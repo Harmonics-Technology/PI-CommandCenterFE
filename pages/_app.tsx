@@ -3,9 +3,6 @@ import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@definitions/chakra/theme';
 import { StyledThemeProvider } from '@definitions/styled-components';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Hydrate } from 'react-query/hydration';
-import { RootStoreProvider } from '@mobx';
 import '../src/styles/global.css';
 import Layout from 'src/layout';
 import Head from 'next/head';
@@ -18,7 +15,6 @@ function MyApp({
     Component,
     pageProps,
 }: AppProps<{ dehydratedState: unknown }>): JSX.Element {
-    const queryClient = new QueryClient();
     OpenAPI.BASE =
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
         'https://timesheetapiprod.azurewebsites.net';
@@ -40,22 +36,16 @@ function MyApp({
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
                 />
-                <title>Timesheet</title>
+                <title>Timesheet Command Center</title>
                 <link rel="icon" href="/assets/logo.png" type="image/x-icon" />
             </Head>
             <StyledThemeProvider>
-                <QueryClientProvider client={queryClient}>
-                    <Hydrate state={pageProps.dehydratedState}>
-                        <RootStoreProvider>
-                            <UserProvider>
-                                <NextNProgress color="#2EAFA3" />
-                                <Layout>
-                                    <Component {...pageProps} />
-                                </Layout>
-                            </UserProvider>
-                        </RootStoreProvider>
-                    </Hydrate>
-                </QueryClientProvider>
+                <UserProvider>
+                    <NextNProgress color="#2EAFA3" />
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </UserProvider>
             </StyledThemeProvider>
         </ChakraProvider>
     );

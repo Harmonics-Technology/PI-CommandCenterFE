@@ -1,0 +1,163 @@
+import {
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    Flex,
+    ModalBody,
+    Box,
+    Text,
+    HStack,
+    Grid,
+    Button,
+    useDisclosure,
+} from '@chakra-ui/react';
+import { PrimaryDate } from '@components/bits-utils/PrimaryDate';
+import { IRenewSubProps } from '@components/generics/Schema';
+import React from 'react';
+import { DateObject } from 'react-multi-date-picker';
+import { useForm } from 'react-hook-form';
+import BeatLoader from 'react-spinners/BeatLoader';
+import { LeaveModel } from 'src/services';
+import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
+import { SubscriptionInfo } from '@components/bits-utils/SubscriptionInfo';
+import { PaymentDetails } from './PaymentDetails';
+
+export const RenewSubscription = ({
+    isOpen,
+    onClose,
+    data,
+}: IRenewSubProps) => {
+    const { isOpen: open, onOpen: opens, onClose: close } = useDisclosure();
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors, isSubmitting, isValid },
+    } = useForm<LeaveModel>({
+        mode: 'all',
+    });
+
+    const openPaymentInfo = () => {
+        opens();
+        onClose();
+    };
+
+    const onSubmit = async (data: LeaveModel) => {
+        //
+    };
+    return (
+        <>
+            <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                motionPreset="slideInBottom"
+                isCentered
+                trapFocus={false}
+            >
+                <ModalOverlay
+                    bg="blackAlpha.300"
+                    backdropFilter="blur(10px) "
+                />
+
+                <ModalContent
+                    py={5}
+                    borderRadius="0px"
+                    w={['88%', '60%']}
+                    // overflow="hidden"
+                    maxH="100vh"
+                    pos="fixed"
+                    mt="1rem"
+                    mb="1rem"
+                    maxW="100%"
+                >
+                    <ModalHeader textAlign="center">
+                        <Flex justify="center">
+                            <Text
+                                color="black"
+                                fontSize="20px"
+                                textAlign="center"
+                                fontWeight="bold"
+                            >
+                                Renew Subscription
+                            </Text>
+                            {/* <Icon as={GrClose} onClick={onClose} cursor="pointer" /> */}
+                        </Flex>
+                    </ModalHeader>
+
+                    <ModalBody>
+                        <Box minH="65vh" overflowY="auto" w="80%" mx="auto">
+                            <SubscriptionInfo
+                                label="Subscription"
+                                packages={[
+                                    { type: 'Onshore', price: '$5,000' },
+                                ]}
+                            />
+                            <SubscriptionInfo
+                                label="Addons"
+                                packages={[
+                                    { type: 'Leave Management', price: '$500' },
+                                    { type: 'Shift Management', price: '$500' },
+                                    {
+                                        type: 'Project Management',
+                                        price: '$500',
+                                    },
+                                ]}
+                            />
+                            <form>
+                                <Grid
+                                    templateColumns={['repeat(2, 1fr)']}
+                                    w="70%"
+                                    gap="3rem 1rem"
+                                    mt='3rem'
+                                >
+                                    <PrimaryDate<LeaveModel>
+                                        control={control}
+                                        name="startDate"
+                                        label={'Start Date'}
+                                        error={errors.startDate}
+                                        min={new DateObject().add(3, 'days')}
+                                        disableWeekend
+                                    />
+                                    <PrimaryInput<LeaveModel>
+                                        label="Duration"
+                                        name="noOfLeaveDaysApplied"
+                                        error={errors.noOfLeaveDaysApplied}
+                                        placeholder=""
+                                        defaultValue=""
+                                        register={register}
+                                    />
+                                    <Button
+                                        w="full"
+                                        bgColor="#DA586F"
+                                        color="white"
+                                        border="5px"
+                                        fontSize="14px"
+                                        borderRadius="5px"
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        w="full"
+                                        bgColor="brand.400"
+                                        color="white"
+                                        border="5px"
+                                        fontSize="14px"
+                                        // type='submit'
+                                        isLoading={isSubmitting}
+                                        borderRadius="5px"
+                                        // isDisabled={!isValid}
+                                        onClick={openPaymentInfo}
+                                    >
+                                        Subscribe
+                                    </Button>
+                                </Grid>
+                            </form>
+                        </Box>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
+            <PaymentDetails isOpen={open} onClose={close} />
+        </>
+    );
+};

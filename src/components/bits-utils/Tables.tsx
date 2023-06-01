@@ -24,15 +24,14 @@ function Tables({ tableHead, children }: TablesProps) {
         <TableContainer h="auto">
             <Table variant="striped" fontSize="11px">
                 <Thead>
-                    <Tr w="full" h="2rem" borderBottom="1px solid #f2f2f2">
+                    <Tr w="full" h="48px" bgColor="brand.400">
                         {tableHead.map((x, i) => (
                             <Th
                                 pl="1rem"
-                                fontSize="12px"
-                                color="brand.200"
+                                fontSize="15px"
+                                color="#ebeff2"
                                 fontWeight="700"
-                                // color="gray.500"
-                                // textTransform="capitalize"
+                                textTransform="capitalize"
                                 key={i}
                             >
                                 {x}
@@ -40,8 +39,8 @@ function Tables({ tableHead, children }: TablesProps) {
                         ))}
                     </Tr>
                 </Thead>
-
-                {
+                <Tbody>{children}</Tbody>
+                {/* {
                     //@ts-ignore
                     children?.props?.children?.length > 0 ||
                     //@ts-ignore
@@ -64,7 +63,7 @@ function Tables({ tableHead, children }: TablesProps) {
                             }
                         />
                     )
-                }
+                } */}
             </Table>
         </TableContainer>
     );

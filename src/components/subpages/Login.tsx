@@ -25,7 +25,6 @@ import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { UserContext } from '@components/context/UserContext';
 import { OpenAPI, UserService, UserViewStandardResponse } from 'src/services';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { useNonInitialEffect } from '@components/generics/useNonInitialEffect';
 
 const schema = yup.object().shape({
     email: yup.string().required('Email is required'),
@@ -48,7 +47,7 @@ function Login() {
         handleSubmit,
         register,
         reset,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isValid },
     } = useForm<LoginModel>({
         resolver: yupResolver(schema),
         mode: 'all',
@@ -126,88 +125,111 @@ function Login() {
         }
     }, []);
     return (
-        <Flex w="full" h="100vh" justify="center" alignItems="center">
-            <Box
-                w={['full', '35%']}
-                mx="auto"
-                boxShadow={['0', '0 20px 27px 0 rgb(0 0 0 / 10%)']}
-                h={['auto', 'auto']}
-                p="1rem 3rem 4rem"
-            >
-                <Box display="flex" justifyContent="center" w="full" my="2rem">
-                    <Image src="/assets/logo.png" h="3rem" />
-                </Box>
-                <Text
-                    fontSize="35px"
-                    fontWeight="bold"
-                    w={['100%', '100%']}
-                    lineHeight="1"
-                    textAlign="center"
+        <Box bgColor="white" w="full" h="100vh">
+            <Flex justify="flex-start" bgColor="white" w="90%" mx="auto">
+                <Flex w="auto" py=".5rem" align="center" gap=".2rem">
+                    <Image src="/assets/logo.png" h="2rem" />
+                    <Text
+                        fontWeight="bold"
+                        mb="0"
+                        fontSize="1.1rem"
+                        fontFamily="Rubik"
+                    >
+                        ADMIN-TIMESHEET
+                    </Text>
+                </Flex>
+            </Flex>
+            <Flex w="full" h="75vh" justify="center" alignItems="center">
+                <Box
+                    w={['full', '40%']}
+                    mx="auto"
+                    // boxShadow={['0', '0 20px 27px 0 rgb(0 0 0 / 10%)']}
+                    h={['auto', 'auto']}
+                    p="1rem 3rem 4rem"
                 >
-                    Sign in!
-                </Text>
+                    {/* <Box display="flex" justifyContent="center" w="full" my="2rem">
+                    <Image src="/assets/logo.png" h="3rem" />
+                </Box> */}
+                    <Text
+                        fontSize="35px"
+                        fontWeight="800"
+                        w={['100%', '100%']}
+                        lineHeight="1"
+                        textAlign="center"
+                    >
+                        Welcome
+                    </Text>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <VStack w="full" spacing=".7rem">
-                        <PrimaryInput<LoginModel>
-                            register={register}
-                            name="email"
-                            error={errors.email}
-                            defaultValue={''}
-                            type="email"
-                            placeholder="Email"
-                            label="Email Address"
-                            fontSize="1rem"
-                        />
-                        <PrimaryInput<LoginModel>
-                            register={register}
-                            name="password"
-                            error={errors.password}
-                            defaultValue={''}
-                            placeholder="*********"
-                            type={passwordVisible ? 'text' : 'password'}
-                            icon={true}
-                            passwordVisible={passwordVisible}
-                            changeVisibility={changeInputType}
-                            label="Password"
-                            fontSize="1rem"
-                        />
-                        <Button
-                            variant="solid"
-                            type="submit"
-                            isLoading={isSubmitting}
-                            spinner={<BeatLoader color="white" size={10} />}
-                            w="full"
-                            p="1.5rem 0"
-                            color="white"
-                            bgColor="brand.400"
-                            // mt={["2rem", "0"]}
-                        >
-                            Login
-                        </Button>
-                        <Flex w="full" justify="space-between">
-                            <Checkbox
-                                alignItems="center"
-                                borderColor="none"
-                                borderRadius="5px"
-                                size="md"
-                                textTransform="capitalize"
-                                onChange={() => setRememberMe((prev) => !prev)}
-                                defaultChecked={true}
-                                isChecked={rememberMe}
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <VStack w="full" spacing=".7rem">
+                            <PrimaryInput<LoginModel>
+                                register={register}
+                                name="email"
+                                error={errors.email}
+                                defaultValue={''}
+                                type="email"
+                                placeholder="name@company.com"
+                                label="Work Email"
+                                fontSize="1rem"
+                            />
+                            <PrimaryInput<LoginModel>
+                                register={register}
+                                name="password"
+                                error={errors.password}
+                                defaultValue={''}
+                                placeholder="password"
+                                type={passwordVisible ? 'text' : 'password'}
+                                icon={true}
+                                passwordVisible={passwordVisible}
+                                changeVisibility={changeInputType}
+                                label="Password"
+                                fontSize="1rem"
+                            />
+                            <Flex
+                                w="full"
+                                justify="space-between"
+                                mb="2rem !important"
                             >
-                                remember me.
-                            </Checkbox>
-                            <NextLink href="/forgot-password" passHref>
-                                <Link fontSize="1rem" fontWeight="semibold">
-                                    Forgot Password?
-                                </Link>
-                            </NextLink>
-                        </Flex>
-                    </VStack>
-                </form>
-            </Box>
-        </Flex>
+                                <Checkbox
+                                    alignItems="center"
+                                    borderColor="none"
+                                    borderRadius="5px"
+                                    size="sm"
+                                    textTransform="capitalize"
+                                    onChange={() =>
+                                        setRememberMe((prev) => !prev)
+                                    }
+                                    defaultChecked={true}
+                                    isChecked={rememberMe}
+                                    fontSize=".9rem"
+                                >
+                                    Keep me signed in.
+                                </Checkbox>
+                                <NextLink href="/forgot-password" passHref>
+                                    <Link fontSize=".9rem" fontWeight="400">
+                                        Forgot Password?
+                                    </Link>
+                                </NextLink>
+                            </Flex>
+                            <Button
+                                variant="solid"
+                                type="submit"
+                                isLoading={isSubmitting}
+                                spinner={<BeatLoader color="white" size={10} />}
+                                w="full"
+                                p="1.5rem 0"
+                                color="white"
+                                bgColor="brand.400"
+                                isDisabled={!isValid}
+                                // mt={["2rem", "0"]}
+                            >
+                                Login
+                            </Button>
+                        </VStack>
+                    </form>
+                </Box>
+            </Flex>
+        </Box>
     );
 }
 

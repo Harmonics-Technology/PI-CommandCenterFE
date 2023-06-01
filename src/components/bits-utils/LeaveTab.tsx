@@ -1,42 +1,40 @@
-import { HStack, Link, Text } from '@chakra-ui/react';
-import { UserContext } from '@components/context/UserContext';
+import { HStack, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
 
 interface leaveProps {
     tabValue: any[];
 }
 
 export const LeaveTab = ({ tabValue }: leaveProps) => {
-    const { user } = useContext(UserContext);
     const router = useRouter();
-    const role = user?.role?.replaceAll(' ', '');
     return (
-        <HStack w="full" borderBottom="1px solid #EBEFF2" gap="1rem">
+        <HStack w="full" borderBottom="2px solid #e0e0e0" gap="1rem">
             {tabValue.map((x) => (
-                <Link
-                    href={`/${role}${x.url}`}
-                    color={
-                        router.asPath.startsWith(`/${role}${x.url}`)
-                            ? 'black'
-                            : ' #A6ACBE'
-                    }
-                    _hover={{
-                        textDecor: 'none',
-                        color: 'brand.400',
-                    }}
-                >
+                <Link href={`/${x.url}`} passHref>
                     <Text
-                        fontWeight="700"
+                        fontWeight={
+                            router.asPath.startsWith(`${x.url}`) ? '700' : '500'
+                        }
                         fontSize=".9rem"
                         borderBottom={
-                            router.asPath.startsWith(`/${role}${x.url}`)
-                                ? '4px solid #2EAFA3'
+                            router.asPath.startsWith(`${x.url}`)
+                                ? '3px solid #2EAFA3'
                                 : '0'
                         }
                         mb="0"
-                        pb=".5rem"
+                        py=".3rem"
                         cursor="pointer"
+                        color={
+                            router.asPath.startsWith(`${x.url}`)
+                                ? 'brand.400'
+                                : ' black'
+                        }
+                        _hover={{
+                            color: 'brand.400',
+                            borderColor: 'brand.400',
+                            borderBottom: '2px solid',
+                        }}
                     >
                         {x.text}
                     </Text>

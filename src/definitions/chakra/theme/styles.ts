@@ -12,6 +12,7 @@ export default {
             },
             p: {
                 marginBottom: '1em',
+                fontFamily: "'Nunito', sans-serif",
             },
             body: {
                 fontFamily: "'Rubik', sans-serif",
