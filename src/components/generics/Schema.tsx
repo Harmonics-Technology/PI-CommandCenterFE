@@ -1,3 +1,14 @@
+import {
+    ClientSubscriptionView,
+    ClientSubscriptionViewPagedCollection,
+    ClientView,
+    ClientViewPagedCollection,
+    FeatureView,
+    SubscriptionView,
+    UserView,
+    UserViewPagedCollection,
+} from 'src/services';
+
 export interface IChartCardProps {
     title: string | number | undefined;
     count: string | number | undefined;
@@ -24,15 +35,21 @@ export interface IModalProps {
 }
 export interface IClientInfoProps {
     id: string;
+    currentSub?: ClientSubscriptionView;
+    allSub?: ClientSubscriptionViewPagedCollection;
+    data?: ClientView;
 }
 export interface IRenewSubProps {
     isOpen: boolean;
     onClose: () => void;
     data?: any;
+    isLoading?: boolean;
+    isValid?: boolean;
+    clickFn?: any;
 }
 export interface ISinglePackage {
-    type: string;
-    price?: string;
+    type: string | null | undefined;
+    price?: string | null | undefined;
 }
 export interface ISubscriptionInfoProps {
     label?: string;
@@ -41,16 +58,33 @@ export interface ISubscriptionInfoProps {
 }
 export interface IPackageCardProps {
     selected?: boolean;
-    name: string | undefined;
-    desc: string | undefined;
-    price: string | undefined;
-    billed: string | undefined;
-    recommended: string | undefined;
-    features: any[];
-    id: string;
+    name: string | null | undefined;
+    desc: string | null | undefined;
+    price: number | null | undefined;
+    billed: string | null | undefined;
+    recommended: string | null | undefined;
+    features: string[] | undefined;
+    id: string | null | undefined;
     updateSubscription: any;
     isEdit?: boolean;
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;
+    data?: SubscriptionView | any;
+    clients?: ClientViewPagedCollection;
+    features?: FeatureView[];
+}
+export interface IManageSubProps {
+    data: SubscriptionView[];
+}
+export interface IAdminProps {
+    data?: UserViewPagedCollection;
+    user?: UserView;
+    id?: any;
+}
+export interface IClientProps {
+    data: ClientViewPagedCollection;
+}
+export interface ISubHistory{
+    data: ClientSubscriptionViewPagedCollection
 }

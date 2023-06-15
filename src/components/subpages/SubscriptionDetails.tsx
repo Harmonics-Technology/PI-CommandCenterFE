@@ -8,25 +8,39 @@ import {
     Tr,
     useDisclosure,
 } from '@chakra-ui/react';
-import { PaymentDetails } from '@components/Modals/PaymentDetails';
+// import { PaymentDetails } from '@components/Modals/PaymentDetails';
 import { RenewSubscription } from '@components/Modals/RenewSubscription';
 import { LeaveTab } from '@components/bits-utils/LeaveTab';
 import { SearchComponent } from '@components/bits-utils/SearchComponent';
 import {
     TableData,
     TableStatus,
-    TableClientActions,
     TableSubscriptionActions,
 } from '@components/bits-utils/TableData';
 import Tables from '@components/bits-utils/Tables';
 import { IClientInfoProps } from '@components/generics/Schema';
+import { CAD } from '@components/generics/functions/Naira';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { ClientSubscriptionView } from 'src/services';
 
-export const SubscriptionDetails = ({ id }: IClientInfoProps) => {
+export const SubscriptionDetails = ({
+    id,
+    currentSub,
+    allSub,
+}: IClientInfoProps) => {
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [data, setData] = useState();
+    // console.log({ currentSub, allSub });
+
+    const dateDiff = dayjs(currentSub?.endDate).diff(
+        currentSub?.startDate,
+        'day',
+    );
+    const dateUsed = dayjs().diff(dayjs(currentSub?.startDate), 'day');
+    const datePercent = Math.round((dateUsed / dateDiff) * 100);
 
     return (
         <Box w="full" bgColor="white" borderRadius="10px" p="1rem" minH="80vh">
@@ -39,7 +53,7 @@ export const SubscriptionDetails = ({ id }: IClientInfoProps) => {
                 mb="1rem"
             >
                 <Text fontWeight="800" color="#1b1d21" mb="0">
-                    {'Proinsight Consulting'}
+                    {currentSub?.client?.companyName}
                 </Text>
                 <Button
                     bgColor="brand.400"
@@ -67,66 +81,100 @@ export const SubscriptionDetails = ({ id }: IClientInfoProps) => {
                 <Text my="1.5rem" fontWeight="700" fontSize=".8rem">
                     Current Subscription
                 </Text>
-                <Tables
-                    tableHead={[
-                        'Subscription Type',
-                        'Start Date',
-                        'Duration',
-                        'Due Date',
-                        'Amount',
-                        'Status',
-                        'Progress',
-                    ]}
-                >
-                    <>
-                        {/* {adminList?.data?.value?.map((x: UserView) => ( */}
-                        <Tr>
-                            <TableData
-                                name={'Onshore + Leave & Shift Mangt '}
-                            />
-                            <TableData name={'01/01/2023'} />
-                            <TableData name={'6 months'} />
-                            <TableData name={'01/01/2023'} isRed />
-                            <TableData name={'$5,000'} />
-                            <TableStatus name={true} />
-                            <td style={{ width: '290px' }}>
-                                <Box w="full">
-                                    <HStack
-                                        fontSize="11px"
-                                        fontWeight="500"
-                                        w="full"
-                                        justify="space-between"
-                                    >
-                                        <Text
-                                            color="#484747"
-                                            fontFamily="Rubik"
-                                            mb="0.2rem"
+                {currentSub !== undefined ? (
+                    <Tables
+                        tableHead={[
+                            'Subscription Type',
+                            'Start Date',
+                            'Duration',
+                            'Due Date',
+                            'Amount',
+                            'Status',
+                            'Progress',
+                        ]}
+                    >
+                        <>
+                            <Tr>
+                                <TableData
+                                    name={`${
+                                        currentSub?.baseSubscription?.name
+                                    } + ${currentSub?.addOns
+                                        ?.map((x) => x?.addOnSubscription?.name)
+                                        .join('+')}`}
+                                />
+                                <TableData
+                                    name={dayjs(currentSub?.startDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                />
+                                <TableData
+                                    name={`${currentSub?.duration} Months`}
+                                />
+                                <TableData
+                                    name={dayjs(currentSub?.endDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                    isRed
+                                />
+                                <TableData
+                                    name={CAD(currentSub?.totalAmount)}
+                                />
+                                <TableStatus name={true} />
+                                <td style={{ width: '290px' }}>
+                                    <Box w="full">
+                                        <HStack
+                                            fontSize="11px"
+                                            fontWeight="500"
+                                            w="full"
+                                            justify="space-between"
                                         >
-                                            Ongoing
-                                        </Text>
-                                        <Text
-                                            color="#8c8c8c"
-                                            fontFamily="Rubik"
-                                            mb="0.2rem"
-                                        >
-                                            65%
-                                        </Text>
-                                    </HStack>
-                                    <Progress
-                                        colorScheme="brand"
-                                        size="sm"
-                                        value={65}
-                                        borderRadius="25px"
-                                        bgColor="#C4C4C4"
-                                        boxShadow="0px 3.5px 5.5px rgba(0, 0, 0, 0.02)"
-                                    />
-                                </Box>
-                            </td>
-                        </Tr>
-
-                        {/* ))} */}
-                    </>
-                </Tables>
+                                            <Text
+                                                color="#484747"
+                                                fontFamily="Rubik"
+                                                mb="0.2rem"
+                                            >
+                                                {dateDiff <= 0
+                                                    ? 'Completed'
+                                                    : ' Ongoing'}
+                                            </Text>
+                                            <Text
+                                                color="#8c8c8c"
+                                                fontFamily="Rubik"
+                                                mb="0.2rem"
+                                            >
+                                                {datePercent < 1
+                                                    ? 0
+                                                    : datePercent}
+                                                %
+                                            </Text>
+                                        </HStack>
+                                        <Progress
+                                            colorScheme="brand"
+                                            size="sm"
+                                            value={
+                                                datePercent < 1
+                                                    ? 0
+                                                    : datePercent
+                                            }
+                                            borderRadius="25px"
+                                            bgColor="#C4C4C4"
+                                            boxShadow="0px 3.5px 5.5px rgba(0, 0, 0, 0.02)"
+                                        />
+                                    </Box>
+                                </td>
+                            </Tr>
+                        </>
+                    </Tables>
+                ) : (
+                    <Text
+                        my="2rem"
+                        textAlign="center"
+                        fontWeight="800"
+                        color="red"
+                    >
+                        No subscription currently active
+                    </Text>
+                )}
             </Box>
             <Box borderTop="1px solid #E0E0E0" mt="2rem">
                 <Text my="1.5rem" fontWeight="700" fontSize=".8rem">
@@ -135,38 +183,57 @@ export const SubscriptionDetails = ({ id }: IClientInfoProps) => {
                 <Flex justify="flex-end" mb="1rem">
                     <SearchComponent />
                 </Flex>
-                <Tables
-                    tableHead={[
-                        'Subscription Type',
-                        'Start Date',
-                        'Duration',
-                        'End Date',
-                        'Amount',
-                        'Status',
-                        'Actions',
-                    ]}
-                >
-                    <>
-                        {/* {adminList?.data?.value?.map((x: UserView) => ( */}
-                        <Tr>
-                            <TableData
-                                name={'Onshore + Leave & Shift Mangt '}
-                            />
-                            <TableData name={'01/01/2023'} />
-                            <TableData name={'6 months'} />
-                            <TableData name={'01/01/2023'} isRed />
-                            <TableData name={'$5,000'} />
-                            <TableStatus name={true} />
-                            <TableSubscriptionActions
-                                openRenew={onOpen}
-                                setData={setData}
-                                x={'any'}
-                            />
-                        </Tr>
-
-                        {/* ))} */}
-                    </>
-                </Tables>
+                {(allSub?.value as any)?.length > 0 ? (
+                    <Tables
+                        tableHead={[
+                            'Subscription Type',
+                            'Start Date',
+                            'Duration',
+                            'End Date',
+                            'Amount',
+                            'Status',
+                            'Actions',
+                        ]}
+                    >
+                        <>
+                            {allSub?.value?.map((x: ClientSubscriptionView) => (
+                                <Tr>
+                                    <TableData
+                                        name={`${
+                                            x.baseSubscription?.name
+                                        } + ${x.addOns
+                                            ?.map(
+                                                (x) =>
+                                                    x?.addOnSubscription?.name,
+                                            )
+                                            .join('+')}`}
+                                    />
+                                    <TableData name={dayjs(x.startDate)} />
+                                    <TableData name={`${x.duration} months`} />
+                                    <TableData name={x?.endDate} isRed />
+                                    <TableData
+                                        name={CAD(currentSub?.totalAmount)}
+                                    />
+                                    <TableStatus name={true} />
+                                    <TableSubscriptionActions
+                                        openRenew={onOpen}
+                                        setData={setData}
+                                        x={x}
+                                    />
+                                </Tr>
+                            ))}
+                        </>
+                    </Tables>
+                ) : (
+                    <Text
+                        my="2rem"
+                        textAlign="center"
+                        fontWeight="800"
+                        color="red"
+                    >
+                        No subscription to show!!!
+                    </Text>
+                )}
             </Box>
             <RenewSubscription isOpen={isOpen} onClose={onClose} data={data} />
         </Box>

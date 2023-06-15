@@ -5,13 +5,8 @@ import {
     Th,
     Thead,
     Tr,
-    Text,
-    Icon,
-    Flex,
 } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
-import TableNoContentWrapper from './TableNoContentWrapper';
-import { BsFillInfoCircleFill } from 'react-icons/bs';
 
 interface TablesProps {
     tableHead: string[];
@@ -19,7 +14,7 @@ interface TablesProps {
 }
 
 function Tables({ tableHead, children }: TablesProps) {
-    console.log({ children });
+    // console.log({ children });
     return (
         <TableContainer h="auto">
             <Table variant="striped" fontSize="11px">

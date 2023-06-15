@@ -1,16 +1,20 @@
 import { Tr, useDisclosure } from '@chakra-ui/react';
 import { AddAdminModal } from '@components/Modals/AddAdminModal';
 import {
-    TableActions,
     TableData,
     TableStatus,
+    TableActions,
 } from '@components/bits-utils/TableData';
 import { TableWrapper } from '@components/bits-utils/TableWrapper';
 import Tables from '@components/bits-utils/Tables';
+import { IAdminProps } from '@components/generics/Schema';
+import dayjs from 'dayjs';
 import React from 'react';
+import { UserView } from 'src/services';
 
-export const AdministratorsComponent = () => {
+export const AdministratorsComponent = ({ data }: IAdminProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    console.log({ data });
     return (
         <>
             <TableWrapper
@@ -31,24 +35,20 @@ export const AdministratorsComponent = () => {
                         ]}
                     >
                         <>
-                            {/* {adminList?.data?.value?.map((x: UserView) => ( */}
-                            <Tr>
-                                <TableData name={'Busayo Moses'} />
-                                <TableData name={'busayo.moses@sample.com'} />
-                                <TableData name={'+1-674-6788-690'} />
-                                <TableData name={'01/01/2023'} />
-                                <TableStatus name={true} />
-                                <TableActions id={'01'} />
-                            </Tr>
-                            <Tr>
-                                <TableData name={'Busayo Moses'} />
-                                <TableData name={'busayo.moses@sample.com'} />
-                                <TableData name={'+1-674-6788-690'} />
-                                <TableData name={'01/01/2023'} />
-                                <TableStatus name={true} />
-                                <TableActions id={'01'} />
-                            </Tr>
-                            {/* ))} */}
+                            {data?.value?.map((x: UserView) => (
+                                <Tr key={x.id}>
+                                    <TableData name={x.fullName} />
+                                    <TableData name={x.email} full />
+                                    <TableData name={x.phoneNumber} />
+                                    <TableData
+                                        name={dayjs(x.dateCreated).format(
+                                            'DD/MM/YYYY',
+                                        )}
+                                    />
+                                    <TableStatus name={x.isActive} />
+                                    <TableActions x={x} />
+                                </Tr>
+                            ))}
                         </>
                     </Tables>
                 }

@@ -9,9 +9,10 @@ import {
     VStack,
 } from '@chakra-ui/react';
 import { IPackageCardProps } from '@components/generics/Schema';
+import { CAD } from '@components/generics/functions/Naira';
 import React from 'react';
 import { BsFillPencilFill } from 'react-icons/bs';
-import { MdCheckCircle } from 'react-icons/md';
+import { MdCheck } from 'react-icons/md';
 
 export const PackageCard = ({
     selected,
@@ -37,13 +38,18 @@ export const PackageCard = ({
                 <Text color="black" fontSize="23px" fontWeight="800" mb="0">
                     {name}
                 </Text>
-                <Text color="#465568" fontSize="16px" fontWeight="300">
+                <Text
+                    color="#465568"
+                    fontSize="16px"
+                    fontWeight="300"
+                    noOfLines={2}
+                >
                     {desc}
                 </Text>
             </Box>
             <Box my="2rem">
                 <Text color="black" fontSize="37px" fontWeight="800" mb="0">
-                    {price}
+                    {CAD(price)}
                 </Text>
                 <Text color="#465568" fontSize="16px" fontWeight="300" mb="0">
                     billed {billed}
@@ -56,7 +62,7 @@ export const PackageCard = ({
                 border="3px solid #375982"
                 h="56px"
                 w="full"
-                onClick={() => updateSubscription(id, name)}
+                onClick={() => updateSubscription({ id, name, price })}
             >
                 {selected ? (
                     'Selected'
@@ -69,7 +75,7 @@ export const PackageCard = ({
                 )}
             </Button>
 
-            <Box my="3rem">
+            <Box my="3rem" maxHeight="5rem" h="full">
                 <Text
                     textTransform="uppercase"
                     color="#101729"
@@ -88,10 +94,18 @@ export const PackageCard = ({
                         Features Include:
                     </Text>
                     <List spacing="1rem">
-                        {features.map((x) => (
-                            <ListItem fontWeight="300" color="black" key={x.id}>
-                                <ListIcon as={MdCheckCircle} color="#375982" />
-                                {x.name}
+                        {features?.map((x, i) => (
+                            <ListItem fontWeight="300" color="black" key={i}>
+                                <ListIcon
+                                    as={MdCheck}
+                                    color="white"
+                                    bgColor="#375982"
+                                    borderRadius="50%"
+                                    w="1.3rem"
+                                    h="1.3rem"
+                                    p=".2rem"
+                                />
+                                {x}
                             </ListItem>
                         ))}
                     </List>

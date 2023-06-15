@@ -1,4 +1,5 @@
 import {
+    Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
@@ -9,6 +10,8 @@ import {
 } from '@chakra-ui/react';
 import { FieldError, UseFormRegister, Path } from 'react-hook-form';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
+import { IsRequiredSign } from './IsRequiredSign';
+import { OptionSelection } from './OptionSelection';
 
 interface FormInputProps<TFormValues extends Record<string, unknown>> {
     name: Path<TFormValues>;
@@ -16,7 +19,7 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     fontSize?: string;
     label?: string;
     register: UseFormRegister<TFormValues>;
-    error: FieldError | undefined;
+    error?: FieldError | undefined;
     type?: string;
     required?: boolean;
     disableLabel?: boolean;
@@ -40,6 +43,11 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     changeVisibility?: any;
     h?: string;
     readonly?: boolean;
+    isRequired?: boolean;
+    isOptions?: boolean;
+    setCurrent?: any;
+    current?: any;
+    options?: string[];
 }
 export const PrimaryInput = <TFormValues extends Record<string, any>>({
     name,
@@ -60,6 +68,11 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
     icon,
     h = '2.6rem',
     readonly = false,
+    isRequired,
+    isOptions,
+    setCurrent,
+    current,
+    options,
 }: FormInputProps<TFormValues>) => {
     return (
         <FormControl
@@ -67,14 +80,25 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
                 error?.type === 'required' || error?.message !== undefined
             }
         >
-            <FormLabel
-                htmlFor={label}
-                textTransform="capitalize"
-                width="fit-content"
-                fontSize={fontSize}
-            >
-                {label}
-            </FormLabel>
+            <Flex justify="space-between" align="center">
+                <FormLabel
+                    htmlFor={label}
+                    textTransform="capitalize"
+                    width="fit-content"
+                    fontSize={fontSize}
+                    mb="0"
+                >
+                    {label}
+                </FormLabel>
+                {isOptions && (
+                    <OptionSelection
+                        name={options}
+                        current={current}
+                        setCurrent={setCurrent}
+                    />
+                )}
+                {isRequired && <IsRequiredSign />}
+            </Flex>
 
             <InputGroup>
                 <Input
@@ -97,6 +121,16 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
                         color="brand.200"
                     >
                         {passwordVisible ? <FaRegEye /> : <FaRegEyeSlash />}
+                    </InputRightElement>
+                )}
+                {isOptions && (
+                    <InputRightElement
+                        color="brand.200"
+                        margin="0 .3rem 0 auto"
+                        fontSize=".8rem"
+                        zIndex={0}
+                    >
+                        {current}
                     </InputRightElement>
                 )}
             </InputGroup>

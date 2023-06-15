@@ -1,6 +1,5 @@
 import {
     Flex,
-    Box,
     Text,
     Image,
     HStack,
@@ -12,6 +11,7 @@ import {
     MenuItem,
     MenuList,
     Circle,
+    VStack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { UserContext } from '@components/context/UserContext';
@@ -19,10 +19,17 @@ import { useContext } from 'react';
 import Items from '@components/menu-item';
 import { BsSearch } from 'react-icons/bs';
 import { BiPowerOff } from 'react-icons/bi';
+import Cookies from 'js-cookie';
 
 function TopNav() {
     const router = useRouter();
     const { user } = useContext(UserContext);
+    const role = user?.role?.replaceAll(' ', '');
+    const logoutFn = () => {
+        Cookies.remove('user');
+        Cookies.remove('token');
+        router.push('/login');
+    };
 
     return (
         <Flex
@@ -52,9 +59,11 @@ function TopNav() {
                     <Items menuTitle="dashboard" />
                     <Items menuTitle="clients" />
                     <Items menuTitle="subscription" />
-                    <Items menuTitle="financials" />
+                    {/* <Items menuTitle="financials" /> */}
                     <Items menuTitle="manage-subscription" />
-                    <Items menuTitle="administrators" />
+                    {role == 'SuperAdmin' && (
+                        <Items menuTitle="administrators" />
+                    )}
                     <Icon as={BsSearch} />
                 </HStack>
                 {/* User Profile */}
@@ -68,24 +77,30 @@ function TopNav() {
                                 h="60px"
                                 w="1px"
                             />
-                            <Avatar name="Ade Oji" src="" size="md" />
-                            <Box>
+                            <Avatar name={user?.fullName} src="" size="md" />
+                            <VStack align="flex-start" spacing="0">
                                 <Text mb="0" fontWeight="700" fontSize="14px">
-                                    Aderonke Akinyemi
+                                    {user?.fullName}
                                 </Text>
                                 <Text
                                     mb="0"
                                     fontWeight="500"
                                     fontSize="11px"
                                     color="#90A0B7"
+                                    textTransform="lowercase"
                                 >
-                                    a.aderonke@gmail.com
+                                    {user?.email}
                                 </Text>
-                            </Box>
+                            </VStack>
                         </HStack>
                     </MenuButton>
                     <MenuList p="0">
-                        <MenuItem gap=".5rem" h="3rem" borderRadius="8px">
+                        <MenuItem
+                            gap=".5rem"
+                            h="3rem"
+                            borderRadius="8px"
+                            onClick={logoutFn}
+                        >
                             <Circle size="1.2rem" bgColor="#777777">
                                 <Icon
                                     as={BiPowerOff}

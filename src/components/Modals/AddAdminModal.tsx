@@ -3,23 +3,52 @@ import DrawerWrapper from '@components/bits-utils/DrawerWrapper';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { PrimaryPhoneInput } from '@components/bits-utils/PrimaryPhoneInput';
 import { IModalProps } from '@components/generics/Schema';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { RegisterModel } from 'src/services';
+import { RegisterModel, UserService } from 'src/services';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = yup.object().shape({
+    firstName: yup.string().required(),
+    email: yup.string().required(),
+    phoneNumber: yup.string().required(),
+});
 
 export const AddAdminModal = ({ isOpen, onClose }: IModalProps) => {
     const {
         register,
         handleSubmit,
         control,
-        formState: { errors, isSubmitting },
+        formState: { errors, isSubmitting, isValid },
     } = useForm<RegisterModel>({
+        resolver: yupResolver(schema),
         mode: 'all',
     });
 
+    const router = useRouter();
+
     const onSubmit = async (data: RegisterModel) => {
-        //
+        data.role = 'Admin';
+        const name = data.firstName;
+        data.firstName = name?.split(' ')[0];
+        data.lastName = name?.split(' ')[1] || '';
+        try {
+            const result = await UserService.create({
+                requestBody: data,
+            });
+            if (result.status) {
+                toast.success('Invite sent successfully');
+                router.reload();
+                return;
+            }
+            toast.error(result.message as string);
+        } catch (error: any) {
+            toast(error?.message || error?.body?.message);
+        }
     };
     return (
         <DrawerWrapper onClose={onClose} isOpen={isOpen} title={'Add User'}>
@@ -27,8 +56,8 @@ export const AddAdminModal = ({ isOpen, onClose }: IModalProps) => {
                 <VStack gap="1rem" mt="2rem">
                     <PrimaryInput<RegisterModel>
                         label="User Name"
-                        name="lastName"
-                        error={errors.lastName}
+                        name="firstName"
+                        error={errors.firstName}
                         placeholder=""
                         defaultValue=""
                         register={register}
@@ -68,7 +97,7 @@ export const AddAdminModal = ({ isOpen, onClose }: IModalProps) => {
                             bgColor="brand.400"
                             color="white"
                             borderRadius="5px"
-                            // height="3rem"
+                            isDisabled={!isValid}
                             fontSize="14px"
                             px="2rem"
                             type="submit"

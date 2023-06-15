@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ThemeProvider } from '@chakra-ui/react';
 import theme from '@definitions/chakra/theme';
 import { StyledThemeProvider } from '@definitions/styled-components';
 import '../src/styles/global.css';
@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import { OpenAPI } from 'src/services';
 import NextNProgress from 'nextjs-progressbar';
 import { UserProvider } from '@components/context/UserContext';
+import { Toaster } from 'react-hot-toast';
 
 function MyApp({
     Component,
@@ -41,6 +42,7 @@ function MyApp({
             </Head>
             <StyledThemeProvider>
                 <UserProvider>
+                    <Toaster position="top-right" reverseOrder={false} />
                     <NextNProgress color="#2EAFA3" />
                     <Layout>
                         <Component {...pageProps} />

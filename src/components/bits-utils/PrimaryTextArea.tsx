@@ -1,11 +1,19 @@
 import {
+    Flex,
     FormControl,
     FormLabel,
     GridItem,
     Text,
     Textarea,
 } from '@chakra-ui/react';
-import { FieldError, UseFormRegister, Path, FieldErrorsImpl, Merge } from 'react-hook-form';
+import {
+    FieldError,
+    UseFormRegister,
+    Path,
+    FieldErrorsImpl,
+    Merge,
+} from 'react-hook-form';
+import { IsRequiredSign } from './IsRequiredSign';
 
 interface FormInputProps<TFormValues extends Record<string, unknown>> {
     name: Path<TFormValues>;
@@ -30,6 +38,8 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     h?: string;
     padding?: string;
     fontsize?: string;
+    isRequired?: boolean;
+    readonly?: boolean;
 }
 
 export const PrimaryTextarea = <TFormValues extends Record<string, any>>({
@@ -55,13 +65,24 @@ export const PrimaryTextarea = <TFormValues extends Record<string, any>>({
     h,
     fontsize = '.8rem',
     padding,
+    isRequired,
+    readonly,
 }: FormInputProps<TFormValues>) => {
     return (
         <>
             <FormControl isInvalid={!!error}>
-                <FormLabel color="brand.100" fontSize=".8rem">
-                    {label}
-                </FormLabel>
+                <Flex justify="space-between">
+                    <FormLabel
+                        htmlFor={label}
+                        textTransform="capitalize"
+                        width="fit-content"
+                        fontSize={fontsize}
+                    >
+                        {label}
+                    </FormLabel>
+
+                    {isRequired && <IsRequiredSign />}
+                </Flex>
                 <Textarea
                     placeholder={placeholder}
                     {...register(name, { required, ...validate })}
@@ -78,6 +99,7 @@ export const PrimaryTextarea = <TFormValues extends Record<string, any>>({
                         boxShadow: 'none',
                     }}
                     w={w}
+                    readOnly={readonly}
                     // bgColor="rgba(25,25,25,.03)"
                     // borderColor="transparent"
                     borderRadius="5px"

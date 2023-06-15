@@ -1,15 +1,25 @@
 import { Flex, Text, Box, Button, Grid } from '@chakra-ui/react';
 import { PackageCard } from '@components/bits-utils/PackageCard';
+import { IManageSubProps } from '@components/generics/Schema';
+import { CAD } from '@components/generics/functions/Naira';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export const ManageSubscriptionComponent = () => {
+export const ManageSubscriptionComponent = ({ data }: IManageSubProps) => {
+    console.log({ data });
     const router = useRouter();
-    const updateSubscription = (value, name) => {
-        router.push(`/manage-subscription/${value}`);
+    const updateSubscription = (value) => {
+        router.push(`/manage-subscription/${value.id}`);
     };
     return (
-        <Box w="full" bgColor="white" borderRadius="10px" p="1rem" minH="80vh">
+        <Box
+            w="full"
+            bgColor="white"
+            borderRadius="10px"
+            p="1rem"
+            minH="80vh"
+            pb="3rem"
+        >
             <Flex
                 justify="space-between"
                 pb="1rem"
@@ -31,45 +41,76 @@ export const ManageSubscriptionComponent = () => {
                     Add Package
                 </Button>
             </Flex>
-            <Box w="90%" mx="auto">
-                <Text
-                    my="3rem"
-                    fontSize="20px"
-                    fontWeight="700"
-                    color="#1b1d21"
-                >
-                    Base Package Subscription
-                </Text>
-                <Grid templateColumns={['repeat(3, 1fr)']} gap=".5rem" w="full">
-                    <PackageCard
-                        id="abc"
-                        name={'Onshore'}
-                        isEdit
-                        desc={
-                            'It does not require a payment partner to process payments'
-                        }
-                        price={'$5,000'}
-                        billed={'/month'}
-                        recommended={'For companies and clients within Canada'}
-                        features={[
-                            { id: '1', name: 'Client Onboarding' },
-                            { id: '2', name: 'Team Onboarding' },
-                            { id: '3', name: 'Timesheet submission' },
-                            { id: '4', name: 'Payroll' },
-                            { id: '5', name: 'Invoice' },
-                        ]}
-                        updateSubscription={updateSubscription}
-                    />
-                </Grid>
-                <Text
-                    my="3rem"
-                    fontSize="20px"
-                    fontWeight="700"
-                    color="#1b1d21"
-                >
-                    Add-ons
-                </Text>
-            </Box>
+            {data.filter((x) => x.subscriptionTypeId == 1).length > 0 && (
+                <Box w="90%" mx="auto">
+                    <Text
+                        my="3rem"
+                        fontSize="20px"
+                        fontWeight="700"
+                        color="#1b1d21"
+                    >
+                        Base Package Subscription
+                    </Text>
+                    <Grid
+                        templateColumns={['repeat(3, 1fr)']}
+                        gap=".5rem"
+                        w="full"
+                    >
+                        {data
+                            .filter((x) => x.subscriptionTypeId == 1)
+                            .map((x) => (
+                                <PackageCard
+                                    id={x.id}
+                                    name={x.name}
+                                    isEdit
+                                    desc={x.description}
+                                    price={x.monthlyAmount}
+                                    billed={'/month'}
+                                    recommended={x.recommendedFor}
+                                    features={x.features
+                                        ?.split(',')
+                                        .map((b) => b)}
+                                    updateSubscription={updateSubscription}
+                                />
+                            ))}
+                    </Grid>
+                </Box>
+            )}
+            {data.filter((x) => x.subscriptionTypeId == 2).length > 0 && (
+                <Box w="90%" mx="auto">
+                    <Text
+                        my="3rem"
+                        fontSize="20px"
+                        fontWeight="700"
+                        color="#1b1d21"
+                    >
+                        Add-ons
+                    </Text>
+                    <Grid
+                        templateColumns={['repeat(3, 1fr)']}
+                        gap=".5rem"
+                        w="full"
+                    >
+                        {data
+                            .filter((x) => x.subscriptionTypeId == 2)
+                            .map((x) => (
+                                <PackageCard
+                                    id={x.id}
+                                    name={x.name}
+                                    isEdit
+                                    desc={x.description}
+                                    price={x.addonAmount || 0}
+                                    billed={'/month'}
+                                    recommended={x.recommendedFor}
+                                    features={x.features
+                                        ?.split(',')
+                                        .map((b) => b)}
+                                    updateSubscription={updateSubscription}
+                                />
+                            ))}
+                    </Grid>
+                </Box>
+            )}
         </Box>
     );
 };

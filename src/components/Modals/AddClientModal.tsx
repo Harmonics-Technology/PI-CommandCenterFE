@@ -14,20 +14,48 @@ import { IModalProps } from '@components/generics/Schema';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { RegisterModel } from 'src/services';
+import { ClientModel, ClientService } from 'src/services';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
+
+const schema = yup.object().shape({
+    companyName: yup.string().required(),
+    companyEmail: yup.string().required(),
+    companyAddress: yup.string().required(),
+    companyPhoneNumber: yup.string().required(),
+    name: yup.string().required(),
+    email: yup.string().required(),
+    phoneNumber: yup.string().required(),
+});
 
 export const AddClientModal = ({ isOpen, onClose }: IModalProps) => {
     const {
         register,
         handleSubmit,
         control,
-        formState: { errors, isSubmitting },
-    } = useForm<RegisterModel>({
+        formState: { errors, isSubmitting, isValid },
+    } = useForm<ClientModel>({
+        resolver: yupResolver(schema),
         mode: 'all',
     });
 
-    const onSubmit = async (data: RegisterModel) => {
-        //
+    const router = useRouter();
+    const onSubmit = async (data: ClientModel) => {
+        try {
+            const result = await ClientService.addClient({
+                requestBody: data,
+            });
+            if (result.status) {
+                toast.success('Client created successfully');
+                router.reload();
+                return;
+            }
+            toast.error(result.message as string);
+        } catch (error: any) {
+            toast(error?.message || error?.body?.message);
+        }
     };
     return (
         <DrawerWrapper onClose={onClose} isOpen={isOpen} title={'Add Client'}>
@@ -41,33 +69,33 @@ export const AddClientModal = ({ isOpen, onClose }: IModalProps) => {
                     >
                         Company Details
                     </Text>
-                    <PrimaryInput<RegisterModel>
+                    <PrimaryInput<ClientModel>
                         label="Company Name"
-                        name="lastName"
-                        error={errors.lastName}
+                        name="companyName"
+                        error={errors.companyName}
                         placeholder=""
                         defaultValue=""
                         register={register}
                     />
-                    <PrimaryInput<RegisterModel>
+                    <PrimaryInput<ClientModel>
                         label="Email"
-                        name="email"
-                        error={errors.email}
+                        name="companyEmail"
+                        error={errors.companyEmail}
                         placeholder=""
                         defaultValue=""
                         register={register}
                     />
-                    <PrimaryPhoneInput<RegisterModel>
+                    <PrimaryPhoneInput<ClientModel>
                         label="Phone Number"
-                        name="phoneNumber"
-                        error={errors.phoneNumber}
+                        name="companyPhoneNumber"
+                        error={errors.companyPhoneNumber}
                         placeholder=""
                         control={control}
                     />
-                    <PrimaryTextarea<RegisterModel>
+                    <PrimaryTextarea<ClientModel>
                         label="Client Address"
-                        name="organizationAddress"
-                        error={errors.organizationAddress}
+                        name="companyAddress"
+                        error={errors.companyAddress}
                         placeholder=""
                         defaultValue=""
                         register={register}
@@ -80,15 +108,15 @@ export const AddClientModal = ({ isOpen, onClose }: IModalProps) => {
                     >
                         Person Of Contact Details
                     </Text>
-                    <PrimaryInput<RegisterModel>
+                    <PrimaryInput<ClientModel>
                         label="Name"
-                        name="lastName"
-                        error={errors.lastName}
+                        name="name"
+                        error={errors.name}
                         placeholder=""
                         defaultValue=""
                         register={register}
                     />
-                    <PrimaryInput<RegisterModel>
+                    <PrimaryInput<ClientModel>
                         label="Email"
                         name="email"
                         error={errors.email}
@@ -96,7 +124,7 @@ export const AddClientModal = ({ isOpen, onClose }: IModalProps) => {
                         defaultValue=""
                         register={register}
                     />
-                    <PrimaryPhoneInput<RegisterModel>
+                    <PrimaryPhoneInput<ClientModel>
                         label="Phone Number"
                         name="phoneNumber"
                         error={errors.phoneNumber}
@@ -128,10 +156,11 @@ export const AddClientModal = ({ isOpen, onClose }: IModalProps) => {
                             px="2rem"
                             type="submit"
                             isLoading={isSubmitting}
+                            isDisabled={!isValid}
                             spinner={<BeatLoader color="white" size={10} />}
                             // boxShadow="0 4px 7px -1px rgb(0 0 0 / 11%), 0 2px 4px -1px rgb(0 0 0 / 7%)"
                         >
-                            <Box>Add Administrator</Box>
+                            <Box>Add Client</Box>
                         </Button>
                     </Flex>
                 </DrawerFooter>

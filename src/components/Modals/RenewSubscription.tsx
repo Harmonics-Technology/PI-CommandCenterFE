@@ -13,15 +13,16 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 import { PrimaryDate } from '@components/bits-utils/PrimaryDate';
-import { IRenewSubProps } from '@components/generics/Schema';
-import React from 'react';
+import { IRenewSubProps, ISinglePackage } from '@components/generics/Schema';
+import React, { useState } from 'react';
 import { DateObject } from 'react-multi-date-picker';
 import { useForm } from 'react-hook-form';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { LeaveModel } from 'src/services';
+import { AddOnsView, RenewSubscriptionModel } from 'src/services';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { SubscriptionInfo } from '@components/bits-utils/SubscriptionInfo';
 import { PaymentDetails } from './PaymentDetails';
+import { CAD } from '@components/generics/functions/Naira';
 
 export const RenewSubscription = ({
     isOpen,
@@ -29,21 +30,24 @@ export const RenewSubscription = ({
     data,
 }: IRenewSubProps) => {
     const { isOpen: open, onOpen: opens, onClose: close } = useDisclosure();
+    const [payData, setPayData] = useState<any>();
     const {
         register,
         handleSubmit,
         control,
-        formState: { errors, isSubmitting, isValid },
-    } = useForm<LeaveModel>({
+        formState: { errors },
+    } = useForm<RenewSubscriptionModel>({
         mode: 'all',
     });
 
-    const openPaymentInfo = () => {
+    const openPaymentInfo = (x, date, duration) => {
+        setPayData({ sub: x, startDate: date, duration: duration });
         opens();
         onClose();
     };
 
-    const onSubmit = async (data: LeaveModel) => {
+    const onSubmit = async (value: RenewSubscriptionModel) => {
+        openPaymentInfo(data, value.startDate, value.duration);
         //
     };
     return (
@@ -90,28 +94,35 @@ export const RenewSubscription = ({
                             <SubscriptionInfo
                                 label="Subscription"
                                 packages={[
-                                    { type: 'Onshore', price: '$5,000' },
+                                    {
+                                        type: data?.subscription?.name,
+                                        price: CAD(
+                                            data?.annualBilling
+                                                ? data?.subscription
+                                                      ?.yearlyAmount
+                                                : data?.subscription
+                                                      ?.monthlyAmount,
+                                        ),
+                                    },
                                 ]}
                             />
                             <SubscriptionInfo
                                 label="Addons"
-                                packages={[
-                                    { type: 'Leave Management', price: '$500' },
-                                    { type: 'Shift Management', price: '$500' },
-                                    {
-                                        type: 'Project Management',
-                                        price: '$500',
-                                    },
-                                ]}
+                                packages={
+                                    data?.addOns?.map((x: AddOnsView) => ({
+                                        type: x.subscription?.name,
+                                        price: x.subscription?.monthlyAmount,
+                                    })) as ISinglePackage[]
+                                }
                             />
                             <form>
                                 <Grid
                                     templateColumns={['repeat(2, 1fr)']}
                                     w="70%"
                                     gap="3rem 1rem"
-                                    mt='3rem'
+                                    mt="3rem"
                                 >
-                                    <PrimaryDate<LeaveModel>
+                                    <PrimaryDate<RenewSubscriptionModel>
                                         control={control}
                                         name="startDate"
                                         label={'Start Date'}
@@ -119,10 +130,10 @@ export const RenewSubscription = ({
                                         min={new DateObject().add(3, 'days')}
                                         disableWeekend
                                     />
-                                    <PrimaryInput<LeaveModel>
+                                    <PrimaryInput<RenewSubscriptionModel>
                                         label="Duration"
-                                        name="noOfLeaveDaysApplied"
-                                        error={errors.noOfLeaveDaysApplied}
+                                        name="duration"
+                                        error={errors.duration}
                                         placeholder=""
                                         defaultValue=""
                                         register={register}
@@ -144,10 +155,9 @@ export const RenewSubscription = ({
                                         border="5px"
                                         fontSize="14px"
                                         // type='submit'
-                                        isLoading={isSubmitting}
                                         borderRadius="5px"
                                         // isDisabled={!isValid}
-                                        onClick={openPaymentInfo}
+                                        onClick={handleSubmit(onSubmit)}
                                     >
                                         Subscribe
                                     </Button>
@@ -157,7 +167,7 @@ export const RenewSubscription = ({
                     </ModalBody>
                 </ModalContent>
             </Modal>
-            <PaymentDetails isOpen={open} onClose={close} />
+            <PaymentDetails isOpen={open} onClose={close} data={payData} />
         </>
     );
 };

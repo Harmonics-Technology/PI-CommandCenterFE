@@ -10,47 +10,227 @@ import {
     HStack,
     Switch,
     Button,
+    useDisclosure,
 } from '@chakra-ui/react';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { PrimaryPhoneInput } from '@components/bits-utils/PrimaryPhoneInput';
 import { PrimaryTextarea } from '@components/bits-utils/PrimaryTextArea';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import BeatLoader from 'react-spinners/BeatLoader';
-import { RegisterModel } from 'src/services';
+import {
+    ClientSubscriptionModel,
+    NewClientSubscriptionModel,
+    SubscriptionService,
+    SubscriptionView,
+} from 'src/services';
 import { useForm } from 'react-hook-form';
 import { SelectrixBox } from '@components/bits-utils/Selectrix';
 import { PrimaryDate } from '@components/bits-utils/PrimaryDate';
 import { DateObject } from 'react-multi-date-picker';
 import { PackageCard } from '@components/bits-utils/PackageCard';
+import { ISubscriptionProps } from '@components/generics/Schema';
+import toast from 'react-hot-toast';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import dayjs from 'dayjs';
+import { PaymentDetails } from '@components/Modals/PaymentDetails';
 
-export const SubscriptionComponent = () => {
+const schema = yup.object().shape({
+    clientId: yup.string().required(),
+    startDate: yup.string().required(),
+    duration: yup
+        .number()
+        .max(
+            11,
+            'Maximum number of month is 11, please select annual for more than 11 months',
+        ),
+});
+
+const newClientSchema = yup.object().shape({
+    companyName: yup.string().required(),
+    companyEmail: yup.string().required(),
+    companyAddress: yup.string().required(),
+    companyPhoneNumber: yup.string().required(),
+    name: yup.string().required(),
+    email: yup.string().required(),
+    phoneNumber: yup.string().required(),
+    startDate: yup.string().required(),
+    duration: yup
+        .number()
+        .max(
+            11,
+            'Maximum number of month is 11, please select annual for more than 11 months',
+        ),
+});
+
+export const SubscriptionComponent = ({
+    data,
+    clients,
+}: ISubscriptionProps) => {
     const router = useRouter();
+    // console.log({ data });
     const {
         register,
         handleSubmit,
         control,
-        formState: { errors, isSubmitting },
-    } = useForm<RegisterModel>({
+        watch: watchs,
+        setValue: setValuee,
+        formState: { errors, isSubmitting, isValid },
+    } = useForm<NewClientSubscriptionModel>({
+        resolver: yupResolver(newClientSchema),
         mode: 'all',
     });
-    const [value, setValue] = useState('1');
+    const {
+        register: registers,
+        handleSubmit: handleSubmits,
+        watch,
+        setValue,
+        control: controls,
+        formState: {
+            errors: isError,
+            isValid: existClientValid,
+            isSubmitting: existSumbit,
+        },
+    } = useForm<ClientSubscriptionModel>({
+        resolver: yupResolver(schema),
+        mode: 'all',
+    });
+    const [values, setValues] = useState('1');
     const [billing, setBilling] = useState('month');
     const [subList, setSubList] = useState<any>([]);
+    const [addonList, setAddonList] = useState<any[]>([]);
+    const [current, setCurrent] = useState('Month');
+    const [readonly, setReadOnly] = useState(false);
 
-    const onSubmit = async (data: RegisterModel) => {
-        //
-    };
-    const updateSubscription = (id, name) => {
-        console.log('Here');
-        const exists = subList.find((x) => x.id == id);
+    console.log({ isValid });
+
+    const updateSubscription = (base) => {
+        const exists = subList.find((x) => x.id == base?.id);
         if (exists) {
-            setSubList(subList.filter((x) => x.id !== id));
+            setSubList(subList.filter((x) => x.id !== base?.id));
             return;
         }
-        setSubList([...subList, { id, name }]);
+        setSubList([base]);
     };
+    const updateAddon = (addun) => {
+        const exists = addonList.find((x) => x.id == addun?.id);
+        if (exists) {
+            setAddonList(addonList.filter((x) => x.id !== addun?.id));
+            return;
+        }
+        setAddonList([...addonList, addun]);
+    };
+    const addonTotal = addonList.reduce((a, b) => a + (b.price as number), 0);
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selection, setSelection] = useState<any>();
+
     console.log({ subList });
+
+    const changePackagetype = () => {
+        setBilling(billing == 'month' ? 'year' : 'month');
+        if (billing == 'month') {
+            setValue('duration', 1);
+            setValuee('duration', 1);
+            setCurrent('Year');
+            setReadOnly(true);
+            return;
+        }
+        setCurrent('Month');
+        setReadOnly(false);
+    };
+
+    const totalAmount =
+        billing == 'month'
+            ? (subList[0]?.price as any) * (watch('duration') as number) +
+                  addonTotal * (watch('duration') as number) ||
+              (subList[0]?.price as any) * (watchs('duration') as number) +
+                  addonTotal * (watchs('duration') as number)
+            : (subList[0]?.price as any) +
+                  addonTotal * ((watch('duration') as number) * 12) ||
+              (subList[0]?.price as any) +
+                  addonTotal * ((watchs('duration') as number) * 12);
+
+    const openModal = () => {
+        setSelection({
+            clientName:
+                clients?.value?.filter((x) => x.id == watch('clientId'))[0]
+                    ?.companyName || watchs('companyName'),
+            duration: watch('duration') || watchs('duration'),
+            startDate: watch('startDate') || watchs('startDate'),
+            endDate: watch('startDate')
+                ? dayjs(watch('startDate')).add(
+                      watch('duration') as number,
+                      'month',
+                  )
+                : dayjs(watchs('startDate')).add(
+                      watchs('duration') as number,
+                      'month',
+                  ),
+            package: {
+                name: subList[0].name,
+                price: subList[0]?.price as any,
+            },
+            addons: { addonList },
+            total: totalAmount,
+            bill: billing,
+        });
+        onOpen();
+    };
+    // console.log({ addonList });
+
+    const onSubmit = async (data: NewClientSubscriptionModel) => {
+        data.annualBilling = billing == 'month' ? false : true;
+        data.baseSubscriptionId = subList[0]?.id;
+        data.endDate = dayjs(data?.startDate)
+            .add(data?.duration as number, 'month')
+            .format('YYYY-MM-DD');
+        data.addOns = addonList.map((x) => ({
+            addOnSubscriptionId: x.id,
+            addOnTotalAmount: (x.addonAmount as number) || 0,
+        }));
+        data.totalAmount = totalAmount;
+
+        try {
+            const result =
+                await SubscriptionService.createNewClientAndSubscription({
+                    requestBody: data,
+                });
+            if (result.status) {
+                toast.success('Successfully');
+                router.reload();
+                return;
+            }
+            toast.error(result.message as string);
+        } catch (error: any) {
+            toast(error?.message || error?.body?.message);
+        }
+    };
+    const existClientSubmit = async (data: ClientSubscriptionModel) => {
+        data.annualBilling = billing == 'month' ? false : true;
+        data.baseSubscriptionId = subList[0]?.id;
+        data.endDate = dayjs(data?.startDate)
+            .add(data?.duration as number, 'month')
+            .format('YYYY-MM-DD');
+        data.addOns = addonList.map((x) => ({
+            addOnSubscriptionId: x.id,
+            addOnTotalAmount: (x.addonAmount as number) || 0,
+        }));
+        data.totalAmount = totalAmount;
+        try {
+            const result = await SubscriptionService.createClientSubscription({
+                requestBody: data,
+            });
+            if (result.status) {
+                toast.success('Successfully');
+                router.reload();
+                return;
+            }
+            toast.error(result.message as string);
+        } catch (error: any) {
+            toast(error?.message || error?.body?.message);
+        }
+    };
     return (
         <Box w="full" bgColor="white" borderRadius="10px" p="1rem" minH="80vh">
             <Flex
@@ -76,9 +256,9 @@ export const SubscriptionComponent = () => {
             </Flex>
             <Box w="full" borderBottom="1px solid #e0e0e0" pb=".5rem">
                 <RadioGroup
-                    onChange={setValue}
-                    value={value}
-                    defaultValue={value}
+                    onChange={setValues}
+                    value={values}
+                    defaultValue={values}
                 >
                     <Stack direction="row">
                         <Radio value="1">Existing Client</Radio>
@@ -95,38 +275,43 @@ export const SubscriptionComponent = () => {
                 >
                     Enter Client Details & Duration Of Subscription
                 </Text>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    {value == '1' ? (
+                <form>
+                    {values == '1' ? (
                         <VStack w="50%" gap="1rem">
-                            <SelectrixBox<RegisterModel>
-                                control={control}
-                                name="email"
-                                error={errors.email}
-                                keys="fee"
-                                keyLabel="fee"
+                            <SelectrixBox<ClientSubscriptionModel>
+                                control={controls}
+                                name="clientId"
+                                error={isError.clientId}
+                                keys="id"
+                                keyLabel="companyName"
                                 label="Client "
-                                options={[]}
+                                options={clients?.value}
                             />
                             <Grid
                                 w="full"
                                 templateColumns={['repeat(2,1fr)']}
                                 gap="2rem"
                             >
-                                <PrimaryDate<RegisterModel>
-                                    control={control}
-                                    name="email"
+                                <PrimaryDate<ClientSubscriptionModel>
+                                    control={controls}
+                                    name="startDate"
                                     label={'Start Date'}
-                                    error={errors.email}
+                                    error={isError.startDate}
                                     min={new DateObject().add(3, 'days')}
                                     disableWeekend
                                 />
-                                <PrimaryInput<RegisterModel>
+                                <PrimaryInput<ClientSubscriptionModel>
                                     label="Duration"
-                                    name="address"
-                                    error={errors.address}
+                                    name="duration"
+                                    error={isError.duration}
                                     placeholder=""
                                     defaultValue=""
-                                    register={register}
+                                    register={registers}
+                                    isOptions
+                                    setCurrent={changePackagetype}
+                                    current={current}
+                                    options={['Month', 'Year']}
+                                    readonly={readonly}
                                 />
                             </Grid>
                         </VStack>
@@ -146,26 +331,26 @@ export const SubscriptionComponent = () => {
                                     >
                                         Company Details
                                     </Text>
-                                    <PrimaryInput<RegisterModel>
+                                    <PrimaryInput<NewClientSubscriptionModel>
                                         label="Company Name"
-                                        name="lastName"
-                                        error={errors.lastName}
+                                        name="companyName"
+                                        error={errors.companyName}
                                         placeholder=""
                                         defaultValue=""
                                         register={register}
                                     />
-                                    <PrimaryInput<RegisterModel>
-                                        label="Email"
-                                        name="email"
-                                        error={errors.email}
+                                    <PrimaryInput<NewClientSubscriptionModel>
+                                        label="Company Email"
+                                        name="companyEmail"
+                                        error={errors.companyEmail}
                                         placeholder=""
                                         defaultValue=""
                                         register={register}
                                     />
-                                    <PrimaryPhoneInput<RegisterModel>
-                                        label="Phone Number"
-                                        name="phoneNumber"
-                                        error={errors.phoneNumber}
+                                    <PrimaryPhoneInput<NewClientSubscriptionModel>
+                                        label="Company Phone Number"
+                                        name="companyPhoneNumber"
+                                        error={errors.companyPhoneNumber}
                                         placeholder=""
                                         control={control}
                                     />
@@ -179,15 +364,15 @@ export const SubscriptionComponent = () => {
                                     >
                                         Person Of Contact Details
                                     </Text>
-                                    <PrimaryInput<RegisterModel>
+                                    <PrimaryInput<NewClientSubscriptionModel>
                                         label="Name"
-                                        name="lastName"
-                                        error={errors.lastName}
+                                        name="name"
+                                        error={errors.name}
                                         placeholder=""
                                         defaultValue=""
                                         register={register}
                                     />
-                                    <PrimaryInput<RegisterModel>
+                                    <PrimaryInput<NewClientSubscriptionModel>
                                         label="Email"
                                         name="email"
                                         error={errors.email}
@@ -195,7 +380,7 @@ export const SubscriptionComponent = () => {
                                         defaultValue=""
                                         register={register}
                                     />
-                                    <PrimaryPhoneInput<RegisterModel>
+                                    <PrimaryPhoneInput<NewClientSubscriptionModel>
                                         label="Phone Number"
                                         name="phoneNumber"
                                         error={errors.phoneNumber}
@@ -204,10 +389,10 @@ export const SubscriptionComponent = () => {
                                     />
                                 </VStack>
                             </Grid>
-                            <PrimaryTextarea<RegisterModel>
+                            <PrimaryTextarea<NewClientSubscriptionModel>
                                 label="Client Address"
-                                name="organizationAddress"
-                                error={errors.organizationAddress}
+                                name="companyAddress"
+                                error={errors.companyAddress}
                                 placeholder=""
                                 defaultValue=""
                                 register={register}
@@ -218,21 +403,25 @@ export const SubscriptionComponent = () => {
                                     templateColumns={['repeat(2,1fr)']}
                                     gap="2rem"
                                 >
-                                    <PrimaryDate<RegisterModel>
+                                    <PrimaryDate<NewClientSubscriptionModel>
                                         control={control}
-                                        name="email"
+                                        name="startDate"
                                         label={'Start Date'}
-                                        error={errors.email}
+                                        error={errors.startDate}
                                         min={new DateObject().add(3, 'days')}
                                         disableWeekend
                                     />
-                                    <PrimaryInput<RegisterModel>
+                                    <PrimaryInput<NewClientSubscriptionModel>
                                         label="Duration"
-                                        name="address"
-                                        error={errors.address}
+                                        name="duration"
+                                        error={errors.duration}
                                         placeholder=""
                                         defaultValue=""
                                         register={register}
+                                        isOptions
+                                        setCurrent={changePackagetype}
+                                        current={current}
+                                        options={['Month', 'Year']}
                                     />
                                 </Grid>
                             </Box>
@@ -257,19 +446,14 @@ export const SubscriptionComponent = () => {
                             </Text>
                         </HStack>
                         <Switch
-                            onChange={() =>
-                                setBilling(
-                                    billing == 'month' ? 'annual' : 'month',
-                                )
-                            }
+                            onChange={() => changePackagetype()}
+                            isChecked={billing == 'year'}
                         />
                         <HStack>
                             <Text
                                 mb="0"
-                                color={
-                                    billing == 'annual' ? 'black' : '#6f7f95'
-                                }
-                                fontWeight={billing == 'annual' ? '500' : '300'}
+                                color={billing == 'year' ? 'black' : '#6f7f95'}
+                                fontWeight={billing == 'year' ? '500' : '300'}
                             >
                                 Annual Billing
                             </Text>
@@ -280,54 +464,104 @@ export const SubscriptionComponent = () => {
                                 fontSize=".8rem"
                                 p=".2rem .5rem"
                             >
-                                25% OFF
+                                Up to 25% OFF
                             </Box>
                         </HStack>
                     </HStack>
-                    <Grid templateColumns={['repeat(3, 1fr)']} gap=".5rem">
-                        <PackageCard
-                            selected={subList.find((x) => x.id == 'abc')}
-                            id="abc"
-                            name={'Onshore'}
-                            desc={
-                                'It does not require a payment partner to process payments'
-                            }
-                            price={'$5,000'}
-                            billed={billing == 'month' ? 'monthly' : 'annually'}
-                            recommended={
-                                'For companies and clients within Canada'
-                            }
-                            features={[
-                                { id: '1', name: 'Client Onboarding' },
-                                { id: '2', name: 'Team Onboarding' },
-                                { id: '3', name: 'Timesheet submission' },
-                                { id: '4', name: 'Payroll' },
-                                { id: '5', name: 'Invoice' },
-                            ]}
-                            updateSubscription={updateSubscription}
-                        />
-                    </Grid>
-                    <Text
-                        my="3rem"
-                        fontSize="20px"
-                        fontWeight="700"
-                        color="#1b1d21"
-                    >
-                        Enter Client Details & Duration Of Subscription
-                    </Text>
-                    <Grid templateColumns={['repeat(3, 1fr)']} gap=".5rem">
-                        <PackageCard
-                            selected={false}
-                            id="x"
-                            name={undefined}
-                            desc={undefined}
-                            price={undefined}
-                            billed={undefined}
-                            recommended={undefined}
-                            features={[]}
-                            updateSubscription={updateSubscription}
-                        />
-                    </Grid>
+                    {data.filter((x) => x.subscriptionTypeId == 1).length >
+                        0 && (
+                        <Box w="90%" mx="auto">
+                            <Text
+                                my="3rem"
+                                fontSize="20px"
+                                fontWeight="700"
+                                color="#1b1d21"
+                            >
+                                Base Package Subscription
+                            </Text>
+                            <Grid
+                                templateColumns={['repeat(3, 1fr)']}
+                                gap=".5rem"
+                                w="full"
+                            >
+                                {data
+                                    .filter((x) => x.subscriptionTypeId == 1)
+                                    .map((x: SubscriptionView) => (
+                                        <PackageCard
+                                            id={x.id}
+                                            name={x.name}
+                                            selected={
+                                                subList.find(
+                                                    (a) => a.id == x.id,
+                                                ) as unknown as boolean
+                                            }
+                                            desc={x.description}
+                                            price={
+                                                billing == 'year'
+                                                    ? x.yearlyAmount
+                                                    : x.monthlyAmount
+                                            }
+                                            billed={
+                                                billing == 'annual'
+                                                    ? 'annually'
+                                                    : 'monthly'
+                                            }
+                                            recommended={x.recommendedFor}
+                                            features={x.features
+                                                ?.split(',')
+                                                .map((b) => b)}
+                                            updateSubscription={
+                                                updateSubscription
+                                            }
+                                        />
+                                    ))}
+                            </Grid>
+                        </Box>
+                    )}
+                    {data.filter((x) => x.subscriptionTypeId == 2).length >
+                        0 && (
+                        <Box w="90%" mx="auto">
+                            <Text
+                                my="3rem"
+                                fontSize="20px"
+                                fontWeight="700"
+                                color="#1b1d21"
+                            >
+                                Add-ons
+                            </Text>
+                            <Grid
+                                templateColumns={['repeat(3, 1fr)']}
+                                gap=".5rem"
+                                w="full"
+                            >
+                                {data
+                                    .filter((x) => x.subscriptionTypeId == 2)
+                                    .map((x: SubscriptionView) => (
+                                        <PackageCard
+                                            id={x.id}
+                                            name={x.name}
+                                            selected={
+                                                addonList.find(
+                                                    (a) => a.id == x.id,
+                                                ) as unknown as boolean
+                                            }
+                                            desc={x.description}
+                                            price={x.addonAmount || 0}
+                                            billed={
+                                                billing == 'annual'
+                                                    ? 'annually'
+                                                    : 'monthly'
+                                            }
+                                            recommended={x.recommendedFor}
+                                            features={x.features
+                                                ?.split(',')
+                                                .map((b) => b)}
+                                            updateSubscription={updateAddon}
+                                        />
+                                    ))}
+                            </Grid>
+                        </Box>
+                    )}
 
                     <Flex w="full" justify="center">
                         <Button
@@ -337,12 +571,49 @@ export const SubscriptionComponent = () => {
                             borderRadius="5px"
                             h="3rem"
                             my="3rem"
+                            onClick={openModal}
                         >
                             Save and Continue
                         </Button>
                     </Flex>
+                    {/* <Flex w="full" justify="center">
+                        <Button
+                            bgColor="brand.400"
+                            color="white"
+                            w="30%"
+                            borderRadius="5px"
+                            h="3rem"
+                            my="3rem"
+                            isLoading={
+                                values == '1' ? existSumbit : isSubmitting
+                            }
+                            isDisabled={
+                                values == '2' ? !isValid : !existClientValid
+                            }
+                            onClick={
+                                values == '2'
+                                    ? handleSubmit(onSubmit)
+                                    : handleSubmits(existClientSubmit)
+                            }
+                            spinner={<BeatLoader color="white" size={10} />}
+                        >
+                            Save and Continue
+                        </Button>
+                    </Flex> */}
                 </form>
             </Box>
+            <PaymentDetails
+                isOpen={isOpen}
+                onClose={onClose}
+                data={selection}
+                isLoading={values == '1' ? existSumbit : isSubmitting}
+                isValid={values == '2' ? !isValid : !existClientValid}
+                clickFn={
+                    values == '2'
+                        ? handleSubmit(onSubmit)
+                        : handleSubmits(existClientSubmit)
+                }
+            />
         </Box>
     );
 };

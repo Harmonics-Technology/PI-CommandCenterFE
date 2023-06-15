@@ -6,7 +6,6 @@ import {
     Link,
     VStack,
     Button,
-    useToast,
     Checkbox,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
@@ -16,14 +15,15 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
-// import Checkbox from '@components/bits-utils/Checkbox';
-interface LoginModel {
-    email: string;
-    password: string;
-}
+import toast from 'react-hot-toast';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { UserContext } from '@components/context/UserContext';
-import { OpenAPI, UserService, UserViewStandardResponse } from 'src/services';
+import {
+    LoginModel,
+    OpenAPI,
+    UserService,
+    UserViewStandardResponse,
+} from 'src/services';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 const schema = yup.object().shape({
@@ -34,12 +34,10 @@ const schema = yup.object().shape({
 function Login() {
     const router = useRouter();
     const { setUser } = useContext(UserContext);
-    const path = Cookies.get('path') as string;
-    const toast = useToast();
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const [rememberedData, setRememberedData] = useState<any>();
-    const [rememberMe, setRememberMe] = useState(rememberedData?.rememberMe);
-    // console.log({ rememberedData, rememberMe });
+    const [rememberMe, setRememberMe] = useState<boolean>();
+    console.log({ rememberedData, rememberMe });
     const changeInputType = () => {
         setPasswordVisible(!passwordVisible);
     };
@@ -54,11 +52,9 @@ function Login() {
     });
     const onSubmit = async (data: LoginModel) => {
         try {
-            const result = (await UserService.loginUser(
-                data,
-            )) as UserViewStandardResponse;
+            const result = await UserService.loginUser({ requestBody: data });
             if (result.status) {
-                if (rememberMe) {
+                rememberMe &&
                     Cookies.set(
                         'details',
                         JSON.stringify({
@@ -67,48 +63,34 @@ function Login() {
                             rememberMe: rememberMe,
                         }),
                     );
-                }
+
+                !rememberMe &&
+                    Cookies.get('details') !== undefined &&
+                    Cookies.remove('details');
+
                 setUser(result.data);
 
                 Cookies.set('user', JSON.stringify(result.data));
                 OpenAPI.TOKEN = result?.data?.token as string;
                 result.data &&
                     Cookies.set('token', result.data.token as string);
-                if (result.data?.twoFactorEnabled) {
-                    router.push('/login/twofalogin');
-                    return;
-                }
-                toast({
-                    title: `Login Successful`,
-                    status: 'success',
-                    isClosable: true,
-                    position: 'top-right',
-                });
+                // if (result.data?.twoFactorEnabled) {
+                //     router.push('/login/twofalogin');
+                //     return;
+                // }
+                toast.success('Login Successful');
                 router.query.from
                     ? (window.location.href = decodeURIComponent(
                           router.query.from as unknown as string,
                       ))
-                    : (window.location.href = `${result?.data?.role?.replaceAll(
-                          ' ',
-                          '',
-                      )}/dashboard`);
+                    : (window.location.href = '/dashboard');
+
                 return;
             }
-            toast({
-                title: result.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
+            toast.error(result.message as string);
             return;
         } catch (error: any) {
-            // console.log({ error });
-            toast({
-                title: error?.message || error?.body?.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
+            toast(error?.message || error?.body?.message);
         }
     };
     // console.log(watch('email'), watch('password'));
@@ -118,6 +100,7 @@ function Login() {
         if (isUser !== undefined) {
             const userDetails = JSON.parse(isUser as unknown as string);
             setRememberedData(userDetails);
+            setRememberMe(userDetails?.rememberMe || false);
             reset({
                 email: userDetails.email,
                 password: userDetails.pass,
@@ -199,7 +182,6 @@ function Login() {
                                     onChange={() =>
                                         setRememberMe((prev) => !prev)
                                     }
-                                    defaultChecked={true}
                                     isChecked={rememberMe}
                                     fontSize=".9rem"
                                 >

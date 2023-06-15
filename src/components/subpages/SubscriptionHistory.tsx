@@ -9,13 +9,18 @@ import {
 } from '@components/bits-utils/TableData';
 import { TableWrapper } from '@components/bits-utils/TableWrapper';
 import Tables from '@components/bits-utils/Tables';
+import { ISubHistory } from '@components/generics/Schema';
+import { CAD } from '@components/generics/functions/Naira';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { ClientSubscriptionView } from 'src/services';
 
-export const SubscriptionHistory = () => {
+export const SubscriptionHistory = ({ data }: ISubHistory) => {
+    console.log({ data });
     const router = useRouter();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [data, setData] = useState();
+    const [subData, setSubData] = useState();
     return (
         <>
             <TableWrapper
@@ -38,30 +43,48 @@ export const SubscriptionHistory = () => {
                         ]}
                     >
                         <>
-                            {/* {adminList?.data?.value?.map((x: UserView) => ( */}
-                            <Tr>
-                                <TableData name={'Proinsight Consulting'} />
-                                <TableData
-                                    name={'Onshore + Leave & Shift Mangt '}
-                                />
-                                <TableData name={'01/01/2023'} />
-                                <TableData name={'01/01/2023'} />
-                                <TableData name={'12 months'} />
-                                <TableData name={'$5,000'} />
-                                <TableStatus name={true} />
-                                <TableSubscriptionActions
-                                    openRenew={onOpen}
-                                    setData={setData}
-                                    x={'any'}
-                                />
-                            </Tr>
-
-                            {/* ))} */}
-                            <RenewSubscription
+                            {data?.value?.map((x: ClientSubscriptionView) => (
+                                <Tr key={x.id}>
+                                    <TableData name={x.client?.companyName} />
+                                    <TableData
+                                        name={`${
+                                            x.baseSubscription?.name
+                                        } + ${x.addOns
+                                            ?.map(
+                                                (x) =>
+                                                    x.addOnSubscription?.name,
+                                            )
+                                            .join(',')}`}
+                                    />
+                                    <TableData
+                                        name={dayjs(x.startDate).format(
+                                            'DD/MM/YYYY',
+                                        )}
+                                    />
+                                    <TableData
+                                        name={dayjs(x.endDate).format(
+                                            'DD/MM/YYYY',
+                                        )}
+                                    />
+                                    <TableData name={`${x.duration} Months`} />
+                                    <TableData name={CAD(x.totalAmount)} />
+                                    <TableStatus
+                                        name={
+                                            x.status == 'ACTIVE' ? true : false
+                                        }
+                                    />
+                                    <TableSubscriptionActions
+                                        openRenew={onOpen}
+                                        setData={setSubData}
+                                        x={x}
+                                    />
+                                </Tr>
+                            ))}
+                            {/* <RenewSubscription
                                 isOpen={isOpen}
                                 onClose={onClose}
-                                data={data}
-                            />
+                                data={subData}
+                            /> */}
                         </>
                     </Tables>
                 }

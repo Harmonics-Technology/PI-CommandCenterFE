@@ -7,10 +7,14 @@ import {
 } from '@components/bits-utils/TableData';
 import { TableWrapper } from '@components/bits-utils/TableWrapper';
 import Tables from '@components/bits-utils/Tables';
+import { IClientProps } from '@components/generics/Schema';
 import React from 'react';
+import { ClientView } from 'src/services';
+import dayjs from 'dayjs';
 
-export const ClientComponent = () => {
+export const ClientComponent = ({ data }: IClientProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    console.log({ data });
     return (
         <>
             <TableWrapper
@@ -24,38 +28,39 @@ export const ClientComponent = () => {
                         tableHead={[
                             'Client Name',
                             'Email',
-                            'Current Subscription Type',
-                            'Amount',
+                            // 'Current Subscription Type',
+                            // 'Amount',
                             'Onboarding Date',
                             'Status',
                             'Actions',
                         ]}
                     >
                         <>
-                            {/* {adminList?.data?.value?.map((x: UserView) => ( */}
-                            <Tr>
-                                <TableData name={'Proinsight Consulting'} />
-                                <TableData name={'info@proinsight.com'} />
-                                <TableData
-                                    name={'Onshore + Leave & Shift Mangt '}
-                                />
-                                <TableData name={'$5,000'} />
-                                <TableData name={'01/01/2023'} />
-                                <TableStatus name={true} />
-                                <TableClientActions id={'01'} />
-                            </Tr>
-                            <Tr>
-                                <TableData name={'Proinsight Consulting'} />
-                                <TableData name={'info@proinsight.com'} />
-                                <TableData
-                                    name={'Onshore + Leave & Shift Mangt '}
-                                />
-                                <TableData name={'$5,000'} />
-                                <TableData name={'01/01/2023'} />
-                                <TableStatus name={true} />
-                                <TableClientActions id={'01'} />
-                            </Tr>
-                            {/* ))} */}
+                            {data?.value?.map((x: ClientView) => (
+                                <Tr key={x.id}>
+                                    <TableData name={x.companyName} />
+                                    <TableData name={x.companyEmail} full />
+                                    {/* <TableData name={x.subscription?.name} /> */}
+                                    {/* <TableData
+                                        name={CAD(
+                                            x.subscription?.monthlyAmount,
+                                        )}
+                                    /> */}
+                                    <TableData
+                                        name={dayjs(x.dateCreated).format(
+                                            'DD/MM/YYYY',
+                                        )}
+                                    />
+                                    <TableStatus
+                                        name={
+                                            x.subscriptionStatus == 'ACTIVE'
+                                                ? true
+                                                : false
+                                        }
+                                    />
+                                    <TableClientActions id={x.id} />
+                                </Tr>
+                            ))}
                         </>
                     </Tables>
                 }

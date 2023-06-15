@@ -1,5 +1,6 @@
 import {
-    Box,
+    Text,
+    Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
@@ -19,6 +20,7 @@ interface select {
 import dynamic from 'next/dynamic';
 import { UserView } from 'src/services';
 import { useState } from 'react';
+import { IsRequiredSign } from './IsRequiredSign';
 const Selectrix = dynamic<select>(() => import('react-selectrix'), {
     ssr: false,
 });
@@ -39,6 +41,7 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     searchable?: boolean;
     renderOption?: any;
     withIcon?: any;
+    isRequired?: boolean;
 }
 export const SelectrixBox = <TFormValues extends Record<string, any>>({
     name,
@@ -56,18 +59,23 @@ export const SelectrixBox = <TFormValues extends Record<string, any>>({
     searchable = false,
     renderOption,
     withIcon = false,
+    isRequired,
 }: FormInputProps<TFormValues>) => {
     // console.log({ customOnchange });
     return (
         <FormControl isInvalid={error?.type === 'required'} minW="0">
             {label && (
-                <FormLabel
-                    htmlFor={label}
-                    textTransform="capitalize"
-                    fontSize={fontSize}
-                >
-                    {label}
-                </FormLabel>
+                <Flex justify="space-between">
+                    <FormLabel
+                        htmlFor={label}
+                        textTransform="capitalize"
+                        width="fit-content"
+                        fontSize={fontSize}
+                    >
+                        {label}
+                    </FormLabel>
+                    {isRequired && <IsRequiredSign />}
+                </Flex>
             )}
 
             <Controller

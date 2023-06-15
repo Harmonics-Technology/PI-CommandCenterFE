@@ -20,21 +20,13 @@ import React, { useContext, useState } from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
 import { FaAppStore, FaEllipsisH, FaEye } from 'react-icons/fa';
 import { RiInboxArchiveFill } from 'react-icons/ri';
-import {
-    ExpenseView,
-    FinancialService,
-    InitiateResetModel,
-    InvoiceView,
-    LeaveService,
-    SettingsService,
-    ShiftService,
-    UserService,
-} from 'src/services';
+import { InitiateResetModel, UserService, UserView } from 'src/services';
 // import fileDownload from 'js-file-download';
 import { UserContext } from '@components/context/UserContext';
 import { BiTrash } from 'react-icons/bi';
 import { MdVerified, MdCancel } from 'react-icons/md';
-import { BsEye, BsEyeFill } from 'react-icons/bs';
+import { BsEye, BsEyeFill, BsPencil } from 'react-icons/bs';
+import toast from 'react-hot-toast';
 
 export function TableHead({
     name,
@@ -223,40 +215,28 @@ export function TableContract({ url }: { url: any }) {
         </td>
     );
 }
-export function TableActions({ id }: { id: any }) {
-    const toast = useToast();
+export function TableActions({ x }: { x: UserView }) {
     const [loading, setLoading] = useState(false);
-    const resendInvite = async (data: InitiateResetModel) => {
-        // console.log(data.email);
+    const router = useRouter();
+    const toggleUser = async (data: boolean) => {
         try {
             setLoading(true);
-            const result = await UserService.resendInvite(data);
+            const result = await UserService.activateOrDeactivateUser({
+                userId: x.id,
+                active: data,
+            });
             if (result.status) {
                 // console.log({ result });
-                toast({
-                    title: 'Invite Sent',
-                    status: 'success',
-                    isClosable: true,
-                    position: 'top-right',
-                });
+                toast.success(result.message as string);
                 setLoading(false);
+                router.reload();
                 return;
             }
             setLoading(false);
-            toast({
-                title: result.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
+            toast.error(result.message as string);
         } catch (err: any) {
+            toast.error(err?.message || err?.body?.message);
             setLoading(false);
-            toast({
-                title: err?.body?.message || err.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
         }
     };
     return (
@@ -274,11 +254,26 @@ export function TableActions({ id }: { id: any }) {
                     </Box>
                 </MenuButton>
                 <MenuList w="full">
-                    <MenuItem onClick={() => resendInvite(id)} w="full">
+                    <MenuItem
+                        onClick={() => router.push(`/administrators/${x.id}`)}
+                        w="full"
+                    >
+                        <Icon as={BsPencil} mr=".5rem" color="#777777" />
+                        Edit User
+                    </MenuItem>
+                    <MenuItem
+                        onClick={() => (x.isActive ? void 0 : toggleUser(true))}
+                        w="full"
+                    >
                         <Icon as={MdVerified} mr=".5rem" color="#777777" />
                         Reactivate User
                     </MenuItem>
-                    <MenuItem onClick={() => resendInvite(id)} w="full">
+                    <MenuItem
+                        onClick={() =>
+                            x.isActive ? toggleUser(false) : void 0
+                        }
+                        w="full"
+                    >
                         <Icon
                             as={RiInboxArchiveFill}
                             mr=".5rem"
@@ -295,39 +290,7 @@ export function TableClientActions({ id }: { id: any }) {
     const toast = useToast();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const resendInvite = async (data: InitiateResetModel) => {
-        // console.log(data.email);
-        try {
-            setLoading(true);
-            const result = await UserService.resendInvite(data);
-            if (result.status) {
-                // console.log({ result });
-                toast({
-                    title: 'Invite Sent',
-                    status: 'success',
-                    isClosable: true,
-                    position: 'top-right',
-                });
-                setLoading(false);
-                return;
-            }
-            setLoading(false);
-            toast({
-                title: result.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
-        } catch (err: any) {
-            setLoading(false);
-            toast({
-                title: err?.body?.message || err.message,
-                status: 'error',
-                isClosable: true,
-                position: 'top-right',
-            });
-        }
-    };
+
     return (
         <td>
             <Menu>
@@ -350,7 +313,7 @@ export function TableClientActions({ id }: { id: any }) {
                         <Icon as={BsEyeFill} mr=".5rem" color="#777777" />
                         View
                     </MenuItem>
-                    <MenuItem onClick={() => resendInvite(id)} w="full">
+                    {/* <MenuItem onClick={() => resendInvite(id)} w="full">
                         <Icon as={MdVerified} mr=".5rem" color="#777777" />
                         Reactivate subscription
                     </MenuItem>
@@ -361,7 +324,7 @@ export function TableClientActions({ id }: { id: any }) {
                             color="#777777"
                         />
                         Deactivate sub
-                    </MenuItem>
+                    </MenuItem> */}
                 </MenuList>
             </Menu>
         </td>

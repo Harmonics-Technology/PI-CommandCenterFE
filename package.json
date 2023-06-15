@@ -11,11 +11,11 @@
         "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
         "test": "jest -c test/jest.config.js",
         "format-staged": "pretty-quick --staged",
-        "openapi:codegen": "openapi --input https://insighttimesheetapi.azurewebsites.net/swagger/v1/swagger.json --output ./src/services --client axios"
+        "openapi:codegen": "openapi --input https://pi-commandcenterdev.azurewebsites.net/swagger/v1/swagger.json --output ./src/services --client axios --useOptions"
     },
     "dependencies": {
         "@chakra-ui/icons": "^2.0.15",
-        "@chakra-ui/react": "^2.4.3",
+        "@chakra-ui/react": "2.4.3",
         "@codegena/oapi3ts-cli": "^2.1.10-alpha.8",
         "@emotion/react": "^11.1.4",
         "@emotion/styled": "^11.0.0",
@@ -27,9 +27,11 @@
         "@types/js-cookie": "^3.0.2",
         "@uploadcare/react-widget": "^2.4.0",
         "axios": "^0.21.1",
+        "babel-plugin-styled-components": "^1.12.0",
         "chart.js": "^4.2.1",
         "chartjs-plugin-datalabels": "^2.2.0",
         "cross-env": "^7.0.3",
+        "dayjs": "^1.11.7",
         "faker": "^6.6.6",
         "framer-motion": "^3.2.1",
         "js-cookie": "^3.0.1",
@@ -45,6 +47,7 @@
         "react-csv-downloader": "^2.9.1",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.39.5",
+        "react-hot-toast": "^2.4.1",
         "react-icons": "^4.7.1",
         "react-loading-skeleton": "^3.2.0",
         "react-multi-date-picker": "^3.3.4",
@@ -56,7 +59,6 @@
         "styled-components": "^5.2.1",
         "styled-system": "^5.1.5",
         "use-debounce": "^9.0.2",
-        "babel-plugin-styled-components": "^1.12.0",
         "yup": "^0.32.11",
         "yup-password": "^0.2.2"
     },

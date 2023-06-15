@@ -212,3 +212,11 @@ select option {
     width: 100%;
     padding: 0 1rem;
 }
+
+.multi {
+    width: 100%;
+}
+.multi-select__control {
+    min-height: 2.9rem !important;
+    border-radius: 0 !important;
+}

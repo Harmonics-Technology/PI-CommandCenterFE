@@ -1,12 +1,4 @@
-import {
-    Box,
-    Button,
-    Flex,
-    Grid,
-    HStack,
-    Text,
-    VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Grid, Text, VStack } from '@chakra-ui/react';
 import { LeaveTab } from '@components/bits-utils/LeaveTab';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { PrimaryPhoneInput } from '@components/bits-utils/PrimaryPhoneInput';
@@ -15,22 +7,45 @@ import { IClientInfoProps } from '@components/generics/Schema';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { RegisterModel } from 'src/services';
+import { UpdateClientModel, ClientService } from 'src/services';
 
-export const ClientDetailsComponent = ({ id }: IClientInfoProps) => {
+export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
     const router = useRouter();
+    console.log({ data, id });
     const {
         register,
         handleSubmit,
         control,
         formState: { errors, isSubmitting },
-    } = useForm<RegisterModel>({
+    } = useForm<UpdateClientModel>({
         mode: 'all',
+        defaultValues: {
+            name: data?.name,
+            address: data?.address,
+            companyAddress: data?.companyAddress,
+            companyName: data?.companyName,
+            companyPhoneNumber: data?.companyPhoneNumber,
+            id: id,
+            phoneNumber: data?.phoneNumber,
+        },
     });
 
-    const onSubmit = async (data: RegisterModel) => {
-        //
+    const onSubmit = async (data: UpdateClientModel) => {
+        try {
+            const result = await ClientService.updateClient({
+                requestBody: data,
+            });
+            if (result.status) {
+                toast.success(result?.message as string);
+                router.reload();
+                return;
+            }
+            toast.error(result.message as string);
+        } catch (error: any) {
+            toast(error?.message || error?.body?.message);
+        }
     };
     return (
         <Box w="full" bgColor="white" borderRadius="10px" p="1rem" minH="80vh">
@@ -101,33 +116,33 @@ export const ClientDetailsComponent = ({ id }: IClientInfoProps) => {
                             >
                                 Company Details
                             </Text>
-                            <PrimaryInput<RegisterModel>
+                            <PrimaryInput<UpdateClientModel>
                                 label="Company Name"
-                                name="lastName"
-                                error={errors.lastName}
+                                name="companyName"
+                                error={errors.companyName}
                                 placeholder=""
                                 defaultValue=""
                                 register={register}
                             />
-                            <PrimaryInput<RegisterModel>
+                            <PrimaryInput<any>
                                 label="Email"
-                                name="email"
-                                error={errors.email}
+                                name="companyEmail"
                                 placeholder=""
-                                defaultValue=""
+                                defaultValue={data?.companyEmail}
+                                disableLabel={true}
                                 register={register}
                             />
-                            <PrimaryPhoneInput<RegisterModel>
+                            <PrimaryPhoneInput<UpdateClientModel>
                                 label="Phone Number"
-                                name="phoneNumber"
-                                error={errors.phoneNumber}
+                                name="companyPhoneNumber"
+                                error={errors.companyPhoneNumber}
                                 placeholder=""
                                 control={control}
                             />
-                            <PrimaryTextarea<RegisterModel>
+                            <PrimaryTextarea<UpdateClientModel>
                                 label="Client Address"
-                                name="organizationAddress"
-                                error={errors.organizationAddress}
+                                name="companyAddress"
+                                error={errors.companyAddress}
                                 placeholder=""
                                 defaultValue=""
                                 register={register}
@@ -146,23 +161,23 @@ export const ClientDetailsComponent = ({ id }: IClientInfoProps) => {
                             >
                                 Person Of Contact Details
                             </Text>
-                            <PrimaryInput<RegisterModel>
+                            <PrimaryInput<UpdateClientModel>
                                 label="Name"
-                                name="lastName"
-                                error={errors.lastName}
+                                name="name"
+                                error={errors.name}
                                 placeholder=""
                                 defaultValue=""
                                 register={register}
                             />
-                            <PrimaryInput<RegisterModel>
+                            <PrimaryInput<any>
                                 label="Email"
                                 name="email"
-                                error={errors.email}
+                                disableLabel={true}
                                 placeholder=""
-                                defaultValue=""
+                                defaultValue={data?.email}
                                 register={register}
                             />
-                            <PrimaryPhoneInput<RegisterModel>
+                            <PrimaryPhoneInput<UpdateClientModel>
                                 label="Phone Number"
                                 name="phoneNumber"
                                 error={errors.phoneNumber}

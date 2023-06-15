@@ -12,24 +12,20 @@ import {
 } from '@chakra-ui/react';
 import { IRenewSubProps } from '@components/generics/Schema';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { LeaveModel } from 'src/services';
 import { SubscriptionInfo } from '@components/bits-utils/SubscriptionInfo';
+import dayjs from 'dayjs';
+import { CAD } from '@components/generics/functions/Naira';
 
-export const PaymentDetails = ({ isOpen, onClose }: IRenewSubProps) => {
-    const {
-        register,
-        handleSubmit,
-        control,
-        formState: { errors, isSubmitting, isValid },
-    } = useForm<LeaveModel>({
-        mode: 'all',
-    });
-
-    const onSubmit = async (data: LeaveModel) => {
-        //
-    };
+export const PaymentDetails = ({
+    isOpen,
+    onClose,
+    data,
+    isLoading,
+    isValid,
+    clickFn,
+}: IRenewSubProps) => {
+    // console.log({ isValid });
     return (
         <Modal
             isOpen={isOpen}
@@ -66,65 +62,91 @@ export const PaymentDetails = ({ isOpen, onClose }: IRenewSubProps) => {
                 </ModalHeader>
 
                 <ModalBody>
-                    <Box maxH="77vh" overflowY="auto" w="85%" mx="auto" px='1rem'>
+                    <Box
+                        maxH="77vh"
+                        overflowY="auto"
+                        w="85%"
+                        mx="auto"
+                        px="1rem"
+                    >
                         <SubscriptionInfo
                             label="Client Name"
-                            packages={[{ type: 'Proinsight Consulting' }]}
+                            packages={[{ type: data?.clientName }]}
                         />
                         <SubscriptionInfo
                             label="Duration"
-                            packages={[{ type: '6 Months' }]}
+                            packages={[
+                                { type: `${data?.duration} ${data?.bill}` },
+                            ]}
                         />
                         <SubscriptionInfo
                             label="Start Date"
-                            packages={[{ type: '01/01/2023' }]}
-                        />
-                        <SubscriptionInfo
-                            label="Due Date"
-                            packages={[{ type: '06/30/2023' }]}
-                        />
-                        <SubscriptionInfo
-                            label="Client Name"
                             packages={[
                                 {
-                                    type: 'Proinsight Consulting',
-                                    price: '$5,000',
+                                    type: dayjs(data?.startDate).format(
+                                        'DD/MM/YYYY',
+                                    ) as string,
                                 },
                             ]}
                         />
                         <SubscriptionInfo
+                            label="Due Date"
                             packages={[
-                                { type: 'Leave Management', price: '$500' },
-                                { type: 'Shift Management', price: '$500' },
-                                { type: 'Project Management', price: '$500' },
+                                {
+                                    type: dayjs(data?.endDate).format(
+                                        'DD/MM/YYYY',
+                                    ) as string,
+                                },
                             ]}
                         />
                         <SubscriptionInfo
-                            packages={[{ type: 'Total', price: '$6,500' }]}
+                            label="Subscription Package"
+                            packages={[
+                                {
+                                    type: data?.package?.name,
+                                    price: CAD(data?.package?.price),
+                                },
+                            ]}
+                        />
+                        <SubscriptionInfo
+                            packages={data?.addons?.addonList.map((x: any) => ({
+                                type: x.name,
+                                price: CAD(x.price),
+                            }))}
+                        />
+                        <SubscriptionInfo
+                            packages={[
+                                { type: 'Total', price: CAD(data?.total) },
+                            ]}
                             total
                         />
-                        <VStack w="40%" mt="3rem" mx="auto">
+                        <VStack w="40%" mt="3rem" mx="auto" spacing="1rem">
                             <Button
                                 w="full"
                                 bgColor="#DA586F"
                                 color="white"
                                 border="5px"
+                                h="3rem"
                                 fontSize="14px"
                                 borderRadius="5px"
+                                onClick={onClose}
                             >
                                 Cancel
                             </Button>
+
                             <Button
-                                w="full"
                                 bgColor="brand.400"
                                 color="white"
-                                border="5px"
-                                fontSize="14px"
-                                isLoading={isSubmitting}
-                                isDisabled={!isValid}
+                                w="full"
                                 borderRadius="5px"
+                                h="3rem"
+                                my="3rem"
+                                isLoading={isLoading}
+                                isDisabled={isValid}
+                                onClick={clickFn}
+                                spinner={<BeatLoader color="white" size={10} />}
                             >
-                                Proceed to Payment
+                                Save and Continue
                             </Button>
                         </VStack>
                     </Box>
