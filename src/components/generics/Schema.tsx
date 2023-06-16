@@ -70,12 +70,14 @@ export interface IPackageCardProps {
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;
-    data?: SubscriptionView | any;
+    base?: SubscriptionView | any;
+    addon?: SubscriptionView | any;
     clients?: ClientViewPagedCollection;
     features?: FeatureView[];
 }
 export interface IManageSubProps {
-    data: SubscriptionView[];
+    base: SubscriptionView[];
+    addon: SubscriptionView[];
 }
 export interface IAdminProps {
     data?: UserViewPagedCollection;
@@ -85,6 +87,6 @@ export interface IAdminProps {
 export interface IClientProps {
     data: ClientViewPagedCollection;
 }
-export interface ISubHistory{
-    data: ClientSubscriptionViewPagedCollection
+export interface ISubHistory {
+    data: ClientSubscriptionViewPagedCollection;
 }

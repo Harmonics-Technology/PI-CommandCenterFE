@@ -6,8 +6,10 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { ClientService, SubscriptionService } from 'src/services';
 
-const subscriptionPage = ({ data, clients }: ISubscriptionProps) => {
-    return <SubscriptionComponent data={data} clients={clients} />;
+const subscriptionPage = ({ base, addon, clients }: ISubscriptionProps) => {
+    return (
+        <SubscriptionComponent base={base} addon={addon} clients={clients} />
+    );
 };
 
 export default subscriptionPage;
@@ -16,14 +18,20 @@ export const getServerSideProps: GetServerSideProps = withPageAuth(
     async (ctx: any) => {
         const pagingOptions = filterPagingSearchOptions(ctx);
         try {
-            const data = await SubscriptionService.listSubscription({});
+            const base = await SubscriptionService.listSubscription({
+                subscriptionTypeId: 1,
+            });
+            const addon = await SubscriptionService.listSubscription({
+                subscriptionTypeId: 2,
+            });
             const clients = await ClientService.listClients({
                 offset: pagingOptions.offset,
                 limit: pagingOptions.limit,
             });
             return {
                 props: {
-                    data: data.data,
+                    base: base.data,
+                    addon: addon.data,
                     clients: clients.data,
                 },
             };

@@ -64,7 +64,8 @@ const newClientSchema = yup.object().shape({
 });
 
 export const SubscriptionComponent = ({
-    data,
+    base,
+    addon,
     clients,
 }: ISubscriptionProps) => {
     const router = useRouter();
@@ -468,8 +469,7 @@ export const SubscriptionComponent = ({
                             </Box>
                         </HStack>
                     </HStack>
-                    {data.filter((x) => x.subscriptionTypeId == 1).length >
-                        0 && (
+                    {base?.length > 0 && (
                         <Box w="90%" mx="auto">
                             <Text
                                 my="3rem"
@@ -484,42 +484,37 @@ export const SubscriptionComponent = ({
                                 gap=".5rem"
                                 w="full"
                             >
-                                {data
-                                    .filter((x) => x.subscriptionTypeId == 1)
-                                    .map((x: SubscriptionView) => (
-                                        <PackageCard
-                                            id={x.id}
-                                            name={x.name}
-                                            selected={
-                                                subList.find(
-                                                    (a) => a.id == x.id,
-                                                ) as unknown as boolean
-                                            }
-                                            desc={x.description}
-                                            price={
-                                                billing == 'year'
-                                                    ? x.yearlyAmount
-                                                    : x.monthlyAmount
-                                            }
-                                            billed={
-                                                billing == 'annual'
-                                                    ? 'annually'
-                                                    : 'monthly'
-                                            }
-                                            recommended={x.recommendedFor}
-                                            features={x.features
-                                                ?.split(',')
-                                                .map((b) => b)}
-                                            updateSubscription={
-                                                updateSubscription
-                                            }
-                                        />
-                                    ))}
+                                {base?.map((x: SubscriptionView) => (
+                                    <PackageCard
+                                        id={x.id}
+                                        name={x.name}
+                                        selected={
+                                            subList.find(
+                                                (a) => a.id == x.id,
+                                            ) as unknown as boolean
+                                        }
+                                        desc={x.description}
+                                        price={
+                                            billing == 'year'
+                                                ? x.yearlyAmount
+                                                : x.monthlyAmount
+                                        }
+                                        billed={
+                                            billing == 'annual'
+                                                ? 'annually'
+                                                : 'monthly'
+                                        }
+                                        recommended={x.recommendedFor}
+                                        features={x.features
+                                            ?.split(',')
+                                            .map((b) => b)}
+                                        updateSubscription={updateSubscription}
+                                    />
+                                ))}
                             </Grid>
                         </Box>
                     )}
-                    {data.filter((x) => x.subscriptionTypeId == 2).length >
-                        0 && (
+                    {addon?.length > 0 && (
                         <Box w="90%" mx="auto">
                             <Text
                                 my="3rem"
@@ -534,31 +529,29 @@ export const SubscriptionComponent = ({
                                 gap=".5rem"
                                 w="full"
                             >
-                                {data
-                                    .filter((x) => x.subscriptionTypeId == 2)
-                                    .map((x: SubscriptionView) => (
-                                        <PackageCard
-                                            id={x.id}
-                                            name={x.name}
-                                            selected={
-                                                addonList.find(
-                                                    (a) => a.id == x.id,
-                                                ) as unknown as boolean
-                                            }
-                                            desc={x.description}
-                                            price={x.addonAmount || 0}
-                                            billed={
-                                                billing == 'annual'
-                                                    ? 'annually'
-                                                    : 'monthly'
-                                            }
-                                            recommended={x.recommendedFor}
-                                            features={x.features
-                                                ?.split(',')
-                                                .map((b) => b)}
-                                            updateSubscription={updateAddon}
-                                        />
-                                    ))}
+                                {addon?.map((x: SubscriptionView) => (
+                                    <PackageCard
+                                        id={x.id}
+                                        name={x.name}
+                                        selected={
+                                            addonList.find(
+                                                (a) => a.id == x.id,
+                                            ) as unknown as boolean
+                                        }
+                                        desc={x.description}
+                                        price={x.addonAmount || 0}
+                                        billed={
+                                            billing == 'annual'
+                                                ? 'annually'
+                                                : 'monthly'
+                                        }
+                                        recommended={x.recommendedFor}
+                                        features={x.features
+                                            ?.split(',')
+                                            .map((b) => b)}
+                                        updateSubscription={updateAddon}
+                                    />
+                                ))}
                             </Grid>
                         </Box>
                     )}
