@@ -18,7 +18,7 @@ function MyApp({
 }: AppProps<{ dehydratedState: unknown }>): JSX.Element {
     OpenAPI.BASE =
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
-        'https://timesheetapiprod.azurewebsites.net';
+        'https://pi-commandcenterdev.azurewebsites.net';
     OpenAPI.TOKEN = Cookies.get('token') as string;
 
     useEffect(() => {
