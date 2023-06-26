@@ -110,8 +110,8 @@ export const RenewSubscription = ({
                                 label="Addons"
                                 packages={
                                     data?.addOns?.map((x: AddOnsView) => ({
-                                        type: x.subscription?.name,
-                                        price: x.subscription?.monthlyAmount,
+                                        type: x.addOnSubscription?.name,
+                                        price: x.addOnTotalAmount,
                                     })) as ISinglePackage[]
                                 }
                             />

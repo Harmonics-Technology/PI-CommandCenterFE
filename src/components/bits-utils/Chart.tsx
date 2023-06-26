@@ -9,11 +9,6 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import {
-    UserCountByPayrollTypeView,
-    UserCountByPayrollTypeViewListStandardResponse,
-} from 'src/services';
-
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -24,11 +19,7 @@ ChartJS.register(
     ChartDataLabels,
 );
 
-export function Chart({
-    chart,
-}: {
-    chart: UserCountByPayrollTypeViewListStandardResponse;
-}) {
+export function Chart({ chart }: { chart: any }) {
     const options = {
         elements: {
             bar: {
@@ -123,9 +114,7 @@ export function Chart({
             },
         },
     };
-    const labels = chart?.data?.map((x: UserCountByPayrollTypeView) =>
-        x.month?.substring(0, 3),
-    );
+    const labels = chart?.data?.map((x: any) => x.month?.substring(0, 3));
     // const labels = [
     //     'Jan',
     //     'Feb',
@@ -147,7 +136,7 @@ export function Chart({
             {
                 label: 'Onshore Team',
                 data: chart?.data?.map(
-                    (x: UserCountByPayrollTypeView) => x.onShore,
+                    (x: any) => x.onShore,
                 ),
                 backgroundColor: '#45DAB6',
                 barPercentage: 0.4,
@@ -155,7 +144,7 @@ export function Chart({
             {
                 label: 'Offshore Team',
                 data: chart?.data?.map(
-                    (x: UserCountByPayrollTypeView) => x.offShore,
+                    (x: any) => x.offShore,
                 ),
                 backgroundColor: '#28A3EF',
                 barPercentage: 0.4,

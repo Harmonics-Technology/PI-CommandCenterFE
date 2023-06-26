@@ -34,7 +34,7 @@ function ForgotPassword() {
 
     const onSubmit = async (data: InitiateResetModel) => {
         try {
-            const result = await UserService.initiateReset('', data);
+            const result = await UserService.initiateReset({redirectUrl: '/password/reset',requestBody: data});
             if (result.status) {
                 // console.log({ result });
                 toast({

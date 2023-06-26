@@ -74,6 +74,7 @@ export interface ISubscriptionProps {
     addon?: SubscriptionView | any;
     clients?: ClientViewPagedCollection;
     features?: FeatureView[];
+    data?: SubscriptionView | any;
 }
 export interface IManageSubProps {
     base: SubscriptionView[];

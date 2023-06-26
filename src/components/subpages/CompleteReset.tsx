@@ -65,7 +65,9 @@ const CompleteReset = ({ code }: { code: string }) => {
         }
         // console.log({ data });
         try {
-            const result = await UserService.completeReset(data);
+            const result = await UserService.completeReset({
+                requestBody: data,
+            });
             if (result.status) {
                 setShowSuccess(true);
                 return;
