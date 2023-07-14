@@ -19,7 +19,7 @@ export function withPageAuth(gssp: any) {
         OpenAPI.TOKEN = token;
         OpenAPI.BASE =
             (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
-            'https://timesheetapiprod.azurewebsites.net';
+            'https://pi-commandcenterdev.azurewebsites.net';
 
         return await gssp(context); // Continue on to call `getServerSideProps` logic
     };
