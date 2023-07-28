@@ -25,6 +25,7 @@ import {
     UserViewStandardResponse,
 } from 'src/services';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { AdminLogo } from '@components/bits-utils/AdminLogo';
 
 const schema = yup.object().shape({
     email: yup.string().required('Email is required'),
@@ -83,7 +84,7 @@ function Login() {
                     ? (window.location.href = decodeURIComponent(
                           router.query.from as unknown as string,
                       ))
-                    : (window.location.href = '/dashboard');
+                    : (window.location.href = '/admin/dashboard');
 
                 return;
             }
@@ -110,17 +111,7 @@ function Login() {
     return (
         <Box bgColor="white" w="full" h="100vh">
             <Flex justify="flex-start" bgColor="white" w="90%" mx="auto">
-                <Flex w="auto" py=".5rem" align="center" gap=".2rem">
-                    <Image src="/assets/logo.png" h="2rem" />
-                    <Text
-                        fontWeight="bold"
-                        mb="0"
-                        fontSize="1.1rem"
-                        fontFamily="Rubik"
-                    >
-                        ADMIN-TIMESHEET
-                    </Text>
-                </Flex>
+                <AdminLogo />
             </Flex>
             <Flex w="full" h="75vh" justify="center" alignItems="center">
                 <Box

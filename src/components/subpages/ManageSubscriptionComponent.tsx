@@ -10,7 +10,7 @@ export const ManageSubscriptionComponent = ({
 }: IManageSubProps) => {
     const router = useRouter();
     const updateSubscription = (value) => {
-        router.push(`/manage-subscription/${value.id}`);
+        router.push(`/admin/manage-subscription/${value.id}`);
     };
     return (
         <Box
@@ -36,7 +36,9 @@ export const ManageSubscriptionComponent = ({
                     bgColor="brand.400"
                     color="white"
                     borderRadius="5px"
-                    onClick={() => router.push('/manage-subscription/new')}
+                    onClick={() =>
+                        router.push('/admin/manage-subscription/new')
+                    }
                     px="2rem"
                 >
                     Add Package

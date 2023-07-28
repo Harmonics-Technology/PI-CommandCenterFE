@@ -59,6 +59,7 @@ export function TableData({
     classes,
     full,
     isRed,
+    solid,
 }: {
     name: any;
     border?: boolean | undefined;
@@ -67,20 +68,28 @@ export function TableData({
     classes?: any;
     full?: boolean;
     isRed?: boolean;
+    solid?: boolean;
 }) {
     return (
         <Td
             borderColor={borderColor}
             borderRight={border ? value : 0}
             borderRightColor={borderColor}
-            paddingInlineStart="1rem"
+            paddingInlineStart="2rem"
             className={classes}
+            fontWeight={solid ? 500 : 400}
             // maxW="120px"
             // textOverflow=""
             // overflow="hidden"
             // noOfLines={1}
             color={
-                isRed ? '#FF5B79' : name == 'ONSHORE' ? 'brand.400' : 'black'
+                isRed
+                    ? '#FF5B79'
+                    : name == 'ONSHORE'
+                    ? 'brand.400'
+                    : solid
+                    ? '#073367'
+                    : 'black'
             }
         >
             <Tooltip label={name} hasArrow>
@@ -255,7 +264,9 @@ export function TableActions({ x }: { x: UserView }) {
                 </MenuButton>
                 <MenuList w="full">
                     <MenuItem
-                        onClick={() => router.push(`/administrators/${x.id}`)}
+                        onClick={() =>
+                            router.push(`/admin/administrators/${x.id}`)
+                        }
                         w="full"
                     >
                         <Icon as={BsPencil} mr=".5rem" color="#777777" />
@@ -307,7 +318,7 @@ export function TableClientActions({ id }: { id: any }) {
                 </MenuButton>
                 <MenuList w="full">
                     <MenuItem
-                        onClick={() => router.push(`/clients/${id}`)}
+                        onClick={() => router.push(`/admin/clients/${id}`)}
                         w="full"
                     >
                         <Icon as={BsEyeFill} mr=".5rem" color="#777777" />

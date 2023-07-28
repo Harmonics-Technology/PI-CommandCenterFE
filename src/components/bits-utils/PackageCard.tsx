@@ -20,11 +20,13 @@ export const PackageCard = ({
     name,
     desc,
     price,
+    prices,
     billed,
     recommended,
     features,
     updateSubscription,
     isEdit,
+    isDisabled,
 }: IPackageCardProps) => {
     return (
         <Box
@@ -49,10 +51,10 @@ export const PackageCard = ({
             </Box>
             <Box my="2rem">
                 <Text color="black" fontSize="37px" fontWeight="800" mb="0">
-                    {CAD(price)}
+                    {CAD(billed == 'year' ? prices : price)}
                 </Text>
                 <Text color="#465568" fontSize="16px" fontWeight="300" mb="0">
-                    billed {billed}
+                    billed per {billed}
                 </Text>
             </Box>
             <Button
@@ -62,7 +64,21 @@ export const PackageCard = ({
                 border="3px solid #375982"
                 h="56px"
                 w="full"
-                onClick={() => updateSubscription({ id, name, price })}
+                onClick={
+                    isDisabled
+                        ? void 0
+                        : () =>
+                              updateSubscription({
+                                  id,
+                                  name,
+                                  price,
+                                  prices,
+                                  desc,
+                                  billed,
+                                  recommended,
+                                  features,
+                              })
+                }
             >
                 {selected ? (
                     'Selected'
@@ -71,7 +87,7 @@ export const PackageCard = ({
                         <Icon as={BsFillPencilFill} mr=".5rem" /> Edit
                     </>
                 ) : (
-                    'Select'
+                    'Get Started'
                 )}
             </Button>
 

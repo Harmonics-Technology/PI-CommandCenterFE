@@ -20,6 +20,7 @@ import Items from '@components/menu-item';
 import { BsSearch } from 'react-icons/bs';
 import { BiPowerOff } from 'react-icons/bi';
 import Cookies from 'js-cookie';
+import { AdminLogo } from '@components/bits-utils/AdminLogo';
 
 function TopNav() {
     const router = useRouter();
@@ -28,7 +29,7 @@ function TopNav() {
     const logoutFn = () => {
         Cookies.remove('user');
         Cookies.remove('token');
-        router.push('/login');
+        router.push('/admin/login');
     };
 
     return (
@@ -43,17 +44,7 @@ function TopNav() {
         >
             <Flex justify="space-between" align="center" h="full" w="90%">
                 {/* Logo */}
-                <Flex w="auto" align="center" gap=".2rem">
-                    <Image src="/assets/logo.png" h="2rem" />
-                    <Text
-                        fontWeight="bold"
-                        mb="0"
-                        fontSize="1.1rem"
-                        fontFamily="Rubik"
-                    >
-                        ADMIN-TIMESHEET
-                    </Text>
-                </Flex>
+                <AdminLogo />
                 {/* Menu Items */}
                 <HStack align="flex-start" gap="2rem">
                     <Items menuTitle="dashboard" />

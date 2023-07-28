@@ -61,12 +61,14 @@ export interface IPackageCardProps {
     name: string | null | undefined;
     desc: string | null | undefined;
     price: number | null | undefined;
+    prices?: number | null | undefined;
     billed: string | null | undefined;
     recommended: string | null | undefined;
     features: string[] | undefined;
     id: string | null | undefined;
     updateSubscription: any;
     isEdit?: boolean;
+    isDisabled?: boolean;
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;

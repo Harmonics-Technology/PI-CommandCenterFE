@@ -22,7 +22,7 @@ export const SubscriptionInfo = ({
                 </Text>
             )}
             <VStack align="flex-end">
-                {packages.map((x: ISinglePackage) => (
+                {packages?.map((x: ISinglePackage) => (
                     <HStack gap="3rem">
                         <Text
                             color="#696969"

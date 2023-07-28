@@ -169,7 +169,7 @@ export const SubscriptionComponent = ({
                       'month',
                   ),
             package: {
-                name: subList[0].name,
+                name: subList[0]?.name,
                 price: subList[0]?.price as any,
             },
             addons: { addonList },
@@ -249,7 +249,7 @@ export const SubscriptionComponent = ({
                     bgColor="brand.400"
                     color="white"
                     borderRadius="5px"
-                    onClick={() => router.push('/subscription/history')}
+                    onClick={() => router.push('/admin/subscription/history')}
                     px="2rem"
                 >
                     Subscription History

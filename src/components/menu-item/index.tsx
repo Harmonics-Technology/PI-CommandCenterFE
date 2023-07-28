@@ -7,7 +7,8 @@ interface MenuProps {
 }
 function MenuItem({ menuTitle }: MenuProps) {
     const router = useRouter();
-    const url = `/${menuTitle}`;
+    const admin = router.pathname.startsWith('/admin');
+    const url = `${admin ? '/admin' : ''}/${menuTitle}`;
     return (
         <>
             <Link href={url} passHref>
@@ -27,15 +28,17 @@ function MenuItem({ menuTitle }: MenuProps) {
                     >
                         {menuTitle.replaceAll('-', ' ')}
                     </Text>
-                    <Box
-                        h="5px"
-                        w={router.pathname.startsWith(url) ? 'full' : '0'}
-                        bgColor="brand.400"
-                        transition="width .3s ease"
-                        _groupHover={{
-                            w: 'full',
-                        }}
-                    />
+                    {admin && (
+                        <Box
+                            h="5px"
+                            w={router.pathname.startsWith(url) ? 'full' : '0'}
+                            bgColor="brand.400"
+                            transition="width .3s ease"
+                            _groupHover={{
+                                w: 'full',
+                            }}
+                        />
+                    )}
                 </VStack>
             </Link>
         </>

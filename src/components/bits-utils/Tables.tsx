@@ -1,30 +1,32 @@
-import {
-    Table,
-    TableContainer,
-    Tbody,
-    Th,
-    Thead,
-    Tr,
-} from '@chakra-ui/react';
+import { Table, TableContainer, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 
 interface TablesProps {
     tableHead: string[];
     children: ReactNode;
+    bg?: string;
+    color?: string;
+    variant?: string;
 }
 
-function Tables({ tableHead, children }: TablesProps) {
+function Tables({
+    tableHead,
+    children,
+    bg = 'brand.400',
+    color = 'brand.200',
+    variant = 'striped',
+}: TablesProps) {
     // console.log({ children });
     return (
         <TableContainer h="auto">
-            <Table variant="striped" fontSize="11px">
+            <Table variant={variant} fontSize="11px">
                 <Thead>
-                    <Tr w="full" h="48px" bgColor="brand.400">
+                    <Tr w="full" h="48px" bg={bg}>
                         {tableHead.map((x, i) => (
                             <Th
-                                pl="1rem"
+                                pl="2rem"
                                 fontSize="15px"
-                                color="#ebeff2"
+                                color={bg ? 'white' : color}
                                 fontWeight="700"
                                 textTransform="capitalize"
                                 key={i}

@@ -108,12 +108,12 @@ export const PaymentDetails = ({
                                 },
                             ]}
                         />
-                        <SubscriptionInfo
+                        {/* <SubscriptionInfo
                             packages={data?.addons?.addonList.map((x: any) => ({
                                 type: x.name,
                                 price: CAD(x.price),
                             }))}
-                        />
+                        /> */}
                         <SubscriptionInfo
                             packages={[
                                 { type: 'Total', price: CAD(data?.total) },
