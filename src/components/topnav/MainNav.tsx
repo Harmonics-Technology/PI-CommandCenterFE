@@ -3,6 +3,7 @@ import { AdminLogo } from '@components/bits-utils/AdminLogo';
 import React from 'react';
 import Items from '@components/menu-item';
 import { useRouter } from 'next/router';
+import { MenuWithDropdown } from '@components/menu-item/MenuWithDropdown';
 
 export const MainNav = () => {
     const router = useRouter();
@@ -25,7 +26,23 @@ export const MainNav = () => {
             >
                 <AdminLogo />
                 <HStack align="center" gap="2rem">
-                    <Items menuTitle="use-cases" />
+                    <MenuWithDropdown
+                        menuTitle="use-cases"
+                        menus={[
+                            {
+                                name: 'sub-contractors',
+                            },
+                            {
+                                name: 'human-resource-managers',
+                            },
+                            {
+                                name: 'entrepreneurs',
+                            },
+                            {
+                                name: 'recruiters',
+                            },
+                        ]}
+                    />
                     <Items menuTitle="pricing" />
                     <Items menuTitle="blogs" />
                     <Items menuTitle="book-a-demo" />

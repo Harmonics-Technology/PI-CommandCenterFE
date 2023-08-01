@@ -96,11 +96,7 @@ export const SubscriptionDetails = ({
                         <>
                             <Tr>
                                 <TableData
-                                    name={`${
-                                        currentSub?.baseSubscription?.name
-                                    } + ${currentSub?.addOns
-                                        ?.map((x) => x?.addOnSubscription?.name)
-                                        .join('+')}`}
+                                    name={`${currentSub?.subscription?.name} `}
                                 />
                                 <TableData
                                     name={dayjs(currentSub?.startDate).format(
@@ -199,14 +195,7 @@ export const SubscriptionDetails = ({
                             {allSub?.value?.map((x: ClientSubscriptionView) => (
                                 <Tr>
                                     <TableData
-                                        name={`${
-                                            x.baseSubscription?.name
-                                        } + ${x.addOns
-                                            ?.map(
-                                                (x) =>
-                                                    x?.addOnSubscription?.name,
-                                            )
-                                            .join('+')}`}
+                                        name={`${x.subscription?.name} `}
                                     />
                                     <TableData name={dayjs(x.startDate)} />
                                     <TableData name={`${x.duration} months`} />

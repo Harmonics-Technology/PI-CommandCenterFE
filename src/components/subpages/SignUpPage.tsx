@@ -18,7 +18,6 @@ import { useForm } from 'react-hook-form';
 import {
     NewClientSubscriptionModel,
     SubscriptionService,
-    SubscriptionView,
 } from 'src/services';
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
@@ -47,7 +46,6 @@ const newClientSchema = yup.object().shape({
 });
 
 export const SignUpPage = () => {
-    const [values, setValues] = useState('1');
     const [billing, setBilling] = useState('month');
     const [current, setCurrent] = useState('Month');
     const [readonly, setReadOnly] = useState(false);
@@ -124,7 +122,7 @@ export const SignUpPage = () => {
 
     const onSubmit = async (data: NewClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
-        data.baseSubscriptionId = base?.id;
+        data.subscriptionId = base?.id;
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
@@ -137,7 +135,7 @@ export const SignUpPage = () => {
                 });
             if (result.status) {
                 toast.success('Successful');
-                router.reload();
+                router.push('/');
                 return;
             }
             toast.error(result.message as string);
@@ -262,7 +260,7 @@ export const SignUpPage = () => {
                                         label={'Start Date'}
                                         error={errors.startDate}
                                         min={new DateObject()}
-                                        disableWeekend
+                                        // disableWeekend
                                         placeholder="Select start date"
                                     />
                                     <PrimaryInput<NewClientSubscriptionModel>

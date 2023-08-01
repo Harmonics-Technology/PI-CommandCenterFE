@@ -25,6 +25,7 @@ export default function PaymentPage({
     const options = {
         clientSecret: clientSecret,
     };
+    console.log({ clientSecret });
 
     return (
         <Modal
@@ -39,7 +40,7 @@ export default function PaymentPage({
             <ModalContent
                 py={5}
                 borderRadius="0px"
-                w={['88%', '60%']}
+                w={['88%', '40%']}
                 // overflow="hidden"
                 maxH="100vh"
                 pos="fixed"

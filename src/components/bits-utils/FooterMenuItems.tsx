@@ -16,7 +16,7 @@ export const FooterMenuItems = ({
                 fontSize={['.8rem', '1rem']}
                 mb="0"
                 cursor="pointer"
-                color="#182c51"
+                color="brand.100"
             >
                 {text}
             </Text>

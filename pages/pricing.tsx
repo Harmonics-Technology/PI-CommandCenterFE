@@ -17,9 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
     OpenAPI.TOKEN = ctx.req.cookies.token;
     const pagingOptions = filterPagingSearchOptions(ctx);
     try {
-        const base = await SubscriptionService.listSubscription({
-            subscriptionTypeId: 1,
-        });
+        const base = await SubscriptionService.listSubscription({});
 
         return {
             props: {

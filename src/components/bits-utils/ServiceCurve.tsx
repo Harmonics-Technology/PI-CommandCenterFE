@@ -13,7 +13,7 @@ export const ServiceCurve = () => {
                 pt="5rem"
                 // pb="8rem"
                 mx="auto"
-                bgColor="#182c51"
+                bgColor="brand.100"
                 borderRadius="0% 0% 50% 50% / 10% 10% 13% 13% "
                 overflow="hidden"
             >

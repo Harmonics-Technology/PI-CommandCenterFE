@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { AddOnsView } from './AddOnsView';
 import type { ClientView } from './ClientView';
 import type { SubscriptionView } from './SubscriptionView';
 
@@ -13,11 +12,10 @@ export type ClientSubscriptionView = {
     freeTrialStartDate?: string | null;
     startDate?: string;
     duration?: number;
-    baseSubscriptionId?: string;
-    baseSubscription?: SubscriptionView;
+    subscriptionId?: string;
+    subscription?: SubscriptionView;
     annualBilling?: boolean;
     status?: string | null;
     endDate?: string;
     totalAmount?: number;
-    addOns?: Array<AddOnsView> | null;
 };

@@ -18,7 +18,8 @@ import { ClientSubscriptionView } from 'src/services';
 export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
-    const { clientSecret } = router.query;
+    const { client_secret } = router.query;
+    console.log({ client_secret });
     return (
         <Box my="4rem" w="80%" mx="auto">
             <Box bgColor="white" borderRadius="0.937rem" w="full">
@@ -61,9 +62,13 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                         variant="unstyled"
                     >
                         <Tr>
-                            <TableData name={'Basic Package'} solid />
-                            <TableData name={'1'} />
-                            <TableData name={CAD(5000)} />
+                            <TableData name={data.subscription?.name} solid />
+                            <TableData name={data.duration} />
+                            <TableData
+                                name={CAD(
+                                    data.subscription?.totalMonthlyAmount,
+                                )}
+                            />
                             <TableData name={CAD(data.totalAmount)} />
                         </Tr>
                         <Tr>
@@ -95,6 +100,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                         h="3rem"
                         my="3rem"
                         onClick={onOpen}
+                        isDisabled={data.status == 'ACTIVE'}
                     >
                         Make Payment
                     </Button>
@@ -104,7 +110,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                 <PaymentPage
                     isOpen={isOpen}
                     onClose={onClose}
-                    clientSecret={clientSecret as string}
+                    clientSecret={client_secret as string}
                 />
             )}
         </Box>

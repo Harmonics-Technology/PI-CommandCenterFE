@@ -7,7 +7,6 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AddOnsModel } from './models/AddOnsModel';
-export type { AddOnsView } from './models/AddOnsView';
 export type { BooleanStandardResponse } from './models/BooleanStandardResponse';
 export type { ClientModel } from './models/ClientModel';
 export type { ClientSubscriptionModel } from './models/ClientSubscriptionModel';
@@ -31,7 +30,6 @@ export type { ProblemDetails } from './models/ProblemDetails';
 export type { RegisterModel } from './models/RegisterModel';
 export type { RenewSubscriptionModel } from './models/RenewSubscriptionModel';
 export type { SubscriptionModel } from './models/SubscriptionModel';
-export type { SubscriptionType } from './models/SubscriptionType';
 export type { SubscriptionView } from './models/SubscriptionView';
 export type { SubscriptionViewListStandardResponse } from './models/SubscriptionViewListStandardResponse';
 export type { SubscriptionViewStandardResponse } from './models/SubscriptionViewStandardResponse';

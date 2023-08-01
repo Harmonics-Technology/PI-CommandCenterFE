@@ -5,24 +5,19 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { SubscriptionService } from 'src/services';
 
-const manageSubscriptionPage = ({ base, addon }: IManageSubProps) => {
-    return <ManageSubscriptionComponent base={base} addon={addon} />;
+const manageSubscriptionPage = ({ base }: IManageSubProps) => {
+    return <ManageSubscriptionComponent base={base} />;
 };
 
 export default manageSubscriptionPage;
 
 export const getServerSideProps: GetServerSideProps = withPageAuth(async () => {
     try {
-        const base = await SubscriptionService.listSubscription({
-            subscriptionTypeId: 1,
-        });
-        const addon = await SubscriptionService.listSubscription({
-            subscriptionTypeId: 2,
-        });
+        const base = await SubscriptionService.listSubscription({});
+
         return {
             props: {
                 base: base.data,
-                addon: addon.data,
             },
         };
     } catch (error: any) {

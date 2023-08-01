@@ -48,7 +48,7 @@ const CheckoutForm = () => {
             >
                 Enter Your Card Details
             </Text>
-            <Box>
+            <Box py='2rem'>
                 {error && (
                     <Text color="red" fontSize=".9rem">
                         {error}

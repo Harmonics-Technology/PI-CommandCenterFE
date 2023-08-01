@@ -47,14 +47,7 @@ export const SubscriptionHistory = ({ data }: ISubHistory) => {
                                 <Tr key={x.id}>
                                     <TableData name={x.client?.companyName} />
                                     <TableData
-                                        name={`${
-                                            x.baseSubscription?.name
-                                        } + ${x.addOns
-                                            ?.map(
-                                                (x) =>
-                                                    x.addOnSubscription?.name,
-                                            )
-                                            .join(',')}`}
+                                        name={`${x.subscription?.name}`}
                                     />
                                     <TableData
                                         name={dayjs(x.startDate).format(

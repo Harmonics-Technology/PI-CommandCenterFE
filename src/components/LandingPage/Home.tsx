@@ -9,7 +9,13 @@ import React from 'react';
 export const Home = () => {
     return (
         <Box>
-            <Mainhero />
+            <Mainhero
+                title="The simple way to track productivity, save time and increase profit"
+                sub="The All-in-One Tracking Software App for Productivityincrease, project management, Seamless Payment Partnerships for Remote Team, Employee onboarding and Management"
+                buttonTitle="Start Using for FREE – Sign up here"
+                image="/assets/laptop.png"
+                bgColor="white"
+            />
             <ServiceBody />
             <ServiceCurve />
             <Faq />

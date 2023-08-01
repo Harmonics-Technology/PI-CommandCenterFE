@@ -80,7 +80,6 @@ export interface ISubscriptionProps {
 }
 export interface IManageSubProps {
     base: SubscriptionView[];
-    addon: SubscriptionView[];
 }
 export interface IAdminProps {
     data?: UserViewPagedCollection;

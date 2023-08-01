@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "What is TIMBA?",
+        "content": "TIMBA is a powerful and user-friendly software designed to streamline time management and project tracking for individuals, teams, and businesses of all sizes. It offers a range of features, including contract management, time tracking, payment monitoring, and more."
+    },
+    {
+        "id": 2,
+        "title": "Who can benefit from TIMBA?",
+        "content": "TIMBA caters to a wide range of users, including contractors, small businesses, remote teams, large enterprises, and individuals seeking efficient time tracking and contract management solutions."
+    },
+    {
+        "id": 3,
+        "title": "What are the key features of TIMBA?",
+        "content": "TIMBA&#39;s main features include centralized contract storage, real-time contract monitoring with start and end dates, milestones tracking, automated invoicing, payment tracking, and contract expiration alerts."
+    },
+    {
+        "id": 4,
+        "title": "How user-friendly is TIMBA? Is it suitable for non-tech-savvy users?",
+        "content": "TIMBA is a web-based app that is easy to use. It has a user-friendly interface and a simple, straightforward workflow. TIMBA is suitable for non-tech-savvy users."
+    },
+    {
+        "id": 5,
+        "title": "How does TIMBA optimize productivity?",
+        "content": "By providing insights into workforce performance and project progress, TIMBA empowers users to optimize their time, monitor productivity, and make informed decisions for improved efficiency."
+    },
+    {
+        "id": 6,
+        "title": "Is TIMBA suitable for small businesses and large enterprises alike?",
+        "content": "Yes, TIMBA is designed to be scalable and versatile, making it suitable for both small businesses and large enterprises with varying time tracking and contract management needs."
+    },
+    {
+        "id": 7,
+        "title": "What security measures does TIMBA have in place?",
+        "content": "TIMBA takes data security seriously and employs industry-standard security measures to protect user information and ensure data confidentiality."
+    },
+    {
+        "id": 8,
+        "title": "Is there a free trial available?",
+        "content": "Yes, TIMBA offers a 30-day free trial, allowing users to experience its features and benefits risk-free before making a commitment."
+    }
+]

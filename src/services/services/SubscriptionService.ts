@@ -75,10 +75,8 @@ requestBody?: SubscriptionModel,
      * @throws ApiError
      */
     public static listSubscription({
-subscriptionTypeId,
 xApiKey,
 }: {
-subscriptionTypeId?: number,
 xApiKey?: any,
 }): CancelablePromise<SubscriptionViewListStandardResponse> {
         return __request(OpenAPI, {
@@ -86,9 +84,6 @@ xApiKey?: any,
             url: '/api/Subscription/subscriptions',
             headers: {
                 'X-API-KEY': xApiKey,
-            },
-            query: {
-                'subscriptionTypeId': subscriptionTypeId,
             },
             errors: {
                 400: `Bad Request`,

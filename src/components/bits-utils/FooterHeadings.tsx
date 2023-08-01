@@ -6,7 +6,7 @@ export const FooterHeadings = ({ text }: { text: string }) => {
         <Text
             fontSize="1.5rem"
             fontWeight="700"
-            color="#182c51"
+            color="brand.100"
             mb="0"
             textTransform="capitalize"
         >

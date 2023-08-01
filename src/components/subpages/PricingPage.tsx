@@ -8,7 +8,7 @@ import {
     Grid,
     Button,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { PackageCard } from '@components/bits-utils/PackageCard';
 import { ISubscriptionProps } from '@components/generics/Schema';
 import { useRouter } from 'next/router';
@@ -22,6 +22,8 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
     const router = useRouter();
     console.log({ subList });
 
+    const btn = useRef<any>(null);
+
     const updateSubscription = (base) => {
         const exists = subList.find((x) => x.id == base?.id);
         if (exists) {
@@ -29,6 +31,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
             return;
         }
         setSubList([base]);
+        btn.current?.scrollIntoView({ behavior: 'smooth' });
     };
     const changePackagetype = () => {
         setBilling(billing == 'month' ? 'year' : 'month');
@@ -51,7 +54,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                 align="center"
                 justify="center"
                 h="40vh"
-                bgColor="#182c51"
+                bgColor="brand.100"
             >
                 <VStack align="center" spacing=".5rem" w="45%">
                     <Text
@@ -132,6 +135,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                         />
                     ))}
                 </Grid>
+                <Box ref={btn} pt="7rem" />
                 {subList.length > 0 && (
                     <Flex w="full" justify="center">
                         <Button
@@ -140,7 +144,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                             w="30%"
                             borderRadius="5px"
                             h="3rem"
-                            my="3rem"
+                            mb="3rem"
                             onClick={showSignUp}
                         >
                             Save and Continue

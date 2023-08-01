@@ -48,6 +48,7 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     setCurrent?: any;
     current?: any;
     options?: string[];
+    color?: string;
 }
 export const PrimaryInput = <TFormValues extends Record<string, any>>({
     name,
@@ -73,6 +74,7 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
     setCurrent,
     current,
     options,
+    color,
 }: FormInputProps<TFormValues>) => {
     return (
         <FormControl
@@ -87,6 +89,7 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
                     width="fit-content"
                     fontSize={fontSize}
                     mb="0"
+                    color={color}
                 >
                     {label}
                 </FormLabel>
@@ -113,6 +116,7 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
                     borderRadius="0"
                     h={h}
                     isReadOnly={readonly}
+                    bgColor="white"
                 />
                 {icon && (
                     <InputRightElement

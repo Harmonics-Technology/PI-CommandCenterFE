@@ -4,7 +4,6 @@
 
 export type SubscriptionModel = {
     id?: string | null;
-    subscriptionTypeId?: number;
     name?: string | null;
     description?: string | null;
     recommendedFor?: string | null;
@@ -14,7 +13,6 @@ export type SubscriptionModel = {
     yearlyAmount?: number;
     yearlyDiscount?: number | null;
     totalAmount?: number;
-    addonAmount?: number | null;
     hasFreeTrial?: boolean;
     freeTrialDuration?: number | null;
     totalMonthlyAmount?: number;

@@ -10,7 +10,7 @@ export const BottomHero = () => {
                 <Flex
                     justify="space-between"
                     pos="relative"
-                    bgColor="#182c51"
+                    bgColor="brand.100"
                     borderRadius="1.562rem"
                     p="4rem 3rem 4rem 6rem"
                     overflow="hidden"

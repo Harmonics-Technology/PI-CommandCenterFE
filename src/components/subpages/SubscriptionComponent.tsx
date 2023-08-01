@@ -65,7 +65,6 @@ const newClientSchema = yup.object().shape({
 
 export const SubscriptionComponent = ({
     base,
-    addon,
     clients,
 }: ISubscriptionProps) => {
     const router = useRouter();
@@ -99,7 +98,6 @@ export const SubscriptionComponent = ({
     const [values, setValues] = useState('1');
     const [billing, setBilling] = useState('month');
     const [subList, setSubList] = useState<any>([]);
-    const [addonList, setAddonList] = useState<any[]>([]);
     const [current, setCurrent] = useState('Month');
     const [readonly, setReadOnly] = useState(false);
 
@@ -113,15 +111,6 @@ export const SubscriptionComponent = ({
         }
         setSubList([base]);
     };
-    const updateAddon = (addun) => {
-        const exists = addonList.find((x) => x.id == addun?.id);
-        if (exists) {
-            setAddonList(addonList.filter((x) => x.id !== addun?.id));
-            return;
-        }
-        setAddonList([...addonList, addun]);
-    };
-    const addonTotal = addonList.reduce((a, b) => a + (b.price as number), 0);
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [selection, setSelection] = useState<any>();
@@ -140,17 +129,14 @@ export const SubscriptionComponent = ({
         setCurrent('Month');
         setReadOnly(false);
     };
-
     const totalAmount =
         billing == 'month'
-            ? (subList[0]?.price as any) * (watch('duration') as number) +
-                  addonTotal * (watch('duration') as number) ||
-              (subList[0]?.price as any) * (watchs('duration') as number) +
-                  addonTotal * (watchs('duration') as number)
-            : (subList[0]?.price as any) +
-                  addonTotal * ((watch('duration') as number) * 12) ||
-              (subList[0]?.price as any) +
-                  addonTotal * ((watchs('duration') as number) * 12);
+            ? (subList[0]?.price as any) * (watch('duration') as number) ||
+              (subList[0]?.price as any) * (watchs('duration') as number)
+            : (subList[0]?.price as any) *
+                  ((watch('duration') as number) * 12) ||
+              (subList[0]?.price as any) *
+                  ((watchs('duration') as number) * 12);
 
     const openModal = () => {
         setSelection({
@@ -172,7 +158,6 @@ export const SubscriptionComponent = ({
                 name: subList[0]?.name,
                 price: subList[0]?.price as any,
             },
-            addons: { addonList },
             total: totalAmount,
             bill: billing,
         });
@@ -182,14 +167,11 @@ export const SubscriptionComponent = ({
 
     const onSubmit = async (data: NewClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
-        data.baseSubscriptionId = subList[0]?.id;
+        data.subscriptionId = subList[0]?.id;
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
-        data.addOns = addonList.map((x) => ({
-            addOnSubscriptionId: x.id,
-            addOnTotalAmount: (x.addonAmount as number) || 0,
-        }));
+
         data.totalAmount = totalAmount;
 
         try {
@@ -209,14 +191,10 @@ export const SubscriptionComponent = ({
     };
     const existClientSubmit = async (data: ClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
-        data.baseSubscriptionId = subList[0]?.id;
+        data.subscriptionId = subList[0]?.id;
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
-        data.addOns = addonList.map((x) => ({
-            addOnSubscriptionId: x.id,
-            addOnTotalAmount: (x.addonAmount as number) || 0,
-        }));
         data.totalAmount = totalAmount;
         try {
             const result = await SubscriptionService.createClientSubscription({
@@ -298,7 +276,7 @@ export const SubscriptionComponent = ({
                                     name="startDate"
                                     label={'Start Date'}
                                     error={isError.startDate}
-                                    min={new DateObject().add(3, 'days')}
+                                    min={new DateObject()}
                                     disableWeekend
                                 />
                                 <PrimaryInput<ClientSubscriptionModel>
@@ -409,8 +387,9 @@ export const SubscriptionComponent = ({
                                         name="startDate"
                                         label={'Start Date'}
                                         error={errors.startDate}
-                                        min={new DateObject().add(3, 'days')}
-                                        disableWeekend
+                                        min={new DateObject()}
+                                        // disableWeekend
+                                        placeholder="Select start date"
                                     />
                                     <PrimaryInput<NewClientSubscriptionModel>
                                         label="Duration"
@@ -477,7 +456,7 @@ export const SubscriptionComponent = ({
                                 fontWeight="700"
                                 color="#1b1d21"
                             >
-                                Base Package Subscription
+                                Package Subscription
                             </Text>
                             <Grid
                                 templateColumns={['repeat(3, 1fr)']}
@@ -509,47 +488,6 @@ export const SubscriptionComponent = ({
                                             ?.split(',')
                                             .map((b) => b)}
                                         updateSubscription={updateSubscription}
-                                    />
-                                ))}
-                            </Grid>
-                        </Box>
-                    )}
-                    {addon?.length > 0 && (
-                        <Box w="90%" mx="auto">
-                            <Text
-                                my="3rem"
-                                fontSize="20px"
-                                fontWeight="700"
-                                color="#1b1d21"
-                            >
-                                Add-ons
-                            </Text>
-                            <Grid
-                                templateColumns={['repeat(3, 1fr)']}
-                                gap=".5rem"
-                                w="full"
-                            >
-                                {addon?.map((x: SubscriptionView) => (
-                                    <PackageCard
-                                        id={x.id}
-                                        name={x.name}
-                                        selected={
-                                            addonList.find(
-                                                (a) => a.id == x.id,
-                                            ) as unknown as boolean
-                                        }
-                                        desc={x.description}
-                                        price={x.addonAmount || 0}
-                                        billed={
-                                            billing == 'annual'
-                                                ? 'annually'
-                                                : 'monthly'
-                                        }
-                                        recommended={x.recommendedFor}
-                                        features={x.features
-                                            ?.split(',')
-                                            .map((b) => b)}
-                                        updateSubscription={updateAddon}
                                     />
                                 ))}
                             </Grid>

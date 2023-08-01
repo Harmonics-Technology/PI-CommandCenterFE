@@ -24,7 +24,7 @@ export const Completed = () => {
                     <BeatLoader color="#2EAFA3" size={20} />
                     <Text
                         fontSize="2.125rem"
-                        color="#182c51"
+                        color="brand.100"
                         fontWeight="800"
                         fontFamily="Nunito"
                         mb="0"

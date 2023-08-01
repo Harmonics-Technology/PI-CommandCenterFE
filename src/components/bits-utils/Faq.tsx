@@ -2,6 +2,7 @@ import { Accordion, Box, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { MainTitle } from './Heros/MainTitle';
 import { AccordionSingle } from '@components/AccordionSingle';
+import FaqData from './FaqData.json';
 
 export const Faq = () => {
     return (
@@ -24,22 +25,9 @@ export const Faq = () => {
                     display="flex"
                     flexDirection="column"
                 >
-                    <AccordionSingle
-                        title="Lorem ipsum dolor sit amet cultriciespurus mattis nisl. ?"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                    />
-                    <AccordionSingle
-                        title="Lorem ipsum dolor sit amet cultriciespurus mattis nisl. ?"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                    />
-                    <AccordionSingle
-                        title="Lorem ipsum dolor sit amet cultriciespurus mattis nisl. ?"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                    />
-                    <AccordionSingle
-                        title="Lorem ipsum dolor sit amet cultriciespurus mattis nisl. ?"
-                        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                    />
+                    {FaqData.map((x) => (
+                        <AccordionSingle title={x.title} content={x.content} />
+                    ))}
                 </Accordion>
             </VStack>
         </Box>
