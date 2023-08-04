@@ -180,6 +180,19 @@ export const SubscriptionFormComponent = ({
                                 register={register}
                                 isRequired
                             />
+                            <SelectrixBox<SubscriptionModel>
+                                control={control}
+                                name="name"
+                                error={errors.name}
+                                keys="label"
+                                keyLabel="label"
+                                label="Client "
+                                options={[
+                                    { id: 1, label: 'Basic' },
+                                    { id: 2, label: 'Standard' },
+                                    { id: 3, label: 'Premium' },
+                                ]}
+                            />
                             <PrimaryTextarea<SubscriptionModel>
                                 label="Description"
                                 name="description"

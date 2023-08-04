@@ -4,13 +4,22 @@ import {
     useElements,
     PaymentElement,
 } from '@stripe/react-stripe-js';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({
+    payBtnText = 'Confirm Payment',
+    redirectUrl,
+}: {
+    payBtnText?: string;
+    redirectUrl: string;
+}) => {
     const stripe = useStripe();
     const elements = useElements();
+    const router = useRouter();
     const [error, setError] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
+    const { subscriptionId } = router.query;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,7 +31,7 @@ const CheckoutForm = () => {
             const result = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: `${window.location.origin}/completed`,
+                    return_url: `${window.location.origin}/completed?redirectUrl=${redirectUrl}&subscriptionId=${subscriptionId}`,
                 },
             });
             if (result.error) {
@@ -48,7 +57,7 @@ const CheckoutForm = () => {
             >
                 Enter Your Card Details
             </Text>
-            <Box py='2rem'>
+            <Box py="2rem">
                 {error && (
                     <Text color="red" fontSize=".9rem">
                         {error}
@@ -66,7 +75,7 @@ const CheckoutForm = () => {
                         isDisabled={!stripe}
                         isLoading={isLoading}
                     >
-                        Confirm Payment
+                        {payBtnText}
                     </Button>
                 </form>
             </Box>

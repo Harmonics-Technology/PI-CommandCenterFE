@@ -14,7 +14,6 @@ export type SubscriptionView = {
     yearlyDiscount?: number | null;
     totalMonthlyAmount?: number;
     totalYearlyAmount?: number;
-    addonAmount?: number | null;
     hasFreeTrial?: boolean;
     freeTrialDuration?: number | null;
     discountType?: string | null;

@@ -69,11 +69,11 @@ export const SubscriptionDetails = ({
                 tabValue={[
                     {
                         text: 'Client Information',
-                        url: `/clients/${id}/client-information`,
+                        url: `/admin/clients/${id}/client-information`,
                     },
                     {
                         text: 'Subscription Details',
-                        url: `/clients/${id}/subscription-details`,
+                        url: `/admin/clients/${id}/subscription-details`,
                     },
                 ]}
             />
@@ -197,12 +197,19 @@ export const SubscriptionDetails = ({
                                     <TableData
                                         name={`${x.subscription?.name} `}
                                     />
-                                    <TableData name={dayjs(x.startDate)} />
-                                    <TableData name={`${x.duration} months`} />
-                                    <TableData name={x?.endDate} isRed />
                                     <TableData
-                                        name={CAD(currentSub?.totalAmount)}
+                                        name={dayjs(x.startDate).format(
+                                            'DD/MM/YY',
+                                        )}
                                     />
+                                    <TableData name={`${x.duration} months`} />
+                                    <TableData
+                                        name={dayjs(x.endDate).format(
+                                            'DD/MM/YY',
+                                        )}
+                                        isRed
+                                    />
+                                    <TableData name={CAD(x?.totalAmount)} />
                                     <TableStatus name={true} />
                                     <TableSubscriptionActions
                                         openRenew={onOpen}

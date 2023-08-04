@@ -18,4 +18,6 @@ export type ClientSubscriptionView = {
     status?: string | null;
     endDate?: string;
     totalAmount?: number;
+    isCanceled?: boolean;
+    cancelationReason?: string | null;
 };

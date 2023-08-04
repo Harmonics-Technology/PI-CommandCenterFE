@@ -8,7 +8,7 @@ export const BookDemo = () => {
         <Box>
             <Flex
                 w="full"
-                bgImage="url('/assets/pricing.png')"
+                bgImage="url('/assets/demobg.png')"
                 bgRepeat="no-repeat"
                 bgSize="cover"
                 bgPosition="center"

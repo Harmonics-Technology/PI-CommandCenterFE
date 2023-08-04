@@ -1,15 +1,40 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { SubscriptionService } from 'src/services';
 
 export const Completed = () => {
+    const router = useRouter();
+    const { redirectUrl, subscriptionId } = router.query;
+    const [loading, setLoading] = useState(false);
     const redirect = () => {
-        window.location.href = process.env.NEXT_PUBLIC_TTS as string;
+        window.location.href = `${
+            process.env.NEXT_PUBLIC_TTS as string
+        }/${redirectUrl}`;
+    };
+    const confirmSuccess = async () => {
+        setLoading(true);
+        try {
+            const result = await SubscriptionService.successSubscription({
+                subscriptionId: subscriptionId as string,
+            });
+            if (result.status) {
+                setLoading(false);
+                toast.success('Successful');
+                redirect();
+                return;
+            }
+            setLoading(false);
+            toast.error(result.message as string);
+        } catch (error: any) {
+            setLoading(false);
+            toast(error?.message || error?.body?.message);
+        }
     };
     useEffect(() => {
-        setTimeout(() => {
-            redirect();
-        }, 3000);
+        confirmSuccess();
     }, []);
     return (
         <Box>
@@ -21,7 +46,7 @@ export const Completed = () => {
                     p="8rem 3rem"
                     borderRadius="12px"
                 >
-                    <BeatLoader color="#2EAFA3" size={20} />
+                    {loading && <BeatLoader color="#2EAFA3" size={20} />}
                     <Text
                         fontSize="2.125rem"
                         color="brand.100"

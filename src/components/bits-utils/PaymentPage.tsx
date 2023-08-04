@@ -10,22 +10,27 @@ import {
 } from '@chakra-ui/react';
 
 const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
+    'pk_test_51IF5dHGrnlH0843CmoosQR3VCgXNVH6dMjYtEBIc8VynNRhWphvwP89HGlv0BsyThloFjfcADs6f6HizQ1Tn4cLc00MRRyeWVX',
 );
+// process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
 
 export default function PaymentPage({
     clientSecret,
     isOpen,
     onClose,
+    redirectUrl,
+    payBtnText,
 }: {
     clientSecret: string;
     isOpen: boolean;
     onClose: any;
+    redirectUrl: string;
+    payBtnText?: string;
 }) {
     const options = {
         clientSecret: clientSecret,
     };
-    console.log({ clientSecret });
+    // console.log({ clientSecret });
 
     return (
         <Modal
@@ -57,7 +62,10 @@ export default function PaymentPage({
                         px="1rem"
                     >
                         <Elements stripe={stripePromise} options={options}>
-                            <CheckoutForm />
+                            <CheckoutForm
+                                payBtnText={payBtnText}
+                                redirectUrl={redirectUrl}
+                            />
                         </Elements>
                     </Box>
                 </ModalBody>

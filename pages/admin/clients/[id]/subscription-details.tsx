@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = withPageAuth(
     async (ctx) => {
         const { id } = ctx.query;
         const pagingOptions = filterPagingSearchOptions(ctx);
-        console.log({ id });
+        // console.log({ id });
         try {
             const currentSub =
                 await SubscriptionService.getCurrentClientSubscription({

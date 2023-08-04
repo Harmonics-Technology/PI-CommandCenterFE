@@ -12,7 +12,6 @@ export type SubscriptionModel = {
     monthlyDiscount?: number | null;
     yearlyAmount?: number;
     yearlyDiscount?: number | null;
-    totalAmount?: number;
     hasFreeTrial?: boolean;
     freeTrialDuration?: number | null;
     totalMonthlyAmount?: number;

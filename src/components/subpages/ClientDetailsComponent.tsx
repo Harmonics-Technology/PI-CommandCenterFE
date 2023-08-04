@@ -13,7 +13,7 @@ import { UpdateClientModel, ClientService } from 'src/services';
 
 export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
     const router = useRouter();
-    console.log({ data, id });
+    // console.log({ data, id });
     const {
         register,
         handleSubmit,
@@ -74,11 +74,11 @@ export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
                 tabValue={[
                     {
                         text: 'Client Information',
-                        url: `/clients/${id}/client-information`,
+                        url: `/admin/clients/${id}/client-information`,
                     },
                     {
                         text: 'Subscription Details',
-                        url: `/clients/${id}/subscription-details`,
+                        url: `/admin/clients/${id}/subscription-details`,
                     },
                 ]}
             />

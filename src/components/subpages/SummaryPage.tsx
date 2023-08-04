@@ -19,7 +19,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
     const { client_secret } = router.query;
-    console.log({ client_secret });
+    // console.log({ client_secret });
     return (
         <Box my="4rem" w="80%" mx="auto">
             <Box bgColor="white" borderRadius="0.937rem" w="full">
@@ -53,7 +53,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     <Tables
                         tableHead={[
                             'Item Description',
-                            'Quantity',
+                            'Duration',
                             'Unit Price',
                             'Amount',
                         ]}
@@ -63,7 +63,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     >
                         <Tr>
                             <TableData name={data.subscription?.name} solid />
-                            <TableData name={data.duration} />
+                            <TableData name={`${data.duration} months`} />
                             <TableData
                                 name={CAD(
                                     data.subscription?.totalMonthlyAmount,
@@ -111,6 +111,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     isOpen={isOpen}
                     onClose={onClose}
                     clientSecret={client_secret as string}
+                    redirectUrl='login'
                 />
             )}
         </Box>
