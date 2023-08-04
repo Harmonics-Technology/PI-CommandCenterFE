@@ -66,7 +66,7 @@ export const PrimaryDate = <TFormValues extends Record<string, any>>({
                 render={({ field: { onChange, value } }) => (
                     <>
                         <DatePicker
-                            value={defaultValue || value || new DateObject()}
+                            value={defaultValue || value}
                             onChange={(date: any) => {
                                 onChange(
                                     JSON.stringify(

@@ -4,13 +4,10 @@ import { IManageSubProps } from '@components/generics/Schema';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export const ManageSubscriptionComponent = ({
-    base,
-    addon,
-}: IManageSubProps) => {
+export const ManageSubscriptionComponent = ({ base }: IManageSubProps) => {
     const router = useRouter();
     const updateSubscription = (value) => {
-        router.push(`/manage-subscription/${value.id}`);
+        router.push(`/admin/manage-subscription/${value.id}`);
     };
     return (
         <Box
@@ -36,7 +33,9 @@ export const ManageSubscriptionComponent = ({
                     bgColor="brand.400"
                     color="white"
                     borderRadius="5px"
-                    onClick={() => router.push('/manage-subscription/new')}
+                    onClick={() =>
+                        router.push('/admin/manage-subscription/new')
+                    }
                     px="2rem"
                 >
                     Add Package
@@ -50,7 +49,7 @@ export const ManageSubscriptionComponent = ({
                         fontWeight="700"
                         color="#1b1d21"
                     >
-                        Base Package Subscription
+                        Package Subscription
                     </Text>
                     <Grid
                         templateColumns={['repeat(3, 1fr)']}
@@ -64,37 +63,6 @@ export const ManageSubscriptionComponent = ({
                                 isEdit
                                 desc={x.description}
                                 price={x.monthlyAmount}
-                                billed={'/month'}
-                                recommended={x.recommendedFor}
-                                features={x.features?.split(',').map((b) => b)}
-                                updateSubscription={updateSubscription}
-                            />
-                        ))}
-                    </Grid>
-                </Box>
-            )}
-            {addon?.length > 0 && (
-                <Box w="90%" mx="auto">
-                    <Text
-                        my="3rem"
-                        fontSize="20px"
-                        fontWeight="700"
-                        color="#1b1d21"
-                    >
-                        Add-ons
-                    </Text>
-                    <Grid
-                        templateColumns={['repeat(3, 1fr)']}
-                        gap=".5rem"
-                        w="full"
-                    >
-                        {addon?.map((x) => (
-                            <PackageCard
-                                id={x.id}
-                                name={x.name}
-                                isEdit
-                                desc={x.description}
-                                price={x.addonAmount || 0}
                                 billed={'/month'}
                                 recommended={x.recommendedFor}
                                 features={x.features?.split(',').map((b) => b)}

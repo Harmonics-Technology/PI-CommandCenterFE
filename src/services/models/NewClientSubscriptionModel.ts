@@ -2,8 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { AddOnsModel } from './AddOnsModel';
-
 export type NewClientSubscriptionModel = {
     companyName?: string | null;
     name?: string | null;
@@ -17,8 +15,7 @@ export type NewClientSubscriptionModel = {
     startDate?: string;
     duration?: number;
     annualBilling?: boolean;
-    baseSubscriptionId?: string;
-    addOns?: Array<AddOnsModel> | null;
+    subscriptionId?: string;
     endDate?: string;
     totalAmount?: number;
 };

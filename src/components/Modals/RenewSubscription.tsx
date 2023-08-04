@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { DateObject } from 'react-multi-date-picker';
 import { useForm } from 'react-hook-form';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { AddOnsView, RenewSubscriptionModel } from 'src/services';
+import { RenewSubscriptionModel } from 'src/services';
 import { PrimaryInput } from '@components/bits-utils/PrimaryInput';
 import { SubscriptionInfo } from '@components/bits-utils/SubscriptionInfo';
 import { PaymentDetails } from './PaymentDetails';
@@ -106,15 +106,7 @@ export const RenewSubscription = ({
                                     },
                                 ]}
                             />
-                            <SubscriptionInfo
-                                label="Addons"
-                                packages={
-                                    data?.addOns?.map((x: AddOnsView) => ({
-                                        type: x.addOnSubscription?.name,
-                                        price: x.addOnTotalAmount,
-                                    })) as ISinglePackage[]
-                                }
-                            />
+
                             <form>
                                 <Grid
                                     templateColumns={['repeat(2, 1fr)']}

@@ -25,7 +25,6 @@ import calculatePercentage from '@components/generics/functions/calculatePercent
 import CreatableSelect from 'react-select/creatable';
 
 const schema = yup.object().shape({
-    subscriptionTypeId: yup.string().required(),
     name: yup.string().required(),
     description: yup.string().required(),
     recommendedFor: yup.string().required(),
@@ -36,9 +35,7 @@ const schema = yup.object().shape({
     yearlyAmount: yup
         .string()
         .when('subscriptionTypeId', { is: 1, then: yup.string().required() }),
-    addonAdmount: yup
-        .string()
-        .when('subscriptionTypeId', { is: 2, then: yup.string().required() }),
+
     // freeTrialDuration: yup
     //     .string()
     //     .when('freeTrial', { is: true, then: yup.string().required() }),
@@ -70,12 +67,10 @@ export const SubscriptionFormComponent = ({
             monthlyDiscount: data?.monthlyDiscount,
             name: data?.name,
             recommendedFor: data?.recommendedFor,
-            subscriptionTypeId: data?.subscriptionTypeId,
             totalMonthlyAmount: data?.totalMonthlyAmount,
             totalYearlyAmount: data?.totalYearlyAmount,
             yearlyAmount: data?.yearlyAmount,
             yearlyDiscount: data?.yearlyDiscount,
-            addonAmount: data?.addonAmount,
         },
     });
     const [current, setCurrent] = useState(data?.discountType || '%');
@@ -133,7 +128,7 @@ export const SubscriptionFormComponent = ({
                   });
             if (result.status) {
                 toast.success('Success');
-                router.push('/manage-subscription');
+                router.push('/admin/manage-subscription');
                 return;
             }
             toast.error(result.message as string);
@@ -175,20 +170,7 @@ export const SubscriptionFormComponent = ({
                             >
                                 Enter your package details
                             </Text>
-                            <SelectrixBox<SubscriptionModel>
-                                control={control}
-                                name="subscriptionTypeId"
-                                error={errors.subscriptionTypeId}
-                                keys="id"
-                                keyLabel="label"
-                                label="Select subscription Type"
-                                placeholder={data?.subscriptionType?.name}
-                                options={[
-                                    { id: 1, label: 'Base Package' },
-                                    { id: 2, label: 'Add-ons' },
-                                ]}
-                                isRequired
-                            />
+
                             <PrimaryInput<SubscriptionModel>
                                 label="Subscription Package Name"
                                 name="name"
@@ -197,6 +179,19 @@ export const SubscriptionFormComponent = ({
                                 defaultValue=""
                                 register={register}
                                 isRequired
+                            />
+                            <SelectrixBox<SubscriptionModel>
+                                control={control}
+                                name="name"
+                                error={errors.name}
+                                keys="label"
+                                keyLabel="label"
+                                label="Client "
+                                options={[
+                                    { id: 1, label: 'Basic' },
+                                    { id: 2, label: 'Standard' },
+                                    { id: 3, label: 'Premium' },
+                                ]}
                             />
                             <PrimaryTextarea<SubscriptionModel>
                                 label="Description"
@@ -278,103 +273,101 @@ export const SubscriptionFormComponent = ({
                         >
                             Value
                         </Text>
-                        {watch('subscriptionTypeId') == 1 ? (
-                            <>
-                                <Grid
-                                    w="full"
-                                    templateColumns={['repeat(2,1fr)']}
-                                    gap="2rem"
-                                >
-                                    <PrimaryInput<SubscriptionModel>
-                                        label="Monthly Amount"
-                                        name="monthlyAmount"
-                                        error={errors.monthlyAmount}
-                                        placeholder=""
-                                        defaultValue=""
-                                        register={register}
-                                        isRequired
-                                    />
-                                    <PrimaryInput<SubscriptionModel>
-                                        label="Monthly Discount"
-                                        name="monthlyDiscount"
-                                        error={errors.monthlyDiscount}
-                                        placeholder=""
-                                        defaultValue=""
-                                        register={register}
-                                        isOptions
-                                        setCurrent={setCurrent}
-                                        current={current}
-                                        options={['%', '$']}
-                                    />
-                                    <PrimaryInput<SubscriptionModel>
-                                        label="Yearly Amount"
-                                        name="yearlyAmount"
-                                        error={errors.yearlyAmount}
-                                        placeholder=""
-                                        defaultValue=""
-                                        register={register}
-                                        isRequired
-                                    />
-                                    <PrimaryInput<SubscriptionModel>
-                                        label="Yearly Discount"
-                                        name="yearlyDiscount"
-                                        error={errors.yearlyDiscount}
-                                        placeholder=""
-                                        defaultValue=""
-                                        register={register}
-                                        isOptions
-                                        setCurrent={setCurrent}
-                                        current={current}
-                                        options={['%', '$']}
-                                    />
-                                </Grid>
-                                <Box mt="2rem">
-                                    <FormLabel
-                                        htmlFor="email-alerts"
-                                        mb="0"
-                                        fontWeight="500"
-                                        fontSize=".8rem"
-                                    >
-                                        Total Monthly Amount After Discount
-                                    </FormLabel>
-                                    <Flex
-                                        h="2.8rem"
-                                        w="full"
-                                        bgColor="gray.400"
-                                        color="white"
-                                        borderRadius="4px"
-                                        align="center"
-                                        px="1rem"
-                                        justify="flex-end"
-                                    >
-                                        {monthlyTotal}
-                                    </Flex>
-                                </Box>
-                                <Box mt="2rem">
-                                    <FormLabel
-                                        htmlFor="email-alerts"
-                                        mb="0"
-                                        fontWeight="500"
-                                        fontSize=".8rem"
-                                    >
-                                        Total Yearly Amount After Discount
-                                    </FormLabel>
-                                    <Flex
-                                        h="2.8rem"
-                                        w="full"
-                                        bgColor="gray.400"
-                                        color="white"
-                                        borderRadius="4px"
-                                        align="center"
-                                        px="1rem"
-                                        justify="flex-end"
-                                    >
-                                        {yearlyTotal}
-                                    </Flex>
-                                </Box>
-                            </>
-                        ) : (
+
+                        <Grid
+                            w="full"
+                            templateColumns={['repeat(2,1fr)']}
+                            gap="2rem"
+                        >
                             <PrimaryInput<SubscriptionModel>
+                                label="Monthly Amount"
+                                name="monthlyAmount"
+                                error={errors.monthlyAmount}
+                                placeholder=""
+                                defaultValue=""
+                                register={register}
+                                isRequired
+                            />
+                            <PrimaryInput<SubscriptionModel>
+                                label="Monthly Discount"
+                                name="monthlyDiscount"
+                                error={errors.monthlyDiscount}
+                                placeholder=""
+                                defaultValue=""
+                                register={register}
+                                isOptions
+                                setCurrent={setCurrent}
+                                current={current}
+                                options={['%', '$']}
+                            />
+                            <PrimaryInput<SubscriptionModel>
+                                label="Yearly Amount"
+                                name="yearlyAmount"
+                                error={errors.yearlyAmount}
+                                placeholder=""
+                                defaultValue=""
+                                register={register}
+                                isRequired
+                            />
+                            <PrimaryInput<SubscriptionModel>
+                                label="Yearly Discount"
+                                name="yearlyDiscount"
+                                error={errors.yearlyDiscount}
+                                placeholder=""
+                                defaultValue=""
+                                register={register}
+                                isOptions
+                                setCurrent={setCurrent}
+                                current={current}
+                                options={['%', '$']}
+                            />
+                        </Grid>
+                        <Box mt="2rem">
+                            <FormLabel
+                                htmlFor="email-alerts"
+                                mb="0"
+                                fontWeight="500"
+                                fontSize=".8rem"
+                            >
+                                Total Monthly Amount After Discount
+                            </FormLabel>
+                            <Flex
+                                h="2.8rem"
+                                w="full"
+                                bgColor="gray.400"
+                                color="white"
+                                borderRadius="4px"
+                                align="center"
+                                px="1rem"
+                                justify="flex-end"
+                            >
+                                {monthlyTotal}
+                            </Flex>
+                        </Box>
+                        <Box mt="2rem">
+                            <FormLabel
+                                htmlFor="email-alerts"
+                                mb="0"
+                                fontWeight="500"
+                                fontSize=".8rem"
+                            >
+                                Total Yearly Amount After Discount
+                            </FormLabel>
+                            <Flex
+                                h="2.8rem"
+                                w="full"
+                                bgColor="gray.400"
+                                color="white"
+                                borderRadius="4px"
+                                align="center"
+                                px="1rem"
+                                justify="flex-end"
+                            >
+                                {yearlyTotal}
+                            </Flex>
+                        </Box>
+
+                        {/* <PrimaryInput<SubscriptionModel>
                                 label="Total Amount"
                                 name="totalAmount"
                                 error={errors.addonAmount}
@@ -382,8 +375,7 @@ export const SubscriptionFormComponent = ({
                                 defaultValue=""
                                 register={register}
                                 isRequired
-                            />
-                        )}
+                            /> */}
 
                         <Box my="2rem">
                             <FormControl

@@ -69,11 +69,11 @@ export const SubscriptionDetails = ({
                 tabValue={[
                     {
                         text: 'Client Information',
-                        url: `/clients/${id}/client-information`,
+                        url: `/admin/clients/${id}/client-information`,
                     },
                     {
                         text: 'Subscription Details',
-                        url: `/clients/${id}/subscription-details`,
+                        url: `/admin/clients/${id}/subscription-details`,
                     },
                 ]}
             />
@@ -96,11 +96,7 @@ export const SubscriptionDetails = ({
                         <>
                             <Tr>
                                 <TableData
-                                    name={`${
-                                        currentSub?.baseSubscription?.name
-                                    } + ${currentSub?.addOns
-                                        ?.map((x) => x?.addOnSubscription?.name)
-                                        .join('+')}`}
+                                    name={`${currentSub?.subscription?.name} `}
                                 />
                                 <TableData
                                     name={dayjs(currentSub?.startDate).format(
@@ -199,21 +195,21 @@ export const SubscriptionDetails = ({
                             {allSub?.value?.map((x: ClientSubscriptionView) => (
                                 <Tr>
                                     <TableData
-                                        name={`${
-                                            x.baseSubscription?.name
-                                        } + ${x.addOns
-                                            ?.map(
-                                                (x) =>
-                                                    x?.addOnSubscription?.name,
-                                            )
-                                            .join('+')}`}
+                                        name={`${x.subscription?.name} `}
                                     />
-                                    <TableData name={dayjs(x.startDate)} />
-                                    <TableData name={`${x.duration} months`} />
-                                    <TableData name={x?.endDate} isRed />
                                     <TableData
-                                        name={CAD(currentSub?.totalAmount)}
+                                        name={dayjs(x.startDate).format(
+                                            'DD/MM/YY',
+                                        )}
                                     />
+                                    <TableData name={`${x.duration} months`} />
+                                    <TableData
+                                        name={dayjs(x.endDate).format(
+                                            'DD/MM/YY',
+                                        )}
+                                        isRed
+                                    />
+                                    <TableData name={CAD(x?.totalAmount)} />
                                     <TableStatus name={true} />
                                     <TableSubscriptionActions
                                         openRenew={onOpen}

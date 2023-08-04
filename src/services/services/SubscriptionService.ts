@@ -2,15 +2,20 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BooleanStandardResponse } from '../models/BooleanStandardResponse';
+import type { CancelSubscriptionModel } from '../models/CancelSubscriptionModel';
+import type { CardViewListStandardResponse } from '../models/CardViewListStandardResponse';
 import type { ClientSubscriptionModel } from '../models/ClientSubscriptionModel';
 import type { ClientSubscriptionViewPagedCollectionStandardResponse } from '../models/ClientSubscriptionViewPagedCollectionStandardResponse';
 import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSubscriptionViewStandardResponse';
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
 import type { RenewSubscriptionModel } from '../models/RenewSubscriptionModel';
+import type { StringStandardResponse } from '../models/StringStandardResponse';
 import type { SubscriptionModel } from '../models/SubscriptionModel';
 import type { SubscriptionViewListStandardResponse } from '../models/SubscriptionViewListStandardResponse';
 import type { SubscriptionViewStandardResponse } from '../models/SubscriptionViewStandardResponse';
+import type { UpdateClientSubscriptionModel } from '../models/UpdateClientSubscriptionModel';
+import type { UpdateDefaultPaymentMethod } from '../models/UpdateDefaultPaymentMethod';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -75,10 +80,8 @@ requestBody?: SubscriptionModel,
      * @throws ApiError
      */
     public static listSubscription({
-subscriptionTypeId,
 xApiKey,
 }: {
-subscriptionTypeId?: number,
 xApiKey?: any,
 }): CancelablePromise<SubscriptionViewListStandardResponse> {
         return __request(OpenAPI, {
@@ -86,9 +89,6 @@ xApiKey?: any,
             url: '/api/Subscription/subscriptions',
             headers: {
                 'X-API-KEY': xApiKey,
-            },
-            query: {
-                'subscriptionTypeId': subscriptionTypeId,
             },
             errors: {
                 400: `Bad Request`,
@@ -192,6 +192,206 @@ requestBody?: ClientSubscriptionModel,
             },
             body: requestBody,
             mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static upgradeClientSubscription({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: UpdateClientSubscriptionModel,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/upgrade-client-subscription',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static pauseClientSubscription({
+subscriptionId,
+pauseDuration,
+xApiKey,
+}: {
+subscriptionId?: string,
+pauseDuration?: number,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/pause-subscription',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'subscriptionId': subscriptionId,
+                'pauseDuration': pauseDuration,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static cancelClientSubscription({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: CancelSubscriptionModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/cancel-subscription',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns StringStandardResponse Success
+     * @throws ApiError
+     */
+    public static addNewCard({
+clientId,
+xApiKey,
+}: {
+clientId?: string,
+xApiKey?: any,
+}): CancelablePromise<StringStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/add-new-card',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static saveDefaultCard({
+clientId,
+paymentMethodId,
+xApiKey,
+}: {
+clientId?: string,
+paymentMethodId?: string,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/set-default-card',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'paymentMethodId': paymentMethodId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static updateUserCardDetails({
+clientId,
+xApiKey,
+requestBody,
+}: {
+clientId?: string,
+xApiKey?: any,
+requestBody?: UpdateDefaultPaymentMethod,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/update-card',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static deleteCard({
+clientId,
+paymentMethodId,
+xApiKey,
+}: {
+clientId?: string,
+paymentMethodId?: string,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/delete-card',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'paymentMethodId': paymentMethodId,
+            },
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,
@@ -394,6 +594,60 @@ requestBody?: RenewSubscriptionModel,
             },
             body: requestBody,
             mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns CardViewListStandardResponse Success
+     * @throws ApiError
+     */
+    public static getUserCards({
+clientId,
+xApiKey,
+}: {
+clientId?: string,
+xApiKey?: any,
+}): CancelablePromise<CardViewListStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/user/cards',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static successSubscription({
+subscriptionId,
+xApiKey,
+}: {
+subscriptionId?: string,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/success',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'subscriptionId': subscriptionId,
+            },
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,

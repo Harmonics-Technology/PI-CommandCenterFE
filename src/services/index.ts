@@ -7,8 +7,10 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AddOnsModel } from './models/AddOnsModel';
-export type { AddOnsView } from './models/AddOnsView';
 export type { BooleanStandardResponse } from './models/BooleanStandardResponse';
+export type { CancelSubscriptionModel } from './models/CancelSubscriptionModel';
+export type { CardView } from './models/CardView';
+export type { CardViewListStandardResponse } from './models/CardViewListStandardResponse';
 export type { ClientModel } from './models/ClientModel';
 export type { ClientSubscriptionModel } from './models/ClientSubscriptionModel';
 export type { ClientSubscriptionView } from './models/ClientSubscriptionView';
@@ -30,12 +32,14 @@ export type { PasswordReset } from './models/PasswordReset';
 export type { ProblemDetails } from './models/ProblemDetails';
 export type { RegisterModel } from './models/RegisterModel';
 export type { RenewSubscriptionModel } from './models/RenewSubscriptionModel';
+export type { StringStandardResponse } from './models/StringStandardResponse';
 export type { SubscriptionModel } from './models/SubscriptionModel';
-export type { SubscriptionType } from './models/SubscriptionType';
 export type { SubscriptionView } from './models/SubscriptionView';
 export type { SubscriptionViewListStandardResponse } from './models/SubscriptionViewListStandardResponse';
 export type { SubscriptionViewStandardResponse } from './models/SubscriptionViewStandardResponse';
 export type { UpdateClientModel } from './models/UpdateClientModel';
+export type { UpdateClientSubscriptionModel } from './models/UpdateClientSubscriptionModel';
+export type { UpdateDefaultPaymentMethod } from './models/UpdateDefaultPaymentMethod';
 export type { UpdateUserModel } from './models/UpdateUserModel';
 export type { UserProfileView } from './models/UserProfileView';
 export type { UserProfileViewStandardResponse } from './models/UserProfileViewStandardResponse';
@@ -45,5 +49,6 @@ export type { UserViewPagedCollectionStandardResponse } from './models/UserViewP
 export type { UserViewStandardResponse } from './models/UserViewStandardResponse';
 
 export { ClientService } from './services/ClientService';
+export { StripeWebhookService } from './services/StripeWebhookService';
 export { SubscriptionService } from './services/SubscriptionService';
 export { UserService } from './services/UserService';
