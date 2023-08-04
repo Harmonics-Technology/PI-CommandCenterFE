@@ -112,7 +112,6 @@ export const SubscriptionFormComponent = ({
             data.totalYearlyAmount = yearlyTotal;
             data.discountType = current;
         }
-        data.totalAmount = 0;
         data.totalMonthlyAmount = 0;
         data.totalYearlyAmount = 0;
         data.discountType = current;
