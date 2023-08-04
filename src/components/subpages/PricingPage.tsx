@@ -119,6 +119,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                     {base?.map((x: SubscriptionView) => (
                         <PackageCard
                             id={x.id}
+                            key={x.id}
                             name={x.name}
                             selected={
                                 subList.find(

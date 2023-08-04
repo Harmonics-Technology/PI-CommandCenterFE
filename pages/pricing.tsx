@@ -13,7 +13,9 @@ const pricing = ({ base }: ISubscriptionProps) => {
 export default pricing;
 
 export const getServerSideProps: GetServerSideProps = async (ctx: any) => {
-    OpenAPI.BASE = process.env.NEXT_PUBLIC_API_BASEURL as string;
+    OpenAPI.BASE =
+        (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
+        'https://pi-commandcenterdev.azurewebsites.net';
     OpenAPI.TOKEN = ctx.req.cookies.token;
     const pagingOptions = filterPagingSearchOptions(ctx);
     try {
