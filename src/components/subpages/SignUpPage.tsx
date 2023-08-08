@@ -15,10 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { DateObject } from 'react-multi-date-picker';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import {
-    NewClientSubscriptionModel,
-    SubscriptionService,
-} from 'src/services';
+import { NewClientSubscriptionModel, SubscriptionService } from 'src/services';
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import { MainTitle } from '@components/bits-utils/Heros/MainTitle';
@@ -134,8 +131,8 @@ export const SignUpPage = () => {
                     requestBody: data,
                 });
             if (result.status) {
-                toast.success('Successful');
-                router.push('/');
+                // toast.success('Successful');
+                router.push(`/summary/${result.data?.id}/${result?.message}`);
                 return;
             }
             toast.error(result.message as string);
