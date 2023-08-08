@@ -3,17 +3,18 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { MainTitle } from '@components/bits-utils/Heros/MainTitle';
 import { SingleServiceLTR } from '@components/bits-utils/SingleServiceLTR';
+import { Spacing } from '@components/bits-utils/Spacing';
 
 export const DemoServices = () => {
     const router = useRouter();
     return (
-        <Box py="6rem" mx="auto" w="90%">
-            <Box mb="6rem" w='70%' mx='auto'>
-                <MainTitle
-                    text="Experience the Power of TIMBA Firsthand - Book your free demo"
-                    sub="Book a personalized demo with our expert team and embark on an immersive journey into the world of TIMBA. Discover how our powerful software can transform your organization's productivity and efficiency."
-                />
-            </Box>
+        <Box py="4rem" mx="auto" w="85%">
+            <MainTitle
+                text="Experience the Power of TIMBA Firsthand - Book your free demo"
+                sub="Book a personalized demo with our expert team and embark on an immersive journey into the world of TIMBA. Discover how our powerful software can transform your organization's productivity and efficiency."
+                w="75%"
+            />
+            <Spacing space="6rem" />
             <SingleServiceLTR
                 image="/assets/demo.png"
                 title="A Personalized Demo Experience"

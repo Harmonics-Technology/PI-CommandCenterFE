@@ -16,11 +16,15 @@ function Footer() {
                         fontSize=".875rem"
                         lineHeight="1.75rem"
                         color="#636b83"
-                        w="70%"
+                        w="90%"
                     >
-                        Lorem ipsum dolor sit amet cultricies egestas commodo
-                        enim enim amet. Tellus pellentesque pretium a purus
-                        mattis nisl.
+                        The TIMBA is a powerful and user-friendly software
+                        designed to streamline time management and project
+                        tracking for individuals, teams, and businesses of all
+                        sizes. With its intuitive interface and robust features,
+                        TIMBA empowers users to efficiently monitor their time,
+                        optimize productivity, and gain valuable insights into
+                        workforce performance.
                     </Text>
                 </VStack>
 

@@ -17,7 +17,11 @@ export const HumanReaource = () => {
                 btnColor="brand.100"
             />
             <HrService />
-            <BottomHero />
+            <BottomHero
+                title="Unlock Your Productivity: Manage 
+                Teams and Plan with Ease, All at 
+                Your Fingertips"
+            />
         </Box>
     );
 };

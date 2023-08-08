@@ -10,65 +10,68 @@ import { TiStopwatch } from 'react-icons/ti';
 
 export const ServiceBody = () => {
     return (
-        <Box py="4rem" mx="auto" w="90%">
-            <MainTitle text="Time tracking software features for employees" />
+        <Box py="4rem" mx="auto" w="80%">
+            <MainTitle
+                text="Features of TIMBA Your seamless time tracking solution"
+                w="80%"
+            />
             <Grid
                 templateColumns={['1fr', 'repeat(3,1fr)']}
                 gap="2rem"
                 mt="4rem"
             >
                 <ServiceCard
-                    sub="Track every minute spent on tasks and learn
-                        how long it takes to complete projects. Track
-                        time with one click using the simple
-                        employee stopwatch."
+                    sub="TIMBA makes it easy to onboard new 
+                    employees by providing them with a 
+                    pre-configured account and access to
+                    all the features they need to get started."
                     title="Employee Onboarding"
                     icon={AiOutlineUserSwitch}
                     bg="white"
                 />
                 <ServiceCard
-                    sub="Generate timesheets automatically based on
-                    time entries. See a detailed breakdown of
-                    employees’ hours by date, client, and project.
-                    Review, approve or reject timesheets from a
-                    single location."
+                    sub="TIMBA automatically tracks time spent on 
+                    tasks and projects, so you don't have to 
+                    worry about manually entering timesheets."
                     title="Automated timesheets"
                     icon={AiOutlineFieldTime}
                     bg="white"
                 />
                 <ServiceCard
-                    sub="No need to worry if someone forgets to track
-                    time. Our time tracking software allows you
-                    to add time entries manually to ensure all
-                    time worked is tracked."
+                    sub="Manage all employee contracts securely in 
+                    one place. Monitor contract status, start and 
+                    end dates, and milestones. Generate invoices 
+                    and keep tabs on payments received. 
+                    Receive alerts for approaching contract 
+                    expirations."
                     title="Contract Management"
                     icon={FaFileContract}
                     bg="white"
                 />
                 <ServiceCard
-                    sub="Track every minute spent on tasks and learn
-                        how long it takes to complete projects. Track
-                        time with one click using the simple
-                        employee stopwatch."
+                    sub="TIMBA integrates with popular payment 
+                    solutions so that you can pay your team 
+                    easily."
                     title="Payment Partner"
                     icon={LuUsers}
                     bg="white"
                 />
                 <ServiceCard
-                    sub="Generate timesheets automatically based on
-                    time entries. See a detailed breakdown of
-                    employees’ hours by date, client, and project.
-                    Review, approve or reject timesheets from a
-                    single location."
+                    sub="TIMBA provides you with reports on 
+                    productivity, billable hours, and other 
+                    metrics so you can track your productivity
+                    progress and make adjustments"
                     title="Reports"
                     icon={MdOutlineBarChart}
                     bg="white"
                 />
                 <ServiceCard
-                    sub="No need to worry if someone forgets to track
-                    time. Our time tracking software allows you
-                    to add time entries manually to ensure all
-                    time worked is tracked."
+                    sub="For Subcontractors, TIMBA helps you 
+                    onboard new clients quickly and easily. 
+                    With TIMBA, you can create pre-configured 
+                    accounts for your new clients, provide 
+                    them with access to all the features they 
+                    need, and track your productivity."
                     title="Client Onboarding"
                     icon={TiStopwatch}
                     bg="white"

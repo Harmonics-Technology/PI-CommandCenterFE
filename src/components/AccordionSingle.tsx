@@ -10,7 +10,7 @@ import { TfiAngleDown, TfiAngleRight } from 'react-icons/tfi';
 
 export const AccordionSingle = ({ title, content }) => {
     return (
-        <AccordionItem>
+        <AccordionItem border='0'>
             {({ isExpanded }) => (
                 <Box
                     border={isExpanded ? '1px solid' : 'none'}
@@ -39,7 +39,8 @@ export const AccordionSingle = ({ title, content }) => {
                                 color="#073367"
                                 noOfLines={1}
                                 fontWeight="700"
-                                maxW="65%"
+                                fontFamily="Nunito"
+                                // maxW="65%"
                             >
                                 {title}
                             </Box>

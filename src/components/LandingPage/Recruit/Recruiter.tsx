@@ -16,7 +16,11 @@ export const Recruiter = () => {
                 color="white"
             />
             <ReServices />
-            <BottomHero />
+            <BottomHero
+                title="Simplify candidate sourcing, elevate 
+                client management, and ensure a 
+                seamless employee onboarding process."
+            />
         </Box>
     );
 };

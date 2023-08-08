@@ -2,7 +2,7 @@ import { Box, Flex, VStack, Text, Button, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export const BottomHero = () => {
+export const BottomHero = ({ title }: { title: string }) => {
     const router = useRouter();
     return (
         <Box bgColor="white" zIndex="6">
@@ -17,39 +17,42 @@ export const BottomHero = () => {
                 >
                     <VStack
                         align="flex-start"
-                        spacing="1.5rem"
+                        spacing="1.8rem"
                         w="60%"
                         color="white"
                     >
                         <Text
-                            fontSize="2.815rem"
-                            fontWeight="700"
+                            fontSize="2.125rem"
+                            fontWeight="800"
                             fontFamily="Nunito"
                             mb="0"
                             lineHeight="normal"
                         >
-                            Simple Time Tracking System For Your Employees
+                            {title}
                         </Text>
-                        <Text
-                            fontSize="1.125rem"
-                            fontWeight="500"
-                            fontFamily="Nunito"
-                            mb="0"
-                        >
-                            Hit the ground running with the Admin Timesheet
-                            application
-                        </Text>
-                        <Button
-                            fontSize="1.125rem"
-                            color="white"
-                            bgColor="brand.400"
-                            borderRadius="8px"
-                            px="2rem"
-                            h="3.25rem"
-                            onClick={() => router.push('/pricing')}
-                        >
-                            Sign Up For Free
-                        </Button>
+                        <Box>
+                            <Button
+                                fontSize="1.125rem"
+                                color="white"
+                                bgColor="brand.400"
+                                borderRadius="8px"
+                                px="2rem"
+                                h="3.25rem"
+                                fontFamily="Nunito"
+                                onClick={() => router.push('/pricing')}
+                            >
+                                Start Using TIMBA Today
+                            </Button>
+                            <Text
+                                fontSize=".875rem"
+                                fontWeight="400"
+                                fontFamily="Nunito"
+                                fontStyle="italic"
+                                m=".81rem 0 0"
+                            >
+                                Sign up for FREE trial - No credit card required
+                            </Text>
+                        </Box>
                     </VStack>
                     <Box
                         w="45%"

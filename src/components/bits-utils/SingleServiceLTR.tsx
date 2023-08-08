@@ -23,13 +23,13 @@ export const SingleServiceLTR = ({
 }) => {
     return (
         <Flex gap="5.5rem" align="center" justify="space-between">
-            <Box w="45%" order={rtl ? 1 : 0}>
+            <Box w="full" order={rtl ? 1 : 0}>
                 <Image src={image} w="full" h="full" alt="banner image" />
             </Box>
             <VStack
                 align="flex-start"
                 spacing="2rem"
-                w="50%"
+                w="full"
                 order={rtl ? 0 : 1}
             >
                 {title && (
@@ -56,6 +56,7 @@ export const SingleServiceLTR = ({
                         borderRadius="8px"
                         px="2.5rem"
                         h="4rem"
+                        fontFamily="Nunito"
                         onClick={onClick}
                     >
                         {btn}

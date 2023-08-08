@@ -20,7 +20,7 @@ export const MainNav = () => {
                 justify="space-between"
                 align="center"
                 bgColor="white"
-                w="90%"
+                w="85%"
                 mx="auto"
                 py="1rem"
             >
@@ -46,7 +46,7 @@ export const MainNav = () => {
                     <Items menuTitle="pricing" />
                     <Items menuTitle="blogs" />
                     <Items menuTitle="book-a-demo" />
-                    <Items menuTitle="contact-us" />
+                    {/* <Items menuTitle="contact-us" /> */}
                     <HStack spacing="0" gap="1rem">
                         <Button
                             variant="outline"

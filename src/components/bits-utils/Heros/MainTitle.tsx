@@ -6,16 +6,20 @@ export const MainTitle = ({
     color = 'brand.100',
     sub,
     align = 'center',
+    w = 'full',
+    mx = 'auto',
 }: {
     text: string;
     color?: string;
     sub?: string;
     align?: any;
+    w?: any;
+    mx?: any;
 }) => {
     return (
-        <VStack align={align} w="full">
+        <VStack align={align} w={w} mx={mx}>
             <Text
-                fontSize="2.75rem"
+                fontSize="2.5rem"
                 color={color}
                 fontWeight="700"
                 fontFamily="Nunito"

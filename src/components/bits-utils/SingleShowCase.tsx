@@ -8,6 +8,7 @@ export const SingleShowCase = ({
     color,
     onClick,
     btn,
+    main,
 }: {
     image: string;
     title: string;
@@ -15,20 +16,27 @@ export const SingleShowCase = ({
     color?: string;
     onClick: any;
     btn: string;
+    main?: string;
 }) => {
     return (
         <Box bgColor="white" py="8rem">
             <HStack gap="5rem" w="90%" mx="auto">
-                <VStack align="flex-start" w="50%" spacing="3rem">
+                <VStack align="flex-start" w="50%" spacing="1.25rem">
+                    <Text
+                        fontSize="2.75rem"
+                        fontWeight="700"
+                        lineHeight="3rem"
+                        color={color ? color : '#182c51'}
+                        mb="0"
+                    >
+                        {main}
+                    </Text>
                     <Text
                         fontSize="1.5rem"
                         fontWeight="400"
                         lineHeight="2.5rem"
                         color={color ? color : '#636b83'}
                         mb="0"
-                        _groupHover={{
-                            color: '#636b83',
-                        }}
                     >
                         {title}
                     </Text>
@@ -40,6 +48,7 @@ export const SingleShowCase = ({
                             borderRadius="8px"
                             px="2.5rem"
                             h="4rem"
+                            fontFamily='Nunito'
                             onClick={onClick}
                         >
                             {btn}

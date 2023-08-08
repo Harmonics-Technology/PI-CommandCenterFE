@@ -7,8 +7,8 @@ import React from 'react';
 export const HrService = () => {
     const router = useRouter();
     return (
-        <Box p="8rem 0 8rem" bgColor="white">
-            <VStack spacing="8rem" w="90%" mx="auto" pb="4rem">
+        <Box p="8rem 0 5rem">
+            <VStack spacing="5rem" w="85%" mx="auto" pb="4rem">
                 <SingleServiceLTR
                     image="/assets/hra.png"
                     title="Streamlined Payroll Management"
@@ -42,16 +42,15 @@ export const HrService = () => {
             <VStack
                 w="full"
                 bgColor="brand.100"
-                py="5rem"
+                py="2.8rem"
                 my="3rem"
-                spacing="3rem"
+                spacing="1.8rem"
             >
-                <Box w='80%' mx='auto'>
-                    <MainTitle
-                        text="The average HR manager spends 20% of their time on administrative tasks. Time-tracking software can help HR managers save time and improve productivity."
-                        color="white"
-                    />
-                </Box>
+                <MainTitle
+                    text="The average HR manager spends 20% of their time on administrative tasks. Time-tracking software can help HR managers save time and improve productivity."
+                    color="white"
+                    w="80%"
+                />
                 <Box>
                     <Button
                         fontSize="1.125rem"
@@ -71,13 +70,13 @@ export const HrService = () => {
                         fontWeight="400"
                         fontFamily="Nunito"
                         fontStyle="italic"
-                        m="2rem 0 0"
+                        m="1rem 0 0"
                     >
                         Sign up for FREE trial - No credit card required
                     </Text>
                 </Box>
             </VStack>
-            <VStack spacing="8rem" w="90%" mx="auto" pt="4rem">
+            <VStack spacing="5rem" w="85%" mx="auto" pt="4rem">
                 <SingleServiceLTR
                     image="/assets/hrc.png"
                     title="Boost Administrative Efficiency"

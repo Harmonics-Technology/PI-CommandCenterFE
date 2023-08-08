@@ -10,6 +10,7 @@ export const Mainhero = ({
     bgColor,
     color,
     btnColor,
+    gap,
 }: {
     title: string;
     sub: string;
@@ -18,6 +19,7 @@ export const Mainhero = ({
     bgColor: string;
     color?: string;
     btnColor?: string;
+    gap?: any;
 }) => {
     const router = useRouter();
     return (
@@ -28,8 +30,8 @@ export const Mainhero = ({
             bgRepeat="no-repeat"
             bgColor={bgColor}
         >
-            <HStack w="90%" mx="auto" h="85vh" align="center" gap="3rem">
-                <VStack align="flex-start" spacing="1.5rem" w="45%">
+            <HStack w="85%" mx="auto" h="85vh" align="center" gap={gap}>
+                <VStack align="flex-start" spacing="1.5rem" w="50%">
                     <Text
                         fontSize="3.125rem"
                         color={color || 'brand.100'}
@@ -56,6 +58,7 @@ export const Mainhero = ({
                         borderRadius="8px"
                         px="2rem"
                         h="3.25rem"
+                        fontFamily="Nunito"
                         onClick={() => router.push('/pricing')}
                     >
                         {buttonTitle}
@@ -72,7 +75,7 @@ export const Mainhero = ({
                         card required.)
                     </Text>
                 </VStack>
-                <Box w="60%">
+                <Box w="55%">
                     <Image src={image} w="full" alt="banner image" />
                 </Box>
             </HStack>

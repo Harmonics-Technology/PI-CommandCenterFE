@@ -1,10 +1,14 @@
-import { Box, Grid, Image } from '@chakra-ui/react';
+import { Box, Circle, Grid, Image } from '@chakra-ui/react';
 import React from 'react';
-import { AiOutlineUserSwitch, AiOutlineFieldTime } from 'react-icons/ai';
+import {
+    AiOutlineUserSwitch,
+    AiOutlineFieldTime,
+    AiOutlineProject,
+} from 'react-icons/ai';
 import { FaFileContract } from 'react-icons/fa';
-import { LuUsers } from 'react-icons/lu';
-import { MdOutlineBarChart } from 'react-icons/md';
-import { TiStopwatch } from 'react-icons/ti';
+import { HiOutlineReceiptTax } from 'react-icons/hi';
+import { MdMoreTime, MdOutlineBarChart, MdPayments } from 'react-icons/md';
+import { PiUsersThreeThin } from 'react-icons/pi';
 import { MainTitle } from './Heros/MainTitle';
 import { ServiceCard } from './ServiceCard';
 import { SingleShowCase } from './SingleShowCase';
@@ -20,6 +24,7 @@ export const SubContractorServices = () => {
                         text="Track every minute of your billable time. We know this means a lot you"
                         sub="Discover the features that make TIMBA the ultimate solution for your needs."
                         color="white"
+                        w="60%"
                     />
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
@@ -27,81 +32,88 @@ export const SubContractorServices = () => {
                         mt="4rem"
                     >
                         <ServiceCard
-                            sub="Track every minute spent on tasks and learn
-                how long it takes to complete projects. Track
-                time with one click using the simple
-                employee stopwatch."
-                            title="Employee Onboarding"
-                            icon={AiOutlineUserSwitch}
+                            sub="Effortlessly track your time with TIMBA's 
+                            user-friendly online timesheet system. 
+                            Say goodbye to manual spreadsheets and 
+                            welcome precise time tracking, allowing 
+                            you to make every minute count."
+                            title="Time Tracking Excellence"
+                            icon={MdMoreTime}
                             bg="white"
                         />
                         <ServiceCard
-                            sub="Generate timesheets automatically based on
-            time entries. See a detailed breakdown of
-            employees’ hours by date, client, and project.
-            Review, approve or reject timesheets from a
-            single location."
-                            title="Automated timesheets"
-                            icon={AiOutlineFieldTime}
+                            sub="Stay on top of your projects with TIMBA's 
+                            project management tools. Organize tasks, 
+                            set deadlines, and enjoy seamless 
+                            collaboration, ensuring you meet project 
+                            goals with ease."
+                            title="Project Management Made Simple"
+                            icon={AiOutlineProject}
                             bg="white"
                         />
                         <ServiceCard
-                            sub="No need to worry if someone forgets to track
-            time. Our time tracking software allows you
-            to add time entries manually to ensure all
-            time worked is tracked."
-                            title="Contract Management"
-                            icon={FaFileContract}
+                            sub="TIMBA's automated payment system 
+                            ensures you get paid on time for your 
+                            hard work. Accurate billable hour 
+                            tracking guarantees no payment delays."
+                            title="Punctual Payments"
+                            icon={MdPayments}
                             bg="white"
                         />
                         <ServiceCard
-                            sub="Track every minute spent on tasks and learn
-                how long it takes to complete projects. Track
-                time with one click using the simple
-                employee stopwatch."
-                            title="Payment Partner"
-                            icon={LuUsers}
+                            sub="Collaborate seamlessly with clients and 
+                            fellow subcontractors using TIMBA's 
+                            communication tools. Share information 
+                            and work together to achieve project success.x"
+                            title="Enhanced Collaboration"
+                            icon={PiUsersThreeThin}
                             bg="white"
                         />
                         <ServiceCard
-                            sub="Generate timesheets automatically based on
-            time entries. See a detailed breakdown of
-            employees’ hours by date, client, and project.
-            Review, approve or reject timesheets from a
-            single location."
-                            title="Reports"
+                            sub="Gain valuable insights into your productivity 
+                            with TIMBA's comprehensive reports and 
+                            analytics. Use data-driven decisions to 
+                            optimize your performance and grow 
+                            your subcontracting business."
+                            title="Detailed Reports for Insights"
                             icon={MdOutlineBarChart}
                             bg="white"
                         />
                         <ServiceCard
-                            sub="No need to worry if someone forgets to track
-            time. Our time tracking software allows you
-            to add time entries manually to ensure all
-            time worked is tracked."
-                            title="Client Onboarding"
-                            icon={TiStopwatch}
+                            sub="Simplify tax season with TIMBA's tax 
+                            management features. Organize 
+                            tax-related information effortlessly, 
+                            ensuring compliance and peace of mind."
+                            title="Hassle-Free Tax Management"
+                            icon={HiOutlineReceiptTax}
                             bg="white"
                         />
                     </Grid>
                 </Box>
-                <Box pos="absolute" top="0" left="0">
-                    <Image src="/assets/cu.png" w="full" alt="banner image" />
-                </Box>
-                <Box
+                <Circle
+                    size="8rem"
+                    bgColor="#FBC953"
                     pos="absolute"
-                    bottom="0"
-                    right="0"
-                    transform="rotate(180deg)"
-                >
-                    <Image src="/assets/cu.png" w="full" alt="banner image" />
-                </Box>
+                    left="-5%"
+                    top="0%"
+                    zIndex="1"
+                />
+                <Circle
+                    size="8rem"
+                    bgColor="#FBC953"
+                    pos="absolute"
+                    right="-5%"
+                    bottom="0%"
+                    zIndex="1"
+                />
             </Box>
             <SingleShowCase
                 btn="Start Using TIMBA Today"
                 image="/assets/lapb.png"
                 onClick={() => router.push('/pricing')}
                 sub="Sign up for FREE trial - No credit card required"
-                title="With TIMBA as your HR management ally, embrace a new era of efficiency, accuracy, and productivity. Simplify payroll processing, safeguard employee data, and elevate your HR operations to new heights."
+                main="Embrace a New Era of Efficiency, Precision, and Productivity"
+                title="Empower your journey and elevate your operations to unprecedented heights with TIMBA."
             />
         </Box>
     );

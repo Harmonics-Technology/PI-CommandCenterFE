@@ -81,7 +81,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                     </Text>
                 </VStack>
             </Flex>
-            <Box w="80%" mx="auto">
+            <Box w="70%" mx="auto">
                 <HStack justify="center" my="5rem">
                     <HStack>
                         <Text
@@ -115,7 +115,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                         </Box>
                     </HStack>
                 </HStack>
-                <Grid templateColumns={['repeat(3, 1fr)']} gap="2rem" w="full">
+                <Grid templateColumns={['repeat(3, 1fr)']} gap=".5rem" w="full">
                     {base?.map((x: SubscriptionView) => (
                         <PackageCard
                             id={x.id}
@@ -153,7 +153,10 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                     </Flex>
                 )}
             </Box>
-            <BottomHero />
+            <BottomHero
+                title="Simple Time Tracking System
+For Your Employees"
+            />
         </Box>
     );
 };

@@ -43,10 +43,10 @@ export const DemoContact = () => {
     return (
         <Box bgColor="brand.100" borderRadius="1.25rem" p="3rem">
             <form>
-                <VStack spacing="3rem">
+                <VStack spacing="2rem">
                     <Grid
                         templateColumns={['1fr', 'repeat(2,1fr)']}
-                        gap="2rem"
+                        gap="1rem"
                         w="full"
                     >
                         <PrimaryInput<NewClientSubscriptionModel>
