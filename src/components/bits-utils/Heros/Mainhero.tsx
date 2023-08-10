@@ -1,6 +1,7 @@
 import { Box, HStack, Text, Image, Button, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useScramble } from 'use-scramble';
 
 export const Mainhero = ({
     title,
@@ -22,6 +23,17 @@ export const Mainhero = ({
     gap?: any;
 }) => {
     const router = useRouter();
+    const { ref } = useScramble({
+        text: title,
+        speed: 0.6,
+        tick: 1,
+        step: 1,
+        scramble: 8,
+        seed: 0,
+        overflow: false,
+        overdrive: false,
+    });
+
     return (
         <Box
             w="full"
@@ -39,6 +51,7 @@ export const Mainhero = ({
                         fontFamily="Nunito"
                         mb="0"
                         lineHeight="normal"
+                        ref={ref}
                     >
                         {title}
                     </Text>

@@ -7430,6 +7430,11 @@ use-isomorphic-layout-effect@^1.1.2:
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
 
+use-scramble@^2.2.12:
+  version "2.2.12"
+  resolved "https://registry.yarnpkg.com/use-scramble/-/use-scramble-2.2.12.tgz#eab8e865efe282b9dde6468c22515f1201e5c430"
+  integrity sha512-/LDu+MJAvfqRd82VJnIBj6xKnGlsJkVVdnJmdXvGtAOxGpMXi6UhfKtve7qbgnIRQELtOp4nPe8vCX7SxYv9KQ==
+
 use-sidecar@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/use-sidecar/-/use-sidecar-1.1.2.tgz#2f43126ba2d7d7e117aa5855e5d8f0276dfe73c2"

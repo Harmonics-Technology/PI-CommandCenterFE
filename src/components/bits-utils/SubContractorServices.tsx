@@ -19,7 +19,7 @@ export const SubContractorServices = () => {
     return (
         <Box>
             <Box bgColor="brand.100" pos="relative">
-                <Box p="4rem 0 8rem" mx="auto" w="90%">
+                <Box p="4rem 0 8rem" mx="auto" w="85%">
                     <MainTitle
                         text="Track every minute of your billable time. We know this means a lot you"
                         sub="Discover the features that make TIMBA the ultimate solution for your needs."

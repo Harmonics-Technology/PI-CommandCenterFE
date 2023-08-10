@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 export const SubContractorService = () => {
     const router = useRouter();
     return (
-        <Box py="4rem" mx="auto" w="90%">
+        <Box py="4rem" mx="auto" w="85%">
             <Box mb="4rem">
                 <MainTitle
                     text="Why Subcontractor love TIMBA"

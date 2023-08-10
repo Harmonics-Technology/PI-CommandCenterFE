@@ -124,6 +124,7 @@ export const SignUpPage = () => {
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
         data.totalAmount = totalAmount;
+        data.fromWebsite = true;
 
         try {
             const result =
@@ -131,8 +132,11 @@ export const SignUpPage = () => {
                     requestBody: data,
                 });
             if (result.status) {
+                // console.log({ result });
                 // toast.success('Successful');
-                router.push(`/summary/${result.data?.id}/${result?.message}`);
+                router.push(
+                    `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}`,
+                );
                 return;
             }
             toast.error(result.message as string);

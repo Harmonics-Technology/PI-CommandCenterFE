@@ -18,4 +18,5 @@ export type NewClientSubscriptionModel = {
     subscriptionId?: string;
     endDate?: string;
     totalAmount?: number;
+    fromWebsite?: boolean;
 };

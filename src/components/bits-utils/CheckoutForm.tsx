@@ -19,7 +19,9 @@ const CheckoutForm = ({
     const router = useRouter();
     const [error, setError] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
-    const { subscriptionId } = router.query;
+    const subscriptionId = router.asPath.split('/')[2].split('?')[0];
+
+    // console.log({ subscriptionId });
 
     const handleSubmit = async (event) => {
         event.preventDefault();

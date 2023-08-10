@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         const data = await SubscriptionService.getClientSubscriptionById({
             id: id as any,
         });
-        console.log({ data });
+        console.log({ data: data.data });
         return {
             props: {
                 data: data.data,

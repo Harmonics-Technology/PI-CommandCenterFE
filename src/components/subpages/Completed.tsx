@@ -10,9 +10,9 @@ export const Completed = () => {
     const { redirectUrl, subscriptionId } = router.query;
     const [loading, setLoading] = useState(false);
     const redirect = () => {
-        window.location.href = `${
-            process.env.NEXT_PUBLIC_TTS as string
-        }/${redirectUrl}`;
+        window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
+            redirectUrl || ''
+        }`;
     };
     const confirmSuccess = async () => {
         setLoading(true);

@@ -66,7 +66,8 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                             <TableData name={`${data.duration} months`} />
                             <TableData
                                 name={CAD(
-                                    data.subscription?.totalMonthlyAmount,
+                                    data.subscription?.monthlyAmount ||
+                                        data.subscription?.yearlyAmount,
                                 )}
                             />
                             <TableData name={CAD(data.totalAmount)} />
@@ -111,7 +112,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     isOpen={isOpen}
                     onClose={onClose}
                     clientSecret={client_secret as string}
-                    redirectUrl='login'
+                    redirectUrl="login"
                 />
             )}
         </Box>

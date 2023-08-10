@@ -20,4 +20,5 @@ export type ClientSubscriptionView = {
     totalAmount?: number;
     isCanceled?: boolean;
     cancelationReason?: string | null;
+    clientSecret?: string | null;
 };

@@ -20,7 +20,7 @@ export const SingleShowCase = ({
 }) => {
     return (
         <Box bgColor="white" py="8rem">
-            <HStack gap="5rem" w="90%" mx="auto">
+            <HStack gap="5rem" w="85%" mx="auto">
                 <VStack align="flex-start" w="50%" spacing="1.25rem">
                     <Text
                         fontSize="2.75rem"
@@ -48,7 +48,7 @@ export const SingleShowCase = ({
                             borderRadius="8px"
                             px="2.5rem"
                             h="4rem"
-                            fontFamily='Nunito'
+                            fontFamily="Nunito"
                             onClick={onClick}
                         >
                             {btn}
