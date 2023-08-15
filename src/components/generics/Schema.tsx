@@ -28,6 +28,7 @@ export interface ITableWrapperProps {
     options?: any[];
     tables: any;
     openModal: any;
+    data?: any;
 }
 export interface IModalProps {
     isOpen: boolean;

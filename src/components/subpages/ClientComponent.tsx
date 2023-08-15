@@ -1,4 +1,4 @@
-import { Tr, useDisclosure } from '@chakra-ui/react';
+import { Box, Tr, useDisclosure } from '@chakra-ui/react';
 import { AddClientModal } from '@components/Modals/AddClientModal';
 import {
     TableClientActions,
@@ -11,18 +11,20 @@ import { IClientProps } from '@components/generics/Schema';
 import React from 'react';
 import { ClientView } from 'src/services';
 import dayjs from 'dayjs';
+import Pagination from '@components/bits-utils/Pagination';
 
 export const ClientComponent = ({ data }: IClientProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     console.log({ data });
     return (
-        <>
+        <Box>
             <TableWrapper
                 tableTitle="Clients"
                 buttonTitle="Add Client"
                 onChange={() => void 0}
                 options={['Client']}
                 openModal={onOpen}
+                data={data}
                 tables={
                     <Tables
                         tableHead={[
@@ -51,13 +53,7 @@ export const ClientComponent = ({ data }: IClientProps) => {
                                             'DD/MM/YYYY',
                                         )}
                                     />
-                                    <TableStatus
-                                        name={
-                                            x.subscriptionStatus == 'ACTIVE'
-                                                ? true
-                                                : false
-                                        }
-                                    />
+                                    <TableStatus name={x.isActive} />
                                     <TableClientActions id={x.id} />
                                 </Tr>
                             ))}
@@ -65,7 +61,8 @@ export const ClientComponent = ({ data }: IClientProps) => {
                     </Tables>
                 }
             />
+
             <AddClientModal isOpen={isOpen} onClose={onClose} />
-        </>
+        </Box>
     );
 };
