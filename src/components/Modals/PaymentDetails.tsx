@@ -25,7 +25,7 @@ export const PaymentDetails = ({
     isValid,
     clickFn,
 }: IRenewSubProps) => {
-    // console.log({ isValid });
+    console.log({ isValid });
     return (
         <Modal
             isOpen={isOpen}
@@ -142,7 +142,7 @@ export const PaymentDetails = ({
                                 h="3rem"
                                 my="3rem"
                                 isLoading={isLoading}
-                                isDisabled={isValid}
+                                // isDisabled={!isValid}
                                 onClick={clickFn}
                                 spinner={<BeatLoader color="white" size={10} />}
                             >

@@ -38,6 +38,7 @@ import { PaymentDetails } from '@components/Modals/PaymentDetails';
 const schema = yup.object().shape({
     clientId: yup.string().required(),
     startDate: yup.string().required(),
+    subscriptionId: yup.string().required(),
     duration: yup
         .number()
         .max(
@@ -55,6 +56,7 @@ const newClientSchema = yup.object().shape({
     email: yup.string().required(),
     phoneNumber: yup.string().required(),
     startDate: yup.string().required(),
+    subscriptionId: yup.string().required(),
     duration: yup
         .number()
         .max(
@@ -75,6 +77,8 @@ export const SubscriptionComponent = ({
         control,
         watch: watchs,
         setValue: setValuee,
+        trigger,
+        reset,
         formState: { errors, isSubmitting, isValid },
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
@@ -86,6 +90,8 @@ export const SubscriptionComponent = ({
         watch,
         setValue,
         control: controls,
+        trigger: triggers,
+        reset: resets,
         formState: {
             errors: isError,
             isValid: existClientValid,
@@ -101,12 +107,29 @@ export const SubscriptionComponent = ({
     const [current, setCurrent] = useState('Month');
     const [readonly, setReadOnly] = useState(false);
 
+    const selectValue = (data) => {
+        setValues(data);
+        reset();
+        resets();
+    };
+
+    console.log(watch('clientId'));
+    const noSub =
+        watch('subscriptionId') == undefined &&
+        watchs('subscriptionId') == undefined;
+
     console.log({ isValid });
 
     const updateSubscription = (base) => {
         const exists = subList.find((x) => x.id == base?.id);
+        values == '1'
+            ? setValue('subscriptionId', base?.id)
+            : setValuee('subscriptionId', base?.id);
         if (exists) {
             setSubList(subList.filter((x) => x.id !== base?.id));
+            values == '1'
+                ? setValue('subscriptionId', undefined)
+                : setValuee('subscriptionId', undefined);
             return;
         }
         setSubList([base]);
@@ -139,6 +162,23 @@ export const SubscriptionComponent = ({
                   ((watchs('duration') as number) * 12);
 
     const openModal = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        if (
+            values == '1' &&
+            !existClientValid &&
+            watch('subscriptionId') == undefined
+        ) {
+            triggers();
+            return;
+        }
+        if (
+            values == '2' &&
+            !isValid &&
+            watchs('subscriptionId') == undefined
+        ) {
+            trigger();
+            return;
+        }
         setSelection({
             clientName:
                 clients?.value?.filter((x) => x.id == watch('clientId'))[0]
@@ -196,6 +236,7 @@ export const SubscriptionComponent = ({
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
         data.totalAmount = totalAmount;
+        console.log({ data });
         try {
             const result = await SubscriptionService.createClientSubscription({
                 requestBody: data,
@@ -235,7 +276,7 @@ export const SubscriptionComponent = ({
             </Flex>
             <Box w="full" borderBottom="1px solid #e0e0e0" pb=".5rem">
                 <RadioGroup
-                    onChange={setValues}
+                    onChange={(value) => selectValue(value)}
                     value={values}
                     defaultValue={values}
                 >
@@ -458,6 +499,16 @@ export const SubscriptionComponent = ({
                             >
                                 Package Subscription
                             </Text>
+                            {noSub && (
+                                <Text
+                                    fontSize="13px"
+                                    fontWeight="500"
+                                    color="red"
+                                    textAlign="center"
+                                >
+                                    Select a package to continue
+                                </Text>
+                            )}
                             <Grid
                                 templateColumns={['repeat(3, 1fr)']}
                                 gap=".5rem"
@@ -466,6 +517,7 @@ export const SubscriptionComponent = ({
                                 {base?.map((x: SubscriptionView) => (
                                     <PackageCard
                                         id={x.id}
+                                        key={x.id}
                                         name={x.name}
                                         selected={
                                             subList.find(
@@ -507,6 +559,7 @@ export const SubscriptionComponent = ({
                             Save and Continue
                         </Button>
                     </Flex>
+
                     {/* <Flex w="full" justify="center">
                         <Button
                             bgColor="brand.400"
@@ -538,7 +591,7 @@ export const SubscriptionComponent = ({
                 onClose={onClose}
                 data={selection}
                 isLoading={values == '1' ? existSumbit : isSubmitting}
-                isValid={values == '2' ? !isValid : !existClientValid}
+                isValid={values == '2' ? isValid : existClientValid}
                 clickFn={
                     values == '2'
                         ? handleSubmit(onSubmit)

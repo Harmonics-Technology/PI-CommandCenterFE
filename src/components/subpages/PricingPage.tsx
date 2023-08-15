@@ -68,17 +68,6 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                     >
                         Pricing Plans
                     </Text>
-                    <Text
-                        fontSize="0.875rem"
-                        color="white"
-                        fontWeight="600"
-                        fontFamily="Nunito"
-                        mb="0"
-                        textAlign="center"
-                    >
-                        Lorem ipsum dolor sit amet cultricies egestas commodo
-                        enim enim amet.
-                    </Text>
                 </VStack>
             </Flex>
             <Box w="70%" mx="auto">
