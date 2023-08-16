@@ -220,7 +220,7 @@ export const SubscriptionComponent = ({
                     requestBody: data,
                 });
             if (result.status) {
-                toast.success('Successfully');
+                toast.success('Successful');
                 router.reload();
                 return;
             }
@@ -242,7 +242,7 @@ export const SubscriptionComponent = ({
                 requestBody: data,
             });
             if (result.status) {
-                toast.success('Successfully');
+                toast.success('Successful');
                 router.reload();
                 return;
             }

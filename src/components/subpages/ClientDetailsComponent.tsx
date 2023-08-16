@@ -199,7 +199,7 @@ export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
                                     }
                                     // boxShadow="0 4px 7px -1px rgb(0 0 0 / 11%), 0 2px 4px -1px rgb(0 0 0 / 7%)"
                                 >
-                                    <Box>Confirm Edit</Box>
+                                    <Box>Update Information</Box>
                                 </Button>
                             </Flex>
                         </VStack>

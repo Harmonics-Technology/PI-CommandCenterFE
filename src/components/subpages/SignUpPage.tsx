@@ -134,9 +134,14 @@ export const SignUpPage = () => {
             if (result.status) {
                 // console.log({ result });
                 // toast.success('Successful');
-                router.push(
-                    `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}`,
-                );
+                if (result?.data?.clientSecret) {
+                    router.push(
+                        `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}`,
+                    );
+                    return;
+                }
+                toast.success('Successful');
+                router.push('/');
                 return;
             }
             toast.error(result.message as string);

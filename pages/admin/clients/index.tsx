@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = withPageAuth(
         try {
             const data = await ClientService.listClients({
                 offset: pagingOptions.offset,
-                limit: pagingOptions.limit || 5,
+                limit: pagingOptions.limit || 10,
                 search: pagingOptions.search,
             });
             return {
