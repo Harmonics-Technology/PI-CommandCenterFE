@@ -120,11 +120,18 @@ export const SignUpPage = () => {
     const onSubmit = async (data: NewClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
         data.subscriptionId = base?.id;
+        data.totalAmount = totalAmount;
+        data.fromWebsite = true;
+        if (base?.freeTrial) {
+            data.freeTrialStartDate = data.startDate;
+            data.startDate = dayjs(data?.startDate)
+                .add(base?.freeTrialDuration as number, 'day')
+                .format('YYYY-MM-DD');
+        }
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
-        data.totalAmount = totalAmount;
-        data.fromWebsite = true;
+        console.log({ data });
 
         try {
             const result =
@@ -306,6 +313,8 @@ export const SignUpPage = () => {
                                         : `every ${watch('duration')} month`
                                 }
                                 recommended={base?.recommended}
+                                freeTrial={base?.freeTrial}
+                                freeTrialDuration={base?.freeTrialDuration}
                                 features={base?.features}
                                 updateSubscription={void 0}
                                 isDisabled

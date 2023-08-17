@@ -70,6 +70,8 @@ export interface IPackageCardProps {
     updateSubscription: any;
     isEdit?: boolean;
     isDisabled?: boolean;
+    freeTrial?: boolean;
+    freeTrialDuration?: any;
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;

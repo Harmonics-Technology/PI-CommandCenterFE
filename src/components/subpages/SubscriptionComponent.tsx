@@ -208,11 +208,17 @@ export const SubscriptionComponent = ({
     const onSubmit = async (data: NewClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
         data.subscriptionId = subList[0]?.id;
+
+        data.totalAmount = totalAmount;
+        if (subList[0]?.hasFreeTrial) {
+            data.freeTrialStartDate = data.startDate;
+            data.startDate = dayjs(data?.startDate)
+                .add(subList[0]?.freeTrialDuration as number, 'day')
+                .format('YYYY-MM-DD');
+        }
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
-
-        data.totalAmount = totalAmount;
 
         try {
             const result =
@@ -232,10 +238,16 @@ export const SubscriptionComponent = ({
     const existClientSubmit = async (data: ClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
         data.subscriptionId = subList[0]?.id;
+        data.totalAmount = totalAmount;
+        if (subList[0]?.hasFreeTrial) {
+            data.freeTrialStartDate = data.startDate;
+            data.startDate = dayjs(data?.startDate)
+                .add(subList[0]?.freeTrialDuration as number, 'day')
+                .format('YYYY-MM-DD');
+        }
         data.endDate = dayjs(data?.startDate)
             .add(data?.duration as number, 'month')
             .format('YYYY-MM-DD');
-        data.totalAmount = totalAmount;
         console.log({ data });
         try {
             const result = await SubscriptionService.createClientSubscription({
@@ -535,6 +547,8 @@ export const SubscriptionComponent = ({
                                                 ? 'annually'
                                                 : 'monthly'
                                         }
+                                        freeTrial={x.hasFreeTrial}
+                                        freeTrialDuration={x.freeTrialDuration}
                                         recommended={x.recommendedFor}
                                         features={x.features
                                             ?.split(',')

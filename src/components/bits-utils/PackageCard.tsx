@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    Flex,
     Icon,
     List,
     ListIcon,
@@ -27,6 +28,8 @@ export const PackageCard = ({
     updateSubscription,
     isEdit,
     isDisabled,
+    freeTrial,
+    freeTrialDuration,
 }: IPackageCardProps) => {
     return (
         <Box
@@ -37,6 +40,28 @@ export const PackageCard = ({
             border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
         >
             <Box>
+                <Box h="2rem" mb="1rem">
+                    {freeTrial && (
+                        <Flex
+                            w="50%"
+                            justify="center"
+                            align="center"
+                            textTransform="uppercase"
+                            color="#1B487D"
+                            borderRadius="2.5rem"
+                            fontSize=".56rem"
+                            bgColor="brand.700"
+                            fontFamily="Nunito"
+                            fontWeight="800"
+                            padding="0rem 1rem"
+                            h="full"
+                        >
+                            <Text mb="0">
+                                {freeTrialDuration} Days free trial
+                            </Text>
+                        </Flex>
+                    )}
+                </Box>
                 <Text color="black" fontSize="23px" fontWeight="800" mb="0">
                     {name}
                 </Text>
@@ -77,6 +102,8 @@ export const PackageCard = ({
                                   billed,
                                   recommended,
                                   features,
+                                  freeTrial,
+                                  freeTrialDuration,
                               })
                 }
             >

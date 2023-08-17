@@ -63,6 +63,8 @@ export const ManageSubscriptionComponent = ({ base }: IManageSubProps) => {
                                 isEdit
                                 desc={x.description}
                                 price={x.monthlyAmount}
+                                freeTrial={x.hasFreeTrial}
+                                freeTrialDuration={x.freeTrialDuration}
                                 billed={'/month'}
                                 recommended={x.recommendedFor}
                                 features={x.features?.split(',').map((b) => b)}

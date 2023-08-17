@@ -110,6 +110,8 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                             id={x.id}
                             key={x.id}
                             name={x.name}
+                            freeTrial={x.hasFreeTrial}
+                            freeTrialDuration={x.freeTrialDuration}
                             selected={
                                 subList.find(
                                     (a) => a.id == x.id,
