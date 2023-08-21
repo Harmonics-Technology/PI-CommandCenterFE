@@ -6,6 +6,8 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { AddCardResponseView } from './models/AddCardResponseView';
+export type { AddCardResponseViewStandardResponse } from './models/AddCardResponseViewStandardResponse';
 export type { AddOnsModel } from './models/AddOnsModel';
 export type { BooleanStandardResponse } from './models/BooleanStandardResponse';
 export type { CancelSubscriptionModel } from './models/CancelSubscriptionModel';
@@ -32,7 +34,6 @@ export type { PasswordReset } from './models/PasswordReset';
 export type { ProblemDetails } from './models/ProblemDetails';
 export type { RegisterModel } from './models/RegisterModel';
 export type { RenewSubscriptionModel } from './models/RenewSubscriptionModel';
-export type { StringStandardResponse } from './models/StringStandardResponse';
 export type { SubscriptionModel } from './models/SubscriptionModel';
 export type { SubscriptionView } from './models/SubscriptionView';
 export type { SubscriptionViewListStandardResponse } from './models/SubscriptionViewListStandardResponse';

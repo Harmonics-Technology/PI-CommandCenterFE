@@ -7,7 +7,8 @@ import { SubscriptionService } from 'src/services';
 
 export const Completed = () => {
     const router = useRouter();
-    const { redirectUrl, subscriptionId } = router.query;
+    const { redirectUrl } = router.query;
+    const subscriptionId = router.query.subscriptionId
     const [loading, setLoading] = useState(false);
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${

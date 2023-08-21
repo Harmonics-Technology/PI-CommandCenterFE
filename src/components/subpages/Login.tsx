@@ -51,6 +51,7 @@ function Login() {
         resolver: yupResolver(schema),
         mode: 'all',
     });
+    const expiresIn = new Date(new Date().getTime() + 15 * 60 * 1000);
     const onSubmit = async (data: LoginModel) => {
         try {
             const result = await UserService.loginUser({ requestBody: data });
@@ -122,7 +123,7 @@ function Login() {
                     p="1rem 3rem 4rem"
                 >
                     {/* <Box display="flex" justifyContent="center" w="full" my="2rem">
-                    <Image src="/assets/logo.png" h="3rem" />
+                    <Image src="/assets/newlogo.png" h="3rem" />
                 </Box> */}
                     <Text
                         fontSize="35px"

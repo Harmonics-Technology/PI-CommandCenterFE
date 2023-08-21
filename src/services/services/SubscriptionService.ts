@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AddCardResponseViewStandardResponse } from '../models/AddCardResponseViewStandardResponse';
 import type { BooleanStandardResponse } from '../models/BooleanStandardResponse';
 import type { CancelSubscriptionModel } from '../models/CancelSubscriptionModel';
 import type { CardViewListStandardResponse } from '../models/CardViewListStandardResponse';
@@ -10,7 +11,6 @@ import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSub
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
 import type { RenewSubscriptionModel } from '../models/RenewSubscriptionModel';
-import type { StringStandardResponse } from '../models/StringStandardResponse';
 import type { SubscriptionModel } from '../models/SubscriptionModel';
 import type { SubscriptionViewListStandardResponse } from '../models/SubscriptionViewListStandardResponse';
 import type { SubscriptionViewStandardResponse } from '../models/SubscriptionViewStandardResponse';
@@ -282,7 +282,7 @@ requestBody?: CancelSubscriptionModel,
     }
 
     /**
-     * @returns StringStandardResponse Success
+     * @returns AddCardResponseViewStandardResponse Success
      * @throws ApiError
      */
     public static addNewCard({
@@ -291,7 +291,7 @@ xApiKey,
 }: {
 clientId?: string,
 xApiKey?: any,
-}): CancelablePromise<StringStandardResponse> {
+}): CancelablePromise<AddCardResponseViewStandardResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Subscription/add-new-card',

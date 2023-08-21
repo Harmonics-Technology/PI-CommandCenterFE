@@ -63,7 +63,11 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     >
                         <Tr>
                             <TableData name={data.subscription?.name} solid />
-                            <TableData name={`${data.duration} months`} />
+                            <TableData
+                                name={`${data.duration} ${
+                                    data.annualBilling ? 'year' : 'months'
+                                }`}
+                            />
                             <TableData
                                 name={CAD(
                                     data.subscription?.monthlyAmount ||

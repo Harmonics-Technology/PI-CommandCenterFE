@@ -24,6 +24,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import { PaymentDetails } from '@components/Modals/PaymentDetails';
+import { PrimaryRadio } from '@components/bits-utils/PrimaryRadio';
 
 const newClientSchema = yup.object().shape({
     companyName: yup.string().required(),
@@ -77,6 +78,7 @@ export const SignUpPage = () => {
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
         mode: 'all',
+        defaultValues: { enableFreeTrial: false },
     });
 
     const changePackagetype = () => {
@@ -90,11 +92,16 @@ export const SignUpPage = () => {
         setCurrent('Month');
         setReadOnly(false);
     };
+    const enableFreeTrial =
+        (watch('enableFreeTrial') as unknown as string) == 'Try For Free'
+            ? true
+            : false;
+    // console.log(enableFreeTrial);
 
     const totalAmount =
         billing == 'month'
             ? base?.price * (watch('duration') as number)
-            : base?.price * ((watch('duration') as number) * 12);
+            : base?.prices * (watch('duration') as number);
 
     const openModal = () => {
         setSelection({
@@ -103,7 +110,7 @@ export const SignUpPage = () => {
             startDate: watch('startDate'),
             endDate: dayjs(watch('startDate')).add(
                 watch('duration') as number,
-                'month',
+                billing == 'month' ? 'month' : 'year',
             ),
 
             package: {
@@ -122,14 +129,18 @@ export const SignUpPage = () => {
         data.subscriptionId = base?.id;
         data.totalAmount = totalAmount;
         data.fromWebsite = true;
-        if (base?.freeTrial) {
+        data.enableFreeTrial = enableFreeTrial;
+        if (enableFreeTrial) {
             data.freeTrialStartDate = data.startDate;
             data.startDate = dayjs(data?.startDate)
                 .add(base?.freeTrialDuration as number, 'day')
                 .format('YYYY-MM-DD');
         }
         data.endDate = dayjs(data?.startDate)
-            .add(data?.duration as number, 'month')
+            .add(
+                data?.duration as number,
+                billing == 'month' ? 'month' : 'year',
+            )
             .format('YYYY-MM-DD');
         console.log({ data });
 
@@ -249,6 +260,21 @@ export const SignUpPage = () => {
                                 defaultValue=""
                                 register={register}
                             />
+                            {base?.freeTrial && (
+                                <PrimaryRadio<NewClientSubscriptionModel>
+                                    name={'enableFreeTrial'}
+                                    error={errors.enableFreeTrial}
+                                    control={control}
+                                    defaultValue={
+                                        'Make Payment For This Package'
+                                    }
+                                    radios={[
+                                        'Try For Free',
+                                        'Make Payment For This Package',
+                                    ]}
+                                    bg="#263238"
+                                />
+                            )}
                             <Box w="full">
                                 <Text
                                     // color="white"

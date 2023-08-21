@@ -19,4 +19,5 @@ export type NewClientSubscriptionModel = {
     endDate?: string;
     totalAmount?: number;
     fromWebsite?: boolean;
+    enableFreeTrial?: boolean;
 };

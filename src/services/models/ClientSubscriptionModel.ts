@@ -12,4 +12,5 @@ export type ClientSubscriptionModel = {
     subscriptionId?: string;
     annualBilling?: boolean;
     totalAmount?: number;
+    enableFreeTrial?: boolean;
 };

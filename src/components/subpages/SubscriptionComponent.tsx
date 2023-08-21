@@ -34,6 +34,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import dayjs from 'dayjs';
 import { PaymentDetails } from '@components/Modals/PaymentDetails';
+import { PrimaryRadio } from '@components/bits-utils/PrimaryRadio';
 
 const schema = yup.object().shape({
     clientId: yup.string().required(),
@@ -152,14 +153,17 @@ export const SubscriptionComponent = ({
         setCurrent('Month');
         setReadOnly(false);
     };
+    const enableFreeTrial =
+        (watch('enableFreeTrial') as unknown as string) ||
+        (watchs('enableFreeTrial') as unknown as string) == 'Try For Free'
+            ? true
+            : false;
     const totalAmount =
         billing == 'month'
             ? (subList[0]?.price as any) * (watch('duration') as number) ||
               (subList[0]?.price as any) * (watchs('duration') as number)
-            : (subList[0]?.price as any) *
-                  ((watch('duration') as number) * 12) ||
-              (subList[0]?.price as any) *
-                  ((watchs('duration') as number) * 12);
+            : (subList[0]?.price as any) * (watch('duration') as number) ||
+              (subList[0]?.price as any) * (watchs('duration') as number);
 
     const openModal = () => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -188,11 +192,11 @@ export const SubscriptionComponent = ({
             endDate: watch('startDate')
                 ? dayjs(watch('startDate')).add(
                       watch('duration') as number,
-                      'month',
+                      billing == 'month' ? 'month' : 'year',
                   )
                 : dayjs(watchs('startDate')).add(
                       watchs('duration') as number,
-                      'month',
+                      billing == 'month' ? 'month' : 'year',
                   ),
             package: {
                 name: subList[0]?.name,
@@ -210,14 +214,18 @@ export const SubscriptionComponent = ({
         data.subscriptionId = subList[0]?.id;
 
         data.totalAmount = totalAmount;
-        if (subList[0]?.hasFreeTrial) {
+        data.enableFreeTrial = enableFreeTrial;
+        if (enableFreeTrial) {
             data.freeTrialStartDate = data.startDate;
             data.startDate = dayjs(data?.startDate)
                 .add(subList[0]?.freeTrialDuration as number, 'day')
                 .format('YYYY-MM-DD');
         }
         data.endDate = dayjs(data?.startDate)
-            .add(data?.duration as number, 'month')
+            .add(
+                data?.duration as number,
+                billing == 'month' ? 'month' : 'year',
+            )
             .format('YYYY-MM-DD');
 
         try {
@@ -239,7 +247,8 @@ export const SubscriptionComponent = ({
         data.annualBilling = billing == 'month' ? false : true;
         data.subscriptionId = subList[0]?.id;
         data.totalAmount = totalAmount;
-        if (subList[0]?.hasFreeTrial) {
+        data.enableFreeTrial = enableFreeTrial;
+        if (enableFreeTrial) {
             data.freeTrialStartDate = data.startDate;
             data.startDate = dayjs(data?.startDate)
                 .add(subList[0]?.freeTrialDuration as number, 'day')
@@ -346,6 +355,21 @@ export const SubscriptionComponent = ({
                                     readonly={readonly}
                                 />
                             </Grid>
+                            {subList[0]?.hasFreeTrial && (
+                                <PrimaryRadio<ClientSubscriptionModel>
+                                    name={'enableFreeTrial'}
+                                    error={isError.enableFreeTrial}
+                                    control={controls}
+                                    defaultValue={
+                                        'Make Payment For This Package'
+                                    }
+                                    radios={[
+                                        'Try For Free',
+                                        'Make Payment For This Package',
+                                    ]}
+                                    bg="#263238"
+                                />
+                            )}
                         </VStack>
                     ) : (
                         <Box w="full">
@@ -458,6 +482,21 @@ export const SubscriptionComponent = ({
                                     />
                                 </Grid>
                             </Box>
+                            {subList[0]?.hasFreeTrial && (
+                                <PrimaryRadio<NewClientSubscriptionModel>
+                                    name={'enableFreeTrial'}
+                                    error={errors.enableFreeTrial}
+                                    control={control}
+                                    defaultValue={
+                                        'Make Payment For This Package'
+                                    }
+                                    radios={[
+                                        'Try For Free',
+                                        'Make Payment For This Package',
+                                    ]}
+                                    bg="#263238"
+                                />
+                            )}
                         </Box>
                     )}
                     <Text
@@ -543,7 +582,7 @@ export const SubscriptionComponent = ({
                                                 : x.monthlyAmount
                                         }
                                         billed={
-                                            billing == 'annual'
+                                            billing == 'year'
                                                 ? 'annually'
                                                 : 'monthly'
                                         }
