@@ -20,12 +20,14 @@ export default function PaymentPage({
     onClose,
     redirectUrl,
     payBtnText,
+    isSubscription,
 }: {
     clientSecret: string;
     isOpen: boolean;
     onClose: any;
     redirectUrl: string;
     payBtnText?: string;
+    isSubscription?: boolean;
 }) {
     const options = {
         clientSecret: clientSecret,
@@ -65,6 +67,7 @@ export default function PaymentPage({
                             <CheckoutForm
                                 payBtnText={payBtnText}
                                 redirectUrl={redirectUrl}
+                                isSubscription={isSubscription}
                             />
                         </Elements>
                     </Box>

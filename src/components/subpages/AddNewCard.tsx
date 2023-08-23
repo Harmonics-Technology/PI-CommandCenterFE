@@ -57,6 +57,7 @@ export const AddNewCard = () => {
                     clientSecret={client_secret as string}
                     payBtnText="Add card"
                     redirectUrl="SuperAdmin/account-management/billing-information"
+                    isSubscription={false}
                 />
             )}
         </Flex>

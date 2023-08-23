@@ -309,6 +309,33 @@ xApiKey?: any,
     }
 
     /**
+     * @returns AddCardResponseViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static addNewCardNew({
+clientId,
+xApiKey,
+}: {
+clientId?: string,
+xApiKey?: any,
+}): CancelablePromise<AddCardResponseViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/add-new-card-new',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
      * @returns BooleanStandardResponse Success
      * @throws ApiError
      */
@@ -632,20 +659,26 @@ xApiKey?: any,
      * @returns BooleanStandardResponse Success
      * @throws ApiError
      */
-    public static successSubscription({
+    public static paymentSuccess({
+clientId,
+subscriptionPayment,
 subscriptionId,
 xApiKey,
 }: {
+clientId?: string,
+subscriptionPayment?: boolean,
 subscriptionId?: string,
 xApiKey?: any,
 }): CancelablePromise<BooleanStandardResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/Subscription/success',
+            url: '/api/Subscription/payment-success',
             headers: {
                 'X-API-KEY': xApiKey,
             },
             query: {
+                'clientId': clientId,
+                'subscriptionPayment': subscriptionPayment,
                 'subscriptionId': subscriptionId,
             },
             errors: {

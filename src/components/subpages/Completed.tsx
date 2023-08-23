@@ -8,18 +8,26 @@ import { SubscriptionService } from 'src/services';
 export const Completed = () => {
     const router = useRouter();
     const { redirectUrl } = router.query;
-    const subscriptionId = router.query.subscriptionId
+    const subscriptionId = router.query.subscriptionId;
+    const clientId = router.query.clientId;
+    const subscriptionPayment = router.query.subscriptionPayment;
     const [loading, setLoading] = useState(false);
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
             redirectUrl || ''
         }`;
     };
+    console.log({ subscriptionId, clientId, subscriptionPayment });
     const confirmSuccess = async () => {
         setLoading(true);
         try {
-            const result = await SubscriptionService.successSubscription({
-                subscriptionId: subscriptionId as string,
+            const result = await SubscriptionService.paymentSuccess({
+                clientId: clientId as string,
+                subscriptionPayment: subscriptionPayment as unknown as boolean,
+                subscriptionId:
+                    (subscriptionId as string) == 'null'
+                        ? undefined
+                        : (subscriptionId as string),
             });
             if (result.status) {
                 setLoading(false);

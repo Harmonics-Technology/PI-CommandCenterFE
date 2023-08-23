@@ -50,6 +50,5 @@ export type { UserViewPagedCollectionStandardResponse } from './models/UserViewP
 export type { UserViewStandardResponse } from './models/UserViewStandardResponse';
 
 export { ClientService } from './services/ClientService';
-export { StripeWebhookService } from './services/StripeWebhookService';
 export { SubscriptionService } from './services/SubscriptionService';
 export { UserService } from './services/UserService';

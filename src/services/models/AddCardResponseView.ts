@@ -4,5 +4,6 @@
 
 export type AddCardResponseView = {
     clientSecret?: string | null;
-    subscriptionId?: string;
+    subscriptionId?: string | null;
+    clientId?: string;
 };
