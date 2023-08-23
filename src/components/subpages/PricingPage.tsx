@@ -20,7 +20,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
     const [billing, setBilling] = useState('month');
     const [subList, setSubList] = useState<any>([]);
     const router = useRouter();
-    console.log({ subList });
+    // console.log({ subList });
 
     const btn = useRef<any>(null);
 
