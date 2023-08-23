@@ -74,6 +74,7 @@ export const SignUpPage = () => {
         control,
         watch,
         setValue,
+        trigger,
         formState: { errors, isSubmitting, isValid },
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
@@ -104,6 +105,12 @@ export const SignUpPage = () => {
             : base?.prices * (watch('duration') as number);
 
     const openModal = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        if (!isValid) {
+            trigger();
+            return;
+        }
+
         setSelection({
             clientName: watch('companyName'),
             duration: watch('duration'),
@@ -152,9 +159,10 @@ export const SignUpPage = () => {
             if (result.status) {
                 // console.log({ result });
                 // toast.success('Successful');
+                console.log({ result });
                 if (result?.data?.clientSecret) {
                     router.push(
-                        `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}`,
+                        `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}&clientId=${result?.data?.clientId}`,
                     );
                     return;
                 }
