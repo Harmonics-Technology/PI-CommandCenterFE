@@ -5,46 +5,30 @@ import toast from 'react-hot-toast';
 import BeatLoader from 'react-spinners/BeatLoader';
 import { SubscriptionService } from 'src/services';
 
-export const Completed = () => {
+export const Completed = ({ data }) => {
     const router = useRouter();
     const { redirectUrl } = router.query;
-    const subscriptionId = router.query.subscriptionId;
-    const clientId = router.query.clientId;
-    const subscriptionPayment = router.query.subscriptionPayment;
     const [loading, setLoading] = useState(false);
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
             redirectUrl || ''
         }`;
     };
-    console.log({ subscriptionId, clientId, subscriptionPayment });
-    const confirmSuccess = async () => {
+
+    const fakePaymentSuccess = () => {
         setLoading(true);
-        try {
-            const result = await SubscriptionService.paymentSuccess({
-                clientId: clientId as string,
-                subscriptionPayment: subscriptionPayment as unknown as boolean,
-                subscriptionId:
-                    (subscriptionId as string) == 'null'
-                        ? undefined
-                        : (subscriptionId as string),
-            });
-            if (result.status) {
-                setLoading(false);
-                toast.success('Successful');
-                redirect();
-                return;
-            }
+        setTimeout(() => {
             setLoading(false);
-            toast.error(result.message as string);
-        } catch (error: any) {
-            setLoading(false);
-            toast(error?.message || error?.body?.message);
-        }
+            redirect();
+        }, 3000);
     };
+
     useEffect(() => {
-        confirmSuccess();
+        if (data.status === true) {
+            fakePaymentSuccess();
+        }
     }, []);
+
     return (
         <Box>
             <Flex minH="90vh" justify="center" align="center">
@@ -56,41 +40,46 @@ export const Completed = () => {
                     borderRadius="12px"
                 >
                     {loading && <BeatLoader color="#2EAFA3" size={20} />}
-                    <Text
-                        fontSize="2.125rem"
-                        color="brand.100"
-                        fontWeight="800"
-                        fontFamily="Nunito"
-                        mb="0"
-                        lineHeight="normal"
-                        textAlign="center"
-                    >
-                        Thank you for your payment!
-                    </Text>
-                    <Text
-                        fontSize="1.25rem"
-                        color="#696969"
-                        fontWeight="600"
-                        fontFamily="Nunito"
-                        mb="0"
-                        textAlign="center"
-                        w="80%"
-                    >
-                        Your payment has been confirmed and your subscription
-                        has been activated. Please ensure you confirm your email
-                        to avoid any restriction. you'll be redirected shortly
-                    </Text>
-                    <Button
-                        fontSize="1.125rem"
-                        color="white"
-                        bgColor="brand.400"
-                        borderRadius="8px"
-                        px="2rem"
-                        h="3.25rem"
-                        onClick={redirect}
-                    >
-                        Click here to redirect
-                    </Button>
+                    {data.status === true && (
+                        <>
+                            <Text
+                                fontSize="2.125rem"
+                                color="brand.100"
+                                fontWeight="800"
+                                fontFamily="Nunito"
+                                mb="0"
+                                lineHeight="normal"
+                                textAlign="center"
+                            >
+                                Thank you for your payment!
+                            </Text>
+                            <Text
+                                fontSize="1.25rem"
+                                color="#696969"
+                                fontWeight="600"
+                                fontFamily="Nunito"
+                                mb="0"
+                                textAlign="center"
+                                w="80%"
+                            >
+                                Your payment has been confirmed and your
+                                subscription has been activated. Please ensure
+                                you confirm your email to avoid any restriction.
+                                you'll be redirected shortly
+                            </Text>
+                            <Button
+                                fontSize="1.125rem"
+                                color="white"
+                                bgColor="brand.400"
+                                borderRadius="8px"
+                                px="2rem"
+                                h="3.25rem"
+                                onClick={redirect}
+                            >
+                                Click here to redirect
+                            </Button>
+                        </>
+                    )}
                 </VStack>
             </Flex>
         </Box>
