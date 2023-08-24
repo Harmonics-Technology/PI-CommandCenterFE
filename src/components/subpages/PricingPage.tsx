@@ -118,8 +118,8 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                                 ) as unknown as boolean
                             }
                             desc={x.description}
-                            prices={x.yearlyAmount}
-                            price={x.monthlyAmount}
+                            prices={x.totalMonthlyAmount}
+                            price={x.totalYearlyAmount}
                             billed={billing == 'year' ? 'year' : 'month'}
                             recommended={x.recommendedFor}
                             features={x.features?.split(',').map((b) => b)}

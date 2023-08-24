@@ -29,7 +29,7 @@ const schema = yup.object().shape({
     description: yup.string().required(),
     recommendedFor: yup.string().required(),
     // features: yup.string().required(),
-    // hasFreeTrial: yup.string().required(),
+    hasFreeTrial: yup.string().required(),
     monthlyAmount: yup.string().required(),
     yearlyAmount: yup.string().required(),
     freeTrialDuration: yup
@@ -57,8 +57,8 @@ export const SubscriptionFormComponent = ({
         defaultValues: {
             description: data?.description,
             features: data?.features,
-            freeTrialDuration: data?.freeTrialDuration,
-            hasFreeTrial: data?.hasFreeTrial,
+            freeTrialDuration: data?.freeTrialDuration || 0,
+            hasFreeTrial: data?.hasFreeTrial || false,
             id: data?.id,
             monthlyAmount: data?.monthlyAmount,
             monthlyDiscount: data?.monthlyDiscount,
@@ -104,19 +104,15 @@ export const SubscriptionFormComponent = ({
     }
 
     const onSubmit = async (data: SubscriptionModel) => {
+        // console.log({ isValid });
         if (!isValid) {
             trigger();
             return;
         }
-        data.totalMonthlyAmount = 0;
-        data.totalYearlyAmount = 0;
+        data.totalMonthlyAmount = monthlyTotal;
+        data.totalYearlyAmount = yearlyTotal;
         data.discountType = current;
         data.features = data.features?.toString();
-        if (!isEdit) {
-            data.totalMonthlyAmount = monthlyTotal;
-            data.totalYearlyAmount = yearlyTotal;
-            data.discountType = current;
-        }
 
         try {
             const result = isEdit
@@ -187,6 +183,7 @@ export const SubscriptionFormComponent = ({
                                 keys="label"
                                 keyLabel="label"
                                 label="Subscription Type "
+                                placeholder={data?.name}
                                 options={[
                                     { id: 1, label: 'Basic' },
                                     { id: 2, label: 'Standard' },

@@ -71,7 +71,7 @@ export const SubscriptionComponent = ({
     clients,
 }: ISubscriptionProps) => {
     const router = useRouter();
-    // console.log({ data });
+    console.log({ base });
     const {
         register,
         handleSubmit,
@@ -578,8 +578,8 @@ export const SubscriptionComponent = ({
                                         desc={x.description}
                                         price={
                                             billing == 'year'
-                                                ? x.yearlyAmount
-                                                : x.monthlyAmount
+                                                ? x.totalYearlyAmount
+                                                : x.totalMonthlyAmount
                                         }
                                         billed={
                                             billing == 'year'
