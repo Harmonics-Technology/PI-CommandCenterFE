@@ -33,6 +33,7 @@ export const Faq = () => {
                             <AccordionSingle
                                 title={x.title}
                                 content={x.content}
+                                key={x.id}
                             />
                         ))}
                     </Accordion>

@@ -57,7 +57,7 @@ export const PackageCard = ({
                             h="full"
                         >
                             <Text mb="0">
-                                {freeTrialDuration} Days free trial
+                                {freeTrialDuration || 0} Days free trial
                             </Text>
                         </Flex>
                     )}

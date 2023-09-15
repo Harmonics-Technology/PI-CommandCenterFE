@@ -37,7 +37,7 @@ export const DemoContact = () => {
             }
             toast.error(result.message as string);
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
     return (

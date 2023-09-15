@@ -94,7 +94,7 @@ function Login() {
             toast.error(result.message as string);
             return;
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
     // console.log(watch('email'), watch('password'));
