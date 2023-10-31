@@ -41,11 +41,10 @@ export const Completed = ({ data, redirectUrl }) => {
                                 w="80%"
                             >
                                 Your payment has been confirmed and your
-                                subscription has been activated. Please ensure
-                                you confirm your email to avoid any restriction.
-                                you'll be redirected shortly
+                                subscription has been activated. Please check
+                                your email for next steps
                             </Text>
-                            <Button
+                            {/* <Button
                                 fontSize="1.125rem"
                                 color="white"
                                 bgColor="brand.400"
@@ -55,7 +54,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 onClick={redirect}
                             >
                                 Click here to redirect
-                            </Button>
+                            </Button> */}
                         </>
                     ) : (
                         <>
