@@ -11,10 +11,12 @@ const CheckoutForm = ({
     payBtnText = 'Confirm Payment',
     redirectUrl,
     isSubscription = true,
+    clientId,
 }: {
     payBtnText?: string;
     redirectUrl: string;
     isSubscription?: boolean;
+    clientId?: string;
 }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -22,7 +24,6 @@ const CheckoutForm = ({
     const [error, setError] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
     const subscriptionId = router.asPath.split('/')[2]?.split('?')[0];
-    const clientId = router.query.clientId;
 
     // console.log({ subscriptionId });
 

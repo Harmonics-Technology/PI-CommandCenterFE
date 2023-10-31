@@ -4,8 +4,8 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { OpenAPI, SubscriptionService } from 'src/services';
 
-const summary = ({ data }: { data: any }) => {
-    return <SummaryPage data={data} />;
+const summary = ({ data, client }: { data: any; client: string }) => {
+    return <SummaryPage data={data} client={client} />;
 };
 
 export default summary;
@@ -15,8 +15,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
         'https://pi-commandcenterdev.azurewebsites.net';
     OpenAPI.TOKEN = ctx.req.cookies.token;
-    const { id } = ctx.query;
-    console.log({ id });
+    const { id, client } = ctx.query;
     try {
         const data = await SubscriptionService.getClientSubscriptionById({
             id: id as any,
@@ -25,6 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         return {
             props: {
                 data: data.data,
+                client,
             },
         };
     } catch (error: any) {

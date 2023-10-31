@@ -15,7 +15,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { ClientSubscriptionView } from 'src/services';
 
-export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
+export const SummaryPage = ({
+    data,
+    client,
+}: {
+    data: ClientSubscriptionView;
+    client;
+}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
     const { client_secret } = router.query;
@@ -117,6 +123,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     onClose={onClose}
                     clientSecret={client_secret as string}
                     redirectUrl="login"
+                    clientId={client as string}
                 />
             )}
         </Box>
