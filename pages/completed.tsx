@@ -3,8 +3,8 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { OpenAPI, SubscriptionService } from 'src/services';
 
-const completed = ({ data }) => {
-    return <Completed data={data} />;
+const completed = ({ data, redirectUrl }) => {
+    return <Completed data={data} redirectUrl={redirectUrl} />;
 };
 
 export default completed;
@@ -14,12 +14,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
         'https://pi-commandcenterdev.azurewebsites.net';
     OpenAPI.TOKEN = ctx.req.cookies.token;
-    const { clientId, subscriptionId, subscriptionPayment } = ctx.query;
-    console.log({ clientId, subscriptionPayment, subscriptionId });
+    const { clientId, subscriptionId, subscriptionPayment, redirectUrl } =
+        ctx.query;
     try {
         const data = await SubscriptionService.paymentSuccess({
             clientId: clientId as any,
-            subscriptionPayment: subscriptionPayment as unknown as boolean,
+            subscriptionPayment: subscriptionPayment == 'true' ? true : false,
             subscriptionId:
                 (subscriptionId as string) == 'null'
                     ? undefined
@@ -29,13 +29,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         return {
             props: {
                 data: data,
+                redirectUrl,
             },
         };
     } catch (error: any) {
-        console.log({ error });
         return {
             props: {
-                data: [],
+                data: error.body,
             },
         };
     }

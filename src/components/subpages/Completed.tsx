@@ -1,33 +1,12 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import BeatLoader from 'react-spinners/BeatLoader';
-import { SubscriptionService } from 'src/services';
+import React from 'react';
 
-export const Completed = ({ data }) => {
-    const router = useRouter();
-    const { redirectUrl } = router.query;
-    const [loading, setLoading] = useState(false);
+export const Completed = ({ data, redirectUrl }) => {
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
             redirectUrl || ''
         }`;
     };
-
-    const fakePaymentSuccess = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            redirect();
-        }, 3000);
-    };
-
-    useEffect(() => {
-        if (data.status === true) {
-            fakePaymentSuccess();
-        }
-    }, []);
 
     return (
         <Box>
@@ -39,8 +18,7 @@ export const Completed = ({ data }) => {
                     p="8rem 3rem"
                     borderRadius="12px"
                 >
-                    {loading && <BeatLoader color="#2EAFA3" size={20} />}
-                    {data.status === true && (
+                    {data.status === true ? (
                         <>
                             <Text
                                 fontSize="2.125rem"
@@ -78,6 +56,31 @@ export const Completed = ({ data }) => {
                             >
                                 Click here to redirect
                             </Button>
+                        </>
+                    ) : (
+                        <>
+                            <Text
+                                fontSize="2.125rem"
+                                color="red"
+                                fontWeight="800"
+                                fontFamily="Nunito"
+                                mb="0"
+                                lineHeight="normal"
+                                textAlign="center"
+                            >
+                                Error!
+                            </Text>
+                            <Text
+                                fontSize="1.25rem"
+                                color="#696969"
+                                fontWeight="600"
+                                fontFamily="Nunito"
+                                mb="0"
+                                textAlign="center"
+                                w="80%"
+                            >
+                                {data?.message}
+                            </Text>
                         </>
                     )}
                 </VStack>
