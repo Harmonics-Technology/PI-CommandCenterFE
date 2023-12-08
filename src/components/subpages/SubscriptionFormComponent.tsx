@@ -124,7 +124,7 @@ export const SubscriptionFormComponent = ({
                   });
             if (result.status) {
                 toast.success('Success');
-                router.push('/admin/manage-subscription');
+                router.push('/command-center/manage-subscription');
                 return;
             }
             toast.error(result.message as string);

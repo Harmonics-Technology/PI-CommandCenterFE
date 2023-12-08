@@ -87,7 +87,7 @@ function Login() {
                     ? (window.location.href = decodeURIComponent(
                           router.query.from as unknown as string,
                       ))
-                    : (window.location.href = '/admin/dashboard');
+                    : (window.location.href = '/command-center/dashboard');
 
                 return;
             }

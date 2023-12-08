@@ -10,7 +10,7 @@ export function withPageAuth(gssp: any) {
             // Redirect to login page
             return {
                 redirect: {
-                    destination: `/admin/login?from=${encodeURIComponent(req.url)}`,
+                    destination: `/command-center/login?from=${encodeURIComponent(req.url)}`,
                     statusCode: 302,
                 },
             };

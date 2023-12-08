@@ -289,7 +289,7 @@ export const SubscriptionComponent = ({
                     bgColor="brand.400"
                     color="white"
                     borderRadius="5px"
-                    onClick={() => router.push('/admin/subscription/history')}
+                    onClick={() => router.push('/command-center/subscription/history')}
                     px="2rem"
                 >
                     Subscription History

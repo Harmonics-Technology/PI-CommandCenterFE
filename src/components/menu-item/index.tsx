@@ -7,8 +7,8 @@ interface MenuProps {
 }
 function MenuItem({ menuTitle }: MenuProps) {
     const router = useRouter();
-    const admin = router.pathname.startsWith('/admin');
-    const url = `${admin ? '/admin' : ''}/${menuTitle}`;
+    const admin = router.pathname.startsWith('/command-center');
+    const url = `${admin ? '/adcommand-centermin' : ''}/${menuTitle}`;
     return (
         <>
             <Link href={url} passHref>

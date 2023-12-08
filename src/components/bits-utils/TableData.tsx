@@ -265,7 +265,7 @@ export function TableActions({ x }: { x: UserView }) {
                 <MenuList w="full">
                     <MenuItem
                         onClick={() =>
-                            router.push(`/admin/administrators/${x.id}`)
+                            router.push(`/command-center/administrators/${x.id}`)
                         }
                         w="full"
                     >
@@ -318,7 +318,7 @@ export function TableClientActions({ id }: { id: any }) {
                 </MenuButton>
                 <MenuList w="full">
                     <MenuItem
-                        onClick={() => router.push(`/admin/clients/${id}`)}
+                        onClick={() => router.push(`/command-center/clients/${id}`)}
                         w="full"
                     >
                         <Icon as={BsEyeFill} mr=".5rem" color="#777777" />
