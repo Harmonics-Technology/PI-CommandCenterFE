@@ -8,7 +8,7 @@ export const ReServices = () => {
             <VStack spacing="5rem" w="100%" py="5rem" mx="auto" bgColor="white">
                 <VStack spacing="5rem" w="85%" mx="auto">
                     <SingleServiceLTR
-                        image="/assets/rea.png"
+                        image="/assets/pr (9).png"
                         title="Streamlined Client Management"
                         items={[
                             {
@@ -23,7 +23,7 @@ export const ReServices = () => {
                         rtl
                     />
                     <SingleServiceLTR
-                        image="/assets/reb.png"
+                        image="/assets/pr (3).png"
                         title="Effortless Employee Onboarding"
                         items={[
                             {
@@ -40,7 +40,7 @@ export const ReServices = () => {
             </VStack>
             <VStack w="85%" mx="auto" pb="5rem">
                 <SingleServiceLTR
-                    image="/assets/rec.png"
+                    image="/assets/pr (5).png"
                     title="Powerful Reporting and Analytics"
                     items={[
                         {

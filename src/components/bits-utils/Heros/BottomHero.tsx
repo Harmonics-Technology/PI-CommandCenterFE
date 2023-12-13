@@ -2,11 +2,19 @@ import { Box, Flex, VStack, Text, Button, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export const BottomHero = ({ title }: { title: string }) => {
+export const BottomHero = ({
+    title,
+    w = '60%',
+    fs = '2.125rem',
+}: {
+    title: string;
+    w?: any;
+    fs?: any;
+}) => {
     const router = useRouter();
     return (
         <Box bgColor="white" zIndex="6">
-            <Box w="80%" mx="auto" py="7rem">
+            <Box w="85%" mx="auto" p="0 0 4rem">
                 <Flex
                     justify="space-between"
                     pos="relative"
@@ -18,11 +26,11 @@ export const BottomHero = ({ title }: { title: string }) => {
                     <VStack
                         align="flex-start"
                         spacing="1.8rem"
-                        w="60%"
+                        w={w}
                         color="white"
                     >
                         <Text
-                            fontSize="2.125rem"
+                            fontSize={fs}
                             fontWeight="800"
                             fontFamily="Nunito"
                             mb="0"
@@ -40,6 +48,7 @@ export const BottomHero = ({ title }: { title: string }) => {
                                 h="3.25rem"
                                 fontFamily="Nunito"
                                 onClick={() => router.push('/pricing')}
+                                _hover={{ bgColor: 'brand.400' }}
                             >
                                 Start Using TIMBA Today
                             </Button>
@@ -55,7 +64,7 @@ export const BottomHero = ({ title }: { title: string }) => {
                         </Box>
                     </VStack>
                     <Box
-                        w="45%"
+                        w="40%"
                         zIndex="4"
                         pos="absolute"
                         right="3%"

@@ -27,7 +27,42 @@ export const MainNav = () => {
                 <AdminLogo />
                 <HStack align="center" gap="2rem">
                     <MenuWithDropdown
-                        menuTitle="use-cases"
+                        menuTitle="features"
+                        temp="repeat(3,1fr)"
+                        bd={false}
+                        gap=".5rem 3rem"
+                        menus={[
+                            {
+                                name: 'project-management',
+                            },
+                            {
+                                name: 'contract-management',
+                            },
+                            {
+                                name: 'leave-management',
+                            },
+                            {
+                                name: 'employee-management',
+                            },
+                            {
+                                name: 'payment-partner',
+                            },
+                            {
+                                name: 'shift-management',
+                            },
+                            {
+                                name: 'automated-timesheet',
+                            },
+                            {
+                                name: 'robust-report',
+                            },
+                            {
+                                name: 'client-onboarding',
+                            },
+                        ]}
+                    />
+                    <MenuWithDropdown
+                        menuTitle="solutions"
                         menus={[
                             {
                                 name: 'sub-contractors',

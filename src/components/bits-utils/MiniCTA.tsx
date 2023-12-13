@@ -5,7 +5,7 @@ import { MainTitle } from './Heros/MainTitle';
 
 export const MiniCTA = ({ bg, text, btn, color }) => {
     return (
-        <VStack w="full" bgColor={bg} py="2.5rem">
+        <VStack w="full" bgColor={bg} py="3rem">
             <MainTitle text={text} color={color} w="60%" />
             <Box>
                 <Button
@@ -15,7 +15,7 @@ export const MiniCTA = ({ bg, text, btn, color }) => {
                     borderRadius="8px"
                     px="2.5rem"
                     h="4rem"
-                    fontFamily='Nunito'
+                    fontFamily="Nunito"
                     onClick={() => router.push('/pricing')}
                 >
                     {btn}

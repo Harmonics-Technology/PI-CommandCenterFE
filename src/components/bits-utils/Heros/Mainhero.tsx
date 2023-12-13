@@ -12,15 +12,21 @@ export const Mainhero = ({
     color,
     btnColor,
     gap,
+    isVertical,
+    fs = '3.125rem',
+    bd = 0,
 }: {
     title: string;
-    sub: string;
+    sub?: string;
     buttonTitle: string;
     image: string;
     bgColor: string;
     color?: string;
     btnColor?: string;
     gap?: any;
+    isVertical?: boolean;
+    fs?: any;
+    bd?: any;
 }) => {
     const router = useRouter();
     const { ref } = useScramble({
@@ -42,28 +48,43 @@ export const Mainhero = ({
             bgRepeat="no-repeat"
             bgColor={bgColor}
         >
-            <HStack w="85%" mx="auto" h="85vh" align="center" gap={gap}>
-                <VStack align="flex-start" spacing="1.5rem" w="50%">
+            <HStack
+                w="85%"
+                mx="auto"
+                h="85vh"
+                align="center"
+                gap={gap}
+                py={isVertical ? '2.5rem' : '0'}
+                flexDir={isVertical ? 'column' : 'row'}
+            >
+                <VStack
+                    align={isVertical ? 'center' : 'flex-start'}
+                    spacing="1.5rem"
+                    w={isVertical ? '80%' : '50%'}
+                >
                     <Text
-                        fontSize="3.125rem"
+                        fontSize={fs}
                         color={color || 'brand.100'}
                         fontWeight="800"
                         fontFamily="Nunito"
                         mb="0"
                         lineHeight="normal"
+                        textAlign={isVertical ? 'center' : 'left'}
                         ref={ref}
                     >
                         {title}
                     </Text>
-                    <Text
-                        fontSize="1.25rem"
-                        color={color || '#696969'}
-                        fontWeight="600"
-                        fontFamily="Nunito"
-                        mb="0"
-                    >
-                        {sub}
-                    </Text>
+                    {sub && (
+                        <Text
+                            fontSize="1.25rem"
+                            color={color || '#696969'}
+                            fontWeight="600"
+                            fontFamily="Nunito"
+                            mb="0"
+                        >
+                            {sub}
+                        </Text>
+                    )}
                     <Button
                         fontSize="1.125rem"
                         color="white"
@@ -73,23 +94,36 @@ export const Mainhero = ({
                         h="3.25rem"
                         fontFamily="Nunito"
                         onClick={() => router.push('/pricing')}
+                        _hover={{ bgColor: 'brand.400' }}
                     >
                         {buttonTitle}
                     </Button>
-                    <Text
-                        fontSize="0.81rem"
-                        color={color || '#696969'}
-                        fontWeight="400"
-                        fontFamily="Nunito"
-                        fontStyle="italic"
-                        mb="0"
-                    >
-                        Enjoy all features for free ( 30 days trial - No credit
-                        card required.)
-                    </Text>
+                    {sub && (
+                        <Text
+                            fontSize="0.81rem"
+                            color={color || '#696969'}
+                            fontWeight="400"
+                            fontFamily="Nunito"
+                            fontStyle="italic"
+                            mb="0"
+                        >
+                            Enjoy all features for free ( 30 days trial - No
+                            credit card required.)
+                        </Text>
+                    )}
                 </VStack>
-                <Box w="55%">
-                    <Image src={image} w="full" alt="banner image" />
+                <Box
+                    w={isVertical ? '38rem' : '41rem'}
+                    h={isVertical ? '23rem' : '27rem'}
+                    borderRadius={bd}
+                    overflow="hidden"
+                >
+                    <Image
+                        src={image}
+                        w={isVertical ? 'auto' : 'full'}
+                        h="full"
+                        alt="banner image"
+                    />
                 </Box>
             </HStack>
         </Box>

@@ -15,6 +15,7 @@ export const Entreprenure = () => {
                 bgColor="brand.400"
                 color="white"
                 btnColor="brand.100"
+                bd="3.125rem"
             />
             <EnService />
             <EnItems />

@@ -18,6 +18,7 @@ export const DemoServices = () => {
             <SingleServiceLTR
                 image="/assets/demo.png"
                 title="A Personalized Demo Experience"
+                bd="1.875rem"
                 items={[
                     {
                         title: 'Tailored to Your Needs',

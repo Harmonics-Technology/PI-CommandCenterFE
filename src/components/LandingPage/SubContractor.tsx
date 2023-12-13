@@ -16,6 +16,7 @@ export const SubContractor = () => {
                 image="/assets/sub.png"
                 bgColor="brand.100"
                 color="white"
+                bd="3.125rem"
             />
             <SubContractorService />
             <SubContractorServices />

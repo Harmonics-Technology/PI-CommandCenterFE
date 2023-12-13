@@ -1,18 +1,17 @@
-import { Box, Circle, Grid, Image } from '@chakra-ui/react';
+import { Box, Circle, Grid } from '@chakra-ui/react';
 import React from 'react';
-import {
-    AiOutlineUserSwitch,
-    AiOutlineFieldTime,
-    AiOutlineProject,
-} from 'react-icons/ai';
-import { FaFileContract } from 'react-icons/fa';
-import { HiOutlineReceiptTax } from 'react-icons/hi';
-import { MdMoreTime, MdOutlineBarChart, MdPayments } from 'react-icons/md';
-import { PiUsersThreeThin } from 'react-icons/pi';
 import { MainTitle } from './Heros/MainTitle';
 import { ServiceCard } from './ServiceCard';
 import { SingleShowCase } from './SingleShowCase';
 import { useRouter } from 'next/router';
+import {
+    Collab,
+    PayPartner,
+    PrjMadeSimple,
+    PunctualPay,
+    TTE,
+    Tax,
+} from '@components/Icons';
 
 export const SubContractorServices = () => {
     const router = useRouter();
@@ -38,7 +37,7 @@ export const SubContractorServices = () => {
                             welcome precise time tracking, allowing 
                             you to make every minute count."
                             title="Time Tracking Excellence"
-                            icon={MdMoreTime}
+                            icon={TTE}
                             bg="white"
                         />
                         <ServiceCard
@@ -48,7 +47,7 @@ export const SubContractorServices = () => {
                             collaboration, ensuring you meet project 
                             goals with ease."
                             title="Project Management Made Simple"
-                            icon={AiOutlineProject}
+                            icon={PrjMadeSimple}
                             bg="white"
                         />
                         <ServiceCard
@@ -57,7 +56,7 @@ export const SubContractorServices = () => {
                             hard work. Accurate billable hour 
                             tracking guarantees no payment delays."
                             title="Punctual Payments"
-                            icon={MdPayments}
+                            icon={PunctualPay}
                             bg="white"
                         />
                         <ServiceCard
@@ -66,7 +65,7 @@ export const SubContractorServices = () => {
                             communication tools. Share information 
                             and work together to achieve project success.x"
                             title="Enhanced Collaboration"
-                            icon={PiUsersThreeThin}
+                            icon={Collab}
                             bg="white"
                         />
                         <ServiceCard
@@ -76,7 +75,7 @@ export const SubContractorServices = () => {
                             optimize your performance and grow 
                             your subcontracting business."
                             title="Detailed Reports for Insights"
-                            icon={MdOutlineBarChart}
+                            icon={PayPartner}
                             bg="white"
                         />
                         <ServiceCard
@@ -85,7 +84,7 @@ export const SubContractorServices = () => {
                             tax-related information effortlessly, 
                             ensuring compliance and peace of mind."
                             title="Hassle-Free Tax Management"
-                            icon={HiOutlineReceiptTax}
+                            icon={Tax}
                             bg="white"
                         />
                     </Grid>
@@ -109,7 +108,7 @@ export const SubContractorServices = () => {
             </Box>
             <SingleShowCase
                 btn="Start Using TIMBA Today"
-                image="/assets/lapb.png"
+                image="/assets/pr (7).png"
                 onClick={() => router.push('/pricing')}
                 sub="Sign up for FREE trial - No credit card required"
                 main="Embrace a New Era of Efficiency, Precision, and Productivity"

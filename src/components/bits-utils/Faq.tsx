@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 export const Faq = () => {
     const router = useRouter();
     return (
-        <Box bgColor="white" w="full">
+        <Box bgColor="white" w="full" pb="6rem">
             <Box p="4rem 0 5.5rem" w="70%" mx="auto" id="faq">
                 <MainTitle text="FAQs" />
                 <Text
@@ -59,8 +59,11 @@ export const Faq = () => {
                     fontFamily="Nunito"
                     h="4rem"
                     onClick={() => router.push('/pricing')}
+                    _hover={{
+                        bgColor: 'brand.400',
+                    }}
                 >
-                    Start Using TIMBA Today
+                    Book A Product Demo
                 </Button>
             </Flex>
         </Box>

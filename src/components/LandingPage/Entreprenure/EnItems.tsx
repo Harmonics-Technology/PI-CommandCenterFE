@@ -146,7 +146,7 @@ export const EnItems = () => {
             </Box>
             <SingleShowCase
                 btn="Have a Large Team - Book a product Demo"
-                image="/assets/lapb.png"
+                image="/assets/pr (7).png"
                 onClick={() => router.push('/book-demo')}
                 title="TIMBA is the ultimate ally that transforms how companies operate, elevates team performance, and fuels the journey to success. Experience the love for yourself and see why TIMBA is the go-to choice for businesses"
             />

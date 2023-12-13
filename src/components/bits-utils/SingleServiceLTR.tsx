@@ -12,6 +12,7 @@ export const SingleServiceLTR = ({
     btn,
     onClick,
     rtl = false,
+    bd = 0,
 }: {
     image: string;
     color?: string;
@@ -20,10 +21,16 @@ export const SingleServiceLTR = ({
     btn?: any;
     onClick?: any;
     rtl?: boolean;
+    bd?: any;
 }) => {
     return (
         <Flex gap="5.5rem" align="center" justify="space-between">
-            <Box w="full" order={rtl ? 1 : 0}>
+            <Box
+                w="full"
+                order={rtl ? 1 : 0}
+                overflow="hidden"
+                borderRadius={bd}
+            >
                 <Image src={image} w="full" h="full" alt="banner image" />
             </Box>
             <VStack

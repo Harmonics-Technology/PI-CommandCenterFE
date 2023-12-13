@@ -14,8 +14,10 @@ export const Recruiter = () => {
                 image="/assets/re.png"
                 bgColor="brand.100"
                 color="white"
+                bd="3.125rem"
             />
             <ReServices />
+            <Box h="6rem" bgColor="white" />
             <BottomHero
                 title="Simplify candidate sourcing, elevate 
                 client management, and ensure a 
