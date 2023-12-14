@@ -123,6 +123,7 @@ export const Mainhero = ({
                         w={isVertical ? 'auto' : 'full'}
                         h="full"
                         alt="banner image"
+                        mx={isVertical ? 'auto': 'unset'}
                     />
                 </Box>
             </HStack>
