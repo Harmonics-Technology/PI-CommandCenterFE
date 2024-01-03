@@ -22,7 +22,7 @@ export const EnItems = () => {
     const router = useRouter();
     return (
         <Box>
-            <Box bgColor="brand.100" pos="relative">
+            <Box bgColor="brand.100" pos="relative" overflow="hidden">
                 <Box p="4rem 0 3rem" mx="auto" w="85%">
                     <MainTitle
                         text="Track every minute of your billable time. We know this means a lot you"
