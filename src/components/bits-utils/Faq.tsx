@@ -39,33 +39,35 @@ export const Faq = () => {
                     </Accordion>
                 </VStack>
             </Box>
-            <Text
-                color="#182c51"
-                fontSize="2.125rem"
-                textAlign="center"
-                fontWeight="600"
-                fontFamily="Nunito"
-                mb="1.5rem"
-            >
-                Have a Large Team - Book a product Demo
-            </Text>
-            <Flex w="full" justify="center">
-                <Button
-                    fontSize="1.125rem"
-                    color="white"
-                    bgColor="brand.400"
-                    borderRadius="8px"
-                    px="3rem"
+            <Box display="none">
+                <Text
+                    color="#182c51"
+                    fontSize="2.125rem"
+                    textAlign="center"
+                    fontWeight="600"
                     fontFamily="Nunito"
-                    h="4rem"
-                    onClick={() => router.push('/pricing')}
-                    _hover={{
-                        bgColor: 'brand.400',
-                    }}
+                    mb="1.5rem"
                 >
-                    Book A Product Demo
-                </Button>
-            </Flex>
+                    Have a Large Team - Book a product Demo
+                </Text>
+                <Flex w="full" justify="center">
+                    <Button
+                        fontSize="1.125rem"
+                        color="white"
+                        bgColor="brand.400"
+                        borderRadius="8px"
+                        px="3rem"
+                        fontFamily="Nunito"
+                        h="4rem"
+                        onClick={() => router.push('/pricing')}
+                        _hover={{
+                            bgColor: 'brand.400',
+                        }}
+                    >
+                        Book A Product Demo
+                    </Button>
+                </Flex>
+            </Box>
         </Box>
     );
 };

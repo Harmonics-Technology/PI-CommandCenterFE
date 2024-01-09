@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, VStack } from '@chakra-ui/react';
+import parse from 'react-html-parser';
 
 export const MainTitle = ({
     text,
@@ -9,7 +10,7 @@ export const MainTitle = ({
     w = 'full',
     mx = 'auto',
 }: {
-    text: string;
+    text: string | undefined;
     color?: string;
     sub?: string;
     align?: any;
@@ -22,14 +23,14 @@ export const MainTitle = ({
                 fontSize="2.5rem"
                 color={color}
                 fontWeight="700"
-                fontFamily="Nunito"
+                fontFamily="Nunito Sans"
                 mb="0"
                 lineHeight="3rem"
                 textAlign={align}
                 // w="65%"
-                mx="auto"
+                mx={mx}
             >
-                {text}
+                {parse(text)}
             </Text>
             <Text
                 fontSize="1rem"
@@ -40,7 +41,7 @@ export const MainTitle = ({
                 lineHeight="1.75rem"
                 textAlign={align}
                 // w="75%"
-                mx="auto"
+                mx={mx}
             >
                 {sub}
             </Text>
