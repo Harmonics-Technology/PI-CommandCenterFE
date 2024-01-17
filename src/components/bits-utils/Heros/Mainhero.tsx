@@ -15,6 +15,7 @@ export const Mainhero = ({
     isVertical,
     fs = '3.125rem',
     bd = 0,
+    isHome = false,
 }: {
     title: string;
     sub?: string;
@@ -27,6 +28,7 @@ export const Mainhero = ({
     isVertical?: boolean;
     fs?: any;
     bd?: any;
+    isHome?: boolean;
 }) => {
     const router = useRouter();
     // const { ref } = useScramble({
@@ -119,7 +121,7 @@ export const Mainhero = ({
                     h={isVertical ? '23rem' : '27rem'}
                     borderRadius={bd}
                     overflow="hidden"
-                    pos="absolute"
+                    pos={isHome ? 'absolute' : 'unset'}
                     right={0}
                 >
                     <Image

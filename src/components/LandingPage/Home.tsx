@@ -17,6 +17,7 @@ export const Home = () => {
                 buttonTitle="Start Using for FREE – Sign up here"
                 image="/assets/laptop.svg"
                 bgColor="#f3f9f8"
+                isHome
             />
             <ServiceBody />
             <WhoCanUseTimbaNew />
