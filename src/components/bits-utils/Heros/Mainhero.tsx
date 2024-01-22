@@ -110,7 +110,7 @@ export const Mainhero = ({
                                 padding=".5 1.25rem"
                                 fontFamily="Nunito"
                                 onChange={(e) => setUserEmail(e.target.value)}
-                                W="60%"
+                                W="55%"
                             />
                             <Button
                                 fontSize="1.125rem"
@@ -124,7 +124,7 @@ export const Mainhero = ({
                                     router.push(`/pricing?email=${userEmail}`)
                                 }
                                 _hover={{ bgColor: 'brand.400' }}
-                                w="40%"
+                                w="45%"
                             >
                                 Sign Up For Free
                             </Button>
