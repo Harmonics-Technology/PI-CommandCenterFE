@@ -99,18 +99,17 @@ export const Mainhero = ({
                         </Text>
                     )}
                     {isHome ? (
-                        <HStack W="90%">
+                        <HStack w="90%">
                             <Input
                                 placeholder="Your Work Enail"
                                 border="1px solid #c4c4c4"
                                 bgColor="white"
                                 h="3.37rem"
-                                w=""
                                 borderRadius="0.5rem"
                                 padding=".5 1.25rem"
                                 fontFamily="Nunito"
                                 onChange={(e) => setUserEmail(e.target.value)}
-                                W="55%"
+                                w="55%"
                             />
                             <Button
                                 fontSize="1.125rem"

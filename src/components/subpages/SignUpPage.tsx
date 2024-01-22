@@ -81,7 +81,7 @@ export const SignUpPage = () => {
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
         mode: 'all',
-        defaultValues: { enableFreeTrial: false, email },
+        defaultValues: { enableFreeTrial: false, email: email as string },
     });
 
     const changePackagetype = () => {
