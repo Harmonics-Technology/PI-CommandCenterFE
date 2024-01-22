@@ -1,6 +1,14 @@
-import { Box, HStack, Text, Image, Button, VStack } from '@chakra-ui/react';
+import {
+    Box,
+    HStack,
+    Text,
+    Image,
+    Button,
+    VStack,
+    Input,
+} from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 // import { useScramble } from 'use-scramble';
 
 export const Mainhero = ({
@@ -31,6 +39,7 @@ export const Mainhero = ({
     isHome?: boolean;
 }) => {
     const router = useRouter();
+    const [userEmail, setUserEmail] = useState('');
     // const { ref } = useScramble({
     //     text: title,
     //     speed: 0.6,
@@ -89,19 +98,52 @@ export const Mainhero = ({
                             {sub}
                         </Text>
                     )}
-                    <Button
-                        fontSize="1.125rem"
-                        color="white"
-                        bgColor={btnColor || 'brand.400'}
-                        borderRadius="8px"
-                        px="2rem"
-                        h="3.25rem"
-                        fontFamily="Nunito"
-                        onClick={() => router.push('/pricing')}
-                        _hover={{ bgColor: 'brand.400' }}
-                    >
-                        {buttonTitle}
-                    </Button>
+                    {isHome ? (
+                        <HStack W="90%">
+                            <Input
+                                placeholder="Your Work Enail"
+                                border="1px solid #c4c4c4"
+                                bgColor="white"
+                                h="3.37rem"
+                                w=""
+                                borderRadius="0.5rem"
+                                padding=".5 1.25rem"
+                                fontFamily="Nunito"
+                                onChange={(e) => setUserEmail(e.target.value)}
+                                W="60%"
+                            />
+                            <Button
+                                fontSize="1.125rem"
+                                color="white"
+                                bgColor={btnColor || 'brand.400'}
+                                borderRadius="8px"
+                                px="2rem"
+                                h="3.37rem"
+                                fontFamily="Nunito"
+                                onClick={() =>
+                                    router.push(`/pricing?email=${userEmail}`)
+                                }
+                                _hover={{ bgColor: 'brand.400' }}
+                                w="40%"
+                            >
+                                Sign Up For Free
+                            </Button>
+                        </HStack>
+                    ) : (
+                        <Button
+                            fontSize="1.125rem"
+                            color="white"
+                            bgColor={btnColor || 'brand.400'}
+                            borderRadius="8px"
+                            px="2rem"
+                            h="3.25rem"
+                            fontFamily="Nunito"
+                            onClick={() => router.push('/pricing')}
+                            _hover={{ bgColor: 'brand.400' }}
+                        >
+                            {buttonTitle}
+                        </Button>
+                    )}
                     {sub && (
                         <Text
                             fontSize="0.81rem"

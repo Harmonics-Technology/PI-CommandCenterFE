@@ -37,10 +37,11 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
         setBilling(billing == 'month' ? 'year' : 'month');
         setSubList([]);
     };
+    const { email } = router.query;
 
     const showSignUp = () => {
         Cookies.set('selectedPackage', JSON.stringify(subList[0]));
-        router.push(`/sign-up?package=${subList[0].id}`);
+        router.push(`/sign-up?package=${subList[0].id}?email=${email}`);
     };
 
     return (

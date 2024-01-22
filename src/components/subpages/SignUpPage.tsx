@@ -52,6 +52,8 @@ export const SignUpPage = () => {
     const [base, setBase] = useState<any>();
     const router = useRouter();
 
+    const { email } = router.query;
+
     useEffect(() => {
         const selectedPackage = Cookies.get(
             'selectedPackage',
@@ -79,7 +81,7 @@ export const SignUpPage = () => {
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
         mode: 'all',
-        defaultValues: { enableFreeTrial: false },
+        defaultValues: { enableFreeTrial: false, email },
     });
 
     const changePackagetype = () => {
