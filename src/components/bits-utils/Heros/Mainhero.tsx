@@ -99,7 +99,7 @@ export const Mainhero = ({
                         </Text>
                     )}
                     {isHome ? (
-                        <HStack w="90%">
+                        <HStack w="80%">
                             <Input
                                 placeholder="Your Work Enail"
                                 border="1px solid #c4c4c4"
