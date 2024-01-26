@@ -40,6 +40,24 @@ export const Mainhero = ({
 }) => {
     const router = useRouter();
     const [userEmail, setUserEmail] = useState('');
+    const [error, setError] = useState({ state: false, msg: '' });
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    function validateEmailAndRedirect() {
+        setError({ state: false, msg: '' });
+        if (emailPattern.test(userEmail)) {
+            router.push(`/pricing?email=${userEmail}`);
+        } else {
+            setError({ state: true, msg: 'Please use a valid email!' });
+        }
+    }
+    function validateEmailOnchange(value: any) {
+        setUserEmail(value);
+        if (emailPattern.test(value) || value == '') {
+            setError({ state: false, msg: '' });
+        } else {
+            setError({ state: true, msg: 'Please use a valid email!' });
+        }
+    }
     // const { ref } = useScramble({
     //     text: title,
     //     speed: 0.6,
@@ -99,35 +117,50 @@ export const Mainhero = ({
                         </Text>
                     )}
                     {isHome ? (
-                        <HStack w="80%">
-                            <Input
-                                placeholder="Your Work Enail"
-                                border="1px solid #c4c4c4"
-                                bgColor="white"
-                                h="3.37rem"
-                                borderRadius="0.5rem"
-                                padding=".5 1.25rem"
-                                fontFamily="Nunito"
-                                onChange={(e) => setUserEmail(e.target.value)}
-                                w="55%"
-                            />
-                            <Button
-                                fontSize="1.125rem"
-                                color="white"
-                                bgColor={btnColor || 'brand.400'}
-                                borderRadius="8px"
-                                px="2rem"
-                                h="3.37rem"
-                                fontFamily="Nunito"
-                                onClick={() =>
-                                    router.push(`/pricing?email=${userEmail}`)
-                                }
-                                _hover={{ bgColor: 'brand.400' }}
-                                w="45%"
-                            >
-                                Sign Up For Free
-                            </Button>
-                        </HStack>
+                        <form style={{ width: '80%' }}>
+                            <HStack w="full">
+                                <Input
+                                    placeholder="Your Work Email"
+                                    border="1px solid #c4c4c4"
+                                    bgColor="white"
+                                    h="3.37rem"
+                                    borderRadius="0.5rem"
+                                    padding=".5 1.25rem"
+                                    fontFamily="Nunito"
+                                    onChange={(e) =>
+                                        validateEmailOnchange(e.target.value)
+                                    }
+                                    w="55%"
+                                    type="email"
+                                />
+                                <Button
+                                    fontSize="1.125rem"
+                                    color="white"
+                                    bgColor={btnColor || 'brand.400'}
+                                    borderRadius="8px"
+                                    px="2rem"
+                                    h="3.37rem"
+                                    fontFamily="Nunito"
+                                    onClick={() => validateEmailAndRedirect()}
+                                    _hover={{ bgColor: 'brand.400' }}
+                                    w="45%"
+                                >
+                                    Sign Up For Free
+                                </Button>
+                            </HStack>
+                            {error.state && (
+                                <Text
+                                    bgColor="red.100"
+                                    color="red.600"
+                                    fontSize=".9rem"
+                                    p=".2rem .5rem"
+                                    w="55%"
+                                    mt=".2rem"
+                                >
+                                    {error?.msg}
+                                </Text>
+                            )}
+                        </form>
                     ) : (
                         <Button
                             fontSize="1.125rem"

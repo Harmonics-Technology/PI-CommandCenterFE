@@ -41,7 +41,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
 
     const showSignUp = () => {
         Cookies.set('selectedPackage', JSON.stringify(subList[0]));
-        router.push(`/sign-up?package=${subList[0].id}?email=${email}`);
+        router.push(`/sign-up?package=${subList[0].id}&email=${email}`);
     };
 
     return (

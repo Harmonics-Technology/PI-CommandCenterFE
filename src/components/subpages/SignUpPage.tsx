@@ -28,11 +28,11 @@ import { PrimaryRadio } from '@components/bits-utils/PrimaryRadio';
 
 const newClientSchema = yup.object().shape({
     companyName: yup.string().required(),
-    companyEmail: yup.string().required(),
+    companyEmail: yup.string().email().required(),
     companyAddress: yup.string().required(),
     companyPhoneNumber: yup.string().required(),
     name: yup.string().required(),
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     phoneNumber: yup.string().required(),
     startDate: yup.string().required(),
     duration: yup
@@ -81,7 +81,10 @@ export const SignUpPage = () => {
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
         mode: 'all',
-        defaultValues: { enableFreeTrial: false, email: email as string },
+        defaultValues: {
+            enableFreeTrial: false,
+            companyEmail: email as string,
+        },
     });
 
     const changePackagetype = () => {
