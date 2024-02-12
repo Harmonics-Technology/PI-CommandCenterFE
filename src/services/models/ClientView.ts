@@ -22,4 +22,5 @@ export type ClientView = {
     subscriptionStatus?: string | null;
     dateCreated?: string;
     isActive?: boolean;
+    country?: string | null;
 };

@@ -43,7 +43,7 @@ export const PackageCard = ({
                 <Box h="2rem" mb="1rem">
                     {freeTrial && (
                         <Flex
-                            w="50%"
+                            w="60%"
                             justify="center"
                             align="center"
                             textTransform="uppercase"

@@ -9,7 +9,9 @@ import type { ClientSubscriptionModel } from '../models/ClientSubscriptionModel'
 import type { ClientSubscriptionViewPagedCollectionStandardResponse } from '../models/ClientSubscriptionViewPagedCollectionStandardResponse';
 import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSubscriptionViewStandardResponse';
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
+import type { LicenseUpdateModel } from '../models/LicenseUpdateModel';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
+import type { PurchaseNewLicensePlanModel } from '../models/PurchaseNewLicensePlanModel';
 import type { RenewSubscriptionModel } from '../models/RenewSubscriptionModel';
 import type { SubscriptionModel } from '../models/SubscriptionModel';
 import type { SubscriptionViewListStandardResponse } from '../models/SubscriptionViewListStandardResponse';
@@ -274,33 +276,6 @@ requestBody?: CancelSubscriptionModel,
             },
             body: requestBody,
             mediaType: 'application/json-patch+json',
-            errors: {
-                400: `Bad Request`,
-                500: `Server Error`,
-            },
-        });
-    }
-
-    /**
-     * @returns AddCardResponseViewStandardResponse Success
-     * @throws ApiError
-     */
-    public static addNewCard({
-clientId,
-xApiKey,
-}: {
-clientId?: string,
-xApiKey?: any,
-}): CancelablePromise<AddCardResponseViewStandardResponse> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/Subscription/add-new-card',
-            headers: {
-                'X-API-KEY': xApiKey,
-            },
-            query: {
-                'clientId': clientId,
-            },
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,
@@ -629,6 +604,58 @@ requestBody?: RenewSubscriptionModel,
     }
 
     /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static purchaseNewLicensePlan({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: PurchaseNewLicensePlanModel,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/new-plan',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static addOrRemoveLicense({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: LicenseUpdateModel,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/update-license-count',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
      * @returns CardViewListStandardResponse Success
      * @throws ApiError
      */
@@ -681,6 +708,32 @@ xApiKey?: any,
                 'subscriptionPayment': subscriptionPayment,
                 'subscriptionId': subscriptionId,
             },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static createNewClientAndSubscriptionBackRoom({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: NewClientSubscriptionModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/create-new-client-subscription-backroom',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,

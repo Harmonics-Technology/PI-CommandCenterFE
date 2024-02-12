@@ -10,14 +10,16 @@ export type NewClientSubscriptionModel = {
     companyPhoneNumber?: string | null;
     phoneNumber?: string | null;
     companyAddress?: string | null;
+    country?: string | null;
     address?: string | null;
     freeTrialStartDate?: string | null;
-    startDate?: string;
+    startDate?: string | null;
     duration?: number;
     annualBilling?: boolean;
     subscriptionId?: string;
-    endDate?: string;
+    endDate?: string | null;
     totalAmount?: number;
     fromWebsite?: boolean;
     enableFreeTrial?: boolean;
+    numberOfLicense?: number;
 };

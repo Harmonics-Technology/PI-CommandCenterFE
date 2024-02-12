@@ -27,11 +27,13 @@ export type { FeatureView } from './models/FeatureView';
 export type { FeatureViewListStandardResponse } from './models/FeatureViewListStandardResponse';
 export { HttpStatusCode } from './models/HttpStatusCode';
 export type { InitiateResetModel } from './models/InitiateResetModel';
+export type { LicenseUpdateModel } from './models/LicenseUpdateModel';
 export type { Link } from './models/Link';
 export type { LoginModel } from './models/LoginModel';
 export type { NewClientSubscriptionModel } from './models/NewClientSubscriptionModel';
 export type { PasswordReset } from './models/PasswordReset';
 export type { ProblemDetails } from './models/ProblemDetails';
+export type { PurchaseNewLicensePlanModel } from './models/PurchaseNewLicensePlanModel';
 export type { RegisterModel } from './models/RegisterModel';
 export type { RenewSubscriptionModel } from './models/RenewSubscriptionModel';
 export type { SubscriptionModel } from './models/SubscriptionModel';
@@ -50,5 +52,6 @@ export type { UserViewPagedCollectionStandardResponse } from './models/UserViewP
 export type { UserViewStandardResponse } from './models/UserViewStandardResponse';
 
 export { ClientService } from './services/ClientService';
+export { StripeWebhookService } from './services/StripeWebhookService';
 export { SubscriptionService } from './services/SubscriptionService';
 export { UserService } from './services/UserService';

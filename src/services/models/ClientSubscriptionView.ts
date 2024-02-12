@@ -10,6 +10,7 @@ export type ClientSubscriptionView = {
     clientId?: string;
     client?: ClientView;
     freeTrialStartDate?: string | null;
+    onFreeTrial?: boolean | null;
     startDate?: string;
     duration?: number;
     subscriptionId?: string;

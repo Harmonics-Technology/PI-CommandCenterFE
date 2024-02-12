@@ -15,6 +15,7 @@ import { useRouter } from 'next/router';
 import { SubscriptionView } from 'src/services';
 import Cookies from 'js-cookie';
 import { BottomHero } from '@components/bits-utils/Heros/BottomHero';
+import { PageHero } from '@components/bits-utils/Heros/PageHero';
 
 export const PricingPage = ({ base }: ISubscriptionProps) => {
     const [billing, setBilling] = useState('month');
@@ -41,36 +42,17 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
 
     const showSignUp = () => {
         Cookies.set('selectedPackage', JSON.stringify(subList[0]));
-        router.push(`/sign-up?package=${subList[0].id}&email=${email}`);
+        router.push(`/sign-up?packagpe=${subList[0].id}&email=${email || ''}`);
     };
 
     return (
         <Box bgColor="white" pb="5rem">
-            <Flex
-                w="full"
-                bgImage="url('/assets/pricing.png')"
-                bgRepeat="no-repeat"
-                bgSize="cover"
-                bgPosition="center"
-                align="center"
-                justify="center"
-                h="40vh"
-                bgColor="brand.100"
-            >
-                <VStack align="center" spacing=".5rem" w="45%">
-                    <Text
-                        fontSize="3.125rem"
-                        color="white"
-                        fontWeight="800"
-                        fontFamily="Nunito"
-                        mb="0"
-                        lineHeight="normal"
-                        textAlign="center"
-                    >
-                        Pricing Plans
-                    </Text>
-                </VStack>
-            </Flex>
+            <PageHero
+                img="/assets/pricing.png"
+                text="Pricing Plans"
+                bg="brand.100"
+            />
+
             <Box w="70%" mx="auto">
                 <HStack justify="center" my="5rem">
                     <HStack>
