@@ -81,7 +81,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
     }, []);
 
     const startDate = dayjs().format('DD/MM/YYYY');
-    const endDate = dayjs(startDate)
+    const endDate = dayjs()
         .add(1, selected as any)
         .format('DD/MM/YYYY');
     const value = selected == 'month' ? base?.price : base?.prices;
