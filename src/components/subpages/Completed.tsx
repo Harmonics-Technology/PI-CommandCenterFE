@@ -1,12 +1,35 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const Completed = ({ data, redirectUrl }) => {
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
-            redirectUrl || ''
+            redirectUrl || `${process.env.NEXT_PUBLIC_TTS as string}/login`
         }`;
     };
+    const [countdown, setCountdown] = useState(5);
+
+    useEffect(() => {
+        const redirectTimer = setTimeout(() => {
+            redirect();
+        }, countdown * 1000);
+
+        const timer = setInterval(() => {
+            setCountdown((prevCountdown) => {
+                if (prevCountdown === 0) {
+                    clearInterval(timer);
+                    return 0;
+                } else {
+                    return prevCountdown - 1;
+                }
+            });
+        }, 1000);
+
+        return () => {
+            clearTimeout(redirectTimer);
+            clearInterval(timer);
+        };
+    }, [countdown]);
 
     return (
         <Box>
@@ -44,17 +67,28 @@ export const Completed = ({ data, redirectUrl }) => {
                                 subscription has been activated. Please check
                                 your email for next steps
                             </Text>
-                            {/* <Button
-                                fontSize="1.125rem"
-                                color="white"
-                                bgColor="brand.400"
-                                borderRadius="8px"
-                                px="2rem"
-                                h="3.25rem"
-                                onClick={redirect}
-                            >
-                                Click here to redirect
-                            </Button> */}
+                            {redirectUrl && (
+                                <>
+                                    <Button
+                                        fontSize="1.125rem"
+                                        color="white"
+                                        bgColor="brand.400"
+                                        borderRadius="8px"
+                                        px="2rem"
+                                        h="3.25rem"
+                                        onClick={redirect}
+                                    >
+                                        Click here to redirect
+                                    </Button>
+                                    <Text
+                                        fontSize=".9rem"
+                                        color="#696969"
+                                        mt=".3rem"
+                                    >
+                                        Redirecting in {countdown} seconds
+                                    </Text>
+                                </>
+                            )}
                         </>
                     ) : (
                         <>

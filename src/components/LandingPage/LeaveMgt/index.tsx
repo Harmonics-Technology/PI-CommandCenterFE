@@ -14,7 +14,6 @@ export const LeaveMgt = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="TIMBA redefines how you handle time off requests, providing a comprehensive platform for efficient leave management. From vacation to sick leave, TIMBA streamlines the process, ensuring seamless request submission, clear approvals, and enhanced team coordination."

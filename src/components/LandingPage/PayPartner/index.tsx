@@ -14,7 +14,6 @@ export const PayPartner = () => {
                 color="brand.100"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="TIMBA redefines the way you handle payments for your team, eliminating complexities and enabling swift, hassle-free transactions across borders. With seamless integration of leading payment solutions, TIMBA ensures that compensating your team is both convenient and efficient."

@@ -14,7 +14,6 @@ export const Timesheet = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="Gone are the days of painstakingly recording every minute spent on tasks and projects. TIMBA introduces a game-changing automated timesheet solution, ensuring accuracy, efficiency, and peace of mind for you and your team."

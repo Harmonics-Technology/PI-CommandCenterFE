@@ -14,7 +14,6 @@ export const ShiftManagement = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="TIMBA reimagines how you manage shifts, providing you with unparalleled flexibility to create, assign, and track shifts effortlessly. With customizable options and real-time availability monitoring, TIMBA ensures optimal coverage while prioritizing your team members' well-being."

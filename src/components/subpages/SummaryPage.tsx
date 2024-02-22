@@ -24,7 +24,7 @@ export const SummaryPage = ({
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
-    const { client_secret } = router.query;
+    const { client_secret, from } = router.query;
     // console.log({ client_secret });
     return (
         <Box my="4rem" w="80%" mx="auto">
@@ -122,7 +122,7 @@ export const SummaryPage = ({
                     isOpen={isOpen}
                     onClose={onClose}
                     clientSecret={client_secret as string}
-                    redirectUrl="login"
+                    redirectUrl={from as string}
                     clientId={client as string}
                 />
             )}

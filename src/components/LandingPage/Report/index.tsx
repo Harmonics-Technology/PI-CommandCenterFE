@@ -14,7 +14,6 @@ export const Report = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="TIMBA empowers you to make informed decisions and optimize your productivity journey through a robust array of reports. From billable hours to productivity metrics, TIMBA's reporting feature provides you with the tools to track progress, make strategic adjustments, and achieve your goals."

@@ -14,7 +14,6 @@ export const ContractMgt = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="TIMBA empowers you to streamline and optimize your contract management processes like never before. From secure storage to intelligent alerts, TIMBA ensures your contracts are meticulously organized and effortlessly managed."

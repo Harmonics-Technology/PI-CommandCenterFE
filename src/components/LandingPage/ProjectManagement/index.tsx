@@ -14,7 +14,6 @@ export const ProjectManagement = () => {
                 color="white"
                 gap="2.25rem"
                 fs="2.75rem"
-                isVertical
             />
             <FeatureBody
                 topText="Effortlessly streamline your project management process with TIMBA's robust suite of tools designed to elevate your project's efficiency and coordination. Say goodbye to chaos and embrace structured excellence through our state-of-the-art project planning features."

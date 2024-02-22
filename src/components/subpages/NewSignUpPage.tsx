@@ -36,7 +36,7 @@ const newClientSchema = yup.object().shape({
 });
 export const NewSignUpPage = ({ countries }: { countries: any }) => {
     const [selected, setSelected] = useState('month');
-    const [userCount, setUserCount] = useState(5);
+    const [userCount, setUserCount] = useState(1);
     const [confirmation, setConfirmation] = useState(false);
     const [lastName, setLastName] = useState(false);
     const [base, setBase] = useState<any>();
@@ -44,8 +44,8 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
     const { email } = router.query;
     const triggerCounter = (value: string) => {
         if (value == 'minus') {
-            if (userCount <= 5) {
-                setUserCount(5);
+            if (userCount <= 1) {
+                setUserCount(1);
             } else {
                 setUserCount((prev) => prev - 1);
             }
@@ -254,7 +254,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                             color="#696969"
                                             mb=".5rem"
                                         >
-                                            The minimum amount is 5 user
+                                            The minimum amount is 1 user
                                         </Text>
                                         <HStack gap="0">
                                             <CountChange

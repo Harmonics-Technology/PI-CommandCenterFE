@@ -5,7 +5,7 @@ import React from 'react';
 
 export const AddNewCard = () => {
     const router = useRouter();
-    const { client_secret } = router.query;
+    const { client_secret, from, clientId } = router.query;
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Flex
@@ -56,8 +56,9 @@ export const AddNewCard = () => {
                     onClose={onClose}
                     clientSecret={client_secret as string}
                     payBtnText="Add card"
-                    redirectUrl="SuperAdmin/account-management/billing-information"
+                    redirectUrl={from as string}
                     isSubscription={false}
+                    clientId={clientId as string}
                 />
             )}
         </Flex>
