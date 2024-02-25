@@ -2,6 +2,8 @@ import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 
 export const Completed = ({ data, redirectUrl }) => {
+    data.status = true;
+    redirectUrl = 'undefined';
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
             redirectUrl || `${process.env.NEXT_PUBLIC_TTS as string}/login`
@@ -9,9 +11,11 @@ export const Completed = ({ data, redirectUrl }) => {
     };
     const [countdown, setCountdown] = useState(5);
 
+    const hasRedirect = redirectUrl !== 'undefined' && redirectUrl;
+
     useEffect(() => {
         const redirectTimer = setTimeout(() => {
-            redirect();
+            hasRedirect ? redirect() : void 0;
         }, countdown * 1000);
 
         const timer = setInterval(() => {
@@ -67,7 +71,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 subscription has been activated. Please check
                                 your email for next steps
                             </Text>
-                            {redirectUrl && (
+                            {hasRedirect && (
                                 <>
                                     <Button
                                         fontSize="1.125rem"
