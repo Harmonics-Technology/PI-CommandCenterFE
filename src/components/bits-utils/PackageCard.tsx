@@ -70,7 +70,7 @@ export const PackageCard = ({
                     color="#465568"
                     fontSize="16px"
                     fontWeight="300"
-                    noOfLines={2}
+                    // noOfLines={2}
                 >
                     {desc}
                 </Text>
