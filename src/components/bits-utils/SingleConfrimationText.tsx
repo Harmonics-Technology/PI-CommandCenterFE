@@ -23,7 +23,7 @@ export const SingleConfirmationText = ({
             borderBottom=" 0.5px dashed #A6A6A6"
             h="46px"
         >
-            <Text fontWeight={500} fontSize="14px" color="#1e1e1e">
+            <Text fontWeight={700} fontSize="14px" color="#1e1e1e">
                 {title}
             </Text>
             <Text

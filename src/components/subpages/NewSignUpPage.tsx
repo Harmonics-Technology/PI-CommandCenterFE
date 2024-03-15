@@ -139,13 +139,21 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                 bg="brand.100"
             />
             {confirmation ? (
-                <Box bgColor="white" w="full">
-                    <Box w="70%" mx="auto" py="4rem">
+                <Box w="full" minH="100vh">
+                    <Box
+                        w="40%"
+                        mx="auto"
+                        my="2.5rem"
+                        py="1.1rem"
+                        border="2px solid #1B487D"
+                        borderRadius="10px"
+                        bgColor="white"
+                    >
                         <Box
                             // borderRadius="5px"
                             // border="1px solid #C2CFE0"
-                            p="1rem 2rem 105px"
-                            mb="31px"
+                            p="1rem 2rem 49px"
+                            // mb="31px"
                             bgColor="white"
                         >
                             <Text
@@ -200,7 +208,12 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                 />
                             </Box>
                         </Box>
-                        <HStack justifyContent="space-between" align="center">
+                        <HStack
+                            justifyContent="space-between"
+                            align="center"
+                            px="2rem"
+                            m="1rem"
+                        >
                             <CustomBtn
                                 color="white"
                                 bg="#da5867"
@@ -223,7 +236,12 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                 <Flex>
                     <Box bgColor="white" pb="5rem" w="60%" px="95px">
                         <Box mt="2rem">
-                            <Text mb="1rem" fontWeight={700} fontSize="24px">
+                            <Text
+                                mb="2.87rem"
+                                fontWeight={700}
+                                fontSize="24px"
+                                color="brand.100"
+                            >
                                 Your License Plan
                             </Text>
                             <Box
@@ -256,7 +274,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                         >
                                             The minimum amount is 1 user
                                         </Text>
-                                        <HStack gap="0">
+                                        <HStack gap="0" spacing={0}>
                                             <CountChange
                                                 value="-"
                                                 onClick={() =>
@@ -352,7 +370,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                 />
 
                                 <PrimarySelect<NewClientSubscriptionModel>
-                                    label="Country"
+                                    label="Country/Region"
                                     name="country"
                                     error={errors.country}
                                     placeholder="Select Country"
@@ -363,7 +381,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                     ))}
                                 />
                                 <PrimaryInput<NewClientSubscriptionModel>
-                                    label="Client Address"
+                                    label="Address"
                                     name="address"
                                     error={errors.address}
                                     placeholder="Enter Address"
@@ -417,7 +435,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                             <HStack
                                 align="flex-start"
                                 justify="space-between"
-                                py="50px"
+                                py="30px"
                                 border="1px dashed black"
                                 borderRight="0"
                                 borderLeft="0"

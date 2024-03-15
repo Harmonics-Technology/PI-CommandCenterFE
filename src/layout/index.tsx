@@ -17,6 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
         router.pathname.startsWith('/command-center/forgot-password');
     const adminNav = router.pathname.startsWith('/command-center') && !noNav;
     const admin = router.pathname.startsWith('/command-center');
+    const signup = router.pathname.startsWith('/sign-up');
 
     return (
         <>
@@ -29,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                     {children}
                 </Box>
-                {!admin ? <Footer /> : null}
+                {!admin && !signup ? <Footer /> : null}
             </Box>
         </>
     );

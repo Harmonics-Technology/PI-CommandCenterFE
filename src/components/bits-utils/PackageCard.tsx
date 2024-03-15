@@ -37,7 +37,8 @@ export const PackageCard = ({
             bgColor="white"
             borderRadius="12px"
             padding="2.5rem"
-            border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
+            border="3px solid #375982"
+            // border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
         >
             <Box>
                 <Box h="2rem" mb="1rem">

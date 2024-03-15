@@ -25,24 +25,25 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
 
     const btn = useRef<any>(null);
 
-    const updateSubscription = (base) => {
-        const exists = subList.find((x) => x.id == base?.id);
-        if (exists) {
-            setSubList(subList.filter((x) => x.id !== base?.id));
-            return;
-        }
-        setSubList([base]);
-        btn.current?.scrollIntoView({ behavior: 'smooth' });
-    };
     const changePackagetype = () => {
         setBilling(billing == 'month' ? 'year' : 'month');
         setSubList([]);
     };
     const { email } = router.query;
 
-    const showSignUp = () => {
-        Cookies.set('selectedPackage', JSON.stringify(subList[0]));
-        router.push(`/sign-up?packagpe=${subList[0].id}&email=${email || ''}`);
+    const showSignUp = (base) => {
+        Cookies.set('selectedPackage', JSON.stringify(base));
+        router.push(`/sign-up?packagpe=${base.id}&email=${email || ''}`);
+    };
+    const updateSubscription = (base) => {
+        // const exists = subList.find((x) => x.id == base?.id);
+        // if (exists) {
+        //     setSubList(subList.filter((x) => x.id !== base?.id));
+        //     return;
+        // }
+        // setSubList([base]);
+        // btn.current?.scrollIntoView({ behavior: 'smooth' });
+        showSignUp(base);
     };
 
     return (
@@ -54,7 +55,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
             />
 
             <Box w="70%" mx="auto">
-                <HStack justify="center" my="5rem">
+                <HStack justify="center" my="2rem">
                     <HStack>
                         <Text
                             mb="0"
@@ -111,7 +112,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                     ))}
                 </Grid>
                 <Box ref={btn} pt="7rem" />
-                {subList.length > 0 && (
+                {/* {subList.length > 0 && (
                     <Flex w="full" justify="center">
                         <Button
                             bgColor="brand.400"
@@ -125,7 +126,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                             Save and Continue
                         </Button>
                     </Flex>
-                )}
+                )} */}
             </Box>
             <BottomHero
                 title="Simple Time Tracking System
