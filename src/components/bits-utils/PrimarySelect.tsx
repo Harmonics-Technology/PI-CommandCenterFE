@@ -42,7 +42,7 @@ export const PrimarySelect = <TFormValues extends Record<string, any>>({
                 htmlFor={label}
                 textTransform="capitalize"
                 fontSize={fontSize}
-                mb="0"
+                mb=".5rem"
             >
                 {label}
             </FormLabel>
