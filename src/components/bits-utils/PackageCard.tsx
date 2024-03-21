@@ -76,7 +76,7 @@ export const PackageCard = ({
                 </Text>
             </Box>
             <Box my="2rem">
-                <Text color="black" fontSize="37px" fontWeight="800" mb="0">
+                <Text color="black" fontSize="37px" fontWeight="800" mb="0rem">
                     {CAD(billed == 'year' ? prices : price)}
                 </Text>
                 <Text color="#465568" fontSize="16px" fontWeight="300" mb="0">
