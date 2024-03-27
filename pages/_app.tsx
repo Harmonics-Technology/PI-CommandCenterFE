@@ -12,6 +12,7 @@ import NextNProgress from 'nextjs-progressbar';
 import { UserProvider } from '@components/context/UserContext';
 import { Toaster } from 'react-hot-toast';
 import { Analytics } from '@vercel/analytics/react';
+import GTM from './gtm';
 
 function MyApp({
     Component,
@@ -34,6 +35,7 @@ function MyApp({
     return (
         <ChakraProvider theme={theme}>
             <Analytics />
+            <GTM />
             <Head>
                 <meta
                     name="viewport"
