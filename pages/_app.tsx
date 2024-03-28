@@ -35,11 +35,15 @@ function MyApp({
     return (
         <ChakraProvider theme={theme}>
             <Analytics />
-            <GTM />
+
             <Head>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
+                />
+                <meta
+                    name="google-site-verification"
+                    content="16u9f_0OHQVm-fs3hgOUpiJpGIx1u46qzNjm1i0OmSU"
                 />
                 <title>Timba | Time Tracking and Productivity App</title>
                 <link
@@ -47,6 +51,7 @@ function MyApp({
                     href="/assets/newfav.jpg"
                     type="image/x-icon"
                 />
+                <GTM />
             </Head>
             <StyledThemeProvider>
                 <UserProvider>
