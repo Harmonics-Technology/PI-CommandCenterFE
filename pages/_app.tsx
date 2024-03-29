@@ -51,7 +51,21 @@ function MyApp({
                     href="/assets/newfav.jpg"
                     type="image/x-icon"
                 />
-                <GTM />
+                <script
+                    async
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-BLBPB619BH`}
+                />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BLBPB619BH');
+            `,
+                    }}
+                />
+                {/* <GTM /> */}
             </Head>
             <StyledThemeProvider>
                 <UserProvider>
