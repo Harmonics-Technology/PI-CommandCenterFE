@@ -1,7 +1,7 @@
 import { Box, Button, Flex, HStack } from '@chakra-ui/react';
 import { AdminLogo } from '@components/bits-utils/AdminLogo';
 import React from 'react';
-import Items from '@components/menu-item';
+import Items, { ExternalMenuItem } from '@components/menu-item';
 import { useRouter } from 'next/router';
 import { MenuWithDropdown } from '@components/menu-item/MenuWithDropdown';
 
@@ -79,7 +79,10 @@ export const MainNav = () => {
                         ]}
                     />
                     <Items menuTitle="pricing" />
-                    <Items menuTitle="blogs" />
+                    <ExternalMenuItem
+                        url="https://blog.timba.ca"
+                        title="Blog"
+                    />
                     <Items menuTitle="book-a-demo" />
                     {/* <Items menuTitle="contact-us" /> */}
                     <HStack spacing="0" gap="1rem">
