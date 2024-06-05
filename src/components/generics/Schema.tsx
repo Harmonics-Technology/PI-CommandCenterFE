@@ -80,6 +80,7 @@ export interface ISubscriptionProps {
     clients?: ClientViewPagedCollection;
     features?: FeatureView[];
     data?: SubscriptionView | any;
+    country?: any;
 }
 export interface IManageSubProps {
     base: SubscriptionView[];

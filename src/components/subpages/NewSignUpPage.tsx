@@ -106,9 +106,9 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
         data.fromWebsite = true;
         data.numberOfLicense = userCount;
         data.duration = selected == 'month' ? 1 : 12;
-        (data.companyEmail = data.email),
-            (data.companyAddress = data.address),
-            (data.companyPhoneNumber = data.phoneNumber);
+        data.companyEmail = data.email;
+        data.companyAddress = data.address;
+        data.companyPhoneNumber = data.phoneNumber;
         try {
             const result =
                 await SubscriptionService.createNewClientAndSubscription({
