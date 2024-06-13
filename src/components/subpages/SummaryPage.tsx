@@ -71,7 +71,7 @@ export const SummaryPage = ({
                             <TableData name={data.subscription?.name} solid />
                             <TableData
                                 name={`${data.duration} ${
-                                    data.annualBilling ? 'year' : 'months'
+                                    data.annualBilling ? 'year' : 'month'
                                 }`}
                             />
                             <TableData

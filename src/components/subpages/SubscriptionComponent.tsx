@@ -209,6 +209,7 @@ export const SubscriptionComponent = ({
             },
             total: totalAmount,
             bill: billing,
+            quantity: userCount,
         });
         onOpen();
     };
