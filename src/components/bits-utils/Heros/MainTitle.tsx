@@ -20,12 +20,12 @@ export const MainTitle = ({
     return (
         <VStack align={align} w={w} mx={mx}>
             <Text
-                fontSize="2.5rem"
+                fontSize={['24px', '2.5rem']}
                 color={color}
                 fontWeight="700"
                 fontFamily="Nunito Sans"
                 mb="0"
-                lineHeight="3rem"
+                lineHeight={['32.74px', '3rem']}
                 textAlign={align}
                 // w="65%"
                 mx={mx}
@@ -33,12 +33,12 @@ export const MainTitle = ({
                 {parse(text)}
             </Text>
             <Text
-                fontSize="1rem"
+                fontSize={['14px', '1rem']}
                 color={color || '#636b83'}
                 fontWeight="400"
                 fontFamily="Nunito"
                 mb="0"
-                lineHeight="1.75rem"
+                lineHeight={['19.1px', '1.75rem']}
                 textAlign={align}
                 // w="75%"
                 mx={mx}

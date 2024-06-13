@@ -15,7 +15,7 @@ export const MiniText = ({
     return (
         <Text
             color="#636b83"
-            lineHeight="1.875rem"
+            lineHeight={['19.1px', '1.875rem']}
             textAlign={align}
             w={w}
             mx={mx}

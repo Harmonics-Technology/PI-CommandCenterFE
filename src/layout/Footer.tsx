@@ -9,15 +9,19 @@ import { FiTwitter } from 'react-icons/fi';
 function Footer() {
     return (
         <Box bgColor="#f5f5f5" w="full">
-            <Box w="85%" mx="auto" py="6rem">
-                <HStack align="flex-start">
-                    <VStack align="flex-start" w="50%">
+            <Box w={['85%', '85%']} mx="auto" py={['3rem', '6rem']}>
+                <HStack
+                    align="flex-start"
+                    flexDir={['column', 'row']}
+                    gap={['32px', '1rem']}
+                >
+                    <VStack align="flex-start" w={['95%', '50%']}>
                         <AdminLogo />
                         <Text
                             fontSize=".875rem"
-                            lineHeight="1.75rem"
+                            lineHeight={['19px', '1.75rem']}
                             color="#636b83"
-                            w="90%"
+                            w={['100%', '90%']}
                         >
                             The TIMBA is a powerful and user-friendly software
                             designed to streamline time management and project
@@ -32,6 +36,7 @@ function Footer() {
                     <Grid
                         templateColumns={['1fr', 'repeat(3, 1fr)']}
                         gap="2rem"
+                        w={['100%']}
                     >
                         <VStack spacing="0" gap="1rem" align="flex-start">
                             <FooterHeadings text="Sections" />

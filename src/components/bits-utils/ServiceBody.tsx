@@ -19,7 +19,7 @@ import { NewHomeStack } from './NewHomeStack';
 export const ServiceBody = () => {
     return (
         <Box w="full" bgColor="white">
-            <Box py="5rem" mx="auto" w="80%">
+            <Box py={['1.5rem', '5rem']} mx="auto" w={['90%', '80%']}>
                 <MainTitle
                     text="Embark on a Journey of Efficiency with TIMBA's Outstanding Features"
                     w="90%"
@@ -29,7 +29,7 @@ export const ServiceBody = () => {
             with TIMBA's real-time insights, keeping everyone on track and
             enhancing overall productivity.`}
                     align="center"
-                    w="80%"
+                    w={['95%', '80%']}
                     mx="auto"
                 />
                 {/* <Grid
@@ -110,7 +110,7 @@ export const ServiceBody = () => {
                     btnClick="/features/client-onboarding"
                 />
             </Grid> */}
-                <VStack gap="5rem" m="6rem auto">
+                <VStack gap={['73px', '5rem']} m={['68px auto', '6rem auto']}>
                     <NewHomeStack
                         title="Elevate Your Project Management Experience"
                         sub={`Effortlessly streamline your project management process with TIMBA's robust suite of tools designed to elevate your project's efficiency and coordination. Say goodbye to chaos and embrace structured excellence through our state-of-the-art project planning features.`}

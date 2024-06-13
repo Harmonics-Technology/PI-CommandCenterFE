@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 export const Faq = () => {
     const router = useRouter();
     return (
-        <Box bgColor="white" w="full" pb="6rem">
-            <Box p="4rem 0 5.5rem" w="70%" mx="auto" id="faq">
+        <Box bgColor="white" w="full" pb={['0', '6rem']}>
+            <Box p="4rem 0 5.5rem" w={['90%', '70%']} mx="auto" id="faq">
                 <MainTitle text="FAQs" />
                 <Text
                     color="brand.400"
@@ -25,7 +25,7 @@ export const Faq = () => {
                     <Accordion
                         defaultIndex={[0]}
                         // allowMultiple
-                        gap="1.8rem"
+                        gap={['.4rem', '1.8rem']}
                         display="flex"
                         flexDirection="column"
                     >

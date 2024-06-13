@@ -21,7 +21,14 @@ const Layout = ({ children }: LayoutProps) => {
 
     return (
         <>
-            <Box as="div" w="100%" mx="auto" bgColor="#ebeff2" minH="100vh">
+            <Box
+                as="div"
+                w="100%"
+                mx="auto"
+                bgColor="#ebeff2"
+                minH="100vh"
+                overflowX="hidden"
+            >
                 {adminNav ? <TopNav /> : !admin ? <MainNav /> : null}
                 <Box
                     mt={!admin ? '0' : '1rem'}

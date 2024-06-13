@@ -8,13 +8,13 @@ export const WhoCanUseTimbaNew = () => {
     return (
         <Box>
             <Box bgColor="brand.100" pos="relative" overflow="hidden">
-                <Box p="4rem 0 6rem" mx="auto" w="85%">
+                <Box p={['3rem 0 3rem', '4rem 0 6rem']} mx="auto" w="85%">
                     <MainTitle
                         text="Who Can Use TIMBA ?"
                         color="white"
-                        w="60%"
+                        w={['100%', '60%']}
                     />
-                    <VStack gap="4.19rem" mt="3rem">
+                    <VStack gap={['25px', '4.19rem']} mt="3rem">
                         <FlexGridImage
                             items={[
                                 {
@@ -102,16 +102,16 @@ export const WhoCanUseTimbaNew = () => {
                     size="8rem"
                     bgColor="#A2C084"
                     pos="absolute"
-                    left="-5%"
-                    top="0%"
+                    left={['-20%', '-5%']}
+                    top={['-5%', '0%']}
                     zIndex="1"
                 />
                 <Circle
                     size="8rem"
                     bgColor="#FBC953"
                     pos="absolute"
-                    right="-5%"
-                    bottom="0%"
+                    right={['-20%', '-5%']}
+                    bottom={['-5%', '0%']}
                     zIndex="1"
                 />
             </Box>

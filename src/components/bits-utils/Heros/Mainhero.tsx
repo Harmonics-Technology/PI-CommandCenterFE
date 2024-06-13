@@ -76,20 +76,21 @@ export const Mainhero = ({
             bgSize="cover"
             bgRepeat="no-repeat"
             bgColor={bgColor}
+            pt={['2.5rem', '0']}
         >
             <HStack
-                w="85%"
+                w={['90%', '85%']}
                 mx="auto"
                 h="85vh"
                 align="center"
                 gap={gap}
                 py={isVertical ? '2.5rem' : '0'}
-                flexDir={isVertical ? 'column' : 'row'}
+                flexDir={['column', isVertical ? 'column' : 'row']}
             >
                 <VStack
                     align={isVertical ? 'center' : 'flex-start'}
                     spacing="1.5rem"
-                    w={isVertical ? '80%' : '60%'}
+                    w={['100%', isVertical ? '80%' : '60%']}
                 >
                     <Text
                         fontSize={fs}
@@ -105,20 +106,24 @@ export const Mainhero = ({
                     </Text>
                     {sub && (
                         <Text
-                            fontSize="1.25rem"
+                            fontSize={['15px', '1.25rem']}
                             color={color || '#696969'}
                             fontWeight="600"
                             fontFamily="Nunito"
                             mb="0"
-                            maxW="88%"
+                            maxW={['100%', '88%']}
                             lineHeight="normal"
                         >
                             {sub}
                         </Text>
                     )}
                     {isHome ? (
-                        <form style={{ width: '80%' }}>
-                            <HStack w="full">
+                        <form style={{ width: '100%' }}>
+                            <HStack
+                                w={['full', '80%']}
+                                flexDir={['column', 'row']}
+                                gap={['1rem', '0']}
+                            >
                                 <Input
                                     placeholder="Your Work Email"
                                     border="1px solid #c4c4c4"
@@ -130,7 +135,7 @@ export const Mainhero = ({
                                     onChange={(e) =>
                                         validateEmailOnchange(e.target.value)
                                     }
-                                    w="55%"
+                                    w={['100%', '55%']}
                                     type="email"
                                 />
                                 <Button
@@ -143,7 +148,7 @@ export const Mainhero = ({
                                     fontFamily="Nunito"
                                     onClick={() => validateEmailAndRedirect()}
                                     _hover={{ bgColor: 'brand.400' }}
-                                    w="45%"
+                                    w={['100%', '45%']}
                                 >
                                     Sign Up For Free
                                 </Button>
@@ -191,11 +196,11 @@ export const Mainhero = ({
                     )}
                 </VStack>
                 <Box
-                    w={isVertical ? '38rem' : '41rem'}
+                    w={['110%', isVertical ? '38rem' : '41rem']}
                     h={isVertical ? '23rem' : '27rem'}
                     borderRadius={bd}
                     overflow="hidden"
-                    pos={isHome ? 'absolute' : 'unset'}
+                    pos={['unset', isHome ? 'absolute' : 'unset']}
                     right={0}
                 >
                     <Image

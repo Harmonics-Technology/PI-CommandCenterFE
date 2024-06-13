@@ -9,10 +9,8 @@ import {
     ModalOverlay,
 } from '@chakra-ui/react';
 
-const stripePromise = loadStripe(
-    'pk_test_51IF5dHGrnlH0843CmoosQR3VCgXNVH6dMjYtEBIc8VynNRhWphvwP89HGlv0BsyThloFjfcADs6f6HizQ1Tn4cLc00MRRyeWVX',
-);
-// process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string,
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string;
+const stripePromise = loadStripe(stripeKey);
 
 export default function PaymentPage({
     clientSecret,

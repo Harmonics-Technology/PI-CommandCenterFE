@@ -1,11 +1,14 @@
-import { Box, Button, Flex, HStack } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Icon } from '@chakra-ui/react';
 import { AdminLogo } from '@components/bits-utils/AdminLogo';
-import React from 'react';
+import React, { useState } from 'react';
 import Items, { ExternalMenuItem } from '@components/menu-item';
 import { useRouter } from 'next/router';
 import { MenuWithDropdown } from '@components/menu-item/MenuWithDropdown';
+import { MdMenu } from 'react-icons/md';
+import { LiaTimesSolid } from 'react-icons/lia';
 
 export const MainNav = () => {
+    const [showMenu, setShowMenu] = useState(false);
     const router = useRouter();
     return (
         <Box
@@ -20,15 +23,34 @@ export const MainNav = () => {
                 justify="space-between"
                 align="center"
                 bgColor="white"
-                w="85%"
+                w={['90%', '85%']}
                 mx="auto"
                 py="1rem"
             >
                 <AdminLogo />
-                <HStack align="center" gap="2rem">
+                <Box display={['block', 'none']}>
+                    <Icon
+                        as={showMenu ? LiaTimesSolid : MdMenu}
+                        onClick={() => setShowMenu((prev) => !prev)}
+                        fontSize="2rem"
+                    />
+                </Box>
+                <HStack
+                    align={['flex-start', 'center']}
+                    gap="2rem"
+                    flexDir={['column', 'row']}
+                    bgColor="white"
+                    p={['1rem', '0']}
+                    pos={['absolute', 'unset']}
+                    top={['100%', '0']}
+                    right={[showMenu ? '0%' : '-100%', '0']}
+                    w={['60%', 'unset']}
+                    transition=".4s all ease-in-out"
+                    h={['100vh', 'auto']}
+                >
                     <MenuWithDropdown
                         menuTitle="features"
-                        temp="repeat(3,1fr)"
+                        temp={['1fr', 'repeat(3,1fr)']}
                         bd={false}
                         gap=".5rem 3rem"
                         menus={[
@@ -85,7 +107,12 @@ export const MainNav = () => {
                     />
                     <Items menuTitle="book-a-demo" />
                     {/* <Items menuTitle="contact-us" /> */}
-                    <HStack spacing="0" gap="1rem">
+                    <HStack
+                        spacing="0"
+                        gap="1rem"
+                        align={['flex-start', 'center']}
+                        flexDir={['column', 'row']}
+                    >
                         <Button
                             variant="outline"
                             borderRadius="8px"

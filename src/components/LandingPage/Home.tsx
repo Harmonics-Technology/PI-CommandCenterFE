@@ -18,6 +18,7 @@ export const Home = () => {
                 image="/assets/laptop.svg"
                 bgColor="#f3f9f8"
                 isHome
+                fs={['24px', '3.125rem']}
             />
             <ServiceBody />
             <WhoCanUseTimbaNew />

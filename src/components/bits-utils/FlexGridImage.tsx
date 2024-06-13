@@ -20,12 +20,17 @@ export const FlexGridImage = ({
             justify="space-between"
             flexDir={['column', 'row']}
         >
-            <VStack align="flex-start" w="50%" gap="1rem" order={rtl ? 1 : 0}>
+            <VStack
+                align="flex-start"
+                w={['100%', '50%']}
+                gap="1rem"
+                order={rtl ? 1 : 0}
+            >
                 {items?.map((x: any, i: any) => (
                     <ServiceItems x={x} key={i} color={color} />
                 ))}
             </VStack>
-            <Box w={'50%'} order={rtl ? 0 : 1}>
+            <Box w={'50%'} order={rtl ? 0 : 1} display={['none', 'block']}>
                 <Grid templateColumns={['repeat(2, 1fr)']} gap="1.8rem">
                     {imgs?.map((img: any, i: any) => (
                         <Box w="full">

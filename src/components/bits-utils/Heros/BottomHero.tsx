@@ -14,27 +14,29 @@ export const BottomHero = ({
     const router = useRouter();
     return (
         <Box bgColor="white" zIndex="6">
-            <Box w="85%" mx="auto" p="0 0 4rem">
+            <Box w={['100%', '85%']} mx="auto" p={['0', '0 0 4rem']}>
                 <Flex
                     justify="space-between"
                     pos="relative"
                     bgColor="brand.100"
-                    borderRadius="1.562rem"
-                    p="4rem 3rem 4rem 6rem"
+                    borderRadius={['0', '1.562rem']}
+                    p={['2rem 1.5rem', '4rem 3rem 4rem 6rem']}
                     overflow="hidden"
+                    flexDir={['column', 'row']}
                 >
                     <VStack
-                        align="flex-start"
+                        align={['center', 'flex-start']}
                         spacing="1.8rem"
-                        w={w}
+                        w={['100%', w]}
                         color="white"
                     >
                         <Text
-                            fontSize={fs}
-                            fontWeight="800"
+                            fontSize={['18px', fs]}
+                            fontWeight={['700', '800']}
                             fontFamily="Nunito"
                             mb="0"
                             lineHeight="normal"
+                            textAlign={['center', 'unset']}
                         >
                             {title}
                         </Text>
@@ -69,6 +71,7 @@ export const BottomHero = ({
                         pos="absolute"
                         right="3%"
                         bottom="-30px"
+                        display={['none', 'block']}
                     >
                         <Image
                             src="/assets/laptop.png"
@@ -76,14 +79,24 @@ export const BottomHero = ({
                             alt="banner image"
                         />
                     </Box>
-                    <Box pos="absolute" top="0" left="0">
+                    <Box
+                        pos="absolute"
+                        top="0"
+                        left="0"
+                        display={['none', 'block']}
+                    >
                         <Image
                             src="/assets/cu.png"
                             w="full"
                             alt="banner image"
                         />
                     </Box>
-                    <Box pos="absolute" bottom="0" right="0%">
+                    <Box
+                        pos="absolute"
+                        bottom="0"
+                        right="0%"
+                        display={['none', 'block']}
+                    >
                         <Image
                             src="/assets/ci.png"
                             w="90%"

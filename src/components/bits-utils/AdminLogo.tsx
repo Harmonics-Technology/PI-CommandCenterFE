@@ -13,7 +13,7 @@ export const AdminLogo = () => {
             cursor="pointer"
             onClick={() => router.push('/')}
         >
-            <Image src="/assets/newlogo.png" h="3rem" />
+            <Image src="/assets/newlogo.png" h={['2.5rem', '3rem']} />
             {/* <Text fontWeight="bold" mb="0" fontSize="1.1rem" fontFamily="Rubik">
                 ADMIN-TIMESHEET
             </Text> */}

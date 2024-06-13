@@ -54,7 +54,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                 bg="brand.100"
             />
 
-            <Box w="70%" mx="auto">
+            <Box w={['100%', '70%']} mx="auto">
                 <HStack justify="center" my="2rem">
                     <HStack>
                         <Text
@@ -88,7 +88,12 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                         </Box>
                     </HStack>
                 </HStack>
-                <Grid templateColumns={['repeat(3, 1fr)']} gap=".5rem" w="full">
+                <Grid
+                    templateColumns={['1fr', 'repeat(3, 1fr)']}
+                    gap=".5rem"
+                    w={['90%', 'full']}
+                    mx="auto"
+                >
                     {base?.map((x: SubscriptionView) => (
                         <PackageCard
                             id={x.id}

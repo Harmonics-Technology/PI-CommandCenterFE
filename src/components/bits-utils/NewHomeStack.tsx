@@ -26,12 +26,12 @@ export const NewHomeStack = ({
 }) => {
     return (
         <HStack
-            gap="1rem"
+            gap={['53px', '1rem']}
             align="center"
             justify="space-between"
             flexDir={['column', 'row']}
         >
-            <VStack align="flex-start" w="55%" order={rtl ? 1 : 0}>
+            <VStack align="flex-start" w={['100%', '55%']} order={rtl ? 1 : 0}>
                 <MainTitle text={title} w="100%" align="left" mx="unset" />
                 {isMulti ? (
                     <VStack
@@ -63,7 +63,7 @@ export const NewHomeStack = ({
                     </Link>
                 )}
             </VStack>
-            <Box w={rtl ? '55%' : '45%'} order={rtl ? 0 : 1}>
+            <Box w={['100%', rtl ? '55%' : '45%']} order={[1, rtl ? 0 : 1]}>
                 <Image
                     w="90%"
                     m={['0', rtl ? '0 auto 0 0' : '0 0 0 auto']}
