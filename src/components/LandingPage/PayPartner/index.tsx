@@ -12,8 +12,10 @@ export const PayPartner = () => {
                 image="/assets/pr (6).png"
                 bgColor="white"
                 color="brand.100"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA redefines the way you handle payments for your team, eliminating complexities and enabling swift, hassle-free transactions across borders. With seamless integration of leading payment solutions, TIMBA ensures that compensating your team is both convenient and efficient."

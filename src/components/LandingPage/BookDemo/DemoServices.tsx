@@ -8,17 +8,18 @@ import { Spacing } from '@components/bits-utils/Spacing';
 export const DemoServices = () => {
     const router = useRouter();
     return (
-        <Box py="4rem" mx="auto" w="85%">
+        <Box py={['25px', '4rem']} mx="auto" w={['90%', '85%']}>
             <MainTitle
                 text="Experience the Power of TIMBA Firsthand - Book your free demo"
                 sub="Book a personalized demo with our expert team and embark on an immersive journey into the world of TIMBA. Discover how our powerful software can transform your organization's productivity and efficiency."
-                w="75%"
+                w={['100%', '75%']}
             />
-            <Spacing space="6rem" />
+            <Spacing space={['2rem', '6rem']} />
             <SingleServiceLTR
                 image="/assets/demo.png"
                 title="A Personalized Demo Experience"
                 bd="1.875rem"
+                order={0}
                 items={[
                     {
                         title: 'Tailored to Your Needs',

@@ -83,6 +83,7 @@ export const PricingPage = ({ base }: ISubscriptionProps) => {
                             borderRadius="4px"
                             fontSize=".8rem"
                             p=".2rem .5rem"
+                            display={['none', 'block']}
                         >
                             Up to 25% OFF
                         </Box>

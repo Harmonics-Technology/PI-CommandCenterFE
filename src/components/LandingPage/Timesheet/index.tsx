@@ -12,8 +12,10 @@ export const Timesheet = () => {
                 image="/assets/pr (5).png"
                 bgColor="brand.400"
                 color="white"
-                gap="2.25rem"
-                fs={['24px',"2.75rem"]}
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="Gone are the days of painstakingly recording every minute spent on tasks and projects. TIMBA introduces a game-changing automated timesheet solution, ensuring accuracy, efficiency, and peace of mind for you and your team."

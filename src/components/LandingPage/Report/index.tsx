@@ -12,8 +12,10 @@ export const Report = () => {
                 image="/assets/pr (5).png"
                 bgColor="brand.100"
                 color="white"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA empowers you to make informed decisions and optimize your productivity journey through a robust array of reports. From billable hours to productivity metrics, TIMBA's reporting feature provides you with the tools to track progress, make strategic adjustments, and achieve your goals."

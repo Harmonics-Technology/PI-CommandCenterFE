@@ -12,8 +12,10 @@ export const LeaveMgt = () => {
                 image="/assets/pr (4).png"
                 bgColor="brand.100"
                 color="white"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA redefines how you handle time off requests, providing a comprehensive platform for efficient leave management. From vacation to sick leave, TIMBA streamlines the process, ensuring seamless request submission, clear approvals, and enhanced team coordination."

@@ -12,8 +12,10 @@ export const ClientOnboarding = () => {
                 image="/assets/pr (5).png"
                 bgColor="brand.400"
                 color="white"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA revolutionizes how you onboard new clients, ensuring a swift and seamless introduction to your services. Through pre-configured accounts, streamlined access, and insightful tracking, TIMBA empowers subcontractors to create lasting impressions and establish fruitful collaborations."

@@ -12,8 +12,10 @@ export const ProjectManagement = () => {
                 image="/assets/pr (1).png"
                 bgColor="brand.100"
                 color="white"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="233px"
+                gap={['33px', '2.25rem']}
+                mainH={['65vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="Effortlessly streamline your project management process with TIMBA's robust suite of tools designed to elevate your project's efficiency and coordination. Say goodbye to chaos and embrace structured excellence through our state-of-the-art project planning features."

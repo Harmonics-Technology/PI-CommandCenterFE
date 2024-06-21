@@ -12,8 +12,10 @@ export const Onboarding = () => {
                 image="/assets/pr (9).png"
                 bgColor="white"
                 color="brand.100"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['55vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA revolutionizes the way you welcome and nurture new talent, ensuring a swift and effective integration into your organization. Our comprehensive employee onboarding and management tools pave the way for success, right from day one."

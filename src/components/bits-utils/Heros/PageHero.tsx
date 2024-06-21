@@ -19,12 +19,12 @@ export const PageHero = ({
             bgPosition="center"
             align="center"
             justify="center"
-            h="40vh"
+            h={['200px', '40vh']}
             bgColor={bg}
         >
-            <VStack align="center" spacing=".5rem" w="55%">
+            <VStack align="center" spacing=".5rem" w={['70%', '55%']}>
                 <Text
-                    fontSize="3.125rem"
+                    fontSize={['24px', '3.125rem']}
                     color="white"
                     fontWeight="800"
                     fontFamily="Nunito"

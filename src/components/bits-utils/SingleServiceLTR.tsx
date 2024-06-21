@@ -13,6 +13,7 @@ export const SingleServiceLTR = ({
     onClick,
     rtl = false,
     bd = 0,
+    order = 1,
 }: {
     image: string;
     color?: string;
@@ -22,6 +23,7 @@ export const SingleServiceLTR = ({
     onClick?: any;
     rtl?: boolean;
     bd?: any;
+    order?: number;
 }) => {
     return (
         <Flex
@@ -32,7 +34,7 @@ export const SingleServiceLTR = ({
         >
             <Box
                 w="full"
-                order={['1', rtl ? 1 : 0]}
+                order={[order, rtl ? 1 : 0]}
                 overflow="hidden"
                 borderRadius={bd}
             >

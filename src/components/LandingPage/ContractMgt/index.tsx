@@ -12,8 +12,10 @@ export const ContractMgt = () => {
                 image="/assets/pr (6).png"
                 bgColor="brand.100"
                 color="white"
-                gap="2.25rem"
-                fs="2.75rem"
+                h="auto"
+                gap={['33px', '2.25rem']}
+                mainH={['65vh', '80vh']}
+                fs={['24px', '2.75rem']}
             />
             <FeatureBody
                 topText="TIMBA empowers you to streamline and optimize your contract management processes like never before. From secure storage to intelligent alerts, TIMBA ensures your contracts are meticulously organized and effortlessly managed."

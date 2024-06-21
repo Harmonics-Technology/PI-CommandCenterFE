@@ -15,8 +15,8 @@ export const FeatureBody = ({
 }) => {
     const router = useRouter();
     return (
-        <Box p="4.4rem 0 0rem" mx="auto" w="100%">
-            <Box w="80%" mx="auto">
+        <Box p={['2rem 0 0', '4.4rem 0 0rem']} mx="auto" w="100%">
+            <Box w={['90%', '80%']} mx="auto">
                 <Text
                     fontSize="1.125rem"
                     fontWeight={400}
@@ -26,8 +26,8 @@ export const FeatureBody = ({
                 >
                     {topText}
                 </Text>
-                <Box py="3rem">
-                    <MainTitle text={mainTitle} w="80%" />
+                <Box py={['2rem', '3rem']}>
+                    <MainTitle text={mainTitle} w={['100%', '80%']} />
                 </Box>
                 <Grid
                     templateColumns={['1fr', 'repeat(3,1fr)']}
@@ -39,9 +39,9 @@ export const FeatureBody = ({
                     ))}
                 </Grid>
             </Box>
-            <Flex justify="center" w="full">
+            <Flex justify="center" w={['90%', 'full']} mx="auto">
                 <Button
-                    fontSize="1.125rem"
+                    fontSize={['1rem', '1.125rem']}
                     color="white"
                     bgColor={'brand.400'}
                     borderRadius="8px"
@@ -63,8 +63,9 @@ export const FeatureBody = ({
                     w="85%"
                     gap="4rem"
                     justify="center"
+                    flexDir={['column', 'row']}
                 >
-                    <Box h="20rem">
+                    <Box h={['auto', '20rem']}>
                         <Image src={img} h="full" w="auto" />
                     </Box>
                     <Text

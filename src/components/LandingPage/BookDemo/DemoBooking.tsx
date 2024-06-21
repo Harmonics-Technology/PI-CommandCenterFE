@@ -6,17 +6,23 @@ import { DemoContact } from './DemoContact';
 
 export const DemoBooking = () => {
     return (
-        <Box bgColor="white" py="8rem">
-            <Box w="85%" mx="auto">
-                <Box mb="4rem">
+        <Box bgColor="white" py={['30px', '8rem']}>
+            <Box w={['100%', '85%']} mx="auto">
+                <Box mb={['2rem', '4rem']}>
                     <MainTitle text="How to Book Your Demo" />
                 </Box>
                 <HStack
-                    spacing="5rem"
+                    gap={['55px', '5rem']}
+                    spacing={0}
                     align="flex-start"
                     justify="space-evenly"
+                    flexDir={['column', 'row']}
                 >
-                    <VStack spacing="2rem" w="40%">
+                    <VStack
+                        gap={['1rem', '2rem']}
+                        w={['90%', '40%']}
+                        mx={['auto', '0']}
+                    >
                         <ServiceItems
                             x={{
                                 title: 'Simple Booking Process',
@@ -30,7 +36,7 @@ export const DemoBooking = () => {
                             }}
                         />
                     </VStack>
-                    <Box w="40%">
+                    <Box w={['100%', '40%']}>
                         <DemoContact />
                     </Box>
                 </HStack>

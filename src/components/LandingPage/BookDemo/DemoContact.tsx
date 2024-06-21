@@ -41,7 +41,11 @@ export const DemoContact = () => {
         }
     };
     return (
-        <Box bgColor="brand.100" borderRadius="1.25rem" p="3rem">
+        <Box
+            bgColor="brand.100"
+            borderRadius={['0', '1.25rem']}
+            p={['2rem 1rem', '3rem']}
+        >
             <form>
                 <VStack spacing="2rem">
                     <Grid

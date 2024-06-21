@@ -36,13 +36,13 @@ export const PackageCard = ({
             w="full"
             bgColor="white"
             borderRadius="12px"
-            padding="2.5rem"
+            padding={['24px', '2.5rem']}
             border="3px solid #375982"
             // border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
         >
             <Box>
-                <Box h="2rem" mb="1rem">
-                    {freeTrial && (
+                {freeTrial && freeTrialDuration > 0 && (
+                    <Box h="2rem" mb="1rem">
                         <Flex
                             w={['100%', '60%']}
                             justify="center"
@@ -61,8 +61,8 @@ export const PackageCard = ({
                                 {freeTrialDuration || 0} Days free trial
                             </Text>
                         </Flex>
-                    )}
-                </Box>
+                    </Box>
+                )}
                 <Text color="black" fontSize="23px" fontWeight="800" mb="0">
                     {name}
                 </Text>
