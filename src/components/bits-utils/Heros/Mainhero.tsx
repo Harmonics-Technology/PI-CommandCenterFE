@@ -21,9 +21,11 @@ export const Mainhero = ({
     btnColor,
     gap,
     isVertical,
-    fs = '3.125rem',
+    fs = ['24px', '3.125rem'],
     bd = 0,
     isHome = false,
+    h = isVertical ? '23rem' : '27rem',
+    mainH = '85vh',
 }: {
     title: string;
     sub?: string;
@@ -37,6 +39,8 @@ export const Mainhero = ({
     fs?: any;
     bd?: any;
     isHome?: boolean;
+    h?: any;
+    mainH?: any;
 }) => {
     const router = useRouter();
     const [userEmail, setUserEmail] = useState('');
@@ -81,7 +85,7 @@ export const Mainhero = ({
             <HStack
                 w={['90%', '85%']}
                 mx="auto"
-                h="85vh"
+                h={mainH}
                 align="center"
                 gap={gap}
                 py={isVertical ? '2.5rem' : '0'}
@@ -108,7 +112,7 @@ export const Mainhero = ({
                         <Text
                             fontSize={['15px', '1.25rem']}
                             color={color || '#696969'}
-                            fontWeight="600"
+                            fontWeight={['500', '600']}
                             fontFamily="Nunito"
                             mb="0"
                             maxW={['100%', '88%']}
@@ -196,8 +200,11 @@ export const Mainhero = ({
                     )}
                 </VStack>
                 <Box
-                    w={['110%', isVertical ? '38rem' : '41rem']}
-                    h={isVertical ? '23rem' : '27rem'}
+                    w={[
+                        isVertical ? '110%' : '100%',
+                        isVertical ? '38rem' : '41rem',
+                    ]}
+                    h={h}
                     borderRadius={bd}
                     overflow="hidden"
                     pos={['unset', isHome ? 'absolute' : 'unset']}

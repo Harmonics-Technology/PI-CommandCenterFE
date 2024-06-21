@@ -24,10 +24,15 @@ export const SingleServiceLTR = ({
     bd?: any;
 }) => {
     return (
-        <Flex gap="5.5rem" align="center" justify="space-between">
+        <Flex
+            gap={['2.5rem', '5.5rem']}
+            align="center"
+            justify="space-between"
+            flexDir={['column', 'row']}
+        >
             <Box
                 w="full"
-                order={rtl ? 1 : 0}
+                order={['1', rtl ? 1 : 0]}
                 overflow="hidden"
                 borderRadius={bd}
             >
@@ -35,18 +40,18 @@ export const SingleServiceLTR = ({
             </Box>
             <VStack
                 align="flex-start"
-                spacing="2rem"
+                spacing={['18px', '2rem']}
                 w="full"
-                order={rtl ? 0 : 1}
+                order={['0', rtl ? 0 : 1]}
             >
                 {title && (
                     <Text
-                        fontSize="2.75rem"
+                        fontSize={['24px', '2.75rem']}
                         color={color || 'brand.100'}
                         fontWeight="700"
                         fontFamily="Nunito"
                         mb="0"
-                        lineHeight="3rem"
+                        lineHeight={['32px', '3rem']}
                     >
                         {title}
                     </Text>

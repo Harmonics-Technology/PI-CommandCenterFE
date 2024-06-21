@@ -18,17 +18,21 @@ export const SubContractorServices = () => {
     return (
         <Box>
             <Box bgColor="brand.100" pos="relative">
-                <Box p="4rem 0 8rem" mx="auto" w="85%">
+                <Box
+                    p={['2rem 0 4rem', '4rem 0 8rem']}
+                    mx="auto"
+                    w={['90%', '85%']}
+                >
                     <MainTitle
                         text="Track every minute of your billable time. We know this means a lot you"
                         sub="Discover the features that make TIMBA the ultimate solution for your needs."
                         color="white"
-                        w="60%"
+                        w={['100%', '60%']}
                     />
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
                         gap="2rem"
-                        mt="4rem"
+                        mt={['20px', '4rem']}
                     >
                         <ServiceCard
                             sub="Effortlessly track your time with TIMBA's 
@@ -96,6 +100,7 @@ export const SubContractorServices = () => {
                     left="-5%"
                     top="0%"
                     zIndex="1"
+                    display={['none', 'block']}
                 />
                 <Circle
                     size="8rem"
@@ -104,6 +109,7 @@ export const SubContractorServices = () => {
                     right="-5%"
                     bottom="0%"
                     zIndex="1"
+                    display={['none', 'block']}
                 />
             </Box>
             <SingleShowCase

@@ -30,7 +30,7 @@ export const ServiceCard = ({
             borderColor={selected ? 'brand.400' : 'none'}
             h="full"
             w="full"
-            px="2rem"
+            px={['30px', '2rem']}
             borderRadius=".5rem"
             transition="border ease .3s"
             role="group"
@@ -41,7 +41,11 @@ export const ServiceCard = ({
             //     bgColor: 'white',
             // }}
         >
-            <VStack align="flex-start" py="3.5rem" spacing="2rem">
+            <VStack
+                align="flex-start"
+                py={['28px', '3.5rem']}
+                spacing={['25px', '2rem']}
+            >
                 {icon && (
                     <Icon
                         color={selected ? 'brand.400' : color ? color : 'black'}
@@ -54,7 +58,7 @@ export const ServiceCard = ({
                 )}
                 <Box>
                     <Text
-                        fontSize="1.25rem"
+                        fontSize={['18px', '1.25rem']}
                         fontWeight="700"
                         lineHeight="2rem"
                         color={selected ? '#253053' : color ? color : '#253053'}
@@ -66,9 +70,9 @@ export const ServiceCard = ({
                         {title}
                     </Text>
                     <Text
-                        fontSize="1rem"
+                        fontSize={['14px', '1rem']}
                         fontWeight="400"
-                        lineHeight="1.75rem"
+                        lineHeight={['16.8px', '1.75rem']}
                         color={selected ? '#636b83' : color ? color : '#636b83'}
                         mb="0"
                         _groupHover={{

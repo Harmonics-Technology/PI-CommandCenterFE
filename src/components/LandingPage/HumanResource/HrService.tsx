@@ -8,11 +8,11 @@ export const HrService = () => {
     const router = useRouter();
     return (
         <Box w="full" bgColor="white">
-            <Box p="8rem 0 5rem">
+            <Box p={['2rem 0', '8rem 0 5rem']}>
                 <Box>
                     <VStack
                         spacing="5rem"
-                        w="85%"
+                        w={['90%', '85%']}
                         mx="auto"
                         pb="4rem"
                         bgColor="white"
@@ -50,7 +50,7 @@ export const HrService = () => {
                 </Box>
                 <VStack
                     w="full"
-                    py="2.8rem"
+                    py={['2rem', '2.8rem']}
                     mt="3rem"
                     spacing="1.8rem"
                     bgColor="brand.100"
@@ -58,9 +58,9 @@ export const HrService = () => {
                     <MainTitle
                         text="The average HR manager spends 20% of their time on administrative tasks. Time-tracking software can help HR managers save time and improve productivity."
                         color="white"
-                        w="80%"
+                        w={['90%', '80%']}
                     />
-                    <Box>
+                    <Box w={['90%', 'unset']}>
                         <Button
                             fontSize="1.125rem"
                             color="white"
@@ -69,6 +69,7 @@ export const HrService = () => {
                             px="2.5rem"
                             h="4rem"
                             onClick={() => router.push('/pricing')}
+                            w={['full', 'fit-content']}
                         >
                             Start Using TIMBA Today
                         </Button>
@@ -80,6 +81,7 @@ export const HrService = () => {
                             fontFamily="Nunito"
                             fontStyle="italic"
                             m="1rem 0 0"
+                            textAlign={['center', 'left']}
                         >
                             Sign up for FREE trial - No credit card required
                         </Text>

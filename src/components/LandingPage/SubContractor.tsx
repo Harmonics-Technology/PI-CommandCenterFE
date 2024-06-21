@@ -16,7 +16,10 @@ export const SubContractor = () => {
                 image="/assets/sub.png"
                 bgColor="brand.100"
                 color="white"
-                bd="3.125rem"
+                bd={['30px', '3.125rem']}
+                h="233px"
+                gap={['33px']}
+                mainH={['72vh', '80vh']}
             />
             <SubContractorService />
             <SubContractorServices />

@@ -9,7 +9,7 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
                 fontWeight="700"
                 lineHeight="2rem"
                 color={color ? color : '#253053'}
-                mb=".5rem"
+                mb={['.3rem',".5rem"]}
                 _groupHover={{
                     color: '#253053',
                 }}

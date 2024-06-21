@@ -23,12 +23,12 @@ export const EnItems = () => {
     return (
         <Box>
             <Box bgColor="brand.100" pos="relative" overflow="hidden">
-                <Box p="4rem 0 3rem" mx="auto" w="85%">
+                <Box p={['44px 0', '4rem 0 3rem']} mx="auto" w={['90%', '85%']}>
                     <MainTitle
                         text="Track every minute of your billable time. We know this means a lot you"
                         sub="Discover the features that make TIMBA the ultimate solution for your needs."
                         color="white"
-                        w="70%"
+                        w={['100%', '70%']}
                     />
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
@@ -134,6 +134,7 @@ export const EnItems = () => {
                     left="-5%"
                     top="0%"
                     zIndex="1"
+                    display={['none', 'block']}
                 />
                 <Circle
                     size="8rem"
@@ -142,6 +143,7 @@ export const EnItems = () => {
                     right="-5%"
                     bottom="0%"
                     zIndex="1"
+                    display={['none', 'block']}
                 />
             </Box>
             <SingleShowCase
