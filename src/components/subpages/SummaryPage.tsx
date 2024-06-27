@@ -106,7 +106,7 @@ export const SummaryPage = ({
                     <Button
                         bgColor="brand.400"
                         color="white"
-                        w="30%"
+                        w={['100%', '30%']}
                         borderRadius="5px"
                         h="3rem"
                         my="3rem"

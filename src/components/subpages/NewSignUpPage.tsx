@@ -37,7 +37,7 @@ const newClientSchema = yup.object().shape({
 export const NewSignUpPage = ({ countries }: { countries: any }) => {
     const [selected, setSelected] = useState('month');
     const [userCount, setUserCount] = useState(1);
-    const [confirmation, setConfirmation] = useState(false);
+    const [confirmation, setConfirmation] = useState(true);
     const [lastName, setLastName] = useState(false);
     const [base, setBase] = useState<any>();
     const router = useRouter();
@@ -141,7 +141,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
             {confirmation ? (
                 <Box w="full" minH="100vh">
                     <Box
-                        w="40%"
+                        w={['90%', '40%']}
                         mx="auto"
                         my="2.5rem"
                         py="1.1rem"
@@ -213,6 +213,8 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                             align="center"
                             px="2rem"
                             m="1rem"
+                            flexDir={['column', 'row']}
+                            gap={['1rem', '0']}
                         >
                             <CustomBtn
                                 color="white"
@@ -233,8 +235,13 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                     </Box>
                 </Box>
             ) : (
-                <Flex>
-                    <Box bgColor="white" pb="5rem" w="60%" px="95px">
+                <Flex flexDir={['column', 'row']} w="full">
+                    <Box
+                        bgColor="white"
+                        pb="5rem"
+                        w={['100%', '60%']}
+                        px={['2rem', '95px']}
+                    >
                         <Box mt="2rem">
                             <Text
                                 mb="2.87rem"
@@ -295,7 +302,10 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                             Select a subscription cycle
                                         </Text>
                                     </Box>
-                                    <HStack gap="14px">
+                                    <HStack
+                                        gap="14px"
+                                        flexDir={['column', 'row']}
+                                    >
                                         <SubScriptionCard
                                             title="Monthly"
                                             price={base?.price}
@@ -314,7 +324,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                 </VStack>
                             </Box>
                         </Box>
-                        <Box>
+                        <Box w="full">
                             <Grid
                                 mt="30px"
                                 templateColumns={['1fr', 'repeat(2, 1fr)']}
@@ -391,11 +401,11 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                             </Grid>
                         </Box>
                     </Box>
-                    <Box p="35px 50px" bgColor="#ebeff2" w="40%">
-                        <Text fontWeight={700} fontSize="24px">
+                    <Box p="35px 50px" bgColor="#ebeff2" w={['100%', '40%']}>
+                        <Text fontWeight={700} fontSize={['18px', '24px']}>
                             Order Summary
                         </Text>
-                        <Box mt="60px">
+                        <Box mt={'60px'}>
                             <HStack align="flex-start" justify="space-between">
                                 <VStack align="flex-start" gap=".2rem">
                                     <Text
