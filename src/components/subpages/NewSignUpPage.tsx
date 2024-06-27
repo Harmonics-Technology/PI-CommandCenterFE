@@ -37,7 +37,7 @@ const newClientSchema = yup.object().shape({
 export const NewSignUpPage = ({ countries }: { countries: any }) => {
     const [selected, setSelected] = useState('month');
     const [userCount, setUserCount] = useState(1);
-    const [confirmation, setConfirmation] = useState(true);
+    const [confirmation, setConfirmation] = useState(false);
     const [lastName, setLastName] = useState(false);
     const [base, setBase] = useState<any>();
     const router = useRouter();
