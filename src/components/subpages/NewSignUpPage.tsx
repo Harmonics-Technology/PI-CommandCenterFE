@@ -65,7 +65,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
         resolver: yupResolver(newClientSchema),
         mode: 'all',
         defaultValues: {
-            enableFreeTrial: false,
+            // enableFreeTrial: false,
             email: email as string,
         },
     });

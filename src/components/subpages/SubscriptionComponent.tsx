@@ -223,7 +223,7 @@ export const SubscriptionComponent = ({
         data.duration = billing == 'month' ? 1 : 12;
         data.totalAmount = totalAmount;
         data.numberOfLicense = userCount;
-        data.enableFreeTrial = enableFreeTrial;
+        // data.enableFreeTrial = enableFreeTrial;
         data.companyEmail = data.email;
         data.companyAddress = data.address;
         data.companyPhoneNumber = data.phoneNumber;

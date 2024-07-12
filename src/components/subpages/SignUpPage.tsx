@@ -82,7 +82,7 @@ export const SignUpPage = () => {
         resolver: yupResolver(newClientSchema),
         mode: 'all',
         defaultValues: {
-            enableFreeTrial: false,
+            // enableFreeTrial: false,
             companyEmail: email as string,
         },
     });
