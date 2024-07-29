@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import parse from 'react-html-parser';
 // import { useScramble } from 'use-scramble';
 
 export const Mainhero = ({
@@ -104,10 +105,9 @@ export const Mainhero = ({
                         mb="0"
                         lineHeight="normal"
                         textAlign={isVertical ? 'center' : 'left'}
-                        dangerouslySetInnerHTML={{ __html: title }}
                         // ref={ref}
                     >
-                        {title}
+                        {parse(title)}
                     </Text>
                     {sub && (
                         <Text
