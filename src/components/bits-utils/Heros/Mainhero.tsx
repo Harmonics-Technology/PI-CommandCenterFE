@@ -104,6 +104,7 @@ export const Mainhero = ({
                         mb="0"
                         lineHeight="normal"
                         textAlign={isVertical ? 'center' : 'left'}
+                        dangerouslySetInnerHTML={{ __html: title }}
                         // ref={ref}
                     >
                         {title}

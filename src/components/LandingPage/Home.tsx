@@ -12,7 +12,7 @@ export const Home = () => {
     return (
         <Box>
             <Mainhero
-                title="Optimize Your Workforce with Ease"
+                title="Optimize Your Workforce <br/> with Ease"
                 sub="Your all-in-one workforce management solution for time tracking, employee management, project workflows, and team collaboration"
                 buttonTitle="Start Using for FREE – Sign up here"
                 image="/assets/laptop.svg"
