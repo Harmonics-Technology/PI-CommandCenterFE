@@ -12,8 +12,8 @@ export const Home = () => {
     return (
         <Box>
             <Mainhero
-                title="Track Your time and Manage Your Team’s Productivity with Ease"
-                sub="Your all-in-one time tracking solution for employee management, enhanced productivity, project management, and team collaboration."
+                title="Optimize Your Workforce with Ease"
+                sub="Your all-in-one workforce management solution for time tracking, employee management, project workflows, and team collaboration"
                 buttonTitle="Start Using for FREE – Sign up here"
                 image="/assets/laptop.svg"
                 bgColor="#f3f9f8"

@@ -40,15 +40,15 @@ export const Completed = ({ data, redirectUrl }) => {
             <Flex minH="90vh" justify="center" align="center">
                 <VStack
                     spacing="2rem"
-                    w="50%"
+                    w={['90%', '50%']}
                     bgColor="white"
-                    p="8rem 3rem"
+                    p={['3rem 1rem', '8rem 3rem']}
                     borderRadius="12px"
                 >
                     {data.status === true ? (
                         <>
                             <Text
-                                fontSize="2.125rem"
+                                fontSize={['1.2rem', '2.125rem']}
                                 color="brand.100"
                                 fontWeight="800"
                                 fontFamily="Nunito"
@@ -59,7 +59,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 Thank you for your payment!
                             </Text>
                             <Text
-                                fontSize="1.25rem"
+                                fontSize={['1rem', '1.25rem']}
                                 color="#696969"
                                 fontWeight="600"
                                 fontFamily="Nunito"
@@ -74,7 +74,7 @@ export const Completed = ({ data, redirectUrl }) => {
                             {hasRedirect && (
                                 <>
                                     <Button
-                                        fontSize="1.125rem"
+                                        fontSize={['.9rem', '1.125rem']}
                                         color="white"
                                         bgColor="brand.400"
                                         borderRadius="8px"
@@ -97,7 +97,7 @@ export const Completed = ({ data, redirectUrl }) => {
                     ) : (
                         <>
                             <Text
-                                fontSize="2.125rem"
+                                fontSize={['1.2rem', '2.125rem']}
                                 color="red"
                                 fontWeight="800"
                                 fontFamily="Nunito"
@@ -108,7 +108,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 Error!
                             </Text>
                             <Text
-                                fontSize="1.25rem"
+                                fontSize={['.8rem', '1.25rem']}
                                 color="#696969"
                                 fontWeight="600"
                                 fontFamily="Nunito"
