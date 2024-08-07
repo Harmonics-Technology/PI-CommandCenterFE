@@ -51,6 +51,9 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
             }
         }
         if (value == 'plus') {
+            if (base?.hasFreeTrial && userCount == base?.maxFreeTrial) {
+                return;
+            }
             setUserCount((prev) => prev + 1);
         }
     };
@@ -420,7 +423,7 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                         color="#696969"
                                         mb="0"
                                     >
-                                        {userCount} users
+                                        {userCount} user(s)
                                     </Text>
                                     <Text
                                         fontWeight={700}
@@ -428,8 +431,8 @@ export const NewSignUpPage = ({ countries }: { countries: any }) => {
                                         mb="0"
                                     >
                                         {selected == 'month'
-                                            ? 'Monthly'
-                                            : 'Yearly'}
+                                            ? 'Monthly '
+                                            : 'Yearly '}
                                         Plan
                                     </Text>
                                 </VStack>
