@@ -30,7 +30,7 @@ npm manifest:
           "prettier": "prettier --write '**/*.{js,jsx,ts,tsx}'",
           "test": "jest -c test/jest.config.js",
           "format-staged": "pretty-quick --staged",
-          "openapi:codegen": "openapi --input https://pi-commandcenterdev.azurewebsites.net/swagger/v1/swagger.json --output ./src/services --client axios --useOptions"
+          "openapi:codegen": "openapi --input https://timba-command-center-staging.azurewebsites.net/swagger/v1/swagger.json --output ./src/services --client axios --useOptions"
       },
       "dependencies": {
           "@chakra-ui/icons": "^2.0.15",

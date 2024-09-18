@@ -9,6 +9,7 @@ import type { ClientSubscriptionModel } from '../models/ClientSubscriptionModel'
 import type { ClientSubscriptionViewPagedCollectionStandardResponse } from '../models/ClientSubscriptionViewPagedCollectionStandardResponse';
 import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSubscriptionViewStandardResponse';
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
+import type { InvoicePaidEventLogViewPagedCollectionStandardResponse } from '../models/InvoicePaidEventLogViewPagedCollectionStandardResponse';
 import type { LicenseUpdateModel } from '../models/LicenseUpdateModel';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
 import type { PurchaseNewLicensePlanModel } from '../models/PurchaseNewLicensePlanModel';
@@ -296,7 +297,7 @@ xApiKey?: any,
 }): CancelablePromise<AddCardResponseViewStandardResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/Subscription/add-new-card-new',
+            url: '/api/Subscription/add-new-card',
             headers: {
                 'X-API-KEY': xApiKey,
             },
@@ -501,6 +502,78 @@ xApiKey?: any,
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/Subscription/client-subscription-history',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'Offset': offset,
+                'Limit': limit,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static servicesListClientSubscriptions({
+clientId,
+offset,
+limit,
+search,
+xApiKey,
+}: {
+clientId?: string,
+offset?: number,
+limit?: number,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/services-client-subscription-history',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'Offset': offset,
+                'Limit': limit,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns InvoicePaidEventLogViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listClientSubscriptionInvoices({
+clientId,
+offset,
+limit,
+search,
+xApiKey,
+}: {
+clientId?: string,
+offset?: number,
+limit?: number,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<InvoicePaidEventLogViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/client-subscription-invoices',
             headers: {
                 'X-API-KEY': xApiKey,
             },
