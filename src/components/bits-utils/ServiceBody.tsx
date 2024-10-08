@@ -22,7 +22,7 @@ export const ServiceBody = () => {
             <Box py={['1.5rem', '5rem']} mx="auto" w={['90%', '80%']}>
                 <MainTitle
                     text="Transform the Way You Work with Timba’s Powerful Features"
-                    w="70%"
+                    w={['100%', '70%']}
                 />
                 {/* <MiniText
                     text={` Ensure seamless coordination for both in-office and remote teams
@@ -110,7 +110,7 @@ export const ServiceBody = () => {
                     btnClick="/features/client-onboarding"
                 />
             </Grid> */}
-                <VStack gap={['73px', '5rem']} m={['68px auto', '3.1rem auto']}>
+                <VStack gap={['73px', '5rem']} m={['48px auto', '3.1rem auto']}>
                     <NewHomeStack
                         title="Project Management"
                         sub={`Simplify the chaos. Timba’s robust tools help you streamline every step of project management. From planning to execution, keep your team aligned and efficient—so you can focus on what truly matters: delivering results.`}

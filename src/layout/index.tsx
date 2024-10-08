@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
                 mx="auto"
                 bgColor="#ebeff2"
                 minH="100vh"
-                // overflowX="hidden"
+                overflowX="hidden"
             >
                 {adminNav ? <TopNav /> : !admin ? <MainNav /> : null}
                 <Box

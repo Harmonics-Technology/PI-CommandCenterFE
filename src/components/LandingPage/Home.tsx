@@ -21,7 +21,8 @@ export const Home = () => {
                 color="white"
                 isHome
                 fs={['24px', '3rem']}
-                h="auto"
+                h={['23rem', 'auto']}
+                mainH="115vh"
             />
             <ServiceBody />
             <WhoCanUseTimbaNew />

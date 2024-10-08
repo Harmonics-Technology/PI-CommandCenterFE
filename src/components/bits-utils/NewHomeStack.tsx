@@ -66,7 +66,7 @@ export const NewHomeStack = ({
             <Box w={['100%', rtl ? '55%' : '45%']} order={[1, rtl ? 0 : 1]}>
                 <Image
                     w="90%"
-                    m={['0', rtl ? '0 auto 0 0' : '0 0 0 auto']}
+                    m={['auto', rtl ? '0 auto 0 0' : '0 0 0 auto']}
                     h="auto"
                     src={img}
                 />
