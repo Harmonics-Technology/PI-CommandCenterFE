@@ -21,17 +21,17 @@ export const ServiceBody = () => {
         <Box w="full" bgColor="white">
             <Box py={['1.5rem', '5rem']} mx="auto" w={['90%', '80%']}>
                 <MainTitle
-                    text="Embark on a Journey of Efficiency with TIMBA's Outstanding Features"
-                    w="90%"
+                    text="Transform the Way You Work with Timba’s Powerful Features"
+                    w="70%"
                 />
-                <MiniText
+                {/* <MiniText
                     text={` Ensure seamless coordination for both in-office and remote teams
             with TIMBA's real-time insights, keeping everyone on track and
             enhancing overall productivity.`}
                     align="center"
                     w={['95%', '80%']}
                     mx="auto"
-                />
+                /> */}
                 {/* <Grid
                 templateColumns={['1fr', 'repeat(3,1fr)']}
                 gap="2rem"
@@ -110,46 +110,61 @@ export const ServiceBody = () => {
                     btnClick="/features/client-onboarding"
                 />
             </Grid> */}
-                <VStack gap={['73px', '5rem']} m={['68px auto', '6rem auto']}>
+                <VStack gap={['73px', '5rem']} m={['68px auto', '3.1rem auto']}>
                     <NewHomeStack
-                        title="Elevate Your Project Management Experience"
-                        sub={`Effortlessly streamline your project management process with TIMBA's robust suite of tools designed to elevate your project's efficiency and coordination. Say goodbye to chaos and embrace structured excellence through our state-of-the-art project planning features.`}
+                        title="Project Management"
+                        sub={`Simplify the chaos. Timba’s robust tools help you streamline every step of project management. From planning to execution, keep your team aligned and efficient—so you can focus on what truly matters: delivering results.`}
                         btn
                         btnClick={'/features/project-management'}
                         img={'/assets/home-a.png'}
                     />
                     <NewHomeStack
-                        title="Automated and Simplified Time Tracking"
-                        sub={`Gone are the days of painstakingly recording every minute spent on tasks and projects. TIMBA introduces a game-changing automated timesheet solution, ensuring accuracy, efficiency, and peace of mind for you and your team.`}
+                        title="Employee Onboarding & Management"
+                        sub={`Starting new employees off right has never been easier. Timba’s onboarding tools make welcoming new talent seamless, ensuring they feel supported from day one. With Timba, building a high-performing team is effortless.`}
                         btn
-                        btnClick={'/features/automated-timesheet'}
+                        btnClick={'/features/employee-management'}
                         img={'/assets/home-b.png'}
                         rtl
                     />
                     <NewHomeStack
-                        title="Employee Lifecycle Management"
-                        sub={`TIMBA revolutionizes the way you welcome and nurture new talent, ensuring a swift and effective integration into your organization. Our comprehensive employee onboarding and management tools pave the way for success, right from day one`}
+                        title="Automated Timesheets"
+                        sub={`Say goodbye to manual time tracking and lost hours. With Timba’s automated timesheets, you’ll have precise, real-time data on how your team spends their time—without the headache of traditional tracking.`}
                         btn
-                        btnClick={'/features/employee-management'}
+                        btnClick={'/features/automated-timesheet'}
                         img={'/assets/home-c.png'}
                     />
                     <NewHomeStack
-                        title="Leave Management Made Effortless"
-                        sub={`TIMBA redefines how you handle time off requests, providing a comprehensive platform for efficient leave management. From vacation to sick leave, TIMBA streamlines the process, ensuring seamless request submission, clear approvals, and enhanced team coordination.`}
+                        title="Contract Management"
+                        sub={`Never lose track of contracts again. Timba’s contract management system keeps all your employee contracts in one place, so you can easily monitor key dates, generate invoices, and ensure nothing slips through the cracks.`}
                         btn
-                        btnClick={'/features/leave-management'}
+                        btnClick={'/features/contract-management'}
                         img={'/assets/home-d.png'}
                         rtl
                     />
                     <NewHomeStack
-                        title="Shift Management Simplified"
+                        title="Robust Reporting"
+                        sub={`Get the insights you need to optimize productivity. From billable hours to performance metrics, Timba’s reporting feature gives you the data to make smarter decisions and drive better outcomes.`}
+                        btn
+                        btnClick={'/features/robust-report'}
+                        img={'/assets/home-g.png'}
+                    />
+                    <NewHomeStack
+                        title="Client Onboarding"
+                        sub={`Impress your clients from day one. Timba helps you onboard clients smoothly with pre-configured accounts and transparent progress tracking, ensuring they have a great first impression and a smooth experience.`}
+                        btn
+                        btnClick={'/features/client-onboarding'}
+                        img={'/assets/home-f.png'}
+                        rtl
+                    />
+                    <NewHomeStack
+                        title="Shift Management <br/> Simplified"
                         sub={`TIMBA revolutionizes the way you welcome and nurture new talent, ensuring a swift and effective integration into your organization. Our comprehensive employee onboarding and management tools pave the way for success, right from day one`}
                         btn
                         btnClick={'/features/shift-management'}
                         img={'/assets/home-e.png'}
                     />
-                    <NewHomeStack
-                        title="Client and Contract Management"
+                    {/* <NewHomeStack
+                        title="Client Onboarding"
                         sub={[
                             {
                                 title: 'Contract Management',
@@ -165,7 +180,7 @@ export const ServiceBody = () => {
                         btnClick={'/features/client-onboarding'}
                         img={'/assets/home-f.png'}
                         rtl
-                    />
+                    /> */}
                     {/* <NewHomeStack
                         title="Contract Management"
                         sub={`Manage all contracts securely in one place. Monitor contract status, start and end dates, and milestones. Generate invoices and keep tabs on payments received. Receive alerts for approaching contract expirations.`}
@@ -173,13 +188,13 @@ export const ServiceBody = () => {
                         btnClick={'/features/contract-management'}
                         img={'/assets/home-f.png'}
                     /> */}
-                    <NewHomeStack
+                    {/* <NewHomeStack
                         title="Realize Your Business Potential with Robust Reports"
                         sub={`TIMBA empowers you to make informed decisions and optimize your productivity journey. Access a robust array of reports, from billable hours to productivity metrics, providing tools to track progress, make strategic adjustments, and achieve your goals.`}
                         btn
                         btnClick={'/features/robust-report'}
                         img={'/assets/home-g.png'}
-                    />
+                    /> */}
                 </VStack>
             </Box>
         </Box>

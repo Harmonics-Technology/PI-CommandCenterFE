@@ -48,7 +48,9 @@ export const ServiceCard = ({
             >
                 {icon && (
                     <Icon
-                        color={selected ? 'brand.400' : color ? color : 'black'}
+                        color={
+                            selected ? 'brand.400' : color ? color : 'brand.400'
+                        }
                         fontSize="41px"
                         as={icon}
                         // _groupHover={{

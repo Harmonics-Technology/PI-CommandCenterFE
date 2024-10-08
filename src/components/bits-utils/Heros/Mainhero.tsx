@@ -95,7 +95,7 @@ export const Mainhero = ({
                 <VStack
                     align={isVertical ? 'center' : 'flex-start'}
                     spacing="1.5rem"
-                    w={['100%', isVertical ? '80%' : '60%']}
+                    w={['100%', isVertical ? '80%' : '50%']}
                 >
                     <Text
                         fontSize={fs}
@@ -111,9 +111,9 @@ export const Mainhero = ({
                     </Text>
                     {sub && (
                         <Text
-                            fontSize={['15px', '1.25rem']}
+                            fontSize={['15px', '18px']}
                             color={color || '#696969'}
-                            fontWeight={['500', '600']}
+                            fontWeight={['400', '400']}
                             fontFamily="Nunito"
                             mb="0"
                             maxW={['100%', '88%']}
@@ -209,7 +209,7 @@ export const Mainhero = ({
                     borderRadius={bd}
                     overflow="hidden"
                     pos={['unset', isHome ? 'absolute' : 'unset']}
-                    right={0}
+                    right={'60px'}
                 >
                     <Image
                         src={image}

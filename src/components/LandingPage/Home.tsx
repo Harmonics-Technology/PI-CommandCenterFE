@@ -7,21 +7,25 @@ import { ServiceBody } from '@components/bits-utils/ServiceBody';
 import React from 'react';
 import { BlogSection } from './BlogSection';
 import { WhoCanUseTimbaNew } from '@components/bits-utils/WhoCanUseTimbaNew';
+import { TimbaStandOut } from '@components/bits-utils/TimbaStandOut';
 
 export const Home = () => {
     return (
         <Box>
             <Mainhero
-                title="Optimize Your Workforce <br/> with Ease"
-                sub="Your all-in-one workforce management solution for time tracking, employee management, project workflows, and team collaboration"
-                buttonTitle="Start Using for FREE – Sign up here"
-                image="/assets/laptop.svg"
-                bgColor="#f3f9f8"
+                title="Optimize Your Workforce <br/> with Ease. Let Timba Do <br/> the Heavy Lifting."
+                sub="Timba is your all-in-one workforce management suite designed to tackle the most common challenges: time tracking, project management, employee engagement, client onboarding, and contract management. Plus, seamlessly collaborate and manage payments for remote teams across the globe."
+                buttonTitle="Sign Up For Free"
+                image="/assets/newlaptop.png"
+                bgColor="#285250"
+                color="white"
                 isHome
-                fs={['24px', '3.125rem']}
+                fs={['24px', '3rem']}
+                h="auto"
             />
             <ServiceBody />
             <WhoCanUseTimbaNew />
+            <TimbaStandOut />
             <BlogSection />
             {/* <ServiceCurve /> */}
             {/* <MiniCTA

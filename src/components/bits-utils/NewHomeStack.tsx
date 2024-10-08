@@ -31,7 +31,7 @@ export const NewHomeStack = ({
             justify="space-between"
             flexDir={['column', 'row']}
         >
-            <VStack align="flex-start" w={['100%', '55%']} order={rtl ? 1 : 0}>
+            <VStack align="flex-start" w={['100%', '45%']} order={rtl ? 1 : 0}>
                 <MainTitle text={title} w="100%" align="left" mx="unset" />
                 {isMulti ? (
                     <VStack
