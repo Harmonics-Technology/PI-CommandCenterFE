@@ -19,7 +19,7 @@ function MyApp({
 }: AppProps<{ dehydratedState: unknown }>): JSX.Element {
     OpenAPI.BASE =
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
-        'https://pi-commandcenterdev.azurewebsites.net';
+        'https://timba-command-center-staging.azurewebsites.net';
     OpenAPI.TOKEN = Cookies.get('token') as string;
 
     useEffect(() => {
