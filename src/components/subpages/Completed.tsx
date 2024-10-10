@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 export const Completed = ({ data, redirectUrl }) => {
     data.status = true;
-    redirectUrl = 'undefined';
+    // redirectUrl = 'undefined';
     const redirect = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
             redirectUrl || `${process.env.NEXT_PUBLIC_TTS as string}/login`
