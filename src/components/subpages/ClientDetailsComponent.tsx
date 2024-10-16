@@ -44,7 +44,7 @@ export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
             }
             toast.error(result.message as string);
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
     return (
@@ -74,11 +74,11 @@ export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
                 tabValue={[
                     {
                         text: 'Client Information',
-                        url: `/admin/clients/${id}/client-information`,
+                        url: `/command-center/clients/${id}/client-information`,
                     },
                     {
                         text: 'Subscription Details',
-                        url: `/admin/clients/${id}/subscription-details`,
+                        url: `/command-center/clients/${id}/subscription-details`,
                     },
                 ]}
             />
@@ -199,7 +199,7 @@ export const ClientDetailsComponent = ({ id, data }: IClientInfoProps) => {
                                     }
                                     // boxShadow="0 4px 7px -1px rgb(0 0 0 / 11%), 0 2px 4px -1px rgb(0 0 0 / 7%)"
                                 >
-                                    <Box>Confirm Edit</Box>
+                                    <Box>Update Information</Box>
                                 </Button>
                             </Flex>
                         </VStack>

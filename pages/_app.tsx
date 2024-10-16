@@ -11,6 +11,7 @@ import { OpenAPI } from 'src/services';
 import NextNProgress from 'nextjs-progressbar';
 import { UserProvider } from '@components/context/UserContext';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({
     Component,
@@ -18,7 +19,7 @@ function MyApp({
 }: AppProps<{ dehydratedState: unknown }>): JSX.Element {
     OpenAPI.BASE =
         (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
-        'https://pi-commandcenterdev.azurewebsites.net';
+        'https://timba-command-center-staging.azurewebsites.net';
     OpenAPI.TOKEN = Cookies.get('token') as string;
 
     useEffect(() => {
@@ -32,13 +33,38 @@ function MyApp({
     }, []);
     return (
         <ChakraProvider theme={theme}>
+            <Analytics />
+
             <Head>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
                 />
-                <title>Timesheet Command Center</title>
-                <link rel="icon" href="/assets/logo.png" type="image/x-icon" />
+                <meta
+                    name="google-site-verification"
+                    content="16u9f_0OHQVm-fs3hgOUpiJpGIx1u46qzNjm1i0OmSU"
+                />
+                <title>Timba | Time Tracking and Productivity App</title>
+                <link
+                    rel="icon"
+                    href="/assets/newfav.jpg"
+                    type="image/x-icon"
+                />
+                <script
+                    async
+                    src={`https://www.googletagmanager.com/gtag/js?id=G-BLBPB619BH`}
+                />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-BLBPB619BH');
+            `,
+                    }}
+                />
+                {/* <GTM /> */}
             </Head>
             <StyledThemeProvider>
                 <UserProvider>

@@ -5,10 +5,19 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { NewClientSubscriptionModel, SubscriptionService } from 'src/services';
+import { NewClientSubscriptionModel, SubscriptionService, UtilityService } from 'src/services';
 import * as yup from 'yup';
+import { BookDemoModel } from 'src/services';
 
-const schema = yup.object().shape({});
+
+const schema = yup.object().shape({
+    firstName: yup.string().required('First Name is required'),
+    lastName: yup.string().required('Last Name is required'),
+    email: yup.string().email('Invalid email').required('Email is required'),
+    location: yup.string().required('Location is required'),
+    phoneNumber: yup.number().required('Phone Number is required'),
+    numberOfUsers: yup.number().required('Number of Users is required'),
+});
 export const DemoContact = () => {
     const {
         register,
@@ -16,76 +25,81 @@ export const DemoContact = () => {
         control,
         watch,
         setValue,
+        reset,
         formState: { errors, isSubmitting, isValid },
-    } = useForm<NewClientSubscriptionModel>({
+    } = useForm<BookDemoModel>({
         resolver: yupResolver(schema),
         mode: 'all',
     });
 
     const router = useRouter();
 
-    const onSubmit = async (data: NewClientSubscriptionModel) => {
+    const onSubmit = async (data: BookDemoModel) => {
+        console.log('hello');
         try {
             const result =
-                await SubscriptionService.createNewClientAndSubscription({
-                    requestBody: data,
-                });
+                await UtilityService.bookDemo({requestBody: data});
             if (result.status) {
-                toast.success('Successful');
-                router.push('/');
+                toast.success('Demo Booking Successful');
+                reset();
+                // router.push('/');
                 return;
             }
             toast.error(result.message as string);
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
     return (
-        <Box bgColor="brand.100" borderRadius="1.25rem" p="3rem">
+        <Box
+            bgColor="brand.100"
+            borderRadius={['0', '1.25rem']}
+            p={['2rem 1rem', '3rem']}
+        >
             <form>
-                <VStack spacing="3rem">
+                <VStack spacing="2rem">
                     <Grid
                         templateColumns={['1fr', 'repeat(2,1fr)']}
-                        gap="2rem"
+                        gap="1rem"
                         w="full"
                     >
-                        <PrimaryInput<NewClientSubscriptionModel>
+                        <PrimaryInput<BookDemoModel>
                             label="First Name"
-                            name="name"
-                            error={errors.name}
+                            name="firstName"
+                            error={errors.firstName}
                             placeholder=""
                             defaultValue=""
                             register={register}
                             color="white"
                         />
-                        <PrimaryInput<NewClientSubscriptionModel>
+                        <PrimaryInput<BookDemoModel>
                             label="Last Name"
-                            name="name"
-                            error={errors.name}
+                            name="lastName"
+                            error={errors.lastName}
                             placeholder=""
                             defaultValue=""
                             register={register}
                             color="white"
                         />
                     </Grid>
-                    <PrimaryInput<NewClientSubscriptionModel>
+                    <PrimaryInput<BookDemoModel>
                         label="Company Email"
-                        name="companyEmail"
-                        error={errors.companyEmail}
+                        name="email"
+                        error={errors.email}
                         placeholder=""
                         defaultValue=""
                         register={register}
                         color="white"
                     />
-                    <PrimaryInput<NewClientSubscriptionModel>
+                    <PrimaryInput<BookDemoModel>
                         label="Location"
-                        name="phoneNumber"
-                        error={errors.phoneNumber}
+                        name="location"
+                        error={errors.location}
                         defaultValue=""
                         register={register}
                         color="white"
                     />
-                    <PrimaryInput<NewClientSubscriptionModel>
+                    <PrimaryInput<BookDemoModel>
                         label="Phone Number"
                         name="phoneNumber"
                         error={errors.phoneNumber}
@@ -93,10 +107,10 @@ export const DemoContact = () => {
                         register={register}
                         color="white"
                     />
-                    <PrimaryInput<NewClientSubscriptionModel>
+                    <PrimaryInput<BookDemoModel>
                         label="How many people will be using TIMBA"
-                        name="phoneNumber"
-                        error={errors.phoneNumber}
+                        name="numberOfUsers"
+                        error={errors.numberOfUsers}
                         defaultValue=""
                         register={register}
                         color="white"
@@ -110,7 +124,7 @@ export const DemoContact = () => {
                             h="3.3rem"
                             isLoading={isSubmitting}
                             isDisabled={!isValid}
-                            onClick={() => handleSubmit(onSubmit)}
+                            onClick={() => handleSubmit(onSubmit)()}
                         >
                             Save and Continue
                         </Button>

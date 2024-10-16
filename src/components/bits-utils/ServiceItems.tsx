@@ -5,11 +5,11 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
     return (
         <Box>
             <Text
-                fontSize="1.25rem"
+                fontSize={['18px', '1.25rem']}
                 fontWeight="700"
                 lineHeight="2rem"
                 color={color ? color : '#253053'}
-                mb=".5rem"
+                mb={['.3rem',".5rem"]}
                 _groupHover={{
                     color: '#253053',
                 }}
@@ -17,7 +17,7 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
                 {x.title}
             </Text>
             <Text
-                fontSize="1rem"
+                fontSize={['14px', '1rem']}
                 fontWeight="400"
                 lineHeight="1.75rem"
                 color={color ? color : '#636b83'}

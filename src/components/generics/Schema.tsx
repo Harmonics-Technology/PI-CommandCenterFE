@@ -28,6 +28,7 @@ export interface ITableWrapperProps {
     options?: any[];
     tables: any;
     openModal: any;
+    data?: any;
 }
 export interface IModalProps {
     isOpen: boolean;
@@ -69,6 +70,8 @@ export interface IPackageCardProps {
     updateSubscription: any;
     isEdit?: boolean;
     isDisabled?: boolean;
+    freeTrial?: boolean;
+    freeTrialDuration?: any;
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;
@@ -77,6 +80,7 @@ export interface ISubscriptionProps {
     clients?: ClientViewPagedCollection;
     features?: FeatureView[];
     data?: SubscriptionView | any;
+    country?: any;
 }
 export interface IManageSubProps {
     base: SubscriptionView[];

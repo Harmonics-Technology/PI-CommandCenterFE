@@ -69,11 +69,11 @@ export const SubscriptionDetails = ({
                 tabValue={[
                     {
                         text: 'Client Information',
-                        url: `/admin/clients/${id}/client-information`,
+                        url: `/command-center/clients/${id}/client-information`,
                     },
                     {
                         text: 'Subscription Details',
-                        url: `/admin/clients/${id}/subscription-details`,
+                        url: `/command-center/clients/${id}/subscription-details`,
                     },
                 ]}
             />

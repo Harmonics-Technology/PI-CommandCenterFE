@@ -34,7 +34,10 @@ function ForgotPassword() {
 
     const onSubmit = async (data: InitiateResetModel) => {
         try {
-            const result = await UserService.initiateReset({redirectUrl: '/password/reset',requestBody: data});
+            const result = await UserService.initiateReset({
+                redirectUrl: '/password/reset',
+                requestBody: data,
+            });
             if (result.status) {
                 // console.log({ result });
                 toast({
@@ -72,7 +75,7 @@ function ForgotPassword() {
                 p="1rem 3rem 4rem"
             >
                 <Box display="flex" justifyContent="center" w="full" my="2rem">
-                    <Image src="/assets/logo.png" h="3rem" />
+                    <Image src="/assets/newlogo.png" h="3rem" />
                 </Box>
                 <Text
                     fontSize="35px"

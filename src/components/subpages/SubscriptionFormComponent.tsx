@@ -29,16 +29,12 @@ const schema = yup.object().shape({
     description: yup.string().required(),
     recommendedFor: yup.string().required(),
     // features: yup.string().required(),
-    monthlyAmount: yup
+    hasFreeTrial: yup.string().required(),
+    monthlyAmount: yup.string().required(),
+    yearlyAmount: yup.string().required(),
+    freeTrialDuration: yup
         .string()
-        .when('subscriptionTypeId', { is: 1, then: yup.string().required() }),
-    yearlyAmount: yup
-        .string()
-        .when('subscriptionTypeId', { is: 1, then: yup.string().required() }),
-
-    // freeTrialDuration: yup
-    //     .string()
-    //     .when('freeTrial', { is: true, then: yup.string().required() }),
+        .when('hasFreeTrial', { is: true, then: yup.string().required() }),
 });
 
 export const SubscriptionFormComponent = ({
@@ -53,6 +49,7 @@ export const SubscriptionFormComponent = ({
         control,
         setValue,
         watch,
+        trigger,
         formState: { errors, isSubmitting, isValid },
     } = useForm<SubscriptionModel>({
         resolver: yupResolver(schema),
@@ -60,8 +57,8 @@ export const SubscriptionFormComponent = ({
         defaultValues: {
             description: data?.description,
             features: data?.features,
-            freeTrialDuration: data?.freeTrialDuration,
-            hasFreeTrial: data?.hasFreeTrial,
+            freeTrialDuration: data?.freeTrialDuration || 0,
+            hasFreeTrial: data?.hasFreeTrial || false,
             id: data?.id,
             monthlyAmount: data?.monthlyAmount,
             monthlyDiscount: data?.monthlyDiscount,
@@ -107,14 +104,13 @@ export const SubscriptionFormComponent = ({
     }
 
     const onSubmit = async (data: SubscriptionModel) => {
-        if (!isEdit) {
-            data.totalMonthlyAmount = monthlyTotal;
-            data.totalYearlyAmount = yearlyTotal;
-            data.discountType = current;
+        // console.log({ isValid });
+        if (!isValid) {
+            trigger();
+            return;
         }
-        data.totalAmount = 0;
-        data.totalMonthlyAmount = 0;
-        data.totalYearlyAmount = 0;
+        data.totalMonthlyAmount = monthlyTotal;
+        data.totalYearlyAmount = yearlyTotal;
         data.discountType = current;
         data.features = data.features?.toString();
 
@@ -128,7 +124,7 @@ export const SubscriptionFormComponent = ({
                   });
             if (result.status) {
                 toast.success('Success');
-                router.push('/admin/manage-subscription');
+                router.push('/command-center/manage-subscription');
                 return;
             }
             toast.error(result.message as string);
@@ -171,7 +167,7 @@ export const SubscriptionFormComponent = ({
                                 Enter your package details
                             </Text>
 
-                            <PrimaryInput<SubscriptionModel>
+                            {/* <PrimaryInput<SubscriptionModel>
                                 label="Subscription Package Name"
                                 name="name"
                                 error={errors.name}
@@ -179,14 +175,15 @@ export const SubscriptionFormComponent = ({
                                 defaultValue=""
                                 register={register}
                                 isRequired
-                            />
+                            /> */}
                             <SelectrixBox<SubscriptionModel>
                                 control={control}
                                 name="name"
                                 error={errors.name}
                                 keys="label"
                                 keyLabel="label"
-                                label="Client "
+                                label="Subscription Type "
+                                placeholder={data?.name}
                                 options={[
                                     { id: 1, label: 'Basic' },
                                     { id: 2, label: 'Standard' },
@@ -234,7 +231,7 @@ export const SubscriptionFormComponent = ({
                                 defaultValue={''}
                                 register={register}
                                 readonly
-                                isRequired
+                                // isRequired
                             />
                             <HStack w="full">
                                 <CreatableSelect
@@ -417,7 +414,7 @@ export const SubscriptionFormComponent = ({
                             borderRadius="5px"
                             type="submit"
                             isLoading={isSubmitting}
-                            isDisabled={!isValid}
+                            // isDisabled={!isValid}
                         >
                             {isEdit ? 'Update' : 'Create'}
                         </Button>

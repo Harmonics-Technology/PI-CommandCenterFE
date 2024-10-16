@@ -1,6 +1,7 @@
 import {
     Box,
     Button,
+    Flex,
     Icon,
     List,
     ListIcon,
@@ -27,16 +28,41 @@ export const PackageCard = ({
     updateSubscription,
     isEdit,
     isDisabled,
+    freeTrial,
+    freeTrialDuration,
 }: IPackageCardProps) => {
     return (
         <Box
             w="full"
             bgColor="white"
             borderRadius="12px"
-            padding="2.5rem"
-            border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
+            padding={['24px', '2.5rem']}
+            border="3px solid #375982"
+            // border={selected ? '3px solid #375982' : '1px solid #CBD5E1'}
         >
             <Box>
+                {freeTrial && freeTrialDuration > 0 && (
+                    <Box h="2rem" mb="1rem">
+                        <Flex
+                            w={['100%', '60%']}
+                            justify="center"
+                            align="center"
+                            textTransform="uppercase"
+                            color="#1B487D"
+                            borderRadius="2.5rem"
+                            fontSize=".56rem"
+                            bgColor="brand.700"
+                            fontFamily="Nunito"
+                            fontWeight="800"
+                            padding="0rem 1rem"
+                            h="full"
+                        >
+                            <Text mb="0">
+                                {freeTrialDuration || 0} Days free trial
+                            </Text>
+                        </Flex>
+                    </Box>
+                )}
                 <Text color="black" fontSize="23px" fontWeight="800" mb="0">
                     {name}
                 </Text>
@@ -44,13 +70,13 @@ export const PackageCard = ({
                     color="#465568"
                     fontSize="16px"
                     fontWeight="300"
-                    noOfLines={2}
+                    // noOfLines={2}
                 >
                     {desc}
                 </Text>
             </Box>
             <Box my="2rem">
-                <Text color="black" fontSize="37px" fontWeight="800" mb="0">
+                <Text color="black" fontSize="37px" fontWeight="800" mb="0rem">
                     {CAD(billed == 'year' ? prices : price)}
                 </Text>
                 <Text color="#465568" fontSize="16px" fontWeight="300" mb="0">
@@ -77,6 +103,8 @@ export const PackageCard = ({
                                   billed,
                                   recommended,
                                   features,
+                                  freeTrial,
+                                  freeTrialDuration,
                               })
                 }
             >
