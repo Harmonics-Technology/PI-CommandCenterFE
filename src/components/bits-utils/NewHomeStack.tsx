@@ -14,6 +14,7 @@ export const NewHomeStack = ({
     img,
     rtl,
     isMulti,
+    multiSub,
 }: {
     title?: string;
     sub?: any;
@@ -23,6 +24,7 @@ export const NewHomeStack = ({
     img?: any;
     rtl?: boolean;
     isMulti?: boolean;
+    multiSub?: string;
 }) => {
     return (
         <HStack
@@ -40,9 +42,12 @@ export const NewHomeStack = ({
                         gap="1rem"
                         order={rtl ? 1 : 0}
                     >
-                        {sub?.map((x: any, i: any) => (
-                            <ServiceItems x={x} key={i} color={'black'} />
-                        ))}
+                        <>
+                            <MiniText text={multiSub} align="left" w="100%" />
+                            {sub?.map((x: any, i: any) => (
+                                <ServiceItems x={x} key={i} color={'black'} />
+                            ))}
+                        </>
                     </VStack>
                 ) : (
                     <MiniText text={sub} align="left" w="100%" />

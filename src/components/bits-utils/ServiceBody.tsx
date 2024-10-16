@@ -146,7 +146,7 @@ export const ServiceBody = () => {
                         sub={`Get the insights you need to optimize productivity. From billable hours to performance metrics, Timba’s reporting feature gives you the data to make smarter decisions and drive better outcomes.`}
                         btn
                         btnClick={'/features/robust-report'}
-                        img={'/assets/home-g.png'}
+                        img={'/assets/hero-i.png'}
                     />
                     <NewHomeStack
                         title="Client Onboarding"

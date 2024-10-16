@@ -11,6 +11,7 @@ export const Timesheet = () => {
                 buttonTitle="Start Using for FREE – Sign up here"
                 image="/assets/pr (5).png"
                 bgColor="brand.400"
+                btnColor="brand.100"
                 color="white"
                 h="auto"
                 gap={['33px', '2.25rem']}

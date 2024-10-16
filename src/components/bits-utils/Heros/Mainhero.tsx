@@ -27,6 +27,9 @@ export const Mainhero = ({
     isHome = false,
     h = isVertical ? '23rem' : '27rem',
     mainH = '85vh',
+    p = '2.5rem',
+    w = '38rem',
+    pt = '0',
 }: {
     title: string;
     sub?: string;
@@ -42,6 +45,9 @@ export const Mainhero = ({
     isHome?: boolean;
     h?: any;
     mainH?: any;
+    p?: any;
+    w?: any;
+    pt?: any;
 }) => {
     const router = useRouter();
     const [userEmail, setUserEmail] = useState('');
@@ -81,7 +87,7 @@ export const Mainhero = ({
             bgSize="cover"
             bgRepeat="no-repeat"
             bgColor={bgColor}
-            pt={['2.5rem', '0']}
+            pt={['2.5rem', pt]}
         >
             <HStack
                 w={['90%', '85%']}
@@ -89,7 +95,7 @@ export const Mainhero = ({
                 h={mainH}
                 align="center"
                 gap={gap}
-                py={isVertical ? '2.5rem' : '0'}
+                py={isVertical ? p : '0'}
                 flexDir={['column', isVertical ? 'column' : 'row']}
             >
                 <VStack
@@ -116,8 +122,9 @@ export const Mainhero = ({
                             fontWeight={['400', '400']}
                             fontFamily="Nunito"
                             mb="0"
-                            maxW={['100%', '88%']}
+                            maxW={['100%', '70%']}
                             lineHeight="normal"
+                            textAlign={isVertical ? 'center' : 'left'}
                         >
                             {sub}
                         </Text>
@@ -195,16 +202,13 @@ export const Mainhero = ({
                             fontStyle="italic"
                             mb="0"
                         >
-                            Enjoy all features for free ( 30 days trial - No
-                            credit card required.)
+                            Sign up to enjoy all features for free ( 30 days
+                            trial - No credit card required.)
                         </Text>
                     )}
                 </VStack>
                 <Box
-                    w={[
-                        isVertical ? '110%' : '100%',
-                        isVertical ? '38rem' : '41rem',
-                    ]}
+                    w={[isVertical ? '110%' : '100%', isVertical ? w : '41rem']}
                     h={h}
                     borderRadius={bd}
                     overflow="hidden"

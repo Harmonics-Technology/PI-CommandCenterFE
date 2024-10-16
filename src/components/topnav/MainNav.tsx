@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Icon } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Icon, Text } from '@chakra-ui/react';
 import { AdminLogo } from '@components/bits-utils/AdminLogo';
 import React, { useState } from 'react';
 import Items, { ExternalMenuItem } from '@components/menu-item';
@@ -6,10 +6,29 @@ import { useRouter } from 'next/router';
 import { MenuWithDropdown } from '@components/menu-item/MenuWithDropdown';
 import { MdMenu } from 'react-icons/md';
 import { LiaTimesSolid } from 'react-icons/lia';
+import { RxCaretDown } from 'react-icons/rx';
+import { FeaturesMenu } from '@components/bits-utils/Heros/FeaturesMenu';
+import { SolutionsMenu } from '@components/bits-utils/Heros/SolutionsMenu';
+
+export const CustomMenu = ({ label, onClick }) => {
+    return (
+        <HStack gap="13px" onClick={onClick} cursor="pointer">
+            <Text color="#182C51" fontWeight={700} mb="0">
+                {label}
+            </Text>
+            <RxCaretDown />
+        </HStack>
+    );
+};
 
 export const MainNav = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const [isOpen, setIsOpen] = useState('');
     const router = useRouter();
+
+    const updateMenuState = (menu) => {
+        setIsOpen(menu === isOpen ? '' : menu);
+    };
     return (
         <Box
             bgColor="white"
@@ -18,6 +37,7 @@ export const MainNav = () => {
             top="0"
             boxShadow="md"
             zIndex="800"
+            overflow={showMenu || isOpen ? 'unset' : 'hidden'}
         >
             <Flex
                 justify="space-between"
@@ -26,6 +46,7 @@ export const MainNav = () => {
                 w={['90%', '85%']}
                 mx="auto"
                 py="1rem"
+                // pos="relative"
             >
                 <AdminLogo />
                 <Box display={['block', 'none']}>
@@ -48,7 +69,7 @@ export const MainNav = () => {
                     transition=".4s all ease-in-out"
                     h={['100vh', 'auto']}
                 >
-                    <MenuWithDropdown
+                    {/* <MenuWithDropdown
                         menuTitle="features"
                         temp={['1fr', 'repeat(3,1fr)']}
                         bd={false}
@@ -82,8 +103,18 @@ export const MainNav = () => {
                                 name: 'client-onboarding',
                             },
                         ]}
+                    /> */}
+
+                    <CustomMenu
+                        onClick={() => updateMenuState('feat')}
+                        label="Features"
                     />
-                    <MenuWithDropdown
+                    <CustomMenu
+                        onClick={() => updateMenuState('solutions')}
+                        label="Solutions"
+                    />
+
+                    {/* <MenuWithDropdown
                         menuTitle="solutions"
                         menus={[
                             {
@@ -99,7 +130,7 @@ export const MainNav = () => {
                                 name: 'recruiters',
                             },
                         ]}
-                    />
+                    /> */}
                     <Items menuTitle="pricing" />
                     <ExternalMenuItem
                         url="https://blog.timba.ca"
@@ -141,6 +172,28 @@ export const MainNav = () => {
                     </HStack>
                 </HStack>
             </Flex>
+            {isOpen === 'feat' && (
+                <Box
+                    pos="absolute"
+                    top="100%"
+                    left="0"
+                    marginInlineStart="0 !important"
+                >
+                    <FeaturesMenu onClose={() => updateMenuState('feat')} />
+                </Box>
+            )}
+            {isOpen === 'solutions' && (
+                <Box
+                    pos="absolute"
+                    top="100%"
+                    left="0"
+                    marginInlineStart="0 !important"
+                >
+                    <SolutionsMenu
+                        onClose={() => updateMenuState('solutions')}
+                    />
+                </Box>
+            )}
         </Box>
     );
 };

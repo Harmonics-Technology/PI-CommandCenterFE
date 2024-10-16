@@ -22,7 +22,7 @@ export const Home = () => {
                 isHome
                 fs={['24px', '3rem']}
                 h={['23rem', 'auto']}
-                mainH="115vh"
+                mainH="90vh"
             />
             <ServiceBody />
             <WhoCanUseTimbaNew />

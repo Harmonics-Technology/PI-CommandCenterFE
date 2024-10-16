@@ -12,7 +12,7 @@ export const ProjectManagement = () => {
                 image="/assets/pr (1).png"
                 bgColor="brand.100"
                 color="white"
-                h="233px"
+                h="389px"
                 gap={['33px', '2.25rem']}
                 mainH={['65vh', '80vh']}
                 fs={['24px', '2.75rem']}
