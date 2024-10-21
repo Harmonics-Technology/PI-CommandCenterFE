@@ -3,7 +3,6 @@ import { AdminLogo } from '@components/bits-utils/AdminLogo';
 import React, { useState } from 'react';
 import Items, { ExternalMenuItem } from '@components/menu-item';
 import { useRouter } from 'next/router';
-import { MenuWithDropdown } from '@components/menu-item/MenuWithDropdown';
 import { MdMenu } from 'react-icons/md';
 import { LiaTimesSolid } from 'react-icons/lia';
 import { RxCaretDown } from 'react-icons/rx';
@@ -12,7 +11,12 @@ import { SolutionsMenu } from '@components/bits-utils/Heros/SolutionsMenu';
 
 export const CustomMenu = ({ label, onClick }) => {
     return (
-        <HStack gap="13px" onClick={onClick} cursor="pointer">
+        <HStack
+            gap="13px"
+            onClick={onClick}
+            cursor="pointer"
+            onMouseOver={onClick}
+        >
             <Text color="#182C51" fontWeight={700} mb="0">
                 {label}
             </Text>

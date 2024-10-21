@@ -39,7 +39,7 @@ export const FeaturesMenu = ({ onClose }) => {
             key: 6,
             title: 'Operational Task Management',
             sub: 'Edit and delete operational tasks, filter them by department, reassign tasks based on type.',
-            url: 'operational-task-management',
+            url: '',
         },
         {
             key: 7,
@@ -57,7 +57,7 @@ export const FeaturesMenu = ({ onClose }) => {
             key: 9,
             title: 'Training & Resources',
             sub: 'Empower your team with the tools and resources they need to succeed through tailored training programs.',
-            url: 'training-resource',
+            url: '',
         },
     ];
     const router = useRouter();
@@ -80,7 +80,7 @@ export const FeaturesMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/features/${x?.url}`);
+                                router.push(`/features/${x?.url}`);
                             }}
                             cursor="pointer"
                         >
@@ -107,7 +107,7 @@ export const FeaturesMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/features/${x?.url}`);
+                                router.push(`/features/${x?.url}`);
                             }}
                             cursor="pointer"
                         >
@@ -121,7 +121,7 @@ export const FeaturesMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/features/${x?.url}`);
+                                router.push(`/features/${x?.url}`);
                             }}
                             cursor="pointer"
                         >

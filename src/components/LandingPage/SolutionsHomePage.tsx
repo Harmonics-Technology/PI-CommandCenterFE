@@ -150,7 +150,7 @@ export const SolutionsHomePage = () => {
                 gap="60px"
                 sub="Sign up to enjoy all features for free ( 30 days trial - No credit card required.)"
                 mainH={['70vh', '80vh']}
-                img="/assets/solu.jpg"
+                img="/assets/solu.jpeg"
             />
             <Box pt="80px" bgColor="white">
                 <Box mx="auto" w={['90%', '80%']}>

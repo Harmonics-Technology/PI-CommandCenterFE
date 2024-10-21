@@ -181,8 +181,7 @@ export const FeaturesHomePage = () => {
                             },
                         ]}
                         isMulti
-                        btnClick={'/features/client-onboarding'}
-                        img={'/assets/home-h.png'}
+                        img={'/assets/home-k.png'}
                         rtl
                     />
                 </Box>

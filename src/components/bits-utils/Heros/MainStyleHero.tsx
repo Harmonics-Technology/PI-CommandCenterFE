@@ -82,8 +82,13 @@ export const MainStyleHero = ({
                         </Text>
                     </Box>
                 </VStack>
-                <Box w="55%" h="full">
-                    <Image src={img} w="full" h="auto" />
+                <Box
+                    w="55%"
+                    h="full"
+                    borderRadius="100px 0 0 100px"
+                    overflow="hidden"
+                >
+                    <Image src={img} w="full" h="full" objectFit="cover" />
                 </Box>
             </HStack>
         </Box>
