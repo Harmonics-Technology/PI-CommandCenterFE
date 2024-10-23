@@ -36,6 +36,7 @@ export const MainStyleHero = ({
                     gap={['1rem', '25px']}
                     align="flex-start"
                     pb={['2rem', '47px']}
+                    pr={['30px', '0']}
                 >
                     <Text
                         fontSize={['24px', '50px']}
