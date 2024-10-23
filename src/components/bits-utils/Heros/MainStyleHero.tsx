@@ -36,7 +36,6 @@ export const MainStyleHero = ({
                     gap={['1rem', '25px']}
                     align="flex-start"
                     pb={['2rem', '47px']}
-                    pr={['30px', '0']}
                 >
                     <Text
                         fontSize={['24px', '50px']}
@@ -45,6 +44,7 @@ export const MainStyleHero = ({
                         fontFamily="Nunito Sans"
                         mb="0"
                         lineHeight={['32.74px', '68px']}
+                        pr={['16px', '0']}
                     >
                         {title}
                     </Text>
@@ -55,6 +55,7 @@ export const MainStyleHero = ({
                         fontFamily="Nunito"
                         mb="0"
                         lineHeight={['19.1px', '1.75rem']}
+                        pr={['16px', '0']}
                     >
                         {desc}
                     </Text>

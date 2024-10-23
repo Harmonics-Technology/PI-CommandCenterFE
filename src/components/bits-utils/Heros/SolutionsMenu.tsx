@@ -103,7 +103,7 @@ export const SolutionsMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/solutions/${x?.url}`);
+                                router.push(`/solutions/${x?.url}`);
                             }}
                             cursor="pointer"
                         >
@@ -135,7 +135,7 @@ export const SolutionsMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/solutions/${x?.url}`);
+                                router.push(`/solutions/${x?.url}`);
                             }}
                             cursor="pointer"
                         >
@@ -154,7 +154,7 @@ export const SolutionsMenu = ({ onClose }) => {
                             key={x.key}
                             onClick={() => {
                                 onClose();
-                                // router.push(`/solutions/${x?.url}`);
+                                router.push(`/solutions/${x?.url}`);
                             }}
                             cursor="pointer"
                         >
