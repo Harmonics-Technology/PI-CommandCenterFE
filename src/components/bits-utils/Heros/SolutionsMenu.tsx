@@ -81,7 +81,7 @@ export const SolutionsMenu = ({ onClose }) => {
             key: 13,
             title: 'Entrepreneurs',
             sub: `Grow your business with Timba's versatile project management and team management tools.`,
-            url: 'enterpreneurs',
+            url: 'entrepreneurs',
         },
     ];
     const router = useRouter();
