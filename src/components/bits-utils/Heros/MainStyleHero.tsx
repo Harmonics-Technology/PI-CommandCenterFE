@@ -19,6 +19,7 @@ export const MainStyleHero = ({
             bgSize="cover"
             bgRepeat="no-repeat"
             bgColor={bgColor}
+            overflow="hidden"
         >
             <HStack
                 w={['100%', '100%']}
@@ -26,21 +27,23 @@ export const MainStyleHero = ({
                 h={mainH}
                 align="center"
                 gap={gap}
-                pl="115px"
+                pl={['30px', '115px']}
+                pt={['55px', '0']}
+                flexDir={['column', 'row']}
             >
                 <VStack
-                    w="40%"
-                    gap="25px"
+                    w={['100%', '40%']}
+                    gap={['1rem', '25px']}
                     align="flex-start"
                     pb={['2rem', '47px']}
                 >
                     <Text
-                        fontSize={['24px', '2.5rem']}
+                        fontSize={['24px', '50px']}
                         color="white"
                         fontWeight="800"
                         fontFamily="Nunito Sans"
                         mb="0"
-                        lineHeight={['32.74px', '3rem']}
+                        lineHeight={['32.74px', '68px']}
                     >
                         {title}
                     </Text>
@@ -83,7 +86,7 @@ export const MainStyleHero = ({
                     </Box>
                 </VStack>
                 <Box
-                    w="55%"
+                    w={['100%', '55%']}
                     h="full"
                     borderRadius="100px 0 0 100px"
                     overflow="hidden"

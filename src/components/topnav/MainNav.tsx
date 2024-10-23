@@ -15,7 +15,7 @@ export const CustomMenu = ({ label, onClick }) => {
             gap="13px"
             onClick={onClick}
             cursor="pointer"
-            onMouseOver={onClick}
+            // onMouseOver={onClick}
         >
             <Text color="#182C51" fontWeight={700} mb="0">
                 {label}

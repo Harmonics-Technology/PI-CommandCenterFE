@@ -1,144 +1,181 @@
 import {
     Box,
     Button,
-    Grid,
+    Circle,
     HStack,
     Icon,
-    Image,
     Text,
     VStack,
 } from '@chakra-ui/react';
-import { Mainhero } from '@components/bits-utils/Heros/Mainhero';
 import { MainStyleHero } from '@components/bits-utils/Heros/MainStyleHero';
 import { MainTitle } from '@components/bits-utils/Heros/MainTitle';
-import { NewHomeStack } from '@components/bits-utils/NewHomeStack';
-import { featuresIcons } from '@components/Icons/featuresIcons';
+import { solutions } from '@components/Icons/solutionsIcon';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
-export const NewBox = ({ icon, label, title, desc, router, url }) => {
+const SolutionBox = ({ label, icon, desc }) => {
     return (
-        <Box borderRight="1px solid #d9d9d9" _last={{ border: 0 }}>
-            <VStack w="full" px="2rem">
-                <Icon as={icon} fontSize="50px" />
+        <HStack
+            bgColor="#f8fbfb"
+            px={['20px', '40px']}
+            border=".8px solid #e4e6ea"
+            h={['auto', '152px']}
+            py={['1rem', '0']}
+            gap={['1rem', '50px']}
+        >
+            <Icon as={icon} fontSize="50px" />
+            <VStack gap="0px" align="flex-start">
                 <Text
-                    mt="8px"
-                    fontSize="18px"
-                    fontWeight={700}
+                    fontSize={['1rem', '18px']}
                     color="brand.100"
-                    textAlign="center"
+                    fontWeight={600}
+                    m="0"
                 >
                     {label}
                 </Text>
                 <Text
-                    mt="10px"
-                    fontSize="18px"
-                    fontWeight={700}
-                    color="#636B83"
-                    textAlign="center"
-                >
-                    {title}
-                </Text>
-                <Text
-                    mt="6px"
-                    fontSize="16px"
-                    fontWeight={400}
-                    color="#636B83"
-                    textAlign="center"
+                    fontSize={['.85rem', '1rem']}
+                    color="#636b83"
+                    lineHeight="24px"
+                    m="0 !important"
                 >
                     {desc}
                 </Text>
-                <Text
-                    mt="13px"
-                    fontSize="14px"
-                    fontWeight={700}
-                    color="brand.400"
-                    onClick={() => router.push(`/${url}`)}
-                    cursor="pointer"
-                >
-                    Learn More
-                </Text>
             </VStack>
-        </Box>
+        </HStack>
     );
 };
 
 export const SolutionsHomePage = () => {
-    const options = [
+    const useCases = [
         {
             key: 1,
-            icon: featuresIcons.one,
-            label: 'Project Management',
-            title: 'Streamline Project Planning, Coordination, and Tracking',
-            desc: 'Add multiple project managers to oversee projects, maintain an audit trail, and manage comments effectively. Easily track time spent on tasks without submitting a timesheet.',
+            icon: solutions.a,
+            label: 'Remote work',
+            desc: 'Align your remote workforce effortlessly with Timba’s improved dashboard and project management tools. Easily assign team members to multiple departments, track time, collaborate across projects, and streamline payment processes.',
             url: '/',
         },
         {
             key: 2,
-            icon: featuresIcons.second,
-            label: 'Employee Onboarding & Management',
-            title: 'Simplify Hiring and Onboarding Processes',
-            desc: 'Assign team members to multiple departments for cross-functional teamwork, ensuring everyone is in the right place for collaboration.',
+            icon: solutions.b,
+            label: 'For Large Teams',
+            desc: 'With Timba’s enhanced project management features, large teams can now assign multiple project managers to each project, ensuring smooth coordination and task delegation. Monitor progress, edit tasks on the go, and include hours worked directly into project timelines all from one central platform.',
             url: '/',
         },
         {
             key: 3,
-            icon: featuresIcons.third,
-            label: 'Operational Task Management',
-            title: 'Manage Tasks Efficiently',
-            desc: 'Edit and delete operational tasks, filter them by department, reassign tasks based on type, and optionally include hours on completed tasks for better tracking.',
+            icon: solutions.c,
+            label: 'Consultants',
+            desc: 'Timba’s flexible project management module lets consultants track time spent on specific tasks, reassess workloads, and optimize project delivery for enhanced client satisfaction.',
             url: '/',
         },
         {
             key: 4,
-            icon: featuresIcons.fourth,
-            label: 'Automated Timesheets',
-            title: 'Accurately Track Employee Hours',
-            desc: 'Eliminate manual entries and streamline time tracking with automated timesheets for reliable data.',
+            icon: solutions.d,
+            label: 'Freelancers',
+            desc: 'For freelancers juggling multiple clients and tasks, Timba simplifies the process with automated timesheets and payment management tools. Add comments, track task progress, and log hours without needing to submit timesheets manually, ensuring seamless project delivery and invoicing.',
+            url: '/',
+        },
+    ];
+    const industries = [
+        {
+            key: 1,
+            icon: solutions.e,
+            label: 'Construction',
+            desc: 'Timba simplifies construction team management with real-time time tracking, resource allocation, and task scheduling. Keep your construction projects on track by adding, editing, and tracking progress with Gantt charts and GPS monitoring.',
+            url: '/',
+        },
+        {
+            key: 2,
+            icon: solutions.f,
+            label: 'Government',
+            desc: 'From assigning team members across departments to managing cross-functional teams, Timba enhances workforce efficiency for government entities. Track work hours, manage leave requests, approve training sessions, and ensure compliance with detailed reporting.',
+            url: '/',
+        },
+        {
+            key: 3,
+            icon: solutions.g,
+            label: 'Creative Agencies',
+            desc: 'Deliver creativity on time and within budget. Manage multiple projects, track client billable hours, assign team members, and monitor productivity. With Timba, creative agencies can focus on delivering top-notch work without worrying about administrative tasks.',
+            url: '/',
+        },
+        {
+            key: 4,
+            icon: solutions.h,
+            label: 'Manufacturing',
+            desc: 'Optimize workforce productivity with Timba’s shift monitoring, automated timesheets, and real-time project updates. Track progress, assign tasks, and manage shifts efficiently to ensure maximum productivity and reduced operational costs.',
             url: '/',
         },
         {
             key: 5,
-            icon: featuresIcons.fifth,
-            label: 'Contract Management',
-            title: 'Efficiently Manage Workforce Contracts',
-            desc: 'Keep all your contracts organized and accessible, ensuring compliance and easy reference.',
+            icon: solutions.i,
+            label: 'Technology',
+            desc: 'Manage complex projects with Timba’s project management tools, including task assignments, audit trails, Gantt charts, and productivity tracking. For tech teams, Timba provides visibility into project workflows while ensuring compliance with industry standards.',
             url: '/',
         },
         {
             key: 6,
-            icon: featuresIcons.sixth,
-            label: 'Leave Management',
-            title: 'Simplify Leave Requests and Tracking',
-            desc: 'Easily manage employee leave requests, approvals, and tracking for seamless operations.',
+            icon: solutions.j,
+            label: 'Staffing & Recruiting',
+            desc: 'Timba’s all-in-one platform makes it easy to track work hours, automate payments, and manage candidate profiles. For staffing and recruiting firms, Timba simplifies the entire hiring and workforce management process.',
+            url: '/',
+        },
+        {
+            key: 6,
+            icon: solutions.k,
+            label: 'Subcontractors',
+            desc: `Streamline your subcontracting work with Timba's intuitive project management and time tracking tools. Easily manage multiple projects, track billable hours, and generate detailed reports for clients. Timba's automated timesheets and payment management features ensure accurate invoicing and efficient communication with clients.`,
             url: '/',
         },
         {
             key: 7,
-            icon: featuresIcons.seventh,
-            label: 'Robust Reporting',
-            title: 'Generate Insightful Reports for Data-Driven Decisions',
-            desc: 'Access comprehensive reports on performance, productivity, and project progress to inform your strategy.',
+            icon: solutions.l,
+            label: 'Human Resource Managers',
+            desc: `Simplify employee management tasks with Timba's comprehensive HR tools. Easily track employee hours, manage leave requests, and onboard new hires seamlessly. Timba's automated processes and reporting features streamline HR workflows and provide valuable insights into your team's performance.`,
             url: '/',
         },
         {
             key: 8,
-            icon: featuresIcons.eight,
-            label: 'Client Onboarding & Management',
-            title: 'Attract and Manage Clients with Ease',
-            desc: 'Streamline your client onboarding process, ensuring a smooth transition and effective relationship management.',
+            icon: solutions.m,
+            label: 'Recruiters',
+            desc: `Efficiently manage your recruiting pipeline with Timba's collaborative tools. Track candidate progress, schedule interviews, and collaborate with hiring teams seamlessly. Timba's streamlined workflows and communication features help you find and hire top talent efficiently.`,
             url: '/',
         },
         {
             key: 9,
-            icon: featuresIcons.night,
-            label: 'Training and Resources',
-            title: 'Provide Comprehensive Training and Resources to Employees',
-            desc: 'Empower your team with the tools and resources they need to succeed through tailored training programs.',
+            icon: solutions.n,
+            label: 'Entrepreneurs',
+            desc: `Grow your business with Timba's versatile project management and team management tools. Easily track project progress, manage team performance, and streamline administrative tasks. Timba's intuitive interface and automation features empower entrepreneurs to focus on strategic growth and achieve their business goals.`,
             url: '/',
         },
     ];
     const router = useRouter();
+
+    const [currentSolution, setCurrentSolution] = useState(1);
+    const solutionOptions = [
+        { key: 1, label: 'Use cases' },
+        { key: 2, label: 'Industries' },
+    ];
+    const useCaseRef = useRef(null);
+    const industriesRef = useRef(null);
+
+    const goToSolution = (key) => {
+        setCurrentSolution(key);
+        if (key == 1) {
+            (useCaseRef?.current as any)?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+            return;
+        }
+        if (key == 2) {
+            (industriesRef?.current as any)?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+            return;
+        }
+    };
     return (
         <Box>
             <MainStyleHero
@@ -147,102 +184,185 @@ export const SolutionsHomePage = () => {
                 btnText="Sign Up For Free"
                 desc="Timba empowers remote teams, SMEs, freelancers, and organizations across industries with an advanced platform for time management, operational efficiency, and seamless project handling. With our latest updates, managing cross-functional teams and complex projects has never been easier."
                 title="Every Team Thrives with Timba"
-                gap="60px"
+                gap={['20px', '60px']}
                 sub="Sign up to enjoy all features for free ( 30 days trial - No credit card required.)"
                 mainH={['70vh', '80vh']}
                 img="/assets/solu.jpeg"
             />
-            <Box pt="80px" bgColor="white">
-                <Box mx="auto" w={['90%', '80%']}>
-                    <NewHomeStack
-                        title="Why Timba?"
-                        multiSub="Managing a team can be challenging. Here are some pain points that many businesses face:"
-                        sub={[
-                            {
-                                title: 'Fragmented Communication',
-                                sub: 'Teams struggle to stay aligned, leading to miscommunication and delays.',
-                            },
-                            {
-                                title: 'Manual Processes',
-                                sub: 'Time-consuming manual entries can lead to errors and inefficiencies in tracking hours and managing tasks.',
-                            },
-                            {
-                                title: 'Complex Project Oversight',
-                                sub: 'Difficulty in managing multiple projects, tasks, and team members often leads to missed deadlines and lost productivity.',
-                            },
-                            {
-                                title: 'Inadequate Reporting',
-                                sub: 'Lack of insights into team performance and project progress hampers data-driven decision-making.',
-                            },
-                        ]}
-                        isMulti
-                        btnClick={'/features/client-onboarding'}
-                        img={'/assets/home-h.png'}
-                        rtl
-                    />
-                </Box>
-            </Box>
-            <Box pt="58px" bgColor="#f8fbfa">
-                <Box mx="auto" w={['90%', '85%']}>
-                    <MainTitle
-                        text="Timba addresses these pain points with innovative features designed for your success."
-                        w={['100%', '70%']}
-                    />
-                    <Grid
-                        templateColumns={['repeat(3,1fr)']}
-                        borderBottom="1px solid #d9d9d9"
-                        mb="22px"
-                        pb="32px"
-                        mt="90px"
-                    >
-                        {options?.slice(0, 3).map((x) => (
-                            <NewBox
-                                key={x?.key}
-                                title={x?.title}
-                                label={x?.label}
-                                desc={x?.desc}
-                                icon={x?.icon}
-                                router={router}
-                                url={x?.url}
-                            />
-                        ))}
-                    </Grid>
-                    <Grid
-                        templateColumns={['repeat(3,1fr)']}
-                        borderBottom="1px solid #d9d9d9"
-                        mb="22px"
-                        pb="32px"
-                    >
-                        {options?.slice(3, 6).map((x) => (
-                            <NewBox
-                                key={x?.key}
-                                title={x?.title}
-                                label={x?.label}
-                                desc={x?.desc}
-                                icon={x?.icon}
-                                router={router}
-                                url={x?.url}
-                            />
-                        ))}
-                    </Grid>
-                    <Grid
-                        templateColumns={['repeat(3,1fr)']}
-                        // borderBottom="1px solid #d9d9d9"
-                        // mb="22px"
-                        pb="52px"
-                    >
-                        {options?.slice(6, 9).map((x) => (
-                            <NewBox
-                                key={x?.key}
-                                title={x?.title}
-                                label={x?.label}
-                                desc={x?.desc}
-                                icon={x?.icon}
-                                router={router}
-                                url={x?.url}
-                            />
-                        ))}
-                    </Grid>
+            <Box bgColor="white" w="full" pb="111px">
+                <Box w={['85%', '80%']} mx="auto">
+                    <Box pt="70px">
+                        <MainTitle
+                            text="Our Solution"
+                            sub="Discover how Timba can transform your operations, no matter your industry or team size. From project management to daily task tracking, Timba offers the flexibility and control your teams need to thrive."
+                            w={['100%', '70%']}
+                        />
+                    </Box>
+                    <Box mt={['50px', '100px']}>
+                        <HStack
+                            align="flex-start"
+                            gap="60px"
+                            flexDir={['column', 'row']}
+                        >
+                            <Box
+                                w={['100%', '25%']}
+                                pos={['static', 'sticky']}
+                                top="100px"
+                            >
+                                <Box
+                                    pb="17px"
+                                    pt="36px"
+                                    borderBottom="1px solid #e4e6ea"
+                                >
+                                    <Text
+                                        fontSize="24px"
+                                        fontWeight={600}
+                                        color="brand.100"
+                                        mb="0"
+                                    >
+                                        Solutions
+                                    </Text>
+                                </Box>
+                                <VStack
+                                    mt="13px"
+                                    align="flex-start"
+                                    p="1rem 0 1.2rem"
+                                    gap="0"
+                                    borderBottom="1px solid #e4e6ea"
+                                >
+                                    {solutionOptions?.map((x) => (
+                                        <HStack
+                                            h={['48px']}
+                                            gap="12px"
+                                            cursor="pointer"
+                                            onClick={() => goToSolution(x?.key)}
+                                        >
+                                            <Circle
+                                                size="10px"
+                                                bgColor={
+                                                    currentSolution === x?.key
+                                                        ? 'brand.100'
+                                                        : 'transparent'
+                                                }
+                                            />
+                                            <Text
+                                                fontWeight={700}
+                                                color="brand.100"
+                                                mb="0"
+                                            >
+                                                {x.label}
+                                            </Text>
+                                        </HStack>
+                                    ))}
+                                </VStack>
+                                <VStack
+                                    gap="1rem"
+                                    p="48px 32px 32px"
+                                    bgColor="#2f4167"
+                                    pos="relative"
+                                    overflow="hidden"
+                                    borderRadius="10px"
+                                >
+                                    <Text
+                                        fontSize={['24px', '31px']}
+                                        color="white"
+                                        fontWeight="400"
+                                        fontFamily="Nunito Sans"
+                                        mb="0"
+                                        lineHeight={['32.74px']}
+                                        textAlign="center"
+                                        zIndex={2}
+                                    >
+                                        Try Timba free for 30 days
+                                    </Text>
+                                    <Text
+                                        fontSize={['14px', '1rem']}
+                                        color={'white'}
+                                        fontWeight="400"
+                                        fontFamily="Nunito"
+                                        mb="0"
+                                        lineHeight={['19.1px']}
+                                        zIndex={2}
+                                    >
+                                        Get full access to all Timba features
+                                        with a free trial. No credit card
+                                        needed. Cancel anytime.
+                                    </Text>
+                                    <Button
+                                        fontSize="1.125rem"
+                                        color="white"
+                                        bgColor="brand.400"
+                                        borderRadius="8px"
+                                        px="2.5rem"
+                                        h="4rem"
+                                        onClick={() =>
+                                            router.push('/book-a-demo')
+                                        }
+                                        w={['full', 'fit-content']}
+                                        zIndex={2}
+                                    >
+                                        Book a demo
+                                    </Button>
+                                    <Circle
+                                        size="400px"
+                                        pos="absolute"
+                                        bottom="-55%"
+                                        left="-99%"
+                                        bgColor="brand.100"
+                                        zIndex={1}
+                                    />
+                                </VStack>
+                            </Box>
+                            <Box w={['100%', '75%']}>
+                                <Box w="full" ref={useCaseRef}>
+                                    <Text
+                                        fontSize={['24px', '44px']}
+                                        fontWeight={600}
+                                        mb="24px"
+                                    >
+                                        By Use cases
+                                    </Text>
+                                    <Box
+                                        border="1px solid #E4E6EA"
+                                        borderRadius="4px"
+                                        w="full"
+                                    >
+                                        {useCases?.map((x) => (
+                                            <SolutionBox
+                                                key={x?.key}
+                                                label={x?.label}
+                                                desc={x?.desc}
+                                                icon={x?.icon}
+                                            />
+                                        ))}
+                                    </Box>
+                                </Box>
+                                <Box w="full" mt="51px" ref={industriesRef}>
+                                    <Text
+                                        fontSize={['24px', '44px']}
+                                        fontWeight={600}
+                                        mb="24px"
+                                    >
+                                        Industries
+                                    </Text>
+                                    <Box
+                                        border="1px solid #E4E6EA"
+                                        borderRadius="4px"
+                                        w="full"
+                                    >
+                                        {industries?.map((x) => (
+                                            <SolutionBox
+                                                key={x?.key}
+                                                label={x?.label}
+                                                desc={x?.desc}
+                                                icon={x?.icon}
+                                            />
+                                        ))}
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </HStack>
+                    </Box>
                 </Box>
             </Box>
             <Box>
@@ -257,12 +377,12 @@ export const SolutionsHomePage = () => {
                     bgBlendMode="overlay"
                 >
                     <MainTitle
-                        text="Join the Revolution with Timba!"
-                        sub="Transform your workforce management with our powerful features. Experience how Timba can help you overcome challenges and boost productivity."
+                        text="Ready to Simplify Workforce Management?"
+                        sub="Join thousands of businesses that trust Timba to optimize operations, enhance productivity, and manage teams effortlessly."
                         color="white"
-                        w={['90%', '45%']}
+                        w={['90%', '54%']}
                     />
-                    <Box w={['90%', 'unset']}>
+                    <VStack w={['90%', 'unset']}>
                         <Button
                             fontSize="1.125rem"
                             color="white"
@@ -273,7 +393,7 @@ export const SolutionsHomePage = () => {
                             onClick={() => router.push('/pricing')}
                             w={['full', 'fit-content']}
                         >
-                            Book A Demo
+                            Start Free Trial
                         </Button>
 
                         <Text
@@ -287,83 +407,8 @@ export const SolutionsHomePage = () => {
                         >
                             Try Timba for free - No credit card required
                         </Text>
-                    </Box>
-                </VStack>
-            </Box>
-            <Box py="85px" bgColor="white">
-                <HStack
-                    pt={['2rem', '47px']}
-                    spacing="1.8rem"
-                    bgColor="brand.100"
-                    borderRadius="40px"
-                    justify="space-between"
-                    w="80%"
-                    mx="auto"
-                    pl="63px"
-                    align="flex-end"
-                >
-                    <VStack
-                        w="40%"
-                        gap="25px"
-                        align="flex-start"
-                        pb={['2rem', '47px']}
-                    >
-                        <Text
-                            fontSize={['24px', '2.5rem']}
-                            color="white"
-                            fontWeight="800"
-                            fontFamily="Nunito Sans"
-                            mb="0"
-                            lineHeight={['32.74px', '3rem']}
-                        >
-                            Get Started with Timba Today!{' '}
-                            <Icon as={featuresIcons.rocket} />
-                        </Text>
-                        <Text
-                            fontSize={['14px', '1rem']}
-                            color={'white'}
-                            fontWeight="400"
-                            fontFamily="Nunito"
-                            mb="0"
-                            lineHeight={['19.1px', '1.75rem']}
-                        >
-                            Explore all our features and see how Timba can
-                            transform your workforce management. Join thousands
-                            of businesses that trust Timba to streamline their
-                            operations and enhance productivity.
-                        </Text>
-
-                        <Box w={['90%', 'unset']}>
-                            <Button
-                                fontSize="1.125rem"
-                                color="white"
-                                bgColor="brand.400"
-                                borderRadius="8px"
-                                px="2.5rem"
-                                h="4rem"
-                                onClick={() => router.push('/pricing')}
-                                w={['full', 'fit-content']}
-                            >
-                                Start Your Free Trial Now
-                            </Button>
-
-                            <Text
-                                fontSize="0.87rem"
-                                color="white"
-                                fontWeight="400"
-                                fontFamily="Nunito"
-                                fontStyle="italic"
-                                m="1rem 0 0"
-                                textAlign={['center', 'left']}
-                            >
-                                Sign up for FREE trial - No credit card required
-                            </Text>
-                        </Box>
                     </VStack>
-                    <Box w="45%">
-                        <Image src="/assets/opt.png" />
-                    </Box>
-                </HStack>
+                </VStack>
             </Box>
         </Box>
     );
