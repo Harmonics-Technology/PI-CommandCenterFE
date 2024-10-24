@@ -20,7 +20,7 @@ interface FormInputProps<TFormValues extends Record<string, unknown>> {
     error: FieldError | undefined;
     control: Control<TFormValues>;
     radios?: any;
-    value?: string;
+    bg?: any;
 }
 
 export const PrimaryRadio = <TFormValues extends Record<string, any>>({
@@ -30,12 +30,12 @@ export const PrimaryRadio = <TFormValues extends Record<string, any>>({
     control,
     defaultValue = undefined,
     radios,
-    value,
+    bg = 'brand.400',
 }: FormInputProps<TFormValues>) => {
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: 'framework',
         defaultValue: defaultValue,
-        onChange: console.log,
+        // onChange: console.log,
     });
 
     const group = getRootProps();
@@ -55,13 +55,17 @@ export const PrimaryRadio = <TFormValues extends Record<string, any>>({
                         <HStack
                             aria-label={label}
                             {...field}
-                            defaultValue={value}
+                            defaultValue={defaultValue}
                             w="full"
                             {...group}
                         >
                             {radios.map((value) => {
                                 const radio = getRadioProps({ value });
-                                return <RadioBtn {...radio}>{value}</RadioBtn>;
+                                return (
+                                    <RadioBtn {...radio} bg={bg}>
+                                        {value}
+                                    </RadioBtn>
+                                );
                             })}
                         </HStack>
                         // </HStack>

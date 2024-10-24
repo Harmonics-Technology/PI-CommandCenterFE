@@ -4,7 +4,7 @@ export const filterPagingSearchOptions = (ctx: any) => {
     const { limit, offset, search, from, to, paySlipFilter, chartYear } =
         ctx.query;
     const options = {
-        limit: limit ? limit : 10,
+        limit: limit,
         shiftLimit: limit ? limit : 5,
         offset: offset ? offset : 0,
         search: search ? search : '',

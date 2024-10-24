@@ -12,11 +12,12 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
     const router = useRouter();
     const noNav =
-        router.pathname.startsWith('/admin/login') ||
-        router.pathname.startsWith('/admin/password') ||
-        router.pathname.startsWith('/admin/forgot-password');
-    const adminNav = router.pathname.startsWith('/admin') && !noNav;
-    const admin = router.pathname.startsWith('/admin');
+        router.pathname.startsWith('/command-center/login') ||
+        router.pathname.startsWith('/command-center/password') ||
+        router.pathname.startsWith('/command-center/forgot-password');
+    const adminNav = router.pathname.startsWith('/command-center') && !noNav;
+    const admin = router.pathname.startsWith('/command-center');
+    const signup = router.pathname.startsWith('/sign-up');
 
     return (
         <>
@@ -29,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                     {children}
                 </Box>
-                {!admin ? <Footer /> : null}
+                {!admin && !signup ? <Footer /> : null}
             </Box>
         </>
     );

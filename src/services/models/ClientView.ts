@@ -21,4 +21,6 @@ export type ClientView = {
     isAnnualBilling?: boolean;
     subscriptionStatus?: string | null;
     dateCreated?: string;
+    isActive?: boolean;
+    country?: string | null;
 };

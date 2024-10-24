@@ -10,16 +10,22 @@ import { useState } from 'react';
 const CheckoutForm = ({
     payBtnText = 'Confirm Payment',
     redirectUrl,
+    isSubscription = true,
+    clientId,
 }: {
     payBtnText?: string;
     redirectUrl: string;
+    isSubscription?: boolean;
+    clientId?: string;
 }) => {
     const stripe = useStripe();
     const elements = useElements();
     const router = useRouter();
     const [error, setError] = useState<any>();
     const [isLoading, setIsLoading] = useState(false);
-    const { subscriptionId } = router.query;
+    const subscriptionId = router.asPath.split('/')[2]?.split('?')[0];
+
+    // console.log({ subscriptionId });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,7 +37,7 @@ const CheckoutForm = ({
             const result = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: `${window.location.origin}/completed?redirectUrl=${redirectUrl}&subscriptionId=${subscriptionId}`,
+                    return_url: `${window.location.origin}/completed?redirectUrl=${redirectUrl}&subscriptionId=${subscriptionId}&clientId=${clientId}&subscriptionPayment=${isSubscription}`,
                 },
             });
             if (result.error) {

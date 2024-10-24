@@ -10,7 +10,7 @@ export function withPageAuth(gssp: any) {
             // Redirect to login page
             return {
                 redirect: {
-                    destination: `/login?from=${encodeURIComponent(req.url)}`,
+                    destination: `/command-center/login?from=${encodeURIComponent(req.url)}`,
                     statusCode: 302,
                 },
             };
@@ -19,7 +19,7 @@ export function withPageAuth(gssp: any) {
         OpenAPI.TOKEN = token;
         OpenAPI.BASE =
             (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
-            'https://timesheetapiprod.azurewebsites.net';
+            'https://timba-command-center-staging.azurewebsites.net';
 
         return await gssp(context); // Continue on to call `getServerSideProps` logic
     };

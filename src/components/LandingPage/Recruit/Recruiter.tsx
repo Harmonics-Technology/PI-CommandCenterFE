@@ -14,9 +14,18 @@ export const Recruiter = () => {
                 image="/assets/re.png"
                 bgColor="brand.100"
                 color="white"
+                bd={['30px', '3.125rem']}
+                h="233px"
+                gap={['33px']}
+                mainH={['72vh', '80vh']}
             />
             <ReServices />
-            <BottomHero />
+            <Box h={['0', '6rem']} bgColor="white" />
+            <BottomHero
+                title="Simplify candidate sourcing, elevate 
+                client management, and ensure a 
+                seamless employee onboarding process."
+            />
         </Box>
     );
 };
