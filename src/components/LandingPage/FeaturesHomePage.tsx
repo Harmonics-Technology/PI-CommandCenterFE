@@ -212,7 +212,7 @@ export const FeaturesHomePage = () => {
                         ))}
                     </Grid>
                     <Grid
-                        templateColumns={['repeat(3,1fr)']}
+                        templateColumns={['1fr', 'repeat(3,1fr)']}
                         borderBottom="1px solid #d9d9d9"
                         mb="22px"
                         pb="32px"
@@ -303,11 +303,13 @@ export const FeaturesHomePage = () => {
                     justify="space-between"
                     w="80%"
                     mx="auto"
-                    pl="63px"
+                    pl={['20px', '63px']}
+                    pr={['20px', '0']}
                     align="flex-end"
+                    flexDir={['column', 'row']}
                 >
                     <VStack
-                        w="40%"
+                        w={['100%', '40%']}
                         gap="25px"
                         align="flex-start"
                         pb={['2rem', '47px']}
@@ -364,7 +366,7 @@ export const FeaturesHomePage = () => {
                             </Text>
                         </Box>
                     </VStack>
-                    <Box w="45%">
+                    <Box w={['100%', '45%']}>
                         <Image src="/assets/opt.png" />
                     </Box>
                 </HStack>
