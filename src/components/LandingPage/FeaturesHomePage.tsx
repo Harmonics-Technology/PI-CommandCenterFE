@@ -17,7 +17,11 @@ import React from 'react';
 
 export const NewBox = ({ icon, label, title, desc, router, url }) => {
     return (
-        <Box borderRight="1px solid #d9d9d9" _last={{ border: 0 }}>
+        <Box
+            borderRight={['0', '1px solid #d9d9d9']}
+            border={['1px solid #d9d9d9', '0']}
+            _last={{ border: [0, 'unset'] }}
+        >
             <VStack w="full" px="2rem">
                 <Icon as={icon} fontSize="50px" />
                 <Text
@@ -194,7 +198,8 @@ export const FeaturesHomePage = () => {
                     />
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
-                        borderBottom="1px solid #d9d9d9"
+                        borderBottom={['0', '1px solid #d9d9d9']}
+                        gap={['1rem', '0']}
                         mb="22px"
                         pb="32px"
                         mt="90px"
@@ -213,7 +218,8 @@ export const FeaturesHomePage = () => {
                     </Grid>
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
-                        borderBottom="1px solid #d9d9d9"
+                        borderBottom={['0', '1px solid #d9d9d9']}
+                        gap={['1rem', '0']}
                         mb="22px"
                         pb="32px"
                     >
@@ -233,6 +239,7 @@ export const FeaturesHomePage = () => {
                         templateColumns={['1fr', 'repeat(3,1fr)']}
                         // borderBottom="1px solid #d9d9d9"
                         // mb="22px"
+                        gap={['1rem', '0']}
                         pb="52px"
                     >
                         {options?.slice(6, 9).map((x) => (
