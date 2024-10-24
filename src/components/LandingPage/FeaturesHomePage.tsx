@@ -193,7 +193,7 @@ export const FeaturesHomePage = () => {
                         w={['100%', '70%']}
                     />
                     <Grid
-                        templateColumns={['repeat(3,1fr)']}
+                        templateColumns={['1fr', 'repeat(3,1fr)']}
                         borderBottom="1px solid #d9d9d9"
                         mb="22px"
                         pb="32px"
@@ -230,7 +230,7 @@ export const FeaturesHomePage = () => {
                         ))}
                     </Grid>
                     <Grid
-                        templateColumns={['repeat(3,1fr)']}
+                        templateColumns={['1fr', 'repeat(3,1fr)']}
                         // borderBottom="1px solid #d9d9d9"
                         // mb="22px"
                         pb="52px"
@@ -301,10 +301,10 @@ export const FeaturesHomePage = () => {
                     bgColor="brand.100"
                     borderRadius="40px"
                     justify="space-between"
-                    w="80%"
+                    w={['90%', '80%']}
                     mx="auto"
-                    pl={['20px', '63px']}
-                    pr={['20px', '0']}
+                    pl={['30px', '63px']}
+                    pr={['30px', '0']}
                     align="flex-end"
                     flexDir={['column', 'row']}
                 >
@@ -339,7 +339,7 @@ export const FeaturesHomePage = () => {
                             operations and enhance productivity.
                         </Text>
 
-                        <Box w={['90%', 'unset']}>
+                        <Box w={['90%', '100%']}>
                             <Button
                                 fontSize="1.125rem"
                                 color="white"
