@@ -26,20 +26,20 @@ export const FlexGridImage = ({
                 gap="1rem"
                 order={rtl ? 1 : 0}
             >
-                {items?.map((x: any, i: any) => (
-                    <ServiceItems x={x} key={i} color={color} />
+                {items?.map((x: any) => (
+                    <ServiceItems x={x} key={x?.title} color={color} />
                 ))}
             </VStack>
             <Box w={'50%'} order={rtl ? 0 : 1} display={['none', 'block']}>
                 <Grid templateColumns={['repeat(2, 1fr)']} gap="1.8rem">
-                    {imgs?.map((img: any, i: any) => (
+                    {imgs?.map((img: any) => (
                         <Box w="full">
                             <Image
                                 w="90%"
                                 m={['0', rtl ? '0 auto 0 0' : '0 0 0 auto']}
                                 h="auto"
                                 src={img}
-                                key={i}
+                                key={img}
                             />
                         </Box>
                     ))}

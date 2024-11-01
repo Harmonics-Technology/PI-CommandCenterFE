@@ -11,7 +11,7 @@ export const LeaveTab = ({ tabValue }: leaveProps) => {
     return (
         <HStack w="full" borderBottom="2px solid #e0e0e0" gap="1rem">
             {tabValue.map((x) => (
-                <Link href={`${x.url}`} passHref>
+                <Link href={`${x.url}`} passHref key={x?.url}>
                     <Text
                         fontWeight={
                             router.asPath.startsWith(`${x.url}`) ? '700' : '500'

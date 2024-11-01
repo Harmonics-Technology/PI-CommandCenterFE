@@ -28,8 +28,8 @@ export const Emp = () => {
                     strokeWidth="2.91892"
                 />
                 <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M35.4905 23.838C35.4905 29.4803 30.9166 34.0543 25.2743 34.0543C19.6321 34.0543 15.0581 29.4803 15.0581 23.838C15.0581 18.1958 19.6321 13.6218 25.2743 13.6218C30.9166 13.6218 35.4905 18.1958 35.4905 23.838Z"
                     stroke="#222E50"
                     strokeWidth="2.91892"

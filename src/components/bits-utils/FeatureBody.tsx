@@ -35,7 +35,12 @@ export const FeatureBody = ({
                     mb="4.6rem"
                 >
                     {options?.map((x) => (
-                        <ServiceCard title={x?.title} sub={x?.sub} bg="white" />
+                        <ServiceCard
+                            title={x?.title}
+                            sub={x?.sub}
+                            bg="white"
+                            key={x?.title}
+                        />
                     ))}
                 </Grid>
             </Box>

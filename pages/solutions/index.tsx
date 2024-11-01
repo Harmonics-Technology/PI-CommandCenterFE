@@ -1,4 +1,4 @@
-import { SolutionsHomePage } from '@components/LandingPage/SolutionsHomePage';
+import { SolutionsHomePage } from '@components/LandingPage/Solutions/SolutionsHomePage';
 import React from 'react';
 
 const index = () => {

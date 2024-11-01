@@ -14,6 +14,7 @@ export const SingleServiceLTR = ({
     rtl = false,
     bd = 0,
     order = 1,
+    desc,
 }: {
     image: string;
     color?: string;
@@ -24,6 +25,7 @@ export const SingleServiceLTR = ({
     rtl?: boolean;
     bd?: any;
     order?: number;
+    desc?: string;
 }) => {
     return (
         <Flex
@@ -56,6 +58,18 @@ export const SingleServiceLTR = ({
                         lineHeight={['32px', '3rem']}
                     >
                         {title}
+                    </Text>
+                )}
+
+                {desc && (
+                    <Text
+                        fontSize={['14px', '1rem']}
+                        fontWeight="400"
+                        lineHeight="1.75rem"
+                        color={color ? color : '#636b83'}
+                        mb="0"
+                    >
+                        {desc}
                     </Text>
                 )}
 

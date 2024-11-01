@@ -9,19 +9,19 @@ export const SolutionsMenu = ({ onClose }) => {
             key: 1,
             title: 'For Remote Teams',
             sub: 'Align your remote workforce effortlessly with Timba’s improved project management tool',
-            url: '',
+            url: 'remote-teams',
         },
         {
             key: 2,
             title: 'For Large Teams',
             sub: 'With Timba, large teams can now assign multiple project managers to each project',
-            url: '',
+            url: 'large-teams',
         },
         {
             key: 3,
             title: 'Consultants',
             sub: 'Efficiently track billable hours, manage projects budgets, and generate detailed reports for clients',
-            url: '',
+            url: 'consultants',
         },
         {
             key: 4,

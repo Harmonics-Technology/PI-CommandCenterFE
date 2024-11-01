@@ -11,6 +11,18 @@ export const MainStyleHero = ({
     btnText,
     sub,
     img,
+    btnColor = 'brand.400',
+}: {
+    bgColor: string;
+    mainH: any;
+    gap: any;
+    title: any;
+    desc: any;
+    btnClick: any;
+    btnText: any;
+    sub: any;
+    img: any;
+    btnColor?: any;
 }) => {
     return (
         <Box
@@ -49,13 +61,14 @@ export const MainStyleHero = ({
                         {title}
                     </Text>
                     <Text
-                        fontSize={['14px', '1rem']}
+                        fontSize={['14px', '1.1rem']}
                         color={'white'}
                         fontWeight="400"
                         fontFamily="Nunito"
                         mb="0"
                         lineHeight={['19.1px', '1.75rem']}
                         pr={['16px', '0']}
+                        w={['100%', '90%']}
                     >
                         {desc}
                     </Text>
@@ -64,12 +77,13 @@ export const MainStyleHero = ({
                         <Button
                             fontSize="1.125rem"
                             color="white"
-                            bgColor="brand.400"
+                            bgColor={btnColor}
                             borderRadius="8px"
                             px="2.5rem"
                             h="4rem"
                             onClick={btnClick}
                             w={['full', 'fit-content']}
+                            fontWeight={400}
                         >
                             {btnText}
                         </Button>

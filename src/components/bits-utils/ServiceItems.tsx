@@ -1,21 +1,24 @@
 import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
+import parse from 'react-html-parser';
 
 export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
     return (
         <Box>
-            <Text
-                fontSize={['18px', '1.25rem']}
-                fontWeight="700"
-                lineHeight="2rem"
-                color={color ? color : '#253053'}
-                mb={['.3rem',".5rem"]}
-                _groupHover={{
-                    color: '#253053',
-                }}
-            >
-                {x.title}
-            </Text>
+            {x?.title && (
+                <Text
+                    fontSize={['18px', '1.25rem']}
+                    fontWeight="700"
+                    lineHeight="2rem"
+                    color={color ? color : '#253053'}
+                    mb={['.3rem', '.5rem']}
+                    _groupHover={{
+                        color: '#253053',
+                    }}
+                >
+                    {x.title}
+                </Text>
+            )}
             <Text
                 fontSize={['14px', '1rem']}
                 fontWeight="400"
@@ -26,7 +29,7 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
                     color: '#636b83',
                 }}
             >
-                {x.sub}
+                {parse(x.sub || '')}
             </Text>
         </Box>
     );

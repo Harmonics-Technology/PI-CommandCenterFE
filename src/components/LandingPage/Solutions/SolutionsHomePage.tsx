@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { MainStyleHero } from '@components/bits-utils/Heros/MainStyleHero';
 import { MainTitle } from '@components/bits-utils/Heros/MainTitle';
+import { SolutionHero } from '@components/bits-utils/Heros/SolutionHero';
 import { solutions } from '@components/Icons/solutionsIcon';
 import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
@@ -365,51 +366,10 @@ export const SolutionsHomePage = () => {
                     </Box>
                 </Box>
             </Box>
-            <Box>
-                <VStack
-                    w="full"
-                    py={['2rem', '68px']}
-                    spacing="1.8rem"
-                    bgColor="brand.100"
-                    bgImage="/assets/revbg.png"
-                    bgSize="cover"
-                    bgRepeat="no-repeat"
-                    bgBlendMode="overlay"
-                >
-                    <MainTitle
-                        text="Ready to Simplify Workforce Management?"
-                        sub="Join thousands of businesses that trust Timba to optimize operations, enhance productivity, and manage teams effortlessly."
-                        color="white"
-                        w={['90%', '54%']}
-                    />
-                    <VStack w={['90%', 'unset']}>
-                        <Button
-                            fontSize="1.125rem"
-                            color="white"
-                            bgColor="brand.400"
-                            borderRadius="8px"
-                            px="2.5rem"
-                            h="4rem"
-                            onClick={() => router.push('/pricing')}
-                            w={['full', 'fit-content']}
-                        >
-                            Start Free Trial
-                        </Button>
-
-                        <Text
-                            fontSize="0.87rem"
-                            color="white"
-                            fontWeight="400"
-                            fontFamily="Nunito"
-                            fontStyle="italic"
-                            m="1rem 0 0"
-                            textAlign={['center', 'left']}
-                        >
-                            Try Timba for free - No credit card required
-                        </Text>
-                    </VStack>
-                </VStack>
-            </Box>
+            <SolutionHero
+                title="Ready to Simplify Workforce Management?"
+                sub="Join thousands of businesses that trust Timba to optimize operations, enhance productivity, and manage teams effortlessly."
+            />
         </Box>
     );
 };
