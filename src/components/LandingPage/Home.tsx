@@ -17,7 +17,7 @@ export const Home = () => {
                 sub="Timba is your all-in-one workforce management suite designed to tackle the most common challenges: time tracking, project management, employee engagement, client onboarding, and contract management. Plus, seamlessly collaborate and manage payments for remote teams across the globe."
                 buttonTitle="Sign Up For Free"
                 image="/assets/newlaptop.png"
-                bgColor="#285250"
+                bgColor="brand.900"
                 color="white"
                 isHome
                 fs={['24px', '3rem']}

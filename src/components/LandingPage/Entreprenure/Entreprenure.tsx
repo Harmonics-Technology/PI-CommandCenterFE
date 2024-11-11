@@ -11,7 +11,7 @@ export const Entreprenure = () => {
     return (
         <Box>
             <MainStyleHero
-                bgColor="brand.400"
+                bgColor="brand.900"
                 btnClick={() => router.push('/pricing')}
                 btnText="Start Using for FREE – Sign up here"
                 title="Improve your teams productivity and efficiency"

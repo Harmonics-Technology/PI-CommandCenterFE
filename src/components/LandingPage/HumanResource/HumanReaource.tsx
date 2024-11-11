@@ -11,7 +11,7 @@ export const HumanReaource = () => {
     return (
         <Box>
             <MainStyleHero
-                bgColor="brand.400"
+                bgColor="brand.900"
                 btnClick={() => router.push('/pricing')}
                 btnText="Start Using for FREE – Sign up here"
                 title="Revolutionize Your HR Operations with TIMBA"

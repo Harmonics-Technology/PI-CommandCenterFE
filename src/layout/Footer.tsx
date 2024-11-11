@@ -4,7 +4,7 @@ import { FooterHeadings } from '@components/bits-utils/FooterHeadings';
 import { FooterMenuItems } from '@components/bits-utils/FooterMenuItems';
 import { FooterIcons } from '@components/bits-utils/Heros/FooterIcons';
 import { BsFacebook, BsInstagram } from 'react-icons/bs';
-import { FiTwitter } from 'react-icons/fi';
+import { FiLinkedin, FiTwitter } from 'react-icons/fi';
 
 function Footer() {
     return (
@@ -61,9 +61,18 @@ function Footer() {
                                 your queries
                             </Text>
                             <HStack spacing="1rem">
-                                <FooterIcons icon={BsFacebook} url="/" />
-                                <FooterIcons icon={FiTwitter} url="/" />
-                                <FooterIcons icon={BsInstagram} url="/" />
+                                <FooterIcons
+                                    icon={BsFacebook}
+                                    url="https://www.facebook.com/profile.php?id=100095655366911"
+                                />
+                                <FooterIcons
+                                    icon={FiLinkedin}
+                                    url="https://www.linkedin.com/company/timba-app"
+                                />
+                                <FooterIcons
+                                    icon={BsInstagram}
+                                    url="https://www.instagram.com/timbaworkforce"
+                                />
                             </HStack>
                         </VStack>
                     </Grid>

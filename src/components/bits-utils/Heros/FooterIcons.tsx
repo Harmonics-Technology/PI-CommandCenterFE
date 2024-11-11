@@ -4,7 +4,7 @@ import React from 'react';
 
 export const FooterIcons = ({ icon, url }: { icon: any; url: string }) => {
     return (
-        <Link passHref href={url}>
+        <Link target="blank" rel="noopener noreferrer" passHref href={url}>
             <Icon
                 fontSize={['1rem', '1.3rem']}
                 cursor="pointer"

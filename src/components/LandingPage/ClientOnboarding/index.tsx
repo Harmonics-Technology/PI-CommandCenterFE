@@ -10,7 +10,7 @@ export const ClientOnboarding = () => {
                 title="Effortless Client Onboarding; Welcome New Ventures with TIMBA's Seamless Integration"
                 buttonTitle="Start Using for FREE – Sign up here"
                 image="/assets/pr (5).png"
-                bgColor="brand.400"
+                bgColor="brand.900"
                 color="white"
                 h="auto"
                 gap={['33px', '2.25rem']}

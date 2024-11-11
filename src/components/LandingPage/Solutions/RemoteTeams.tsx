@@ -10,7 +10,7 @@ export const RemoteTeams = () => {
     return (
         <Box>
             <MainStyleHero
-                bgColor="#285250"
+                bgColor="brand.900"
                 btnClick={() => router.push('/pricing')}
                 btnText="Get Started for Free Today"
                 title="Supercharge Your Remote Team with TIMBA"

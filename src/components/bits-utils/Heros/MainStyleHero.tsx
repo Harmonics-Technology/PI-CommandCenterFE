@@ -11,7 +11,7 @@ export const MainStyleHero = ({
     btnText,
     sub,
     img,
-    btnColor = 'brand.400',
+    btnColor = 'brand.900',
 }: {
     bgColor: string;
     mainH: any;
