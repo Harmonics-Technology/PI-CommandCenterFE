@@ -27,19 +27,19 @@ export const SolutionsMenu = ({ onClose }) => {
             key: 4,
             title: 'Freelancers',
             sub: 'Timba simplifies the process with automated timesheets and payment management tools',
-            url: '',
+            url: 'freelancers',
         },
         {
             key: 5,
             title: 'Construction',
             sub: 'Timba simplifies construction team management with real-time time tracking',
-            url: '',
+            url: 'construction',
         },
         {
             key: 6,
             title: 'Government',
             sub: 'Timba enhances workforce efficiency for government entities',
-            url: '',
+            url: 'government',
         },
         {
             key: 7,
