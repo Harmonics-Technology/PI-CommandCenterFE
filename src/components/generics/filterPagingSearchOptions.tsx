@@ -1,7 +1,7 @@
 export const filterPagingSearchOptions = (ctx: any) => {
     // console.log({ ctx: ctx.query });
 
-    const { limit, offset, search, from, to, paySlipFilter, chartYear } =
+    const { limit, offset, search, from, to, paySlipFilter, status, client } =
         ctx.query;
     const options = {
         limit: limit,
@@ -11,8 +11,10 @@ export const filterPagingSearchOptions = (ctx: any) => {
         from: from ? from : '',
         to: to ? to : '',
         paySlipFilter: paySlipFilter ? paySlipFilter : '',
+        status: status,
+        client: client,
         // chartYear: chartYear ? chartYear : moment(new Date()).format('YYYY'),
     };
-    console.log({ options });
+    // console.log({ options });
     return options;
 };

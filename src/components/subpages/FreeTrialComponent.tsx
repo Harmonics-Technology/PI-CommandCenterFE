@@ -10,11 +10,7 @@ import {
     Button,
 } from '@chakra-ui/react';
 import { AddClientModal } from '@components/Modals/AddClientModal';
-import {
-    TableClientActions,
-    TableData,
-    TableState,
-} from '@components/bits-utils/TableData';
+import { TableData, TableState } from '@components/bits-utils/TableData';
 import Tables from '@components/bits-utils/Tables';
 import { IClientProps } from '@components/generics/Schema';
 import React from 'react';
@@ -25,9 +21,8 @@ import { LeaveTab } from '@components/bits-utils/LeaveTab';
 import { SearchComponent } from '@components/bits-utils/SearchComponent';
 import { HiOutlineFilter } from 'react-icons/hi';
 import { useRouter } from 'next/router';
-import { CAD } from '@components/generics/functions/Naira';
 
-export const ClientComponent = ({ data, clients }: IClientProps) => {
+export const FreeTrialComponent = ({ data }: IClientProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
 
@@ -80,7 +75,7 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                         <Icon as={HiOutlineFilter} />
                         <Text>Filter By</Text>
                     </HStack>
-                    <Select
+                    {/* <Select
                         w="200px"
                         onChange={(e) => filterBox('client', e?.target.value)}
                         borderRadius="0"
@@ -92,7 +87,7 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                                 {x?.companyName}
                             </option>
                         ))}
-                    </Select>
+                    </Select> */}
                     <Select
                         w="100px"
                         onChange={(e) => filterBox('status', e?.target.value)}
@@ -101,8 +96,8 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                     >
                         <option value="">Status</option>
                         <option value="1">Active</option>
-                        <option value="2">Expired</option>
-                        <option value="2">Canceled</option>
+                        <option value="2">Free Trial</option>
+                        <option value="2">Inactive</option>
                     </Select>
                 </HStack>
                 <SearchComponent />
@@ -110,38 +105,47 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
             <Tables
                 tableHead={[
                     'Company Name',
-                    'Current Subscription Type',
-                    'No Of License Used',
-                    'Amount',
-                    'Start Date',
-                    'No Of Days Left',
-                    'Billing Frequency',
-                    'Status',
-                    'Actions',
+                    'Free Trial Start Date',
+                    'Free Trial End Date',
+                    'Subscription Start Date',
+                    'Current Status',
+                    'Free Trial Plan',
+                    'Days In Free Trial',
+                    'Trial To Active Conversion',
                 ]}
             >
                 <>
                     {data?.value?.map((x: ClientSubscriptionView) => (
                         <Tr key={x.id}>
                             <TableData name={x?.client?.companyName} />
-                            <TableData name={x?.subscription?.name} full />
                             <TableData
-                                name={`${x?.numberOfLicenseUsed}/${x?.numberOfLicense}`}
+                                name={dayjs(x.freeTrialStartDate).format(
+                                    'DD/MM/YYYY',
+                                )}
                             />
-                            <TableData name={CAD(x.totalAmount)} />
+                            <TableData
+                                name={dayjs(x.freeTrialStartDate)
+                                    .add(1, 'm')
+                                    .format('DD/MM/YYYY')}
+                            />
                             <TableData
                                 name={dayjs(x.startDate).format('DD/MM/YYYY')}
                             />
-                            <TableData
-                                name={dayjs(x.endDate).diff(x?.startDate) + 1}
-                            />
-                            <TableData
-                                name={x.annualBilling ? 'Annually' : 'Monthly'}
-                            />
                             <TableState name={x?.status} />
-                            <TableClientActions
-                                id={x.clientId}
-                                route={'list'}
+                            <TableData name={x?.subscription?.name} />
+                            <TableData
+                                name={dayjs(x?.freeTrialStartDate).diff(
+                                    dayjs(),
+                                )}
+                            />
+                            <TableData
+                                name={
+                                    x?.onFreeTrial
+                                        ? 'Free trial in progress'
+                                        : x?.isCanceled
+                                        ? 'No'
+                                        : 'Yes'
+                                }
                             />
                         </Tr>
                     ))}

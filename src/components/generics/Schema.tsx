@@ -35,9 +35,10 @@ export interface IModalProps {
     onClose: () => void;
 }
 export interface IClientInfoProps {
-    id: string;
+    id?: string;
     currentSub?: ClientSubscriptionView;
     allSub?: ClientSubscriptionViewPagedCollection;
+    sub?: ClientSubscriptionViewPagedCollection;
     data?: ClientView;
 }
 export interface IRenewSubProps {
@@ -91,7 +92,8 @@ export interface IAdminProps {
     id?: any;
 }
 export interface IClientProps {
-    data: ClientViewPagedCollection;
+    data: ClientSubscriptionViewPagedCollection;
+    clients?: ClientViewPagedCollection;
 }
 export interface ISubHistory {
     data: ClientSubscriptionViewPagedCollection;

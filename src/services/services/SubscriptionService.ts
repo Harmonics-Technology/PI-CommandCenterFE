@@ -6,6 +6,7 @@ import type { BooleanStandardResponse } from '../models/BooleanStandardResponse'
 import type { CancelSubscriptionModel } from '../models/CancelSubscriptionModel';
 import type { CardViewListStandardResponse } from '../models/CardViewListStandardResponse';
 import type { ClientSubscriptionModel } from '../models/ClientSubscriptionModel';
+import type { ClientSubscriptionSearch } from '../models/ClientSubscriptionSearch';
 import type { ClientSubscriptionViewPagedCollectionStandardResponse } from '../models/ClientSubscriptionViewPagedCollectionStandardResponse';
 import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSubscriptionViewStandardResponse';
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
@@ -19,6 +20,7 @@ import type { SubscriptionViewListStandardResponse } from '../models/Subscriptio
 import type { SubscriptionViewStandardResponse } from '../models/SubscriptionViewStandardResponse';
 import type { UpdateClientSubscriptionModel } from '../models/UpdateClientSubscriptionModel';
 import type { UpdateDefaultPaymentMethod } from '../models/UpdateDefaultPaymentMethod';
+import type { UsedLicenseCountUpdateModel } from '../models/UsedLicenseCountUpdateModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -729,6 +731,32 @@ requestBody?: LicenseUpdateModel,
     }
 
     /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static updateSUbscriptionUsedLicenceCount({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: UsedLicenseCountUpdateModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/update-used-license-count',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
      * @returns CardViewListStandardResponse Success
      * @throws ApiError
      */
@@ -807,6 +835,81 @@ requestBody?: NewClientSubscriptionModel,
             },
             body: requestBody,
             mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listAllClientSubscriptions({
+offset,
+limit,
+clientId,
+staus,
+search,
+xApiKey,
+}: {
+offset?: number,
+limit?: number,
+clientId?: string,
+staus?: ClientSubscriptionSearch,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/all-client-subscriptions',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'Offset': offset,
+                'Limit': limit,
+                'clientId': clientId,
+                'staus': staus,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listAllFreeTrialSubscriptions({
+offset,
+limit,
+staus,
+search,
+xApiKey,
+}: {
+offset?: number,
+limit?: number,
+staus?: ClientSubscriptionSearch,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/all-free-trial-subscriptions',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'Offset': offset,
+                'Limit': limit,
+                'staus': staus,
+                'search': search,
+            },
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,
