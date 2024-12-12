@@ -13,8 +13,7 @@ export const Completed = ({ data, redirectUrl }) => {
     const redirect = () => {
         window.location.href = `${
             process.env.NEXT_PUBLIC_TTS as string
-        }/${'SuperAdmin/account-management/manage-subscription'}
-        }`;
+        }/SuperAdmin/account-management/manage-subscription`;
     };
     const [countdown, setCountdown] = useState(5);
 
