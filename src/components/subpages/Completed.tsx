@@ -4,9 +4,16 @@ import React, { useEffect, useState } from 'react';
 export const Completed = ({ data, redirectUrl }) => {
     data.status = true;
     // redirectUrl = 'undefined';
+    // const redirect = () => {
+    //     window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
+    //         redirectUrl || '/login'
+    //     }
+    //     }`;
+    // };
     const redirect = () => {
-        window.location.href = `${process.env.NEXT_PUBLIC_TTS as string}/${
-            redirectUrl || `${process.env.NEXT_PUBLIC_TTS as string}/login`
+        window.location.href = `${
+            process.env.NEXT_PUBLIC_TTS as string
+        }/${'SuperAdmin/account-management/manage-subscription'}
         }`;
     };
     const [countdown, setCountdown] = useState(5);
@@ -34,6 +41,8 @@ export const Completed = ({ data, redirectUrl }) => {
             clearInterval(timer);
         };
     }, [countdown]);
+
+    console.log({ redirectUrl });
 
     return (
         <Box>
