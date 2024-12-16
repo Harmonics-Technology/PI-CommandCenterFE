@@ -172,7 +172,7 @@ export function TableState({ name }: { name: string | undefined | null }) {
                     name == 'APPROVED' ||
                     name == 'Completed'
                         ? 'brand.400'
-                        : name == 'PENDING' || name == 'EXPIRED'
+                        : name == 'PENDING' || name == 'INACTIVE'
                         ? 'brand.700'
                         : name == 'REVIEWED' || name == 'SUBMITTED'
                         ? 'brand.600'

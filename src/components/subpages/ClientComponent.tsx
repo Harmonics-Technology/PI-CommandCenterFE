@@ -101,8 +101,8 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                     >
                         <option value="">Status</option>
                         <option value="1">Active</option>
-                        <option value="2">Expired</option>
-                        <option value="2">Canceled</option>
+                        <option value="2">Inactive</option>
+                        <option value="4">Canceled</option>
                     </Select>
                 </HStack>
                 <SearchComponent />
@@ -121,30 +121,35 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                 ]}
             >
                 <>
-                    {data?.value?.map((x: ClientSubscriptionView) => (
-                        <Tr key={x.id}>
-                            <TableData name={x?.client?.companyName} />
-                            <TableData name={x?.subscription?.name} full />
-                            <TableData
-                                name={`${x?.numberOfLicenseUsed}/${x?.numberOfLicense}`}
-                            />
-                            <TableData name={CAD(x.totalAmount)} />
-                            <TableData
-                                name={dayjs(x.startDate).format('DD/MM/YYYY')}
-                            />
-                            <TableData
-                                name={dayjs(x.endDate).diff(x?.startDate) + 1}
-                            />
-                            <TableData
-                                name={x.annualBilling ? 'Annually' : 'Monthly'}
-                            />
-                            <TableState name={x?.status} />
-                            <TableClientActions
-                                id={x.clientId}
-                                route={'list'}
-                            />
-                        </Tr>
-                    ))}
+                    {data?.value?.map((x: ClientSubscriptionView) => {
+                        const dateDiff = dayjs(x.endDate).diff(dayjs(), 'days');
+                        return (
+                            <Tr key={x.id}>
+                                <TableData name={x?.client?.companyName} />
+                                <TableData name={x?.subscription?.name} full />
+                                <TableData
+                                    name={`${x?.numberOfLicenseUsed}/${x?.numberOfLicense}`}
+                                />
+                                <TableData name={CAD(x.totalAmount)} />
+                                <TableData
+                                    name={dayjs(x.startDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                />
+                                <TableData name={dateDiff} />
+                                <TableData
+                                    name={
+                                        x.annualBilling ? 'Annually' : 'Monthly'
+                                    }
+                                />
+                                <TableState name={x?.status} />
+                                <TableClientActions
+                                    id={x.clientId}
+                                    route={'list'}
+                                />
+                            </Tr>
+                        );
+                    })}
                 </>
             </Tables>
             <Box px="2rem">

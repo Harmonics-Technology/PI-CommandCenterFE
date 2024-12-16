@@ -13,6 +13,7 @@ import { CustomTextWithSubtitle } from '@components/bits-utils/CustomTextWithSub
 import { LeaveTab } from '@components/bits-utils/LeaveTab';
 import { TableData, TableState } from '@components/bits-utils/TableData';
 import Tables from '@components/bits-utils/Tables';
+import { CAD } from '@components/generics/functions/Naira';
 import { IClientInfoProps } from '@components/generics/Schema';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
@@ -119,8 +120,8 @@ export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
                         <CustomTextWithSubtitle
                             title="Billing Frequency"
                             sub={`${
-                                x?.annualBilling ? 'Momthly' : 'Annually'
-                            } ${x?.totalAmount}`}
+                                x?.annualBilling ? 'Annually' : 'Monthly'
+                            } }`}
                         />
                         <CustomTextWithSubtitle
                             title="Last Payment Date"
@@ -157,13 +158,12 @@ export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
                                         )}
                                     />
                                     <TableData
-                                        name={`${
-                                            dayjs(x?.endDate).diff(
-                                                x?.startDate,
-                                            ) + 1
-                                        } days`}
+                                        name={`${dayjs(x?.endDate).diff(
+                                            dayjs(),
+                                            'days',
+                                        )} days`}
                                     />
-                                    <TableData name={x?.totalAmount} />
+                                    <TableData name={CAD(x?.totalAmount)} />
                                     <TableState name={x?.status} />
                                     <td style={{ width: '290px' }}>
                                         <Box w="full">
