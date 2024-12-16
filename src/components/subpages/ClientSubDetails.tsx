@@ -119,17 +119,15 @@ export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
                         />
                         <CustomTextWithSubtitle
                             title="Billing Frequency"
-                            sub={`${
-                                x?.annualBilling ? 'Annually' : 'Monthly'
-                            } }`}
+                            sub={`${x?.annualBilling ? 'Annually' : 'Monthly'}`}
                         />
                         <CustomTextWithSubtitle
                             title="Last Payment Date"
-                            sub={dayjs(x?.startDate).format('dddd MMM YYYY')}
+                            sub={dayjs(x?.startDate).format('dddd MMM DD YYYY')}
                         />
                         <CustomTextWithSubtitle
                             title="Upcoming Payment Date"
-                            sub={dayjs(x?.endDate).format('dddd MMM YYYY')}
+                            sub={dayjs(x?.endDate).format('dddd MMM DD YYYY')}
                         />
                     </Grid>
                 ))}
