@@ -1,4 +1,5 @@
 import {
+    ClientLicenseUpdatesLogViewData,
     ClientSubscriptionView,
     ClientSubscriptionViewPagedCollection,
     ClientView,
@@ -40,6 +41,7 @@ export interface IClientInfoProps {
     allSub?: ClientSubscriptionViewPagedCollection;
     sub?: ClientSubscriptionViewPagedCollection;
     data?: ClientView;
+    activity?: ClientLicenseUpdatesLogViewData;
 }
 export interface IRenewSubProps {
     isOpen: boolean;

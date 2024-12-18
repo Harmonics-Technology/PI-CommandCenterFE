@@ -18,7 +18,7 @@ import { IClientInfoProps } from '@components/generics/Schema';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 
-export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
+export const ClientSubDetails = ({ sub, activity }: IClientInfoProps) => {
     const router = useRouter();
     const data = sub?.value?.at(0);
     // const [data, setData] = useState();
@@ -217,7 +217,7 @@ export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
                 {/* <Flex justify="flex-end" mb="1rem">
                     <SearchComponent />
                 </Flex> */}
-                {([] as any)?.length > 0 ? (
+                {(activity?.value as any)?.length > 0 ? (
                     <Tables
                         tableHead={[
                             'Subscription Type',
@@ -226,14 +226,14 @@ export const ClientSubDetails = ({ sub }: IClientInfoProps) => {
                         ]}
                     >
                         <>
-                            {[].map((x: any) => (
+                            {activity?.value?.map((x) => (
                                 <Tr>
-                                    <TableData name={`Premium `} />
+                                    <TableData name={x?.licenseType} />
+                                    <TableData name={x?.activityNote} />
                                     <TableData
-                                        name={`Super Admin assigns a Premium License to a user`}
-                                    />
-                                    <TableData
-                                        name={dayjs().format('DD/MM/YY')}
+                                        name={dayjs(x?.dateCreated).format(
+                                            'DD/MM/YY',
+                                        )}
                                     />
                                 </Tr>
                             ))}

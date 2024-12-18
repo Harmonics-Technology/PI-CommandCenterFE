@@ -125,7 +125,7 @@ export const FreeTrialComponent = ({ data }: IClientProps) => {
                             />
                             <TableData
                                 name={dayjs(x.freeTrialStartDate)
-                                    .add(1, 'm')
+                                    .add(1, 'M')
                                     .format('DD/MM/YYYY')}
                             />
                             <TableData
@@ -134,9 +134,9 @@ export const FreeTrialComponent = ({ data }: IClientProps) => {
                             <TableState name={x?.status} />
                             <TableData name={x?.subscription?.name} />
                             <TableData
-                                name={dayjs(x?.freeTrialStartDate).diff(
-                                    dayjs(),
-                                )}
+                                name={dayjs(
+                                    dayjs(x?.freeTrialStartDate).add(1, 'M'),
+                                ).diff(dayjs(), 'days')}
                             />
                             <TableData
                                 name={

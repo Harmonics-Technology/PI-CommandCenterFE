@@ -23,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = withPageAuth(
                 staus: pagingOptions.status,
                 search: pagingOptions.search,
             });
+
             const clients = await ClientService.listClients({
                 offset: pagingOptions.offset,
                 limit: pagingOptions.limit || 50,
