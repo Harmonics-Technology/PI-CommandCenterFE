@@ -236,7 +236,7 @@ export const ClientSubDetails = ({ sub, activity }: IClientInfoProps) => {
                             {activity?.value?.map((x) => (
                                 <Tr>
                                     <TableData name={x?.licenseType} />
-                                    <TableData name={x?.activityNote} />
+                                    <TableData name={x?.activityNote} full />
                                     <TableData
                                         name={dayjs(x?.dateCreated).format(
                                             'DD/MM/YY',
