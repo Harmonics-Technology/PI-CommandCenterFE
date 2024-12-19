@@ -115,52 +115,70 @@ export const FreeTrialComponent = ({ data }: IClientProps) => {
                 ]}
             >
                 <>
-                    {data?.value?.map((x: ClientSubscriptionView) => (
-                        <Tr key={x.id}>
-                            <TableData name={x?.client?.companyName} />
-                            <TableData
-                                name={dayjs(x.freeTrialStartDate).format(
-                                    'DD/MM/YYYY',
-                                )}
-                            />
-                            <TableData
-                                name={dayjs(x.freeTrialStartDate)
-                                    .add(1, 'M')
-                                    .format('DD/MM/YYYY')}
-                            />
-                            <TableData
-                                name={dayjs(x.startDate).format('DD/MM/YYYY')}
-                            />
-                            <TableState name={x?.status} />
-                            <TableData name={x?.subscription?.name} />
-                            <TableData
-                                name={
-                                    dayjs(
-                                        dayjs(x?.freeTrialStartDate).add(
-                                            1,
-                                            'M',
-                                        ),
-                                    ).diff(dayjs(), 'days') <= 0
-                                        ? 0
-                                        : dayjs(
-                                              dayjs(x?.freeTrialStartDate).add(
-                                                  1,
-                                                  'M',
-                                              ),
-                                          ).diff(dayjs(), 'days')
-                                }
-                            />
-                            <TableData
-                                name={
-                                    x?.onFreeTrial
-                                        ? 'Free trial in progress'
-                                        : x?.isCanceled
-                                        ? 'No'
-                                        : 'Yes'
-                                }
-                            />
-                        </Tr>
-                    ))}
+                    {data?.value?.map((x: ClientSubscriptionView) => {
+                        const route = router.push(
+                            `/command-center/clients/list/${x?.clientId}`,
+                        );
+                        return (
+                            <Tr key={x.id}>
+                                <TableData
+                                    name={x?.client?.companyName}
+                                    onClick={route}
+                                />
+                                <TableData
+                                    name={dayjs(x.freeTrialStartDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                    onClick={route}
+                                />
+                                <TableData
+                                    name={dayjs(x.freeTrialStartDate)
+                                        .add(1, 'M')
+                                        .format('DD/MM/YYYY')}
+                                    onClick={route}
+                                />
+                                <TableData
+                                    name={dayjs(x.startDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                    onClick={route}
+                                />
+                                <TableState name={x?.status} />
+                                <TableData
+                                    name={x?.subscription?.name}
+                                    onClick={route}
+                                />
+                                <TableData
+                                    name={`${
+                                        dayjs(
+                                            dayjs(x?.freeTrialStartDate).add(
+                                                1,
+                                                'M',
+                                            ),
+                                        ).diff(dayjs(), 'days') <= 0
+                                            ? 0
+                                            : dayjs(
+                                                  dayjs(
+                                                      x?.freeTrialStartDate,
+                                                  ).add(1, 'M'),
+                                              ).diff(dayjs(), 'days')
+                                    } days`}
+                                    onClick={route}
+                                />
+                                <TableData
+                                    name={
+                                        x?.onFreeTrial
+                                            ? 'Free trial in progress'
+                                            : x?.isCanceled
+                                            ? 'No'
+                                            : 'Yes'
+                                    }
+                                    full
+                                    onClick={route}
+                                />
+                            </Tr>
+                        );
+                    })}
                 </>
             </Tables>
             <Box px="2rem">

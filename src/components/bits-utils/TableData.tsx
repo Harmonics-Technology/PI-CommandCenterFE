@@ -60,6 +60,7 @@ export function TableData({
     full,
     isRed,
     solid,
+    onClick,
 }: {
     name: any;
     border?: boolean | undefined;
@@ -69,6 +70,7 @@ export function TableData({
     full?: boolean;
     isRed?: boolean;
     solid?: boolean;
+    onClick?: any;
 }) {
     return (
         <Td
@@ -78,6 +80,7 @@ export function TableData({
             paddingInlineStart="2rem"
             className={classes}
             fontWeight={solid ? 500 : 400}
+            onClick={onClick}
             // maxW="120px"
             // textOverflow=""
             // overflow="hidden"

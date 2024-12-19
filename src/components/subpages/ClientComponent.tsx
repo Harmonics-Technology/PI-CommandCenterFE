@@ -136,7 +136,11 @@ export const ClientComponent = ({ data, clients }: IClientProps) => {
                                         'DD/MM/YYYY',
                                     )}
                                 />
-                                <TableData name={dateDiff} />
+                                <TableData
+                                    name={`${
+                                        dateDiff <= 0 ? 0 : dateDiff
+                                    } days`}
+                                />
                                 <TableData
                                     name={
                                         x.annualBilling ? 'Annually' : 'Monthly'
