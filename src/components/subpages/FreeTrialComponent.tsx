@@ -116,9 +116,11 @@ export const FreeTrialComponent = ({ data }: IClientProps) => {
             >
                 <>
                     {data?.value?.map((x: ClientSubscriptionView) => {
-                        const route = router.push(
-                            `/command-center/clients/list/${x?.clientId}`,
-                        );
+                        const route = () => {
+                            router.push(
+                                `/command-center/clients/list/${x?.clientId}`,
+                            );
+                        };
                         return (
                             <Tr key={x.id}>
                                 <TableData
