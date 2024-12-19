@@ -156,10 +156,17 @@ export const ClientSubDetails = ({ sub, activity }: IClientInfoProps) => {
                                         )}
                                     />
                                     <TableData
-                                        name={`${dayjs(x?.endDate).diff(
-                                            dayjs(),
-                                            'days',
-                                        )} days`}
+                                        name={`${
+                                            dayjs(x?.endDate).diff(
+                                                dayjs(),
+                                                'days',
+                                            ) <= 0
+                                                ? 0
+                                                : dayjs(x?.endDate).diff(
+                                                      dayjs(),
+                                                      'days',
+                                                  )
+                                        } days`}
                                     />
                                     <TableData name={CAD(x?.totalAmount)} />
                                     <TableState name={x?.status} />
