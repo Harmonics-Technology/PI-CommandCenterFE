@@ -81,6 +81,7 @@ export function TableData({
             className={classes}
             fontWeight={solid ? 500 : 400}
             onClick={onClick}
+            cursor={onClick ? 'pointer' : 'auto'}
             // maxW="120px"
             // textOverflow=""
             // overflow="hidden"
