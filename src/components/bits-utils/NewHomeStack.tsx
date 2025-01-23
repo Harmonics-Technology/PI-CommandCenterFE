@@ -1,8 +1,8 @@
-import { Button, HStack, VStack, Box, Image } from '@chakra-ui/react';
+import { Button, HStack, VStack, Box, Image, Link } from '@chakra-ui/react';
 import React from 'react';
 import { MainTitle } from './Heros/MainTitle';
 import { MiniText } from './MiniText';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { ServiceItems } from './ServiceItems';
 
 export const NewHomeStack = ({
@@ -53,7 +53,7 @@ export const NewHomeStack = ({
                     <MiniText text={sub} align="left" w="100%" />
                 )}
                 {btn && (
-                    <Link passHref href={btnClick || ''}>
+                    <Link href={btnClick || ''}>
                         <Button
                             borderRadius="0.5rem"
                             bgColor="#0CA59D"

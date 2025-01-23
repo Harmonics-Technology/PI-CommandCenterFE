@@ -7,9 +7,9 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
         <Box>
             {x?.title && (
                 <Text
-                    fontSize={['18px', '1.25rem']}
+                    fontSize={{ base: '18px', xl: '1rem' }}
                     fontWeight="700"
-                    lineHeight="2rem"
+                    lineHeight="1.5rem"
                     color={color ? color : '#253053'}
                     mb={['.3rem', '.5rem']}
                     _groupHover={{
@@ -20,9 +20,9 @@ export const ServiceItems = ({ color, x }: { color?: string; x: any }) => {
                 </Text>
             )}
             <Text
-                fontSize={['14px', '1rem']}
+                fontSize={['14px', '.9rem']}
                 fontWeight="400"
-                lineHeight="1.75rem"
+                lineHeight="1.5rem"
                 color={color ? color : '#636b83'}
                 mb="0"
                 _groupHover={{
