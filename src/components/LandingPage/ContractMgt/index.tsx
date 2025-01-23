@@ -15,7 +15,11 @@ export const ContractMgt = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['65vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="TIMBA empowers you to streamline and optimize your contract management processes like never before. From secure storage to intelligent alerts, TIMBA ensures your contracts are meticulously organized and effortlessly managed."

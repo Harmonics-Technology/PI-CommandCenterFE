@@ -50,7 +50,7 @@ export const MainStyleHero = ({
                     pb={['2rem', '47px']}
                 >
                     <Text
-                        fontSize={['24px', '50px']}
+                        fontSize={{ base: '24px', xl: '2.5rem', '2xl': '50px' }}
                         color="white"
                         fontWeight="800"
                         fontFamily="Nunito Sans"
@@ -61,7 +61,7 @@ export const MainStyleHero = ({
                         {title}
                     </Text>
                     <Text
-                        fontSize={['14px', '1.1rem']}
+                        fontSize={{ base: '14px', '2xl': '1.1rem' }}
                         color={'white'}
                         fontWeight="400"
                         fontFamily="Nunito"
@@ -102,7 +102,7 @@ export const MainStyleHero = ({
                     </Box>
                 </VStack>
                 <Box
-                    w={['100%', '55%']}
+                    w={{ base: '100%', xl: '45%', '2xl': '50%' }}
                     h="full"
                     borderRadius="100px 0 0 100px"
                     overflow="hidden"

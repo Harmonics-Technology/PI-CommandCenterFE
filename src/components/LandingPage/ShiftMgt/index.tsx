@@ -15,7 +15,11 @@ export const ShiftManagement = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['55vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="TIMBA reimagines how you manage shifts, providing you with unparalleled flexibility to create, assign, and track shifts effortlessly. With customizable options and real-time availability monitoring, TIMBA ensures optimal coverage while prioritizing your team members' well-being."

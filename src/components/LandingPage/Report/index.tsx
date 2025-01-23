@@ -15,7 +15,11 @@ export const Report = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['55vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="TIMBA empowers you to make informed decisions and optimize your productivity journey through a robust array of reports. From billable hours to productivity metrics, TIMBA's reporting feature provides you with the tools to track progress, make strategic adjustments, and achieve your goals."

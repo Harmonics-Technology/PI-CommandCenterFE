@@ -22,7 +22,10 @@ export const Mainhero = ({
     btnColor,
     gap,
     isVertical,
-    fs = ['24px', '3.125rem'],
+    fs = {
+        base: '24px',
+        '2xl': '3.125rem',
+    },
     bd = 0,
     isHome = false,
     h = isVertical ? '23rem' : '27rem',
@@ -117,12 +120,19 @@ export const Mainhero = ({
                     </Text>
                     {sub && (
                         <Text
-                            fontSize={['15px', '18px']}
+                            fontSize={{
+                                base: '15px',
+                                '2xl': '18px',
+                            }}
                             color={color || '#696969'}
                             fontWeight={['400', '400']}
                             fontFamily="Nunito"
                             mb="0"
-                            maxW={['100%', '70%']}
+                            maxW={{
+                                base: '100%',
+                                xl: '90%',
+                                '2xl': '70%',
+                            }}
                             lineHeight="normal"
                             textAlign={isVertical ? 'center' : 'left'}
                         >
@@ -208,7 +218,11 @@ export const Mainhero = ({
                     )}
                 </VStack>
                 <Box
-                    w={[isVertical ? '110%' : '100%', isVertical ? w : '41rem']}
+                    w={{
+                        base: isVertical ? '110%' : '100%',
+                        xl: isVertical ? w : '32rem',
+                        '2xl': isVertical ? w : '41rem',
+                    }}
                     h={h}
                     borderRadius={bd}
                     overflow="hidden"

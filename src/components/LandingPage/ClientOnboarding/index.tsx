@@ -15,7 +15,11 @@ export const ClientOnboarding = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['55vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="TIMBA revolutionizes how you onboard new clients, ensuring a swift and seamless introduction to your services. Through pre-configured accounts, streamlined access, and insightful tracking, TIMBA empowers subcontractors to create lasting impressions and establish fruitful collaborations."

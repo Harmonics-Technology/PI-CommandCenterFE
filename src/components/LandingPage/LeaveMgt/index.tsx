@@ -15,7 +15,11 @@ export const LeaveMgt = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['55vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="TIMBA redefines how you handle time off requests, providing a comprehensive platform for efficient leave management. From vacation to sick leave, TIMBA streamlines the process, ensuring seamless request submission, clear approvals, and enhanced team coordination."

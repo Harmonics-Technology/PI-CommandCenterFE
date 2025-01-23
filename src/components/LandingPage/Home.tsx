@@ -20,7 +20,11 @@ export const Home = () => {
                 bgColor="brand.900"
                 color="white"
                 isHome
-                fs={['24px', '3rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.5rem',
+                    '2xl': '3rem',
+                }}
                 h={['23rem', 'auto']}
                 mainH="90vh"
             />

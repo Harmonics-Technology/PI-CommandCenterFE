@@ -16,7 +16,11 @@ export const Timesheet = () => {
                 h="auto"
                 gap={['33px', '2.25rem']}
                 mainH={['55vh', '80vh']}
-                fs={['24px', '2.75rem']}
+                fs={{
+                    base: '24px',
+                    xl: '2.3rem',
+                    '2xl': '2.75rem',
+                }}
             />
             <FeatureBody
                 topText="Gone are the days of painstakingly recording every minute spent on tasks and projects. TIMBA introduces a game-changing automated timesheet solution, ensuring accuracy, efficiency, and peace of mind for you and your team."
