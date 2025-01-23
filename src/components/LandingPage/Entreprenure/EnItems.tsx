@@ -1,4 +1,12 @@
-import { Box, Button, Grid, Image, Text, VStack } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Circle,
+    Grid,
+    Image,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 import React from 'react';
 import { AiOutlineUserSwitch, AiOutlineFieldTime } from 'react-icons/ai';
 import { FaFileContract } from 'react-icons/fa';
@@ -14,12 +22,13 @@ export const EnItems = () => {
     const router = useRouter();
     return (
         <Box>
-            <Box bgColor="brand.100" pos="relative">
-                <Box p="4rem 0 8rem" mx="auto" w="90%">
+            <Box bgColor="brand.100" pos="relative" overflow="hidden">
+                <Box p={['44px 0', '4rem 0 3rem']} mx="auto" w={['90%', '85%']}>
                     <MainTitle
                         text="Track every minute of your billable time. We know this means a lot you"
                         sub="Discover the features that make TIMBA the ultimate solution for your needs."
                         color="white"
+                        w={['100%', '70%']}
                     />
                     <Grid
                         templateColumns={['1fr', 'repeat(3,1fr)']}
@@ -87,7 +96,7 @@ export const EnItems = () => {
                             bg="white"
                         />
                     </Grid>
-                    <VStack w="full" bgColor="brand.100" pt="3rem" mt="3rem">
+                    <VStack w="full" bgColor="brand.100" pt="0rem" mt="4rem">
                         <MainTitle
                             text="Start Using TIMBA today"
                             color="white"
@@ -111,31 +120,46 @@ export const EnItems = () => {
                                 fontWeight="400"
                                 fontFamily="Nunito"
                                 fontStyle="italic"
-                                m="2rem 0 0"
+                                m="1rem 0 0"
                             >
                                 Sign up for FREE trial - No credit card required
                             </Text>
                         </Box>
                     </VStack>
                 </Box>
-                <Box pos="absolute" top="0" left="0">
-                    <Image src="/assets/cu.png" w="full" alt="banner image" />
-                </Box>
-                <Box
+                <Circle
+                    size="8rem"
+                    bgColor="#FBC953"
                     pos="absolute"
-                    bottom="0"
-                    right="0"
-                    transform="rotate(180deg)"
-                >
-                    <Image src="/assets/cu.png" w="full" alt="banner image" />
-                </Box>
+                    left="-5%"
+                    top="0%"
+                    zIndex="1"
+                    display={['none', 'block']}
+                />
+                <Circle
+                    size="8rem"
+                    bgColor="#FBC953"
+                    pos="absolute"
+                    right="-5%"
+                    bottom="0%"
+                    zIndex="1"
+                    display={['none', 'block']}
+                />
             </Box>
             <SingleShowCase
                 btn="Have a Large Team - Book a product Demo"
-                image="/assets/lapb.png"
+                image="/assets/pr (7).png"
                 onClick={() => router.push('/book-demo')}
                 title="TIMBA is the ultimate ally that transforms how companies operate, elevates team performance, and fuels the journey to success. Experience the love for yourself and see why TIMBA is the go-to choice for businesses"
             />
+            {/* <SingleShowCase
+                btn="Start Using TIMBA Today"
+                image="/assets/lapb.png"
+                onClick={() => router.push('/book-demo')}
+                sub="Sign up for FREE trial - No credit card required"
+                main="Embrace a New Era of Efficiency, Precision, and Productivity"
+                title="Empower your journey and elevate your operations to unprecedented heights with TIMBA."
+            /> */}
         </Box>
     );
 };

@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BooleanStandardResponse } from '../models/BooleanStandardResponse';
+import type { ClientLicenseUpdatesLogViewStandardResponse } from '../models/ClientLicenseUpdatesLogViewStandardResponse';
 import type { ClientModel } from '../models/ClientModel';
 import type { ClientViewPagedCollectionStandardResponse } from '../models/ClientViewPagedCollectionStandardResponse';
 import type { ClientViewStandardResponse } from '../models/ClientViewStandardResponse';
@@ -144,6 +145,45 @@ xApiKey?: any,
                 'Offset': offset,
                 'Limit': limit,
                 'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientLicenseUpdatesLogViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static getClientLicenseUpdateLogs({
+offset,
+limit,
+clientId,
+startDate,
+endDate,
+xApiKey,
+}: {
+offset?: number,
+limit?: number,
+clientId?: string,
+startDate?: string,
+endDate?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientLicenseUpdatesLogViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Client/license-logs',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'Offset': offset,
+                'Limit': limit,
+                'clientId': clientId,
+                'startDate': startDate,
+                'endDate': endDate,
             },
             errors: {
                 400: `Bad Request`,

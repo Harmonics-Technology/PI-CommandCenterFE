@@ -88,7 +88,7 @@ export const PrimaryInput = <TFormValues extends Record<string, any>>({
                     textTransform="capitalize"
                     width="fit-content"
                     fontSize={fontSize}
-                    mb="0"
+                    mb=".5rem"
                     color={color}
                 >
                     {label}

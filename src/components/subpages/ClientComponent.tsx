@@ -1,71 +1,166 @@
-import { Tr, useDisclosure } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    HStack,
+    Icon,
+    Select,
+    Tr,
+    Text,
+    useDisclosure,
+    Button,
+} from '@chakra-ui/react';
 import { AddClientModal } from '@components/Modals/AddClientModal';
 import {
     TableClientActions,
     TableData,
-    TableStatus,
+    TableState,
 } from '@components/bits-utils/TableData';
-import { TableWrapper } from '@components/bits-utils/TableWrapper';
 import Tables from '@components/bits-utils/Tables';
 import { IClientProps } from '@components/generics/Schema';
 import React from 'react';
-import { ClientView } from 'src/services';
+import { ClientSubscriptionView } from 'src/services';
 import dayjs from 'dayjs';
+import Pagination from '@components/bits-utils/Pagination';
+import { LeaveTab } from '@components/bits-utils/LeaveTab';
+import { SearchComponent } from '@components/bits-utils/SearchComponent';
+import { HiOutlineFilter } from 'react-icons/hi';
+import { useRouter } from 'next/router';
+import { CAD } from '@components/generics/functions/Naira';
 
-export const ClientComponent = ({ data }: IClientProps) => {
+export const ClientComponent = ({ data, clients }: IClientProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    console.log({ data });
+    const router = useRouter();
+
+    const filterBox = (type, value) => {
+        router.push({
+            query: {
+                ...router.query,
+                [type]: value,
+            },
+        });
+    };
+
     return (
-        <>
-            <TableWrapper
-                tableTitle="Clients"
-                buttonTitle="Add Client"
-                onChange={() => void 0}
-                options={['Client']}
-                openModal={onOpen}
-                tables={
-                    <Tables
-                        tableHead={[
-                            'Client Name',
-                            'Email',
-                            // 'Current Subscription Type',
-                            // 'Amount',
-                            'Onboarding Date',
-                            'Status',
-                            'Actions',
-                        ]}
+        <Box w="full" bgColor="white" borderRadius="10px" p="1rem" minH="80vh">
+            <Text
+                fontWeight="800"
+                color="#1b1d21"
+                pb=".5rem"
+                borderBottom="2px solid #e0e0e0"
+            >
+                Clients
+            </Text>
+            <LeaveTab
+                tabValue={[
+                    {
+                        text: 'Client List',
+                        url: `/command-center/clients/list`,
+                    },
+                    {
+                        text: 'Free Trial Subscription Lifecycle',
+                        url: `/command-center/clients/free-trial`,
+                    },
+                ]}
+            >
+                <Button
+                    bgColor="brand.400"
+                    color="white"
+                    borderRadius="5px"
+                    onClick={onOpen}
+                    px="2rem"
+                    h="31px"
+                >
+                    Add
+                </Button>
+            </LeaveTab>
+
+            <Flex justify="space-between" py=".8rem">
+                <HStack>
+                    <HStack>
+                        <Icon as={HiOutlineFilter} />
+                        <Text>Filter By</Text>
+                    </HStack>
+                    <Select
+                        w="200px"
+                        onChange={(e) => filterBox('client', e?.target.value)}
+                        borderRadius="0"
+                        fontSize=".8rem"
                     >
-                        <>
-                            {data?.value?.map((x: ClientView) => (
-                                <Tr key={x.id}>
-                                    <TableData name={x.companyName} />
-                                    <TableData name={x.companyEmail} full />
-                                    {/* <TableData name={x.subscription?.name} /> */}
-                                    {/* <TableData
-                                        name={CAD(
-                                            x.subscription?.monthlyAmount,
-                                        )}
-                                    /> */}
-                                    <TableData
-                                        name={dayjs(x.dateCreated).format(
-                                            'DD/MM/YYYY',
-                                        )}
-                                    />
-                                    <TableStatus
-                                        name={
-                                            x.subscriptionStatus == 'ACTIVE'
-                                                ? true
-                                                : false
-                                        }
-                                    />
-                                    <TableClientActions id={x.id} />
-                                </Tr>
-                            ))}
-                        </>
-                    </Tables>
-                }
-            />
+                        <option value="">Clients</option>
+                        {clients?.value?.map((x) => (
+                            <option key={x.id} value={x.id}>
+                                {x?.companyName}
+                            </option>
+                        ))}
+                    </Select>
+                    <Select
+                        w="100px"
+                        onChange={(e) => filterBox('status', e?.target.value)}
+                        borderRadius="0"
+                        fontSize=".8rem"
+                    >
+                        <option value="">Status</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                        <option value="4">Canceled</option>
+                    </Select>
+                </HStack>
+                <SearchComponent />
+            </Flex>
+            <Tables
+                tableHead={[
+                    'Company Name',
+                    'Current Subscription Type',
+                    'No Of License Used',
+                    'Amount',
+                    'Start Date',
+                    'No Of Days Left',
+                    'Billing Frequency',
+                    'Status',
+                    'Actions',
+                ]}
+            >
+                <>
+                    {data?.value?.map((x: ClientSubscriptionView) => {
+                        const dateDiff = dayjs(x.endDate).diff(dayjs(), 'days');
+                        return (
+                            <Tr key={x.id}>
+                                <TableData name={x?.client?.companyName} />
+                                <TableData name={x?.subscription?.name} full />
+                                <TableData
+                                    name={`${x?.numberOfLicenseUsed}/${x?.numberOfLicense}`}
+                                />
+                                <TableData name={CAD(x.totalAmount)} />
+                                <TableData
+                                    name={dayjs(x.startDate).format(
+                                        'DD/MM/YYYY',
+                                    )}
+                                />
+                                <TableData
+                                    name={`${
+                                        dateDiff <= 0 ? 0 : dateDiff
+                                    } days`}
+                                />
+                                <TableData
+                                    name={
+                                        x.annualBilling ? 'Annually' : 'Monthly'
+                                    }
+                                />
+                                <TableState name={x?.status} />
+                                <TableClientActions
+                                    id={x.clientId}
+                                    route={'list'}
+                                />
+                            </Tr>
+                        );
+                    })}
+                </>
+            </Tables>
+            <Box px="2rem">
+                <Pagination data={data} />
+            </Box>
+
             <AddClientModal isOpen={isOpen} onClose={onClose} />
-        </>
+        </Box>
     );
 };

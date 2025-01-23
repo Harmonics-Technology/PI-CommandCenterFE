@@ -15,10 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { DateObject } from 'react-multi-date-picker';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import {
-    NewClientSubscriptionModel,
-    SubscriptionService,
-} from 'src/services';
+import { NewClientSubscriptionModel, SubscriptionService } from 'src/services';
 import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import { MainTitle } from '@components/bits-utils/Heros/MainTitle';
@@ -27,14 +24,15 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import dayjs from 'dayjs';
 import { PaymentDetails } from '@components/Modals/PaymentDetails';
+import { PrimaryRadio } from '@components/bits-utils/PrimaryRadio';
 
 const newClientSchema = yup.object().shape({
     companyName: yup.string().required(),
-    companyEmail: yup.string().required(),
+    companyEmail: yup.string().email().required(),
     companyAddress: yup.string().required(),
     companyPhoneNumber: yup.string().required(),
     name: yup.string().required(),
-    email: yup.string().required(),
+    email: yup.string().email().required(),
     phoneNumber: yup.string().required(),
     startDate: yup.string().required(),
     duration: yup
@@ -53,6 +51,8 @@ export const SignUpPage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [base, setBase] = useState<any>();
     const router = useRouter();
+
+    const { email } = router.query;
 
     useEffect(() => {
         const selectedPackage = Cookies.get(
@@ -76,10 +76,15 @@ export const SignUpPage = () => {
         control,
         watch,
         setValue,
+        trigger,
         formState: { errors, isSubmitting, isValid },
     } = useForm<NewClientSubscriptionModel>({
         resolver: yupResolver(newClientSchema),
         mode: 'all',
+        defaultValues: {
+            // enableFreeTrial: false,
+            companyEmail: email as string,
+        },
     });
 
     const changePackagetype = () => {
@@ -93,20 +98,31 @@ export const SignUpPage = () => {
         setCurrent('Month');
         setReadOnly(false);
     };
+    const enableFreeTrial =
+        (watch('enableFreeTrial') as unknown as string) == 'Try For Free'
+            ? true
+            : false;
+    // console.log(enableFreeTrial);
 
     const totalAmount =
         billing == 'month'
             ? base?.price * (watch('duration') as number)
-            : base?.price * ((watch('duration') as number) * 12);
+            : base?.prices * (watch('duration') as number);
 
     const openModal = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        if (!isValid) {
+            trigger();
+            return;
+        }
+
         setSelection({
             clientName: watch('companyName'),
             duration: watch('duration'),
             startDate: watch('startDate'),
             endDate: dayjs(watch('startDate')).add(
                 watch('duration') as number,
-                'month',
+                billing == 'month' ? 'month' : 'year',
             ),
 
             package: {
@@ -123,10 +139,22 @@ export const SignUpPage = () => {
     const onSubmit = async (data: NewClientSubscriptionModel) => {
         data.annualBilling = billing == 'month' ? false : true;
         data.subscriptionId = base?.id;
-        data.endDate = dayjs(data?.startDate)
-            .add(data?.duration as number, 'month')
-            .format('YYYY-MM-DD');
         data.totalAmount = totalAmount;
+        data.fromWebsite = true;
+        data.enableFreeTrial = enableFreeTrial;
+        if (enableFreeTrial) {
+            data.freeTrialStartDate = data.startDate;
+            data.startDate = dayjs(data?.startDate)
+                .add(base?.freeTrialDuration as number, 'day')
+                .format('YYYY-MM-DD');
+        }
+        data.endDate = dayjs(data?.startDate)
+            .add(
+                data?.duration as number,
+                billing == 'month' ? 'month' : 'year',
+            )
+            .format('YYYY-MM-DD');
+        console.log({ data });
 
         try {
             const result =
@@ -134,13 +162,22 @@ export const SignUpPage = () => {
                     requestBody: data,
                 });
             if (result.status) {
+                // console.log({ result });
+                // toast.success('Successful');
+                console.log({ result });
+                if (result?.data?.clientSecret) {
+                    router.push(
+                        `/summary/${result.data?.id}?client_secret=${result?.data?.clientSecret}&clientId=${result?.data?.clientId}`,
+                    );
+                    return;
+                }
                 toast.success('Successful');
                 router.push('/');
                 return;
             }
             toast.error(result.message as string);
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
 
@@ -236,6 +273,21 @@ export const SignUpPage = () => {
                                 defaultValue=""
                                 register={register}
                             />
+                            {base?.freeTrial && (
+                                <PrimaryRadio<NewClientSubscriptionModel>
+                                    name={'enableFreeTrial'}
+                                    error={errors.enableFreeTrial}
+                                    control={control}
+                                    defaultValue={
+                                        'Make Payment For This Package'
+                                    }
+                                    radios={[
+                                        'Try For Free',
+                                        'Make Payment For This Package',
+                                    ]}
+                                    bg="#263238"
+                                />
+                            )}
                             <Box w="full">
                                 <Text
                                     // color="white"
@@ -300,6 +352,8 @@ export const SignUpPage = () => {
                                         : `every ${watch('duration')} month`
                                 }
                                 recommended={base?.recommended}
+                                freeTrial={base?.freeTrial}
+                                freeTrialDuration={base?.freeTrialDuration}
                                 features={base?.features}
                                 updateSubscription={void 0}
                                 isDisabled

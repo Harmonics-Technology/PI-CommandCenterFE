@@ -10,6 +10,7 @@ export type UpdateClientModel = {
     phoneNumber?: string | null;
     companyAddress?: string | null;
     address?: string | null;
+    country?: string | null;
     startDate?: string;
     durationInMonths?: number;
     subscriptionId?: string;

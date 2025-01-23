@@ -9,7 +9,7 @@ interface pageOptions {
 }
 
 function Pagination({ data, shift }: pageOptions) {
-    data = data?.data;
+    data = data || data?.data;
     console.log({ data });
     const totalPages =
         (data?.size as number) / (data?.limit as unknown as number);
@@ -32,27 +32,21 @@ function Pagination({ data, shift }: pageOptions) {
         let link = '';
         if (direction == 'previous' && previous != null) {
             link = previous?.split('?')[1] ?? false;
-            shift
-                ? (window.location.href = `?limit=${data.limit}&offset=${
-                      data.previousOffset || 0
-                  }`)
-                : router.push({
+            router.push({
                       query: {
                           ...router.query,
                           limit: data.limit,
-                          offset: data.previousOffset,
+                          offset: data.offset - data.limit,
                       },
                   });
         }
         if (direction == 'next' && next != null) {
             link = next?.split('?')[1] ?? false;
-            shift
-                ? (window.location.href = `?limit=${data.limit}&offset=${data.nextOffset}`)
-                : router.push({
+            router.push({
                       query: {
                           ...router.query,
                           limit: data.limit,
-                          offset: data.nextOffset,
+                          offset: data.offset + data.limit,
                       },
                   });
             // shift && router.reload();
@@ -116,9 +110,8 @@ function Pagination({ data, shift }: pageOptions) {
                         disabled={!previous}
                         onClick={() => paginate('last')}
                     >
-                        {Math.floor(totalPages) < 2
-                            ? '2'
-                            : Math.floor(totalPages)}
+                        {Math.ceil(totalPages)}
+                           
                     </Button>
 
                     <Button

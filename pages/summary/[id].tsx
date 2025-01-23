@@ -4,29 +4,33 @@ import { GetServerSideProps } from 'next';
 import React from 'react';
 import { OpenAPI, SubscriptionService } from 'src/services';
 
-const summary = ({ data }: { data: any }) => {
-    return <SummaryPage data={data} />;
+const summary = ({ data, clientId }: { data: any; clientId: string }) => {
+    return <SummaryPage data={data} client={clientId} />;
 };
 
 export default summary;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    OpenAPI.BASE = process.env.NEXT_PUBLIC_API_BASEURL as string;
+    OpenAPI.BASE =
+        (process.env.NEXT_PUBLIC_API_BASEURL as string) ||
+        'https://timba-command-center-staging.azurewebsites.net';
     OpenAPI.TOKEN = ctx.req.cookies.token;
-    const { id } = ctx.query;
-    console.log({ id });
+    const { id, clientId } = ctx.query;
+
+    // console.log({ ctx: ctx.query });
     try {
         const data = await SubscriptionService.getClientSubscriptionById({
             id: id as any,
         });
-        console.log({ data });
+        // console.log({ data: data.data });
         return {
             props: {
                 data: data.data,
+                clientId,
             },
         };
     } catch (error: any) {
-        console.log({ error });
+        // console.log({ error });
         return {
             props: {
                 data: [],

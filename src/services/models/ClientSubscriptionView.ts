@@ -10,6 +10,7 @@ export type ClientSubscriptionView = {
     clientId?: string;
     client?: ClientView;
     freeTrialStartDate?: string | null;
+    onFreeTrial?: boolean | null;
     startDate?: string;
     duration?: number;
     subscriptionId?: string;
@@ -20,4 +21,7 @@ export type ClientSubscriptionView = {
     totalAmount?: number;
     isCanceled?: boolean;
     cancelationReason?: string | null;
+    clientSecret?: string | null;
+    numberOfLicense?: number;
+    numberOfLicenseUsed?: number;
 };

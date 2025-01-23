@@ -16,6 +16,7 @@ export const OptionSelection = ({
             {name?.map((x) => {
                 return (
                     <Square
+                        key={x}
                         size="min"
                         p=".2rem .3rem"
                         color={current == x ? 'brand.400' : 'black'}

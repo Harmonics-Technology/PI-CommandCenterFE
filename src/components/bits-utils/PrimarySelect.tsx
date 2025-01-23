@@ -42,6 +42,7 @@ export const PrimarySelect = <TFormValues extends Record<string, any>>({
                 htmlFor={label}
                 textTransform="capitalize"
                 fontSize={fontSize}
+                mb=".5rem"
             >
                 {label}
             </FormLabel>
@@ -49,7 +50,7 @@ export const PrimarySelect = <TFormValues extends Record<string, any>>({
                 {...register(name, { required, ...validate })}
                 w="full"
                 border="1px solid grey"
-                borderRadius="5px"
+                borderRadius="0px"
                 height="2.6rem"
                 fontSize=".9rem"
                 textTransform="capitalize"

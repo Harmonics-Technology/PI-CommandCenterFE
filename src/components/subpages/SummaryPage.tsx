@@ -15,10 +15,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { ClientSubscriptionView } from 'src/services';
 
-export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
+export const SummaryPage = ({
+    data,
+    client,
+}: {
+    data: ClientSubscriptionView;
+    client;
+}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const router = useRouter();
-    const { client_secret } = router.query;
+    const { client_secret, from } = router.query;
     // console.log({ client_secret });
     return (
         <Box my="4rem" w="80%" mx="auto">
@@ -63,10 +69,15 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     >
                         <Tr>
                             <TableData name={data.subscription?.name} solid />
-                            <TableData name={`${data.duration} months`} />
+                            <TableData
+                                name={`${data.duration} ${
+                                    data.annualBilling ? 'year' : 'month'
+                                }`}
+                            />
                             <TableData
                                 name={CAD(
-                                    data.subscription?.totalMonthlyAmount,
+                                    data.subscription?.monthlyAmount ||
+                                        data.subscription?.yearlyAmount,
                                 )}
                             />
                             <TableData name={CAD(data.totalAmount)} />
@@ -95,7 +106,7 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     <Button
                         bgColor="brand.400"
                         color="white"
-                        w="30%"
+                        w={['100%', '30%']}
                         borderRadius="5px"
                         h="3rem"
                         my="3rem"
@@ -111,7 +122,8 @@ export const SummaryPage = ({ data }: { data: ClientSubscriptionView }) => {
                     isOpen={isOpen}
                     onClose={onClose}
                     clientSecret={client_secret as string}
-                    redirectUrl='login'
+                    redirectUrl={from as string}
+                    clientId={client as string}
                 />
             )}
         </Box>

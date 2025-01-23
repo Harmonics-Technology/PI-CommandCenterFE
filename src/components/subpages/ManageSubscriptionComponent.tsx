@@ -7,7 +7,7 @@ import React from 'react';
 export const ManageSubscriptionComponent = ({ base }: IManageSubProps) => {
     const router = useRouter();
     const updateSubscription = (value) => {
-        router.push(`/admin/manage-subscription/${value.id}`);
+        router.push(`/command-center/manage-subscription/${value.id}`);
     };
     return (
         <Box
@@ -34,7 +34,7 @@ export const ManageSubscriptionComponent = ({ base }: IManageSubProps) => {
                     color="white"
                     borderRadius="5px"
                     onClick={() =>
-                        router.push('/admin/manage-subscription/new')
+                        router.push('/command-center/manage-subscription/new')
                     }
                     px="2rem"
                 >
@@ -62,7 +62,9 @@ export const ManageSubscriptionComponent = ({ base }: IManageSubProps) => {
                                 name={x.name}
                                 isEdit
                                 desc={x.description}
-                                price={x.monthlyAmount}
+                                price={x.totalMonthlyAmount}
+                                freeTrial={x.hasFreeTrial}
+                                freeTrialDuration={x.freeTrialDuration}
                                 billed={'/month'}
                                 recommended={x.recommendedFor}
                                 features={x.features?.split(',').map((b) => b)}

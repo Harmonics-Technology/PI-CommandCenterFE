@@ -28,7 +28,7 @@ export const SubscriptionHistory = ({ data }: ISubHistory) => {
                 buttonTitle="Add Subscription"
                 onChange={() => void 0}
                 options={['Client']}
-                openModal={() => router.push('/admin/subscription')}
+                openModal={() => router.push('/command-center/subscription')}
                 tables={
                     <Tables
                         tableHead={[

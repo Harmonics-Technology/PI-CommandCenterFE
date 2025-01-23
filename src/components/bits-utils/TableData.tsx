@@ -23,7 +23,7 @@ import { RiInboxArchiveFill } from 'react-icons/ri';
 import { InitiateResetModel, UserService, UserView } from 'src/services';
 // import fileDownload from 'js-file-download';
 import { UserContext } from '@components/context/UserContext';
-import { BiTrash } from 'react-icons/bi';
+import { HiArchiveBoxArrowDown } from 'react-icons/hi2';
 import { MdVerified, MdCancel } from 'react-icons/md';
 import { BsEye, BsEyeFill, BsPencil } from 'react-icons/bs';
 import toast from 'react-hot-toast';
@@ -60,6 +60,7 @@ export function TableData({
     full,
     isRed,
     solid,
+    onClick,
 }: {
     name: any;
     border?: boolean | undefined;
@@ -69,6 +70,7 @@ export function TableData({
     full?: boolean;
     isRed?: boolean;
     solid?: boolean;
+    onClick?: any;
 }) {
     return (
         <Td
@@ -78,6 +80,8 @@ export function TableData({
             paddingInlineStart="2rem"
             className={classes}
             fontWeight={solid ? 500 : 400}
+            onClick={onClick}
+            cursor={onClick ? 'pointer' : 'auto'}
             // maxW="120px"
             // textOverflow=""
             // overflow="hidden"
@@ -172,7 +176,7 @@ export function TableState({ name }: { name: string | undefined | null }) {
                     name == 'APPROVED' ||
                     name == 'Completed'
                         ? 'brand.400'
-                        : name == 'PENDING'
+                        : name == 'PENDING' || name == 'INACTIVE'
                         ? 'brand.700'
                         : name == 'REVIEWED' || name == 'SUBMITTED'
                         ? 'brand.600'
@@ -190,7 +194,7 @@ export function TableState({ name }: { name: string | undefined | null }) {
                 cursor="pointer"
                 textTransform="uppercase"
             >
-                {name || 'Inactive'}
+                {name || 'Canceled'}
             </Box>
         </td>
     );
@@ -265,7 +269,9 @@ export function TableActions({ x }: { x: UserView }) {
                 <MenuList w="full">
                     <MenuItem
                         onClick={() =>
-                            router.push(`/admin/administrators/${x.id}`)
+                            router.push(
+                                `/command-center/administrators/${x.id}`,
+                            )
                         }
                         w="full"
                     >
@@ -297,10 +303,14 @@ export function TableActions({ x }: { x: UserView }) {
         </td>
     );
 }
-export function TableClientActions({ id }: { id: any }) {
+export function TableClientActions({ id, route }: { id: any; route?: any }) {
     const toast = useToast();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+
+    const cancelSub = (id: string) => {
+        //
+    };
 
     return (
         <td>
@@ -318,17 +328,25 @@ export function TableClientActions({ id }: { id: any }) {
                 </MenuButton>
                 <MenuList w="full">
                     <MenuItem
-                        onClick={() => router.push(`/admin/clients/${id}`)}
+                        onClick={() =>
+                            router.push(
+                                `/command-center/clients/${route}/${id}`,
+                            )
+                        }
                         w="full"
                     >
                         <Icon as={BsEyeFill} mr=".5rem" color="#777777" />
                         View
                     </MenuItem>
-                    {/* <MenuItem onClick={() => resendInvite(id)} w="full">
-                        <Icon as={MdVerified} mr=".5rem" color="#777777" />
-                        Reactivate subscription
+                    <MenuItem onClick={() => cancelSub(id)} w="full">
+                        <Icon
+                            as={HiArchiveBoxArrowDown}
+                            mr=".5rem"
+                            color="#777777"
+                        />
+                        Cancel
                     </MenuItem>
-                    <MenuItem onClick={() => resendInvite(id)} w="full">
+                    {/* <MenuItem onClick={() => resendInvite(id)} w="full">
                         <Icon
                             as={RiInboxArchiveFill}
                             mr=".5rem"

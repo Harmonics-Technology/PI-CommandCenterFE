@@ -1,21 +1,26 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AddCardResponseViewStandardResponse } from '../models/AddCardResponseViewStandardResponse';
 import type { BooleanStandardResponse } from '../models/BooleanStandardResponse';
 import type { CancelSubscriptionModel } from '../models/CancelSubscriptionModel';
 import type { CardViewListStandardResponse } from '../models/CardViewListStandardResponse';
 import type { ClientSubscriptionModel } from '../models/ClientSubscriptionModel';
+import type { ClientSubscriptionSearch } from '../models/ClientSubscriptionSearch';
 import type { ClientSubscriptionViewPagedCollectionStandardResponse } from '../models/ClientSubscriptionViewPagedCollectionStandardResponse';
 import type { ClientSubscriptionViewStandardResponse } from '../models/ClientSubscriptionViewStandardResponse';
 import type { FeatureViewListStandardResponse } from '../models/FeatureViewListStandardResponse';
+import type { InvoicePaidEventLogViewPagedCollectionStandardResponse } from '../models/InvoicePaidEventLogViewPagedCollectionStandardResponse';
+import type { LicenseUpdateModel } from '../models/LicenseUpdateModel';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
+import type { PurchaseNewLicensePlanModel } from '../models/PurchaseNewLicensePlanModel';
 import type { RenewSubscriptionModel } from '../models/RenewSubscriptionModel';
-import type { StringStandardResponse } from '../models/StringStandardResponse';
 import type { SubscriptionModel } from '../models/SubscriptionModel';
 import type { SubscriptionViewListStandardResponse } from '../models/SubscriptionViewListStandardResponse';
 import type { SubscriptionViewStandardResponse } from '../models/SubscriptionViewStandardResponse';
 import type { UpdateClientSubscriptionModel } from '../models/UpdateClientSubscriptionModel';
 import type { UpdateDefaultPaymentMethod } from '../models/UpdateDefaultPaymentMethod';
+import type { UsedLicenseCountUpdateModel } from '../models/UsedLicenseCountUpdateModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -282,16 +287,16 @@ requestBody?: CancelSubscriptionModel,
     }
 
     /**
-     * @returns StringStandardResponse Success
+     * @returns AddCardResponseViewStandardResponse Success
      * @throws ApiError
      */
-    public static addNewCard({
+    public static addNewCardNew({
 clientId,
 xApiKey,
 }: {
 clientId?: string,
 xApiKey?: any,
-}): CancelablePromise<StringStandardResponse> {
+}): CancelablePromise<AddCardResponseViewStandardResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/Subscription/add-new-card',
@@ -519,6 +524,78 @@ xApiKey?: any,
      * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
      * @throws ApiError
      */
+    public static servicesListClientSubscriptions({
+clientId,
+offset,
+limit,
+search,
+xApiKey,
+}: {
+clientId?: string,
+offset?: number,
+limit?: number,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/services-client-subscription-history',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'Offset': offset,
+                'Limit': limit,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns InvoicePaidEventLogViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listClientSubscriptionInvoices({
+clientId,
+offset,
+limit,
+search,
+xApiKey,
+}: {
+clientId?: string,
+offset?: number,
+limit?: number,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<InvoicePaidEventLogViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/client-subscription-invoices',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'clientId': clientId,
+                'Offset': offset,
+                'Limit': limit,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
     public static listCurrentClientSubscription({
 offset,
 limit,
@@ -602,6 +679,84 @@ requestBody?: RenewSubscriptionModel,
     }
 
     /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static purchaseNewLicensePlan({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: PurchaseNewLicensePlanModel,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/new-plan',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static addOrRemoveLicense({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: LicenseUpdateModel,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/update-license-count',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static updateSUbscriptionUsedLicenceCount({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: UsedLicenseCountUpdateModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/license/update-used-license-count',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
      * @returns CardViewListStandardResponse Success
      * @throws ApiError
      */
@@ -632,21 +787,128 @@ xApiKey?: any,
      * @returns BooleanStandardResponse Success
      * @throws ApiError
      */
-    public static successSubscription({
+    public static paymentSuccess({
+clientId,
+subscriptionPayment,
 subscriptionId,
 xApiKey,
 }: {
+clientId?: string,
+subscriptionPayment?: boolean,
 subscriptionId?: string,
 xApiKey?: any,
 }): CancelablePromise<BooleanStandardResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/Subscription/success',
+            url: '/api/Subscription/payment-success',
             headers: {
                 'X-API-KEY': xApiKey,
             },
             query: {
+                'clientId': clientId,
+                'subscriptionPayment': subscriptionPayment,
                 'subscriptionId': subscriptionId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static createNewClientAndSubscriptionBackRoom({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: NewClientSubscriptionModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/create-new-client-subscription-backroom',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listAllClientSubscriptions({
+offset,
+limit,
+clientId,
+staus,
+search,
+xApiKey,
+}: {
+offset?: number,
+limit?: number,
+clientId?: string,
+staus?: ClientSubscriptionSearch,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/all-client-subscriptions',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'Offset': offset,
+                'Limit': limit,
+                'clientId': clientId,
+                'staus': staus,
+                'search': search,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewPagedCollectionStandardResponse Success
+     * @throws ApiError
+     */
+    public static listAllFreeTrialSubscriptions({
+offset,
+limit,
+staus,
+search,
+xApiKey,
+}: {
+offset?: number,
+limit?: number,
+staus?: ClientSubscriptionSearch,
+search?: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewPagedCollectionStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/all-free-trial-subscriptions',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'Offset': offset,
+                'Limit': limit,
+                'staus': staus,
+                'search': search,
             },
             errors: {
                 400: `Bad Request`,

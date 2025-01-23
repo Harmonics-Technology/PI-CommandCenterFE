@@ -29,7 +29,7 @@ function TopNav() {
     const logoutFn = () => {
         Cookies.remove('user');
         Cookies.remove('token');
-        router.push('/admin/login');
+        router.push('/command-center/login');
     };
 
     return (

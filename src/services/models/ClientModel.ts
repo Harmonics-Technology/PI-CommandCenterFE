@@ -12,4 +12,5 @@ export type ClientModel = {
     phoneNumber?: string | null;
     companyAddress?: string | null;
     address?: string | null;
+    country?: string | null;
 };

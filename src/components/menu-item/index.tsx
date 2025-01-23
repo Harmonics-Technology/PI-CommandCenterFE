@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 interface MenuProps {
     menuTitle: string;
 }
-function MenuItem({ menuTitle }: MenuProps) {
+export default function MenuItem({ menuTitle }: MenuProps) {
     const router = useRouter();
-    const admin = router.pathname.startsWith('/admin');
-    const url = `${admin ? '/admin' : ''}/${menuTitle}`;
+    const admin = router.pathname.startsWith('/command-center');
+    const url = `${admin ? '/command-center' : ''}/${menuTitle}`;
     return (
         <>
             <Link href={url} passHref>
@@ -45,4 +45,20 @@ function MenuItem({ menuTitle }: MenuProps) {
     );
 }
 
-export default MenuItem;
+export function ExternalMenuItem({ url, title }) {
+    return (
+        <Link href={url} passHref>
+            <Text
+                fontWeight="700"
+                fontSize=".9rem"
+                fontFamily="Nunito"
+                noOfLines={1}
+                mb="0"
+                textTransform="capitalize"
+                cursor="pointer"
+            >
+                {title}
+            </Text>
+        </Link>
+    );
+}

@@ -21,7 +21,7 @@ import dynamic from 'next/dynamic';
 import { UserView } from 'src/services';
 import { useState } from 'react';
 import { IsRequiredSign } from './IsRequiredSign';
-const Selectrix = dynamic<select>(() => import('react-selectrix'), {
+const Selectrix = dynamic<any>(() => import('react-selectrix'), {
     ssr: false,
 });
 

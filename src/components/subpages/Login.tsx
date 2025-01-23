@@ -51,6 +51,7 @@ function Login() {
         resolver: yupResolver(schema),
         mode: 'all',
     });
+    const expiresIn = new Date(new Date().getTime() + 30 * 60 * 1000);
     const onSubmit = async (data: LoginModel) => {
         try {
             const result = await UserService.loginUser({ requestBody: data });
@@ -74,7 +75,9 @@ function Login() {
                 Cookies.set('user', JSON.stringify(result.data));
                 OpenAPI.TOKEN = result?.data?.token as string;
                 result.data &&
-                    Cookies.set('token', result.data.token as string);
+                    Cookies.set('token', result.data.token as string, {
+                        expires: expiresIn,
+                    });
                 // if (result.data?.twoFactorEnabled) {
                 //     router.push('/login/twofalogin');
                 //     return;
@@ -84,14 +87,14 @@ function Login() {
                     ? (window.location.href = decodeURIComponent(
                           router.query.from as unknown as string,
                       ))
-                    : (window.location.href = '/admin/dashboard');
+                    : (window.location.href = '/command-center/dashboard');
 
                 return;
             }
             toast.error(result.message as string);
             return;
         } catch (error: any) {
-            toast(error?.message || error?.body?.message);
+            toast(error?.body?.message || error?.message);
         }
     };
     // console.log(watch('email'), watch('password'));
@@ -122,7 +125,7 @@ function Login() {
                     p="1rem 3rem 4rem"
                 >
                     {/* <Box display="flex" justifyContent="center" w="full" my="2rem">
-                    <Image src="/assets/logo.png" h="3rem" />
+                    <Image src="/assets/newlogo.png" h="3rem" />
                 </Box> */}
                     <Text
                         fontSize="35px"

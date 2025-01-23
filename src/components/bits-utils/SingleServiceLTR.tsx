@@ -12,6 +12,9 @@ export const SingleServiceLTR = ({
     btn,
     onClick,
     rtl = false,
+    bd = 0,
+    order = 1,
+    desc,
 }: {
     image: string;
     color?: string;
@@ -20,28 +23,53 @@ export const SingleServiceLTR = ({
     btn?: any;
     onClick?: any;
     rtl?: boolean;
+    bd?: any;
+    order?: number;
+    desc?: string;
 }) => {
     return (
-        <Flex gap="5.5rem" align="center" justify="space-between">
-            <Box w="45%" order={rtl ? 1 : 0}>
+        <Flex
+            gap={['2.5rem', '5.5rem']}
+            align="center"
+            justify="space-between"
+            flexDir={['column', 'row']}
+        >
+            <Box
+                w="full"
+                order={[order, rtl ? 1 : 0]}
+                overflow="hidden"
+                borderRadius={bd}
+            >
                 <Image src={image} w="full" h="full" alt="banner image" />
             </Box>
             <VStack
                 align="flex-start"
-                spacing="2rem"
-                w="50%"
-                order={rtl ? 0 : 1}
+                spacing={['18px', '2rem']}
+                w="full"
+                order={['0', rtl ? 0 : 1]}
             >
                 {title && (
                     <Text
-                        fontSize="2.75rem"
+                        fontSize={['24px', '2.75rem']}
                         color={color || 'brand.100'}
                         fontWeight="700"
                         fontFamily="Nunito"
                         mb="0"
-                        lineHeight="3rem"
+                        lineHeight={['32px', '3rem']}
                     >
                         {title}
+                    </Text>
+                )}
+
+                {desc && (
+                    <Text
+                        fontSize={['14px', '1rem']}
+                        fontWeight="400"
+                        lineHeight="1.75rem"
+                        color={color ? color : '#636b83'}
+                        mb="0"
+                    >
+                        {desc}
                     </Text>
                 )}
 
@@ -56,6 +84,7 @@ export const SingleServiceLTR = ({
                         borderRadius="8px"
                         px="2.5rem"
                         h="4rem"
+                        fontFamily="Nunito"
                         onClick={onClick}
                     >
                         {btn}

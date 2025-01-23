@@ -1,4 +1,5 @@
 import {
+    ClientLicenseUpdatesLogViewData,
     ClientSubscriptionView,
     ClientSubscriptionViewPagedCollection,
     ClientView,
@@ -28,16 +29,19 @@ export interface ITableWrapperProps {
     options?: any[];
     tables: any;
     openModal: any;
+    data?: any;
 }
 export interface IModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 export interface IClientInfoProps {
-    id: string;
+    id?: string;
     currentSub?: ClientSubscriptionView;
     allSub?: ClientSubscriptionViewPagedCollection;
+    sub?: ClientSubscriptionViewPagedCollection;
     data?: ClientView;
+    activity?: ClientLicenseUpdatesLogViewData;
 }
 export interface IRenewSubProps {
     isOpen: boolean;
@@ -69,6 +73,8 @@ export interface IPackageCardProps {
     updateSubscription: any;
     isEdit?: boolean;
     isDisabled?: boolean;
+    freeTrial?: boolean;
+    freeTrialDuration?: any;
 }
 export interface ISubscriptionProps {
     isEdit?: boolean;
@@ -77,6 +83,7 @@ export interface ISubscriptionProps {
     clients?: ClientViewPagedCollection;
     features?: FeatureView[];
     data?: SubscriptionView | any;
+    country?: any;
 }
 export interface IManageSubProps {
     base: SubscriptionView[];
@@ -87,7 +94,8 @@ export interface IAdminProps {
     id?: any;
 }
 export interface IClientProps {
-    data: ClientViewPagedCollection;
+    data: ClientSubscriptionViewPagedCollection;
+    clients?: ClientViewPagedCollection;
 }
 export interface ISubHistory {
     data: ClientSubscriptionViewPagedCollection;
