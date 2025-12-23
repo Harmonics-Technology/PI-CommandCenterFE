@@ -4,6 +4,7 @@
 import type { BookDemoModel } from '../models/BookDemoModel';
 import type { BooleanStandardResponse } from '../models/BooleanStandardResponse';
 import type { ContactMessageModel } from '../models/ContactMessageModel';
+import type { LogFileInfoListStandardResponse } from '../models/LogFileInfoListStandardResponse';
 import type { MailchimpModel } from '../models/MailchimpModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -113,6 +114,58 @@ requestBody?: BookDemoModel,
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static getApiUtilityDownloadLogsFiles({
+date,
+fileName,
+xApiKey,
+}: {
+date?: string,
+fileName?: string,
+xApiKey?: any,
+}): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Utility/download-logs-files',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'date': date,
+                'fileName': fileName,
+            },
+        });
+    }
+
+    /**
+     * @returns LogFileInfoListStandardResponse Success
+     * @throws ApiError
+     */
+    public static getApiUtilityListLogFiles({
+date,
+fileName,
+xApiKey,
+}: {
+date?: string,
+fileName?: string,
+xApiKey?: any,
+}): CancelablePromise<LogFileInfoListStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Utility/list-log-files',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'date': date,
+                'fileName': fileName,
             },
         });
     }

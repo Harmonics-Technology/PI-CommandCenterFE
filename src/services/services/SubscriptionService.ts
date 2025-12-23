@@ -14,6 +14,8 @@ import type { InvoicePaidEventLogViewPagedCollectionStandardResponse } from '../
 import type { LicenseUpdateModel } from '../models/LicenseUpdateModel';
 import type { NewClientSubscriptionModel } from '../models/NewClientSubscriptionModel';
 import type { PurchaseNewLicensePlanModel } from '../models/PurchaseNewLicensePlanModel';
+import type { ReactivateSubscriptionCommandCenterModel } from '../models/ReactivateSubscriptionCommandCenterModel';
+import type { ReactivateSubscriptionResponseStandardResponse } from '../models/ReactivateSubscriptionResponseStandardResponse';
 import type { RenewSubscriptionModel } from '../models/RenewSubscriptionModel';
 import type { SubscriptionModel } from '../models/SubscriptionModel';
 import type { SubscriptionViewListStandardResponse } from '../models/SubscriptionViewListStandardResponse';
@@ -264,6 +266,33 @@ xApiKey?: any,
      * @returns BooleanStandardResponse Success
      * @throws ApiError
      */
+    public static resumeClientSubscription({
+subscriptionId,
+xApiKey,
+}: {
+subscriptionId?: string,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/resume-subscription',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'subscriptionId': subscriptionId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
     public static cancelClientSubscription({
 xApiKey,
 requestBody,
@@ -444,6 +473,33 @@ xApiKey?: any,
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/Subscription/client-subscription/{id}',
+            path: {
+                'id': id,
+            },
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns ClientSubscriptionViewStandardResponse Success
+     * @throws ApiError
+     */
+    public static getClientHighestSubscriptionById({
+id,
+xApiKey,
+}: {
+id: string,
+xApiKey?: any,
+}): CancelablePromise<ClientSubscriptionViewStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/client-highest-subscription/{id}',
             path: {
                 'id': id,
             },
@@ -914,6 +970,78 @@ xApiKey?: any,
                 400: `Bad Request`,
                 500: `Server Error`,
             },
+        });
+    }
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static updateFreeTrialEndDate({
+subscriptionId,
+xApiKey,
+}: {
+subscriptionId?: string,
+xApiKey?: any,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/update-free-trial-end-date',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            query: {
+                'subscriptionId': subscriptionId,
+            },
+            errors: {
+                400: `Bad Request`,
+                500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns any Success
+     * @throws ApiError
+     */
+    public static getApiSubscriptionStatus({
+clientSubscriptionId,
+xApiKey,
+}: {
+clientSubscriptionId: string,
+xApiKey?: any,
+}): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/Subscription/status/{clientSubscriptionId}',
+            path: {
+                'clientSubscriptionId': clientSubscriptionId,
+            },
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+        });
+    }
+
+    /**
+     * @returns ReactivateSubscriptionResponseStandardResponse Success
+     * @throws ApiError
+     */
+    public static postApiSubscriptionReactivate({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: ReactivateSubscriptionCommandCenterModel,
+}): CancelablePromise<ReactivateSubscriptionResponseStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/api/Subscription/reactivate',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
         });
     }
 

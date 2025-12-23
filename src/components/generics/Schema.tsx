@@ -6,6 +6,7 @@ import {
     ClientViewPagedCollection,
     FeatureView,
     SubscriptionView,
+    SuperAdminTransferHistoryView,
     UserView,
     UserViewPagedCollection,
 } from 'src/services';
@@ -42,6 +43,10 @@ export interface IClientInfoProps {
     sub?: ClientSubscriptionViewPagedCollection;
     data?: ClientView;
     activity?: ClientLicenseUpdatesLogViewData;
+}
+export interface IAdminRightsProps {
+    data?: ClientView;
+    activity?: SuperAdminTransferHistoryView[];
 }
 export interface IRenewSubProps {
     isOpen: boolean;

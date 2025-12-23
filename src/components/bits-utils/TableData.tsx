@@ -4,29 +4,26 @@ import {
     MenuButton,
     MenuItem,
     MenuList,
-    useToast,
-    Link,
-    Spinner,
+    useToast, Spinner,
     Th,
     Td,
     Tooltip,
     Icon,
-    Text,
+    Text
 } from '@chakra-ui/react';
 import axios from 'axios';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineDownload } from 'react-icons/ai';
-import { FaAppStore, FaEllipsisH, FaEye } from 'react-icons/fa';
+import { FaEllipsisH } from 'react-icons/fa';
 import { RiInboxArchiveFill } from 'react-icons/ri';
-import { InitiateResetModel, UserService, UserView } from 'src/services';
+import { UserService, UserView } from 'src/services';
 // import fileDownload from 'js-file-download';
-import { UserContext } from '@components/context/UserContext';
 import { HiArchiveBoxArrowDown } from 'react-icons/hi2';
-import { MdVerified, MdCancel } from 'react-icons/md';
-import { BsEye, BsEyeFill, BsPencil } from 'react-icons/bs';
+import { MdVerified } from 'react-icons/md';
+import { BsEyeFill, BsPencil } from 'react-icons/bs';
 import toast from 'react-hot-toast';
+import { getShiftDateColor, getTableDataColor, getTableStateColors, getTableStatusColors } from './TableUtils';
 
 export function TableHead({
     name,
@@ -86,15 +83,7 @@ export function TableData({
             // textOverflow=""
             // overflow="hidden"
             // noOfLines={1}
-            color={
-                isRed
-                    ? '#FF5B79'
-                    : name == 'ONSHORE'
-                    ? 'brand.400'
-                    : solid
-                    ? '#073367'
-                    : 'black'
-            }
+            color={getTableDataColor(name, solid, isRed)}
         >
             <Tooltip label={name} hasArrow>
                 {full ? name : name?.toString()?.substring(0, 20) || ''}
@@ -130,13 +119,7 @@ export function TableDataShiftDate({
             // textOverflow=""
             // overflow="hidden"
             // noOfLines={1}
-            color={
-                name == 'OFFSHORE'
-                    ? 'brand.700'
-                    : name == 'ONSHORE'
-                    ? 'brand.400'
-                    : 'black'
-            }
+            color={getShiftDateColor(name)}
         >
             <Tooltip label={name} hasArrow>
                 {full ? name : name?.toString()?.substring(0, 20) || ''}
@@ -148,51 +131,41 @@ export function TableDataShiftDate({
     );
 }
 export function TableStatus({ name }: { name: boolean | undefined }) {
+    const { bg, color, text } = getTableStatusColors(!!name);
     return (
         <td>
             <Box
                 fontSize="10px"
-                bgColor={name == true ? '#BFF1DF' : '#F9C3CD'}
+                bgColor={bg}
                 borderRadius="4px"
-                color={name == true ? '#2EB67D' : '#E45771'}
+                color={color}
                 fontWeight="bold"
                 padding=".2rem 1rem"
                 width="fit-content"
                 cursor="pointer"
                 textTransform="uppercase"
             >
-                {name == true ? 'Active' : 'Inactive'}
+                {text}
             </Box>
         </td>
     );
 }
 export function TableState({ name }: { name: string | undefined | null }) {
+    const { bg, color } = getTableStateColors(name);
     return (
         <td>
             <Box
-                fontSize="10px"
-                bgColor={
-                    name == 'ACTIVE' ||
-                    name == 'APPROVED' ||
-                    name == 'Completed'
-                        ? 'brand.400'
-                        : name == 'PENDING' || name == 'INACTIVE'
-                        ? 'brand.700'
-                        : name == 'REVIEWED' || name == 'SUBMITTED'
-                        ? 'brand.600'
-                        : name == 'INVOICED'
-                        ? '#28a3ef'
-                        : name == 'In progress'
-                        ? 'gray.400'
-                        : 'red'
-                }
+                fontSize="12px"
+                bgColor={bg}
                 borderRadius="4px"
-                color="white"
+                h='28px'
+                color={color}
                 fontWeight="bold"
-                padding=".2rem 1rem"
+                padding="6px 8px"
                 width="fit-content"
                 cursor="pointer"
-                textTransform="uppercase"
+                fontFamily='Nunito'
+            // textTransform="uppercase"
             >
                 {name || 'Canceled'}
             </Box>

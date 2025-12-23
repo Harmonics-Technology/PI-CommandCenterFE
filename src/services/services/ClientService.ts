@@ -6,6 +6,7 @@ import type { ClientLicenseUpdatesLogViewStandardResponse } from '../models/Clie
 import type { ClientModel } from '../models/ClientModel';
 import type { ClientViewPagedCollectionStandardResponse } from '../models/ClientViewPagedCollectionStandardResponse';
 import type { ClientViewStandardResponse } from '../models/ClientViewStandardResponse';
+import type { SuperAdminTransferUpdateModel } from '../models/SuperAdminTransferUpdateModel';
 import type { UpdateClientModel } from '../models/UpdateClientModel';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -13,6 +14,28 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class ClientService {
+
+    /**
+     * @returns BooleanStandardResponse Success
+     * @throws ApiError
+     */
+    public static putApiClientSuperadmintransferrecordupdate({
+xApiKey,
+requestBody,
+}: {
+xApiKey?: any,
+requestBody?: SuperAdminTransferUpdateModel,
+}): CancelablePromise<BooleanStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'PUT',
+            url: '/api/Client/superadmintransferrecordupdate',
+            headers: {
+                'X-API-KEY': xApiKey,
+            },
+            body: requestBody,
+            mediaType: 'application/json-patch+json',
+        });
+    }
 
     /**
      * @returns ClientViewStandardResponse Success

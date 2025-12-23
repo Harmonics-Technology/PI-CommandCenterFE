@@ -62,47 +62,58 @@ export const ClientSubDetails = ({ sub, activity }: IClientInfoProps) => {
                     },
                 ]}
             />
-            <Box borderBottom="1px solid #E0E0E0" py="1rem">
-                <Text my="1.5rem" fontWeight="700" fontSize=".9rem">
-                    Client Information
-                </Text>
-                <Grid
-                    templateColumns={['1fr', 'repeat(5,1fr)']}
-                    gap="1rem"
-                    mb="1rem"
+            <Flex justify='space-between' align='flex-end' borderBottom="1px solid #E0E0E0" py="1rem">
+                <Box >
+                    <Text my="1.5rem" fontWeight="700" fontSize=".9rem">
+                        Client Information
+                    </Text>
+                    <Grid
+                        templateColumns={['1fr', 'repeat(5,1fr)']}
+                        gap="1rem"
+                        mb="1rem"
+                    >
+                        <CustomTextWithSubtitle
+                            title="First Name"
+                            sub={data?.client?.name?.split(' ')[0]}
+                        />
+                        <CustomTextWithSubtitle
+                            title="Phone Number"
+                            sub={data?.client?.phoneNumber}
+                        />
+                        <CustomTextWithSubtitle
+                            title="Country"
+                            sub={data?.client?.country}
+                        />
+                    </Grid>
+                    <Grid
+                        templateColumns={['1fr', 'repeat(5,1fr)']}
+                        gap="1rem"
+                        mb="1rem"
+                    >
+                        <CustomTextWithSubtitle
+                            title="Last Name"
+                            sub={data?.client?.name?.split(' ')[1]}
+                        />
+                        <CustomTextWithSubtitle
+                            title="Email"
+                            sub={data?.client?.email}
+                        />
+                        <CustomTextWithSubtitle
+                            title="Address"
+                            sub={data?.client?.address}
+                        />
+                    </Grid>
+                </Box>
+                <Button
+                    bgColor="brand.400"
+                    color="white"
+                    borderRadius="5px"
+                    onClick={() => router.push(`/command-center/clients/list/${data?.client?.id}/admin-rights`)}
+                    px="2rem"
                 >
-                    <CustomTextWithSubtitle
-                        title="First Name"
-                        sub={data?.client?.name?.split(' ')[0]}
-                    />
-                    <CustomTextWithSubtitle
-                        title="Phone Number"
-                        sub={data?.client?.phoneNumber}
-                    />
-                    <CustomTextWithSubtitle
-                        title="Country"
-                        sub={data?.client?.country}
-                    />
-                </Grid>
-                <Grid
-                    templateColumns={['1fr', 'repeat(5,1fr)']}
-                    gap="1rem"
-                    mb="1rem"
-                >
-                    <CustomTextWithSubtitle
-                        title="Last Name"
-                        sub={data?.client?.name?.split(' ')[1]}
-                    />
-                    <CustomTextWithSubtitle
-                        title="Email"
-                        sub={data?.client?.email}
-                    />
-                    <CustomTextWithSubtitle
-                        title="Address"
-                        sub={data?.client?.address}
-                    />
-                </Grid>
-            </Box>
+                    Admin Right Activities
+                </Button>
+            </Flex>
             <Box borderBottom="1px solid #E0E0E0" py="1rem">
                 <Text my="1.5rem" fontWeight="700" fontSize=".9rem">
                     Current Subscription: {sub?.size} Active subscription
@@ -156,17 +167,16 @@ export const ClientSubDetails = ({ sub, activity }: IClientInfoProps) => {
                                         )}
                                     />
                                     <TableData
-                                        name={`${
-                                            dayjs(x?.endDate).diff(
+                                        name={`${dayjs(x?.endDate).diff(
+                                            dayjs(),
+                                            'days',
+                                        ) <= 0
+                                            ? 0
+                                            : dayjs(x?.endDate).diff(
                                                 dayjs(),
                                                 'days',
-                                            ) <= 0
-                                                ? 0
-                                                : dayjs(x?.endDate).diff(
-                                                      dayjs(),
-                                                      'days',
-                                                  )
-                                        } days`}
+                                            )
+                                            } days`}
                                     />
                                     <TableData name={CAD(x?.totalAmount)} />
                                     <TableState name={x?.status} />

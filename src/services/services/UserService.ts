@@ -5,6 +5,7 @@ import type { InitiateResetModel } from '../models/InitiateResetModel';
 import type { LoginModel } from '../models/LoginModel';
 import type { PasswordReset } from '../models/PasswordReset';
 import type { RegisterModel } from '../models/RegisterModel';
+import type { SuperAdminTransferHistoryViewListStandardResponse } from '../models/SuperAdminTransferHistoryViewListStandardResponse';
 import type { UpdateUserModel } from '../models/UpdateUserModel';
 import type { UserProfileViewStandardResponse } from '../models/UserProfileViewStandardResponse';
 import type { UserViewPagedCollectionStandardResponse } from '../models/UserViewPagedCollectionStandardResponse';
@@ -299,6 +300,29 @@ xApiKey?: any,
             errors: {
                 400: `Bad Request`,
                 500: `Server Error`,
+            },
+        });
+    }
+
+    /**
+     * @returns SuperAdminTransferHistoryViewListStandardResponse Success
+     * @throws ApiError
+     */
+    public static getTransferHistory({
+superAdminId,
+xApiKey,
+}: {
+superAdminId: string,
+xApiKey?: any,
+}): CancelablePromise<SuperAdminTransferHistoryViewListStandardResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/User/transfer-history/{superAdminId}',
+            path: {
+                'superAdminId': superAdminId,
+            },
+            headers: {
+                'X-API-KEY': xApiKey,
             },
         });
     }
