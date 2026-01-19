@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export const Completed = ({ data, redirectUrl }) => {
+export const Completed = ({ data, redirectUrl, subscriptionPayment }) => {
     data.status = true;
     // redirectUrl = 'undefined';
     // const redirect = () => {
@@ -11,9 +11,8 @@ export const Completed = ({ data, redirectUrl }) => {
     //     }`;
     // };
     const redirect = () => {
-        window.location.href = `${
-            process.env.NEXT_PUBLIC_TTS as string
-        }/SuperAdmin/account-management/manage-subscription`;
+        window.location.href = `${process.env.NEXT_PUBLIC_TTS as string
+            }/SuperAdmin/account-management/manage-subscription`;
     };
     const [countdown, setCountdown] = useState(5);
 
@@ -41,7 +40,7 @@ export const Completed = ({ data, redirectUrl }) => {
         };
     }, [countdown]);
 
-    console.log({ redirectUrl });
+    // console.log({ redirectUrl });
 
     return (
         <Box>
@@ -64,7 +63,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 lineHeight="normal"
                                 textAlign="center"
                             >
-                                Thank you for your payment!
+                                {subscriptionPayment ? "Thank you for your payment!" : "Card successfully added!"}
                             </Text>
                             <Text
                                 fontSize={['1rem', '1.25rem']}
@@ -75,9 +74,7 @@ export const Completed = ({ data, redirectUrl }) => {
                                 textAlign="center"
                                 w="80%"
                             >
-                                Your payment has been confirmed and your
-                                subscription has been activated. Please check
-                                your email for next steps
+                                {subscriptionPayment ? "Your payment has been confirmed and your subscription has been activated. Please check your email for next steps" : "Your card has been added successfully!"}
                             </Text>
                             {hasRedirect && (
                                 <>

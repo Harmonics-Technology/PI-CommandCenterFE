@@ -1,11 +1,10 @@
 import { Completed } from '@components/subpages/Completed';
 import { GetServerSideProps } from 'next';
-import React from 'react';
 import { OpenAPI, SubscriptionService } from 'src/services';
 
-const completed = ({ data, redirectUrl }) => {
+const completed = ({ data, redirectUrl, subscriptionPayment }) => {
     // data = { status: true };
-    return <Completed data={data} redirectUrl={redirectUrl} />;
+    return <Completed data={data} redirectUrl={redirectUrl} subscriptionPayment={subscriptionPayment} />;
 };
 
 export default completed;
@@ -31,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             props: {
                 data: data,
                 redirectUrl,
+                subscriptionPayment: subscriptionPayment == 'true' ? true : false,
             },
         };
     } catch (error: any) {
