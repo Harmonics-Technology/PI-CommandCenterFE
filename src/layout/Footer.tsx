@@ -4,7 +4,7 @@ import { FooterHeadings } from '@components/bits-utils/FooterHeadings';
 import { FooterMenuItems } from '@components/bits-utils/FooterMenuItems';
 import { FooterIcons } from '@components/bits-utils/Heros/FooterIcons';
 import { BsFacebook, BsInstagram } from 'react-icons/bs';
-import { FiLinkedin, FiTwitter } from 'react-icons/fi';
+import { FiLinkedin } from 'react-icons/fi';
 
 function Footer() {
     return (
@@ -47,8 +47,8 @@ function Footer() {
                         </VStack>
                         <VStack spacing="0" gap="1rem" align="flex-start">
                             <FooterHeadings text="Quick links" />
-                            <FooterMenuItems text="Legal" url="/legal" />
-                            <FooterMenuItems text="Term of use" url="/terms" />
+                            <FooterMenuItems text="Privacy policy" url="/privacy-policy" />
+                            <FooterMenuItems text="Term of use" url="/terms-of-use" />
                         </VStack>
                         <VStack spacing="0" gap="1rem" align="flex-start">
                             <FooterHeadings text="Contact us" />
