@@ -53,7 +53,7 @@ export const PrivacyPolicy = () => {
        This Privacy Policy applies to all information processed through your interaction with:
       </Text>
       <UnorderedList spacing={2} pl={4} mb={4}>
-       <ListItem>The Timba web application (<Link href="https://app.timba.ca" color="#2EAFA3" isExternal>app.timba.ca</Link>).</ListItem>
+       <ListItem>The Timba web application (<Link href="https://tts.timba.ca/login" color="#2EAFA3" isExternal>tts.timba.ca</Link>).</ListItem>
        <ListItem>Our public website (<Link href="https://timba.ca" color="#2EAFA3" isExternal>timba.ca</Link>).</ListItem>
        <ListItem>Our official mobile applications.</ListItem>
        <ListItem>Any communication with our support, sales, or marketing teams.</ListItem>
@@ -259,7 +259,7 @@ export const PrivacyPolicy = () => {
       </Text>
       <UnorderedList spacing={2} pl={4}>
        <ListItem><Text as="span" fontWeight="bold">Account Settings:</Text> Many rights can be exercised directly.</ListItem>
-       <ListItem><Text as="span" fontWeight="bold">Other Requests:</Text> Email <Link href="mailto:privacy@timba.ca" color="#2EAFA3">privacy@timba.ca</Link> with verifiable proof of identity.</ListItem>
+       <ListItem><Text as="span" fontWeight="bold">Other Requests:</Text> Email <Link href="mailto:info@timba.ca" color="#2EAFA3">info@timba.ca</Link> with verifiable proof of identity.</ListItem>
       </UnorderedList>
      </Box>
 
