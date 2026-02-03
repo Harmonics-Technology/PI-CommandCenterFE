@@ -313,7 +313,7 @@ export const PrivacyPolicy = () => {
        12. Contact Us & Lodging Complaints
       </Heading>
       <Text mb={2}>Attn: Privacy Officer</Text>
-      <Text mb={2}>Email: <Link href="mailto:privacy@timba.ca" color="#2EAFA3">privacy@timba.ca</Link></Text>
+      <Text mb={2}>Email: <Link href="mailto:info@timba.ca" color="#2EAFA3">info@timba.ca</Link></Text>
       <Text mb={2}>Mailing Address: 25 Sheppard Avenue West, Suite 300 Toronto, ON, Canada.</Text>
       <Text>
        EEA/UK users can lodge complaints with local data protection authorities, though we prefer the chance to resolve issues directly.

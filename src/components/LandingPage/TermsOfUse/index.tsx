@@ -280,7 +280,7 @@ export const TermsOfUse = () => {
        18. Contact Information
       </Heading>
       <Text mb={2}>Email: <Link href="mailto:support@timba.ca" color="#2EAFA3">support@timba.ca</Link></Text>
-      <Text mb={2}>Privacy: <Link href="mailto:privacy@timba.ca" color="#2EAFA3">privacy@timba.ca</Link></Text>
+      <Text mb={2}>Privacy: <Link href="mailto:info@timba.ca" color="#2EAFA3">info@timba.ca</Link></Text>
       <Text>Address: 25 Sheppard Avenue West, Suite 300, Toronto, ON, Canada</Text>
      </Box>
 
